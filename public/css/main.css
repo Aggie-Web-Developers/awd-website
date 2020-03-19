@@ -1,0 +1,148 @@
+/***** Global *****/
+body {
+	font-family: 'Raleway', sans-serif;
+}
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
+
+.main-purple{
+	color: #341f97;
+}
+
+/***** Home Page *****/
+.home-banner-img {
+ 	background: url('../images/banner.png');
+	background-position: top-left; 
+  	background-repeat: no-repeat; 
+ 	background-size: cover; 
+ 	background-attachment: fixed;
+ 	height: 40rem;
+ 	color: #fff;
+ 	overflow: hidden;
+ 	font-size: 1.25rem;
+}
+
+.activities-banner-img {
+ 	background: url('../images/activities-banner.png');
+	background-position: center; 
+  	background-repeat: no-repeat;
+  	background-size: cover;
+ 	color: #fff;
+ 	font-size: 1.25rem;
+ 	/*padding: 10rem 0; FIXME */
+}
+
+.home-banner-header{
+	font-size: 8rem;
+	font-weight: 900;
+	z-index: -2;
+}
+
+#mainLogo {
+	font-size: 2rem;
+	font-weight: 900;
+}
+
+.flex-vert-center {
+	display: flex;
+	align-items: center;
+}
+
+.navbar-toggler {
+  display: inline-block;
+  height: 75%;
+  margin-left: 10px;
+}
+
+#navRight {
+   padding-left: 20px;
+}
+
+#navLeft {
+   padding-right: 20px;
+}
+
+#navbar{
+	width: 100%;
+	transition: background-color .4s linear;
+	z-index: 1;
+}
+
+#navbar.scrolled{
+	background-color: #341f97;
+	transition: background-color .4s linear;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  margin-top: 8rem;
+}
+
+@media (max-width: 992px){
+   #navRight {
+       padding-left: 0;
+   }
+   #navLeft {
+       padding-left: 0;
+   }
+}
+
+@media (max-width: 768px){
+   .home-banner-header{
+		font-size: 4rem;
+	}
+	.home-banner-img {
+		height: 25rem;
+	}
+}
+
+#txtEmail {
+	border-top-left-radius: 38px;
+	border-bottom-left-radius: 38px;
+	z-index: 0;
+}
+
+#btnSubmitHome {
+	border-top-right-radius: 38px;
+	border-bottom-right-radius: 38px;
+	background-color: #341f97;
+	color: #FFF;
+	z-index: 0;
+}
+
+#btnSubmitHome:hover {
+	background-color: #54a0ff;
+	color: #FFF;
+	transition: .8s;
+}
+
+.home-icon {
+	font-size: 4rem;
+}
+
+.footer {
+	background-color: #341f97;
+	height: 5rem;
+	color: #FFF;
+}
