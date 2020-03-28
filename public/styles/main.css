@@ -119,6 +119,15 @@ label:focus,
 	}
 }
 
+@media (max-width: 375px){
+   .home-banner-header{
+		font-size: 3rem;
+	}
+	.home-banner-img {
+		height: 20rem;
+	}
+}
+
 /***** /Navbar/ *****/
 
 #txtEmail {
