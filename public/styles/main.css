@@ -24,6 +24,17 @@ label:focus,
 .main-purple{
 	color: #341f97;
 }
+
+a {
+	color: #FFF;
+	transition: background-color .4s linear;
+}
+
+a:hover {
+	color: #8395a7;
+	transition: color .2s linear;
+	text-decoration: none;
+}
 /***** /Global/ ******/
 
 /***** Home Page *****/
@@ -115,7 +126,22 @@ label:focus,
 		font-size: 4rem;
 	}
 	.home-banner-img {
-		height: 25rem;
+		height: 28rem;
+	}
+}
+
+@media (max-width: 576px){
+	.home-banner-img {
+		height: 23rem;
+	}
+}
+
+@media (max-width: 435px){
+   .home-banner-header{
+		font-size: 3rem;
+	}
+	.home-banner-img {
+		height: 20rem;
 	}
 }
 
@@ -145,11 +171,7 @@ label:focus,
 	font-size: 4rem;
 }
 
-.footer {
-	background-color: #341f97;
-	height: 5rem;
-	color: #FFF;
-}
+
 
 
 /***** News Cards *****/
@@ -352,4 +374,49 @@ label:focus,
 }
 
 /***** /News Cards/ *****/
+
+/***** Footer *****/
+.icon-row {
+	font-size: 2rem;
+}
+
+@media (max-width: 762px){
+	.footer-copyright {
+		font-size: .8rem;
+	}
+}
+
+@media (max-width: 480px){
+   .icon-row {
+   		font-size: 1.8rem;
+		padding: 0 5px;
+	}
+	.footer-copyright {
+		font-size: .65rem;
+	}
+}
+
+@media (max-width: 400px){
+   .icon-row {
+		font-size: 1.5rem;
+		padding: 0 5px;
+	}
+	.footer-copyright {
+		font-size: .5rem;
+	}
+}
+
+@media (max-width: 375px){
+   .icon-row {
+		font-size: 1.1rem;
+		padding: 0 5px;
+	}
+}
+
+.footer {
+	background-color: #341f97;
+	color: #FFF;
+}
+/***** /Footer/ *****/
+
 /***** /Home Page/ *****/
