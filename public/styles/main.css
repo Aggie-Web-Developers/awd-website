@@ -420,3 +420,39 @@ a:hover {
 /***** /Footer/ *****/
 
 /***** /Home Page/ *****/
+
+/***** About Us Page *****/
+.about-us-banner {
+ 	background: url('../images/about-us-banner.jpg');
+	background-position: center; 
+  	background-repeat: no-repeat; 
+ 	background-size: cover; 
+ 	height: 15rem;
+ 	overflow: hidden;
+}
+
+.about-us-subheader {
+	background-color: rgba(211, 211, 211, .4);
+	color: #341f97;
+	height: 5rem;
+	align-items: center;
+	border-radius: 50px;
+	justify-content: center;
+
+	height: 5rem!important;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 900;
+    font-weight: bold;
+}
+
+.about-us-copy {
+	font-weight: 600;
+	padding-left: 7rem;
+	font-size: 1.1rem;
+}
+
+/***** /About Us Page/ *****/
