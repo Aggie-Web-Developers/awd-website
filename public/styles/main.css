@@ -69,6 +69,7 @@ a:hover {
 #mainLogo {
 	font-size: 2rem;
 	font-weight: 900;
+	transition: color .4s linear;
 }
 
 .flex-vert-center {
@@ -95,11 +96,17 @@ a:hover {
 	width: 100%;
 	transition: background-color .4s linear;
 	z-index: 10;
+	font-size: 1.25rem;
 }
 
 #navbar.scrolled{
 	background-color: #341f97;
 	transition: background-color .4s linear;
+}
+
+.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link{
+	font-weight: bold;
+	transition: color .4s linear;
 }
 
 .sticky {
@@ -424,35 +431,47 @@ a:hover {
 /***** About Us Page *****/
 .about-us-banner {
  	background: url('../images/about-us-banner.jpg');
-	background-position: center; 
   	background-repeat: no-repeat; 
  	background-size: cover; 
- 	height: 15rem;
+ 	background-position: 85%;
+ 	height: 50rem;
  	overflow: hidden;
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.about-us-header {
+	margin-top: 3rem;
+	font-size: 6rem;
+	z-index: 0;
 }
 
 .about-us-subheader {
 	background-color: rgba(211, 211, 211, .4);
-	color: #341f97;
-	height: 5rem;
-	align-items: center;
 	border-radius: 50px;
-	justify-content: center;
 
-	height: 5rem!important;
+	height: 6rem!important;
 
     display:flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     font-weight: 900;
     font-weight: bold;
 }
 
 .about-us-copy {
-	font-weight: 600;
-	padding-left: 7rem;
-	font-size: 1.1rem;
+    font-size: 1.0rem;
+    letter-spacing: .04rem;
+    line-height: 2rem;
+    font-weight: 500;
+}
+
+.mission-icon {
+	font-size: 12rem;
 }
 
 /***** /About Us Page/ *****/

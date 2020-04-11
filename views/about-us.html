@@ -15,6 +15,34 @@
 		crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+		<!-- TODO: Remove to its own JS Script -->
+		<script type="text/javascript">
+			$(function () {
+				
+				$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
+				$('#mainLogo').css('color', '#341f97');
+
+				// navbar
+				$(document).scroll(function () {
+					$("#navbar").toggleClass('scrolled', $(this).scrollTop() > $("#navbar").height());
+
+					if ($(this).scrollTop() <= $("#navbar").height()){
+						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
+						$('#mainLogo').css('color', '#341f97');
+					} else {
+						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
+						$('#mainLogo').css('color', '#fff');
+					}
+					
+				});
+
+				$('.navbar-toggler').on('click', function(){
+					$("#navbar").addClass('scrolled');
+				});
+			});
+		</script>
+
 	</head>
   
 	<body>
@@ -55,25 +83,41 @@
 			</nav>
 		</div>
 
-		<div class="about-us-banner"></div>
+		<div class="about-us-banner text-center">
+			<div class="container">
+				<div class="row justify-content-center">
+					<h1 class="font-weight-bold about-us-header main-purple">About Us</h1>
+				</div>
 
-		<div class="container text-center my-5">
-			<h1 class="font-weight-bold text-uppercase">About Us</h1>
+				<div class="row mt-5">
+					<p class="about-us-copy main-purple">Aggie Web Developers is an on-campus organization dedicated to empowering Aggies to build technical prowess in web development, network with peers and industry contacts, and learn more about careers in the technology industry. Our primary mission is to develop the next generation of professionals, entrepreneurs, and hobbyists; by providing students with an opportunity for growth in web development skills that are ethical and just.To achieve this mission, our organization will provide workshops, social meetings, networking opportunities, and team project opportunities to all members. Additionally, we plan to support our member’s professional development by providing our members with opportunities to learn about diversity, ethical business models, as well as the importance of mental health; to inspire the next generation of change in young professionals.</p>
+				</div>
+			</div>
 		</div>
 
 		<div class="container my-5">
-			<div class="row">
-				<div class="col-6">
-					<div class="about-us-subheader text-uppercase">
-						Our Mission
+			<div class="row justify-content-between">
+				<div class="col-7">
+					<div class="row">
+						<div class="col-12">
+							<div class="about-us-subheader text-uppercase">
+								Our Mission
+							</div>
+						</div>
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-11 mt-4">
+							<p class="about-us-copy font-weight-bold text-center">
+								To develop the next generation of professionals, entrepreneurs, and hobbyists; by providing students with an opportunity for growth in web development skills that are ethical and just.
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-10 mt-4">
-					<p class="about-us-copy main-purple">
-						To develop the next generation of professionals, entrepreneurs, and hobbyists; by providing students with an opportunity for growth in web development skills that are ethical and just.
-					</p>
+
+				<div class="col-3 justify-content-center d-flex align-items-center">
+					<div class="container">
+						<h1 class="main-purple text-center mission-icon"><i class="fas fa-bullseye"></i></h1>
+					</div>
 				</div>
 			</div>
 		</div>
