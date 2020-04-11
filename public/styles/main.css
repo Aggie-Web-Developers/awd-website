@@ -3,11 +3,11 @@ body {
 	font-family: 'Raleway', sans-serif;
 }
 
-textarea:hover, 
-input:hover, 
-textarea:active, 
-input:active, 
-textarea:focus, 
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
 input:focus,
 button:focus,
 button:active,
@@ -29,9 +29,9 @@ label:focus,
 /***** Home Page *****/
 .home-banner-img {
  	background: url('../images/banner.png');
-	background-position: top-left; 
-  	background-repeat: no-repeat; 
- 	background-size: cover; 
+	background-position: top-left;
+  	background-repeat: no-repeat;
+ 	background-size: cover;
  	background-attachment: fixed;
  	height: 40rem;
  	color: #fff;
@@ -41,7 +41,7 @@ label:focus,
 
 .activities-banner-img {
  	background: url('../images/activities-banner.png');
-	background-position: center; 
+	background-position: center;
   	background-repeat: no-repeat;
   	background-size: cover;
  	color: #fff;
@@ -70,6 +70,30 @@ label:focus,
   height: 75%;
   margin-left: 10px;
 }
+
+.what-can-we-do {
+	font-size: 4rem;
+	font-weight: bold;
+}
+
+@media (max-width: 800px){
+	.what-can-we-do {
+	 font-size: 3.3rem;
+	}
+}
+
+@media (max-width: 425px){
+	.what-can-we-do {
+	 font-size: 1.5rem;
+	}
+}
+
+@media (max-width: 320px){
+	.what-can-we-do {
+	 font-size: 1.3rem;
+	}
+}
+
 
 /***** Navbar *****/
 #navRight {
