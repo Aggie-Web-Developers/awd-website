@@ -35,6 +35,10 @@ a:hover {
 	transition: color .2s linear;
 	text-decoration: none;
 }
+
+.container-margin {
+	margin-top: 8rem;
+}
 /***** /Global/ ******/
 
 /***** Home Page *****/
@@ -472,6 +476,10 @@ a:hover {
 
 .mission-icon {
 	font-size: 12rem;
+}
+
+.value-icon {
+	font-size: 4rem;
 }
 
 /***** /About Us Page/ *****/
