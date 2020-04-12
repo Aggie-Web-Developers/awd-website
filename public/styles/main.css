@@ -88,6 +88,30 @@ a:hover {
   margin-left: 10px;
 }
 
+.what-can-we-do {
+	font-size: 4rem;
+	font-weight: bold;
+}
+
+@media (max-width: 800px){
+	.what-can-we-do {
+	 font-size: 3.3rem;
+	}
+}
+
+@media (max-width: 425px){
+	.what-can-we-do {
+	 font-size: 1.5rem;
+	}
+}
+
+@media (max-width: 320px){
+	.what-can-we-do {
+	 font-size: 1.3rem;
+	}
+}
+
+
 /***** Navbar *****/
 #navRight {
    padding-left: 20px;
@@ -155,6 +179,14 @@ a:hover {
 	.home-banner-img {
 		height: 20rem;
 	}
+}
+
+@media (max-width: 375px){
+   .home-banner-header{
+		font-size: 3rem;
+	}
+	.home-banner-img {
+		height: 20rem;
 }
 
 .custom-toggler .navbar-toggler-icon {
@@ -440,7 +472,7 @@ a:hover {
 /***** /Footer/ *****/
 
 /***** /Home Page/ *****/
-
+  
 /***** About Us Page *****/
 .about-us-banner {
  	background: url('../images/about-us-banner.jpg');
