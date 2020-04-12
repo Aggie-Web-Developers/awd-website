@@ -21,28 +21,37 @@
 			$(function () {
 
 				$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
+
 				$('#mainLogo').css('color', '#341f97');
 
 				// navbar
 				$(document).scroll(function () {
 					$("#navbar").toggleClass('scrolled', $(this).scrollTop() > $("#navbar").height());
+					$('.navbar-toggler').toggleClass('.custom-toggler', $(this).scrollTop() > $("#navbar").height());
 
-					if ($(this).scrollTop() <= $("#navbar").height()){
+					if ($(this).scrollTop() <= $("#navbar").height())
+					{
 						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
+
 						$('#mainLogo').css('color', '#341f97');
-						$('.navbar-toggler-icon').css('color', '#341f97');
-					} else {
+					}
+					else
+					{
 						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
+
 						$('#mainLogo').css('color', '#fff');
 						$('.navbar-toggler-icon').css('color', '#fff');
 					}
 
 				});
 
-				$('.navbar-toggler').on('click', function(){
+				$('.navbar-toggler').on('click', function() {
 					$("#navbar").addClass('scrolled');
+
 					$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
+
 					$('#mainLogo').css('color', '#fff');
+					$('.navbar-toggler').toggleClass('.custom-toggler', $(this).scrollTop() > $("#navbar").height());
 				});
 			});
 		</script>
@@ -67,7 +76,7 @@
 			    </div>
 			    <div class="mx-auto order-0 order-lg-1 flex-vert-center">
 			        <a id="mainLogo" class="navbar-brand mx-auto" href="#"><i class="fas fa-angle-double-left pr-2" aria-hidden="true"></i>AWD<i class="fas fa-angle-double-right pl-2" aria-hidden="true"></i></a>
-			        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+			        <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
 			            <span class="navbar-toggler-icon"></span>
 			        </button>
 			    </div>
