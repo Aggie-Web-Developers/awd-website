@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<title>AWD - About Us</title>
 		<link rel="icon" type="image/png" href="../public/images/AWD-logo.png">
 
@@ -30,15 +30,19 @@
 					if ($(this).scrollTop() <= $("#navbar").height()){
 						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
 						$('#mainLogo').css('color', '#341f97');
+						$('.navbar-toggler-icon').css('color', '#341f97');
 					} else {
 						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
 						$('#mainLogo').css('color', '#fff');
+						$('.navbar-toggler-icon').css('color', '#fff');
 					}
 					
 				});
 
 				$('.navbar-toggler').on('click', function(){
 					$("#navbar").addClass('scrolled');
+					$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
+					$('#mainLogo').css('color', '#fff');
 				});
 			});
 		</script>
@@ -46,7 +50,7 @@
 	</head>
   
 	<body>
-		<div class="navbar-fixed-top">
+		<div class="navbar-fixed-top about-us-banner">
 			<nav class="navbar navbar-expand-lg navbar-dark sticky scrolled" id="navbar">
 			    <div id="navLeft" class="navbar-collapse collapse w-100 order-1 order-lg-0 dual-collapse2">
 			        <ul class="navbar-nav ml-auto">
@@ -81,19 +85,21 @@
 			        </ul>
 			    </div>
 			</nav>
-		</div>
 
-		<div class="about-us-banner text-center">
-			<div class="container">
-				<div class="row justify-content-center">
-					<h1 class="font-weight-bold about-us-header main-purple">About Us</h1>
-				</div>
+			<div class=" text-center">
+				<div class="container">
+					<div class="row justify-content-center">
+						<h1 class="font-weight-bold about-us-header main-purple">About Us</h1>
+					</div>
 
-				<div class="row mt-5">
-					<p class="about-us-copy main-purple">Aggie Web Developers is an on-campus organization dedicated to empowering Aggies to build technical prowess in web development, network with peers and industry contacts, and learn more about careers in the technology industry. Our primary mission is to develop the next generation of professionals, entrepreneurs, and hobbyists; by providing students with an opportunity for growth in web development skills that are ethical and just.To achieve this mission, our organization will provide workshops, social meetings, networking opportunities, and team project opportunities to all members. Additionally, we plan to support our member’s professional development by providing our members with opportunities to learn about diversity, ethical business models, as well as the importance of mental health; to inspire the next generation of change in young professionals.</p>
+					<div class="row mt-5">
+						<p class="about-us-copy main-purple">Aggie Web Developers is an on-campus organization dedicated to empowering Aggies to build technical prowess in web development, network with peers and industry contacts, and learn more about careers in the technology industry. Our primary mission is to develop the next generation of professionals, entrepreneurs, and hobbyists; by providing students with an opportunity for growth in web development skills that are ethical and just.To achieve this mission, our organization will provide workshops, social meetings, networking opportunities, and team project opportunities to all members. Additionally, we plan to support our member’s professional development by providing our members with opportunities to learn about diversity, ethical business models, as well as the importance of mental health; to inspire the next generation of change in young professionals.</p>
+					</div>
 				</div>
 			</div>
 		</div>
+
+		
 
 		<div class="container my-5">
 			<div class="row justify-content-between">
@@ -123,7 +129,7 @@
 		</div>
 
 		<div class="container container-margin">
-			<div class="row justify-content-end">
+			<div class="row justify-content-center">
 				<div class="col-7">
 					<div class="about-us-subheader text-uppercase">
 						Our Values

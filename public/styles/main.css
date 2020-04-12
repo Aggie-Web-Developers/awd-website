@@ -1,6 +1,7 @@
 /***** Global *****/
 body {
 	font-family: 'Raleway', sans-serif;
+	max-width: 100%;
 }
 
 textarea:hover, 
@@ -97,10 +98,10 @@ a:hover {
 }
 
 #navbar{
-	width: 100%;
+	max-width: 100%;
 	transition: background-color .4s linear;
 	z-index: 10;
-	font-size: 1.25rem;
+	font-size: 1rem;
 }
 
 #navbar.scrolled{
@@ -437,11 +438,10 @@ a:hover {
  	background: url('../images/about-us-banner.jpg');
   	background-repeat: no-repeat; 
  	background-size: cover; 
- 	background-position: 85%;
+ 	background-position: 50%;
  	height: 50rem;
  	overflow: hidden;
-    width:100%;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
