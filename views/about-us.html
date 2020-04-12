@@ -27,20 +27,22 @@
 				// navbar
 				$(document).scroll(function () {
 					$("#navbar").toggleClass('scrolled', $(this).scrollTop() > $("#navbar").height());
-					$('.navbar-toggler').toggleClass('.custom-toggler', $(this).scrollTop() > $("#navbar").height());
 
 					if ($(this).scrollTop() <= $("#navbar").height())
 					{
 						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
 
 						$('#mainLogo').css('color', '#341f97');
+						$('.navbar-toggler').addClass('custom-toggler');
+						$('.navbar-toggler-icon').addClass('custom-toggler');
 					}
 					else
 					{
 						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
 
 						$('#mainLogo').css('color', '#fff');
-						$('.navbar-toggler-icon').css('color', '#fff');
+						$('.navbar-toggler').removeClass('custom-toggler');
+						$('.navbar-toggler-icon').removeClass('custom-toggler');
 					}
 
 				});
@@ -51,7 +53,8 @@
 					$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
 
 					$('#mainLogo').css('color', '#fff');
-					$('.navbar-toggler').toggleClass('.custom-toggler', $(this).scrollTop() > $("#navbar").height());
+					$('.navbar-toggler').removeClass('custom-toggler');
+					$('.navbar-toggler-icon').removeClass('custom-toggler');
 				});
 			});
 		</script>
@@ -60,7 +63,7 @@
 
 	<body>
 		<div class="navbar-fixed-top about-us-banner">
-			<nav class="navbar navbar-expand-lg navbar-dark sticky scrolled" id="navbar">
+			<nav class="navbar navbar-expand-lg navbar-dark sticky" id="navbar">
 			    <div id="navLeft" class="navbar-collapse collapse w-100 order-1 order-lg-0 dual-collapse2">
 			        <ul class="navbar-nav ml-auto">
 			            <li class="nav-item active">
@@ -86,10 +89,10 @@
 			                <a class="nav-link" href="#">Corporate Sponsors</a>
 			            </li>
 			            <li class="nav-item active">
-			                <a class="nav-link" href="#">Our Team</a>
+			                <a class="nav-link" href="#">About Us</a>
 			            </li>
 			            <li class="nav-item active">
-			                <a class="nav-link" href="#">About Us</a>
+			                <a class="nav-link" href="#">Contact Us</a>
 			            </li>
 			        </ul>
 			    </div>
@@ -108,8 +111,6 @@
 				</div>
 			</div>
 		</div>
-
-
 
 		<div class="container my-5">
 			<div id="mission-div" class="row justify-content-around">
