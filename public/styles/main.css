@@ -1,6 +1,7 @@
 /***** Global *****/
 body {
 	font-family: 'Raleway', sans-serif;
+	max-width: 100%;
 }
 
 textarea:hover,
@@ -34,6 +35,10 @@ a:hover {
 	color: #8395a7;
 	transition: color .2s linear;
 	text-decoration: none;
+}
+
+.container-margin {
+	margin-top: 8rem;
 }
 /***** /Global/ ******/
 
@@ -69,6 +74,7 @@ a:hover {
 #mainLogo {
 	font-size: 2rem;
 	font-weight: 900;
+	transition: color .4s linear;
 }
 
 .flex-vert-center {
@@ -116,14 +122,20 @@ a:hover {
 }
 
 #navbar{
-	width: 100%;
+	max-width: 100%;
 	transition: background-color .4s linear;
 	z-index: 10;
+	font-size: 1rem;
 }
 
 #navbar.scrolled{
 	background-color: #341f97;
 	transition: background-color .4s linear;
+}
+
+.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link{
+	font-weight: bold;
+	transition: color .4s linear;
 }
 
 .sticky {
@@ -175,7 +187,14 @@ a:hover {
 	}
 	.home-banner-img {
 		height: 20rem;
-	}
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(52,31,151, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.custom-toggler.navbar-toggler {
+  border-color: rgb(52,31,151);
 }
 
 /***** /Navbar/ *****/
@@ -453,3 +472,69 @@ a:hover {
 /***** /Footer/ *****/
 
 /***** /Home Page/ *****/
+  
+/***** About Us Page *****/
+.about-us-banner {
+ 	background: url('../images/about-us-banner.jpg');
+  	background-repeat: no-repeat;
+ 	background-size: cover;
+ 	background-position: 50%;
+ 	height: 50rem;
+ 	overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.about-us-header {
+	margin-top: 3rem;
+	font-size: 6rem;
+	z-index: 0;
+}
+
+.about-us-subheader {
+	background-color: rgba(211, 211, 211, .4);
+	border-radius: 50px;
+
+	height: 6rem!important;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-weight: bold;
+}
+
+.about-us-copy {
+    font-size: 1.0rem;
+    letter-spacing: .04rem;
+    line-height: 2rem;
+    font-weight: 500;
+		padding: 1rem;
+}
+
+.mission-icon {
+	font-size: 12rem;
+}
+
+.value-icon {
+	font-size: 4rem;
+}
+
+@media (max-width: 425px) {
+	.about-us-header {
+		font-size: 4rem;
+	}
+	.about-us-subheader {
+		font-size: 2.4rem;
+	}
+}
+
+@media (max-width: 768px) {
+	#mission-div {
+		justify-content: center;
+	}
+}
+/***** /About Us Page/ *****/

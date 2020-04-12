@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<title>AWD - About Us</title>
+		<link rel="icon" type="image/png" href="../public/images/AWD-logo.png">
+
+		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700,900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/44473cf6a5.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="../public/styles/main.css">
+
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+		<!-- TODO: Remove to its own JS Script -->
+		<script type="text/javascript">
+			$(function () {
+
+				$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
+
+				$('#mainLogo').css('color', '#341f97');
+
+				// navbar
+				$(document).scroll(function () {
+					$("#navbar").toggleClass('scrolled', $(this).scrollTop() > $("#navbar").height());
+
+					if ($(this).scrollTop() <= $("#navbar").height())
+					{
+						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
+
+						$('#mainLogo').css('color', '#341f97');
+						$('.navbar-toggler').addClass('custom-toggler');
+						$('.navbar-toggler-icon').addClass('custom-toggler');
+					}
+					else
+					{
+						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
+
+						$('#mainLogo').css('color', '#fff');
+						$('.navbar-toggler').removeClass('custom-toggler');
+						$('.navbar-toggler-icon').removeClass('custom-toggler');
+					}
+
+				});
+
+				$('.navbar-toggler').on('click', function() {
+					$("#navbar").addClass('scrolled');
+
+					$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
+
+					$('#mainLogo').css('color', '#fff');
+					$('.navbar-toggler').removeClass('custom-toggler');
+					$('.navbar-toggler-icon').removeClass('custom-toggler');
+				});
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<div class="navbar-fixed-top about-us-banner">
+			<nav class="navbar navbar-expand-lg navbar-dark sticky" id="navbar">
+			    <div id="navLeft" class="navbar-collapse collapse w-100 order-1 order-lg-0 dual-collapse2">
+			        <ul class="navbar-nav ml-auto">
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">General Meetings</a>
+			            </li>
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">Workshops</a>
+			            </li>
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">Projects</a>
+			            </li>
+			        </ul>
+			    </div>
+			    <div class="mx-auto order-0 order-lg-1 flex-vert-center">
+			        <a id="mainLogo" class="navbar-brand mx-auto" href="#"><i class="fas fa-angle-double-left pr-2" aria-hidden="true"></i>AWD<i class="fas fa-angle-double-right pl-2" aria-hidden="true"></i></a>
+			        <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+			            <span class="navbar-toggler-icon"></span>
+			        </button>
+			    </div>
+			    <div id="navRight" class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+			        <ul class="navbar-nav mr-auto">
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">Corporate Sponsors</a>
+			            </li>
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">About Us</a>
+			            </li>
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">Contact Us</a>
+			            </li>
+			        </ul>
+			    </div>
+			</nav>
+
+			<div class=" text-center">
+				<div class="container">
+					<div class="row justify-content-center">
+						<h1 class="font-weight-bold about-us-header main-purple">About Us</h1>
+					</div>
+
+					<div class="row mt-5">
+						<p class="about-us-copy main-purple">Aggie Web Developers is an on-campus organization dedicated to empowering Aggies to build technical prowess in web development, network with peers and industry contacts, and learn more about careers in the technology industry.
+							<span class="d-none d-md-block">Our primary mission is to develop the next generation of professionals, entrepreneurs, and hobbyists; by providing students with an opportunity for growth in web development skills that are ethical and just.To achieve this mission, our organization will provide workshops, social meetings, networking opportunities, and team project opportunities to all members. Additionally, we plan to support our member’s professional development by providing our members with opportunities to learn about diversity, ethical business models, as well as the importance of mental health; to inspire the next generation of change in young professionals.</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container my-5">
+			<div id="mission-div" class="row justify-content-around">
+				<div class="col-sm-10 col-md-7">
+					<div class="row">
+						<div class="col-12">
+							<div class="about-us-subheader text-uppercase">
+								Our Mission
+							</div>
+						</div>
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-12 mt-4">
+							<p class="about-us-copy font-weight-bold text-center">
+								To develop the next generation of professionals, entrepreneurs, and hobbyists; by providing students with an opportunity for growth in web development skills that are ethical and just.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="d-none d-lg-flex col-3 justify-content-center align-items-center">
+					<div class="d-none d-lg-block container">
+						<h1 class="main-purple text-center mission-icon"><i class="fas fa-bullseye"></i></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container container-margin">
+			<div class="row justify-content-center">
+				<div class="col-sm-10 col-md-7">
+					<div class="about-us-subheader text-uppercase">
+						Our Values
+					</div>
+				</div>
+			</div>
+
+			<div class="row justify-content-around text-center my-5">
+				<div class="col-sm-12 col-lg-5 mt-5">
+					<h1 class="main-purple font-weight-bold"><i class="fas fa-hand-holding-medical value-icon"></i></h1>
+					<h4 class="font-weight-bold text-uppercase">Selflessness</h4>
+					<p class="pt-3 about-us-copy">Our team and members are committed to teaching everything we know and helping each other succeed before anything else.</p>
+				</div>
+				<div class="col-sm-12 col-lg-5 mt-5">
+					<h1 class="main-purple font-weight-bold"><i class="fas fa-university value-icon"></i></h1>
+					<h4 class="font-weight-bold text-uppercase">Integrity</h4>
+					<p class="pt-3 about-us-copy">Our team and members are committed to following through with our word and having strong moral roots.</p>
+				</div>
+				<div class="col-sm-12 col-lg-5 mt-5">
+					<h1 class="main-purple font-weight-bold"><i class="fas fa-people-carry value-icon"></i></h1>
+					<h4 class="font-weight-bold text-uppercase">Teamwork</h4>
+					<p class="pt-3 about-us-copy">Our team and members are committed to being supportive, present, and dependable team members; for all projects, big or small.</p>
+				</div>
+				<div class="col-sm-12 col-lg-5 mt-5">
+					<h1 class="main-purple font-weight-bold"><i class="fas fa-hat-cowboy value-icon"></i></h1>
+					<h4 class="font-weight-bold text-uppercase">Enthusiasm</h4>
+					<p class="pt-3 about-us-copy">Our team and members pride ourselves on our work and our mission. We come equipped to every meeting with a positive mindset and a readiness to tackle challenges.</p>
+				</div>
+				<div class="col-sm-12 col-lg-6 mt-5">
+					<h1 class="main-purple font-weight-bold"><i class="fas fa-globe value-icon"></i></h1>
+					<h4 class="font-weight-bold text-uppercase">Diversity</h4>
+					<p class="pt-3 about-us-copy">Our team and members are committed to building a team with a diverse set of experiences and viewpoints, by including people of all races, genders, ages, religions, identities, and experiences.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer navbar-fixed-bottom">
+			<div class="container py-2 mt-5">
+				<div class="row justify-content-center mt-5">
+					<h1 class="font-weight-bold text-uppercase text-center">Stay in Touch</h1>
+				</div>
+				<div class="row justify-content-center mt-3">
+					<div class="col-6 text-center icon-row">
+						<a class="white-link" href=""><i class="fab fa-linkedin px-2"></i></a>
+						<a class="white-link" href=""><i class="fas fa-envelope px-2"></i></a>
+						<a class="white-link" href=""><i class="fab fa-github-alt px-2"></i></a>
+						<a class="white-link" href=""><i class="fab fa-instagram px-2"></i></a>
+					</div>
+				</div>
+
+				<div class="row justify-content-center mt-5">
+					<h6 class="text-center footer-copyright">Copyright &copy; 2020 Aggie Web Developers - <a class="white-link" href="">Terms & Conditions + Privacy Policy</a></h6>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
