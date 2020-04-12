@@ -4,11 +4,11 @@ body {
 	max-width: 100%;
 }
 
-textarea:hover, 
-input:hover, 
-textarea:active, 
-input:active, 
-textarea:focus, 
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
 input:focus,
 button:focus,
 button:active,
@@ -45,9 +45,9 @@ a:hover {
 /***** Home Page *****/
 .home-banner-img {
  	background: url('../images/banner.png');
-	background-position: top-left; 
-  	background-repeat: no-repeat; 
- 	background-size: cover; 
+	background-position: top-left;
+  	background-repeat: no-repeat;
+ 	background-size: cover;
  	background-attachment: fixed;
  	height: 40rem;
  	color: #fff;
@@ -57,7 +57,7 @@ a:hover {
 
 .activities-banner-img {
  	background: url('../images/activities-banner.png');
-	background-position: center; 
+	background-position: center;
   	background-repeat: no-repeat;
   	background-size: cover;
  	color: #fff;
@@ -436,8 +436,8 @@ a:hover {
 /***** About Us Page *****/
 .about-us-banner {
  	background: url('../images/about-us-banner.jpg');
-  	background-repeat: no-repeat; 
- 	background-size: cover; 
+  	background-repeat: no-repeat;
+ 	background-size: cover;
  	background-position: 50%;
  	height: 50rem;
  	overflow: hidden;
@@ -472,6 +472,7 @@ a:hover {
     letter-spacing: .04rem;
     line-height: 2rem;
     font-weight: 500;
+		padding: 1rem;
 }
 
 .mission-icon {
@@ -482,4 +483,18 @@ a:hover {
 	font-size: 4rem;
 }
 
+@media (max-width: 425px) {
+	.about-us-header {
+		font-size: 4rem;
+	}
+	.about-us-subheader {
+		font-size: 2.4rem;
+	}
+}
+
+@media (max-width: 768px) {
+	#mission-div {
+		justify-content: center;
+	}
+}
 /***** /About Us Page/ *****/
