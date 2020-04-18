@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<title>AWD - Contact Us</title>
+		<link rel="icon" type="image/png" href="../public/images/AWD-logo.png">
+
+		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700,900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/44473cf6a5.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="../public/styles/main.css">
+
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+		<!-- TODO: Remove to its own JS Script -->
+		<script type="text/javascript">
+			$(function () {
+
+				$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
+
+				$('#mainLogo').css('color', '#341f97');
+
+				// navbar
+				$(document).scroll(function () {
+					$("#navbar").toggleClass('scrolled', $(this).scrollTop() > $("#navbar").height());
+
+					if ($(this).scrollTop() <= $("#navbar").height())
+					{
+						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
+
+						$('#mainLogo').css('color', '#341f97');
+						$('.navbar-toggler').addClass('custom-toggler');
+						$('.navbar-toggler-icon').addClass('custom-toggler');
+					}
+					else
+					{
+						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
+
+						$('#mainLogo').css('color', '#fff');
+						$('.navbar-toggler').removeClass('custom-toggler');
+						$('.navbar-toggler-icon').removeClass('custom-toggler');
+					}
+
+				});
+
+				$('.navbar-toggler').on('click', function() {
+					$("#navbar").addClass('scrolled');
+
+					$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
+
+					$('#mainLogo').css('color', '#fff');
+					$('.navbar-toggler').removeClass('custom-toggler');
+					$('.navbar-toggler-icon').removeClass('custom-toggler');
+				});
+
+				$('#btnContactGeneral').on('click', function() {
+					$('#divCorpContact').slideUp(600);
+					$('#divGenContact').slideDown(600);
+
+					scrollTo();
+				});
+
+				$('#btnContactCorporate').on('click', function() {
+					$('#divGenContact').slideUp(600);
+					$('#divCorpContact').slideDown(600);
+
+					scrollTo();
+				});
+			});
+
+			function scrollTo(){
+				$('html, body').animate({
+			        scrollTop: $('#divPlaceholder').offset().top + 750
+			    }, 600);
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<div class="navbar-fixed-top contact-us-banner">
+			<nav class="navbar navbar-expand-lg navbar-dark sticky" id="navbar">
+			    <div id="navLeft" class="navbar-collapse collapse w-100 order-1 order-lg-0 dual-collapse2">
+			        <ul class="navbar-nav ml-auto">
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">General Meetings</a>
+			            </li>
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">Workshops</a>
+			            </li>
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">Projects</a>
+			            </li>
+			        </ul>
+			    </div>
+			    <div class="mx-auto order-0 order-lg-1 flex-vert-center">
+			        <a id="mainLogo" class="navbar-brand mx-auto" href="#"><i class="fas fa-angle-double-left pr-2" aria-hidden="true"></i>AWD<i class="fas fa-angle-double-right pl-2" aria-hidden="true"></i></a>
+			        <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+			            <span class="navbar-toggler-icon"></span>
+			        </button>
+			    </div>
+			    <div id="navRight" class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+			        <ul class="navbar-nav mr-auto">
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">Corporate Sponsors</a>
+			            </li>
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">About Us</a>
+			            </li>
+			            <li class="nav-item active">
+			                <a class="nav-link" href="#">Contact Us</a>
+			            </li>
+			        </ul>
+			    </div>
+			</nav>
+
+			<div class="container-fluid pt-5">
+				<div class="container my-5 pt-3">
+					<div class="row contact">
+						<div class="col-12 text-center">
+							<h1 class="font-weight-bold contact-us-header">Contact Us</h1>
+						</div>
+					</div>
+					<div class="row mt-5">
+						<div class="col-xs-12 col-md-6 text-center">
+							<h1 class="font-weight-bold" style="color: #54a0ff"><i class="far fa-chart-bar value-icon"></i></h1>
+							<h4 class="font-weight-bold">Corporate Outreach</h4>
+							<button class="btn btn-lg mt-3 mb-5 btn-contact" id="btnContactCorporate" type="button">Start Here</button>
+						</div>
+
+						<div class="col-xs-12 col-md-6 text-center">
+							<h1 class="font-weight-bold" style="color: #54a0ff"><i class="far fa-question-circle value-icon"></i></h1>
+							<h4 class="font-weight-bold">General Questions</h4>
+							<button class="btn btn-lg mt-3 btn-contact" id="btnContactGeneral" type="button">Start Here</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="divPlaceholder"></div>
+		<div class="container" id="divGenContact">
+			<div class="row justify-content-center my-5">
+				<div class="col-xs-10 col-md-8">
+					<!-- TODO: Link form -->
+					<h3 class="font-weight-bold mb-3">General Questions</h3>
+					<form>
+						<div class="form-group">
+							<label for="txtNameGen">Your Name</label>
+							<input type="text" class="form-control" id="txtNameGen" name="txtNameGen" placeholder="Miss Reveille">
+						</div>
+						<div class="form-group">
+							<label for="txtEmailGen">Email address</label>
+							<input type="email" class="form-control" id="txtEmailGen" name="txtEmailGen" aria-describedby="emailHelp" placeholder="howdy@aggiedevs.com">
+							<small id="emailHelp" class="form-text text-muted">We do not share your email with anyone.</small>
+						</div>
+						<div class="form-group">
+							<label for="ddlSubjectGen">Subject</label>
+							<select class="form-control" id="ddlSubjectGen" name="ddlSubjectGen">
+								<option value="">Select One</option>
+								<option>General Meetings</option>
+								<option>Workshops</option>
+								<option>Suggestion</option>
+								<option>Feedback</option>
+								<option>Other</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="txtCommentsGen">Question / Comments / Concerns</label>
+							<textarea class="form-control" id="txtCommentsGen" name="txtCommentsGen" rows="3">How can we help?</textarea>
+						</div>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input checkmark" id="chkTermsGen" name="chkTermsGen">
+							<label class="form-check-label" for="chkTermsGen">I agree to the <a href="#">Terms & Conditions</a></label>
+						</div>
+						<div class="form-check mt-3">
+							<input type="checkbox" class="form-check-input checkmark" id="chkNewsGen" name="chkNewsGen">
+							<label class="form-check-label" for="chkNewsCorp">Join Our Newsletter</label>
+						</div>
+						<button type="submit" class="btn btn-contact btn-contact-slim mt-4">Send an Owl</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="container" id="divCorpContact">
+			<div class="row justify-content-center my-5">
+				<div class="col-xs-10 col-md-8">
+					<h3 class="font-weight-bold mb-3">Corporate Outreach</h3>
+					<!-- TODO: Link form -->
+					<form>
+						<div class="form-group">
+							<label for="txtNameCorp">Your Name</label>
+							<input type="text" class="form-control" id="txtNameCorp" name="txtNameCorp" placeholder="Miss Reveille">
+						</div>
+						<div class="form-group">
+							<label for="txtCorp">Your Company</label>
+							<input type="text" class="form-control" id="txtCorp" name="txtCorp" placeholder="Ministry of Magic">
+						</div>
+						<div class="form-group">
+							<label for="txtEmailCorp">Email address</label>
+							<input type="email" class="form-control" id="txtEmailCorp" name="txtEmailCorp" aria-describedby="emailHelp2" placeholder="howdy@aggiedevs.com">
+							<small id="emailHelp2" class="form-text text-muted">We do not share your email with anyone.</small>
+						</div>
+						<div class="form-group">
+							<label for="ddlSubjectCorp">Subject</label>
+							<select class="form-control" id="ddlSubjectCorp" name="ddlSubjectCorp">
+								<option value="">Select One</option>
+								<option>Sponsorship</option>
+								<option>Recruiting</option>
+								<option>Workshops</option>
+								<option>Giving a Presentation</option>
+								<option>Other</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="txtCommentsCorp">Question / Comments / Concerns</label>
+							<textarea class="form-control" id="txtCommentsCorp" name="txtCommentsCorp"  rows="3">How can we help?</textarea>
+						</div>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input checkmark" id="chkTermsCorp" name="chkTermsCorp">
+							<label class="form-check-label" for="chkTermsCorp">I agree to the <a class="" href="#">Terms & Conditions</a></label>
+						</div>
+						<div class="form-check mt-3">
+							<input type="checkbox" class="form-check-input checkmark" id="chkNewsCorp" name="chkNewsCorp">
+							<label class="form-check-label" for="chkNewsCorp">Join Our Corporate Newsletter</label>
+						</div>
+						<button type="submit" class="btn btn-contact btn-contact-slim mt-4">Send an Owl</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer navbar-fixed-bottom">
+			<div class="container py-2">
+				<div class="row justify-content-center mt-5">
+					<h1 class="font-weight-bold text-uppercase text-center">Stay in Touch</h1>
+				</div>
+				<div class="row justify-content-center mt-3">
+					<div class="col-6 text-center icon-row">
+						<a class="white-link" href=""><i class="fab fa-linkedin px-2"></i></a>
+						<a class="white-link" href=""><i class="fas fa-envelope px-2"></i></a>
+						<a class="white-link" href=""><i class="fab fa-github-alt px-2"></i></a>
+						<a class="white-link" href=""><i class="fab fa-instagram px-2"></i></a>
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<h6 class="text-center footer-copyright">Copyright &copy; 2020 Aggie Web Developers - <a class="white-link" href="">Terms & Conditions + Privacy Policy</a></h6>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
