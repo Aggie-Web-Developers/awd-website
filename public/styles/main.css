@@ -590,4 +590,19 @@ label:focus,
 	display: none;
 }
 
+@media (max-width: 425px) {
+	.contact-us-header {
+		font-size: 4rem;
+	}
+	.btn-contact-slim {
+		font-size: .7rem;
+	}
+}
+
+@media (max-width: 375px) {
+	.btn-contact-slim {
+		font-size: .65rem;
+	}
+}
+
 /***** /Contact Us Page/ *****/
