@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<title>AWD - About Us</title>
+		<title>AWD - Contact Us</title>
 		<link rel="icon" type="image/png" href="../public/images/AWD-logo.png">
 
 		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -56,13 +56,33 @@
 					$('.navbar-toggler').removeClass('custom-toggler');
 					$('.navbar-toggler-icon').removeClass('custom-toggler');
 				});
+
+				$('#btnContactGeneral').on('click', function() {
+					$('#divCorpContact').slideUp(600);
+					$('#divGenContact').slideDown(600);
+
+					scrollTo();
+				});
+
+				$('#btnContactCorporate').on('click', function() {
+					$('#divGenContact').slideUp(600);
+					$('#divCorpContact').slideDown(600);
+
+					scrollTo();
+				});
 			});
+
+			function scrollTo(){
+				$('html, body').animate({
+			        scrollTop: $('#divPlaceholder').offset().top + 750
+			    }, 600);
+			}
 		</script>
 
 	</head>
 
 	<body>
-		<div class="navbar-fixed-top about-us-banner">
+		<div class="navbar-fixed-top contact-us-banner">
 			<nav class="navbar navbar-expand-lg navbar-dark sticky" id="navbar">
 			    <div id="navLeft" class="navbar-collapse collapse w-100 order-1 order-lg-0 dual-collapse2">
 			        <ul class="navbar-nav ml-auto">
@@ -98,81 +118,119 @@
 			    </div>
 			</nav>
 
-			<div class=" text-center">
-				<div class="container">
-					<div class="row justify-content-center">
-						<h1 class="font-weight-bold about-us-header main-purple">About Us</h1>
+			<div class="container-fluid pt-5">
+				<div class="container my-5 pt-3">
+					<div class="row contact">
+						<div class="col-12 text-center">
+							<h1 class="font-weight-bold contact-us-header">Contact Us</h1>
+						</div>
 					</div>
-
 					<div class="row mt-5">
-						<p class="about-us-copy main-purple">Aggie Web Developers is an on-campus organization dedicated to empowering Aggies to build technical prowess in web development, network with peers and industry contacts, and learn more about careers in the technology industry.
-							<span class="d-none d-md-block">Our primary mission is to develop the next generation of professionals, entrepreneurs, and hobbyists; by providing students with an opportunity for growth in web development skills that are ethical and just. To achieve this mission, our organization will provide workshops, social meetings, networking opportunities, and team project opportunities to all members. Additionally, we plan to support our member’s professional development by providing our members with opportunities to learn about diversity, ethical business models, as well as the importance of mental health; to inspire the next generation of change in young professionals.</span></p>
+						<div class="col-xs-12 col-md-6 text-center">
+							<h1 class="font-weight-bold" style="color: #54a0ff"><i class="far fa-chart-bar value-icon"></i></h1>
+							<h4 class="font-weight-bold">Corporate Outreach</h4>
+							<button class="btn btn-lg mt-3 mb-5 btn-contact" id="btnContactCorporate" type="button">Start Here</button>
+						</div>
+
+						<div class="col-xs-12 col-md-6 text-center">
+							<h1 class="font-weight-bold" style="color: #54a0ff"><i class="far fa-question-circle value-icon"></i></h1>
+							<h4 class="font-weight-bold">General Questions</h4>
+							<button class="btn btn-lg mt-3 btn-contact" id="btnContactGeneral" type="button">Start Here</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="container my-5">
-			<div id="mission-div" class="row justify-content-around">
-				<div class="col-sm-10 col-md-7">
-					<div class="row">
-						<div class="col-12">
-							<div class="about-us-subheader text-uppercase">
-								Our Mission
-							</div>
+		<div id="divPlaceholder"></div>
+		<div class="container" id="divGenContact">
+			<div class="row justify-content-center my-5">
+				<div class="col-xs-10 col-md-8">
+					<!-- TODO: Link form -->
+					<h3 class="font-weight-bold mb-3">General Questions</h3>
+					<form>
+						<div class="form-group">
+							<label for="txtNameGen">Your Name</label>
+							<input type="text" class="form-control" id="txtNameGen" name="txtNameGen" placeholder="Miss Reveille">
 						</div>
-					</div>
-					<div class="row justify-content-center">
-						<div class="col-12 mt-4">
-							<p class="about-us-copy font-weight-bold text-center">
-								To develop the next generation of professionals, entrepreneurs, and hobbyists; by providing students with an opportunity for growth in web development skills that are ethical and just.
-							</p>
+						<div class="form-group">
+							<label for="txtEmailGen">Email address</label>
+							<input type="email" class="form-control" id="txtEmailGen" name="txtEmailGen" aria-describedby="emailHelp" placeholder="howdy@aggiedevs.com">
+							<small id="emailHelp" class="form-text text-muted">We do not share your email with anyone.</small>
 						</div>
-					</div>
-				</div>
-
-				<div class="d-none d-lg-flex col-3 justify-content-center align-items-center">
-					<div class="d-none d-lg-block container">
-						<h1 class="main-purple text-center mission-icon"><i class="fas fa-bullseye"></i></h1>
-					</div>
+						<div class="form-group">
+							<label for="ddlSubjectGen">Subject</label>
+							<select class="form-control" id="ddlSubjectGen" name="ddlSubjectGen">
+								<option value="">Select One</option>
+								<option>General Meetings</option>
+								<option>Workshops</option>
+								<option>Suggestion</option>
+								<option>Feedback</option>
+								<option>Other</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="txtCommentsGen">Question / Comments / Concerns</label>
+							<textarea class="form-control" id="txtCommentsGen" name="txtCommentsGen" rows="3">How can we help?</textarea>
+						</div>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input checkmark" id="chkTermsGen" name="chkTermsGen">
+							<label class="form-check-label" for="chkTermsGen">I agree to the <a href="#">Terms & Conditions</a></label>
+						</div>
+						<div class="form-check mt-3">
+							<input type="checkbox" class="form-check-input checkmark" id="chkNewsGen" name="chkNewsGen">
+							<label class="form-check-label" for="chkNewsCorp">Join Our Newsletter</label>
+						</div>
+						<button type="submit" class="btn btn-contact btn-contact-slim mt-4">Send an Owl</button>
+					</form>
 				</div>
 			</div>
 		</div>
 
-		<div class="container container-margin">
-			<div class="row justify-content-center">
-				<div class="col-sm-10 col-md-7">
-					<div class="about-us-subheader text-uppercase">
-						Our Values
-					</div>
-				</div>
-			</div>
-
-			<div class="row justify-content-around text-center my-5">
-				<div class="col-sm-12 col-lg-5 mt-5">
-					<h1 class="main-purple font-weight-bold"><i class="fas fa-hand-holding-medical value-icon"></i></h1>
-					<h4 class="font-weight-bold text-uppercase">Selflessness</h4>
-					<p class="pt-3 about-us-copy">Our team and members are committed to teaching everything we know and helping each other succeed before anything else.</p>
-				</div>
-				<div class="col-sm-12 col-lg-5 mt-5">
-					<h1 class="main-purple font-weight-bold"><i class="fas fa-university value-icon"></i></h1>
-					<h4 class="font-weight-bold text-uppercase">Integrity</h4>
-					<p class="pt-3 about-us-copy">Our team and members are committed to following through with our word and having strong moral roots.</p>
-				</div>
-				<div class="col-sm-12 col-lg-5 mt-5">
-					<h1 class="main-purple font-weight-bold"><i class="fas fa-people-carry value-icon"></i></h1>
-					<h4 class="font-weight-bold text-uppercase">Teamwork</h4>
-					<p class="pt-3 about-us-copy">Our team and members are committed to being supportive, present, and dependable team members; for all projects, big or small.</p>
-				</div>
-				<div class="col-sm-12 col-lg-5 mt-5">
-					<h1 class="main-purple font-weight-bold"><i class="fas fa-hat-cowboy value-icon"></i></h1>
-					<h4 class="font-weight-bold text-uppercase">Enthusiasm</h4>
-					<p class="pt-3 about-us-copy">Our team and members pride ourselves on our work and our mission. We come equipped to every meeting with a positive mindset and a readiness to tackle challenges.</p>
-				</div>
-				<div class="col-sm-12 col-lg-6 mt-5">
-					<h1 class="main-purple font-weight-bold"><i class="fas fa-globe value-icon"></i></h1>
-					<h4 class="font-weight-bold text-uppercase">Diversity</h4>
-					<p class="pt-3 about-us-copy">Our team and members are committed to building a team with a diverse set of experiences and viewpoints, by including people of all races, genders, ages, religions, identities, and experiences.</p>
+		<div class="container" id="divCorpContact">
+			<div class="row justify-content-center my-5">
+				<div class="col-xs-10 col-md-8">
+					<h3 class="font-weight-bold mb-3">Corporate Outreach</h3>
+					<!-- TODO: Link form -->
+					<form>
+						<div class="form-group">
+							<label for="txtNameCorp">Your Name</label>
+							<input type="text" class="form-control" id="txtNameCorp" name="txtNameCorp" placeholder="Miss Reveille">
+						</div>
+						<div class="form-group">
+							<label for="txtCorp">Your Company</label>
+							<input type="text" class="form-control" id="txtCorp" name="txtCorp" placeholder="Ministry of Magic">
+						</div>
+						<div class="form-group">
+							<label for="txtEmailCorp">Email address</label>
+							<input type="email" class="form-control" id="txtEmailCorp" name="txtEmailCorp" aria-describedby="emailHelp2" placeholder="howdy@aggiedevs.com">
+							<small id="emailHelp2" class="form-text text-muted">We do not share your email with anyone.</small>
+						</div>
+						<div class="form-group">
+							<label for="ddlSubjectCorp">Subject</label>
+							<select class="form-control" id="ddlSubjectCorp" name="ddlSubjectCorp">
+								<option value="">Select One</option>
+								<option>Sponsorship</option>
+								<option>Recruiting</option>
+								<option>Workshops</option>
+								<option>Giving a Presentation</option>
+								<option>Other</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="txtCommentsCorp">Question / Comments / Concerns</label>
+							<textarea class="form-control" id="txtCommentsCorp" name="txtCommentsCorp"  rows="3">How can we help?</textarea>
+						</div>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input checkmark" id="chkTermsCorp" name="chkTermsCorp">
+							<label class="form-check-label" for="chkTermsCorp">I agree to the <a class="" href="#">Terms & Conditions</a></label>
+						</div>
+						<div class="form-check mt-3">
+							<input type="checkbox" class="form-check-input checkmark" id="chkNewsCorp" name="chkNewsCorp">
+							<label class="form-check-label" for="chkNewsCorp">Join Our Corporate Newsletter</label>
+						</div>
+						<button type="submit" class="btn btn-contact btn-contact-slim mt-4">Send an Owl</button>
+					</form>
 				</div>
 			</div>
 		</div>
