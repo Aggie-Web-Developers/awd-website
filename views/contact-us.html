@@ -15,70 +15,6 @@
 		crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-		<!-- TODO: Remove to its own JS Script -->
-		<script type="text/javascript">
-			$(function () {
-
-				$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
-
-				$('#mainLogo').css('color', '#341f97');
-
-				// navbar
-				$(document).scroll(function () {
-					$("#navbar").toggleClass('scrolled', $(this).scrollTop() > $("#navbar").height());
-
-					if ($(this).scrollTop() <= $("#navbar").height())
-					{
-						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
-
-						$('#mainLogo').css('color', '#341f97');
-						$('.navbar-toggler').addClass('custom-toggler');
-						$('.navbar-toggler-icon').addClass('custom-toggler');
-					}
-					else
-					{
-						$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
-
-						$('#mainLogo').css('color', '#fff');
-						$('.navbar-toggler').removeClass('custom-toggler');
-						$('.navbar-toggler-icon').removeClass('custom-toggler');
-					}
-
-				});
-
-				$('.navbar-toggler').on('click', function() {
-					$("#navbar").addClass('scrolled');
-
-					$(".navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#fff');
-
-					$('#mainLogo').css('color', '#fff');
-					$('.navbar-toggler').removeClass('custom-toggler');
-					$('.navbar-toggler-icon').removeClass('custom-toggler');
-				});
-
-				$('#btnContactGeneral').on('click', function() {
-					$('#divCorpContact').slideUp(600);
-					$('#divGenContact').slideDown(600);
-
-					scrollTo();
-				});
-
-				$('#btnContactCorporate').on('click', function() {
-					$('#divGenContact').slideUp(600);
-					$('#divCorpContact').slideDown(600);
-
-					scrollTo();
-				});
-			});
-
-			function scrollTo(){
-				$('html, body').animate({
-			        scrollTop: $('#divPlaceholder').offset().top + 750
-			    }, 600);
-			}
-		</script>
-
 	</head>
 
 	<body>
@@ -254,5 +190,8 @@
 				</div>
 			</div>
 		</div>
+
+		<script src="../public/scripts/contact-us.js"></script>
+
 	</body>
 </html>
