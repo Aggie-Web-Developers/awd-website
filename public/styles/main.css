@@ -620,27 +620,13 @@ label:focus,
     color: #fff;
 }
 
-.about-us-header {
+.sponsors-header {
 	margin-top: 3rem;
 	font-size: 6rem;
 	z-index: 0;
 }
 
-.about-us-subheader {
-	background-color: rgba(211, 211, 211, .4);
-	border-radius: 50px;
-
-	height: 6rem!important;
-
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    font-weight: 900;
-    font-weight: bold;
-}
-
-.about-us-copy {
+.sponsors-copy {
     font-size: 1.0rem;
     letter-spacing: .04rem;
     line-height: 2rem;
@@ -648,26 +634,13 @@ label:focus,
 		padding: 1rem;
 }
 
-.mission-icon {
-	font-size: 12rem;
-}
-
-.value-icon {
-	font-size: 4rem;
+.sponsors-image {
+	max-height: 15rem;
 }
 
 @media (max-width: 425px) {
-	.about-us-header {
+	.sponsors-header {
 		font-size: 4rem;
-	}
-	.about-us-subheader {
-		font-size: 2.4rem;
-	}
-}
-
-@media (max-width: 768px) {
-	#mission-div {
-		justify-content: center;
 	}
 }
 /***** /Sponsors Page/ *****/
