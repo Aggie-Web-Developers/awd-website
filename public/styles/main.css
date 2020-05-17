@@ -417,7 +417,7 @@ label:focus,
 	color: #341f97;
 }
 
-@media (min-width: 425px) and (max-width: 768px){
+@media (min-width: 425px) and (max-width: 767px){
    .post-module{
    		width: 360px;
    }
