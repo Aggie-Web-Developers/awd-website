@@ -613,12 +613,20 @@ label:focus,
   	background-repeat: no-repeat;
  	background-size: cover;
  	background-position: 100% 80%;
- 	height: 40rem;
+ 	height: 30rem;
  	overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
+}
+
+.meetings-subheader {
+	font-size: 4rem;
+}
+
+.meetings-icon {
+	font-size: 4rem;
 }
 
 .meetings-header {
