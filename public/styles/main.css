@@ -484,7 +484,7 @@ label:focus,
 /***** /Footer/ *****/
 
 /***** /Home Page/ *****/
-  
+
 /***** About Us Page *****/
 .about-us-banner {
  	background: url('../images/about-us-banner.jpg');
@@ -642,5 +642,26 @@ label:focus,
 	.sponsors-header {
 		font-size: 4rem;
 	}
+	.sponsors-text {
+		font-size: 1.4rem;
+	}
 }
+
+@media (max-width: 400px) {
+	.sponsors-text {
+		font-size: 1.25rem;
+		padding: 1rem;
+	}
+	.sponsors-header {
+		font-size: 3rem;
+	}
+}
+
+@media (max-width: 320px) {
+	.sponsors-text {
+		font-size: 1.15rem;
+		padding: 1rem;
+	}
+}
+
 /***** /Sponsors Page/ *****/
