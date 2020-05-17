@@ -613,7 +613,7 @@ label:focus,
  	background-size: cover;
  	background-position: 50%;
  	height: 40rem;
- 	overflow: hidden;
+	overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -665,3 +665,42 @@ label:focus,
 }
 
 /***** /Sponsors Page/ *****/
+/***** Meetings Page *****/
+.meetings-banner {
+	background: url('../images/meetings-banner.jpg');
+  	background-repeat: no-repeat;
+ 	background-size: cover;
+ 	background-position: 100% 80%;
+ 	height: 30rem;
+ 	overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.meetings-subheader {
+	font-size: 4rem;
+}
+
+.meetings-icon {
+	font-size: 4rem;
+}
+
+.meetings-header {
+	font-size: 5rem;
+}
+
+@media (max-width: 425px) {
+	.meetings-header {
+		font-size: 4rem;
+	}
+}
+
+@media (max-width: 535px) {
+	.meetings-banner {
+		background-position: 75% 80%;
+	}
+}
+
+/***** /Meetings Page/ *****/
