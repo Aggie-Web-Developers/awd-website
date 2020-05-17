@@ -638,9 +638,9 @@ label:focus,
 	max-height: 15rem;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 426px) {
 	.sponsors-header {
-		font-size: 4rem;
+		font-size: 3.8rem;
 	}
 	.sponsors-text {
 		font-size: 1.4rem;
