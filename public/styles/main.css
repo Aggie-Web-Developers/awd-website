@@ -529,6 +529,24 @@ label:focus,
     color: #fff;
 }
 
+.team-sub-banner {
+	background: url('../images/team-banner.jpg');
+  	background-repeat: no-repeat;
+ 	background-size: cover;
+ 	background-position: 0 50%;
+ 	height: 20rem;
+ 	overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.team-header {
+	font-size: 6rem;
+	z-index: 0;
+}
+
 .about-us-header {
 	margin-top: 3rem;
 	font-size: 6rem;
@@ -579,7 +597,168 @@ label:focus,
 		justify-content: center;
 	}
 }
+
+/***** Officer Cards *****/
+
+.officer-card, .officer-card-inner {
+  margin: 0 auto;
+  position: relative;
+}
+
+.officer-card {
+  -webkit-perspective: 900px;
+          perspective: 900px;
+  -webkit-perspective-origin: 50% calc(50% - 18em);
+          perspective-origin: 50% calc(50% - 18em);
+}
+
+.officer-card-inner {
+  margin: 50px auto;
+  border-radius: 5px;
+  font-weight: 400;
+  color: #071011;
+  font-size: 1rem;
+  text-align: center;
+  -webkit-transition: all 0.6s cubic-bezier(1.0, -0.4, 0.2, 1.7);
+  transition: all 0.6s cubic-bezier(1.0, -0.4, 0.2, 1.7);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.officer-card-inner:hover {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  background-color: transparent;
+}
+
+/* Handle visibility of back of card and front of card on hover */
+.officer-card-inner:hover .social-icon {
+  opacity: 1;
+  top: 0;
+}
+
+.officer-card-inner:hover .officer-card-photo, .officer-card-inner:hover .front__footer {
+  opacity: 0;
+}
+
+.front, .back {
+  position: relative;
+  top: 0;
+  left: 0;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.front {
+  cursor: pointer;
+  height: 100%;
+  background: #fff;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-radius: 5px;
+  box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.officer-card-background-photo {
+  position: relative;
+  height: 150px;
+  background: url("https://images.unsplash.com/photo-1572573473437-393814b3de64?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80") no-repeat;
+  background-size: cover;
+  background-position: 0 50%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  overflow: hidden;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.officer-card-background-photo:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.officer-card-photo {
+  position: relative;
+  top: -4.5rem;
+  height: 9rem;
+  width: 9rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  overflow: hidden;
+  -webkit-transition: all 0.6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
+  transition: all 0.6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
+  z-index: 3;
+}
+
+.photo-president{
+	background: url("https://avatars0.githubusercontent.com/u/30357632?s=460&v=4") no-repeat;
+  	background-size: contain;
+}
+
+.photo-treasurer{
+	background: url("https://img.buzzfeed.com/thumbnailer-prod-us-east-1/6f1f6e8541404c6db1f0fa9c0d6de7f8/BFV12484_3-IngredientDinners-FB1080SQ.jpg") no-repeat;
+  	background-size: contain;
+}
+
+.photo-vacant{
+	background: url("https://images.squarespace-cdn.com/content/v1/586c43ba725e250e1dc97018/1491492876275-63G54YF3HSEUN1844P21/ke17ZwdGBToddI8pDm48kOyctPanBqSdf7WQMpY1FsRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwwQIrqN0bcqL_6-iJCOAA0qwytzcs0JTq1XS2aqVbyK6GtMIM7F0DGeOwCXa63_4k/We+are+Hiring+Image+square-600xauto.jpg") no-repeat;
+  	background-size: contain;
+} 
+
+.back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #341f97;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+.officer-card-body {
+	position: relative;
+	top: -3.5rem;
+}
+
+.social-media-wrapper .social-icon {
+  position: relative;
+  top: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 3rem;
+  opacity: 0;
+  color: #fff;
+  -webkit-transition: all 0.4s cubic-bezier(0.3, 0.7, 0.1, 1.9);
+  transition: all 0.4s cubic-bezier(0.3, 0.7, 0.1, 1.9);
+  padding: 0 8px;
+}
+
+.social-media-wrapper .social-icon {
+  -webkit-transition-delay: 0.6s;
+          transition-delay: 0.6s;
+}
+
+/***** /Officer Cards/ *****/
 /***** /About Us Page/ *****/
+
 /***** Contact Us Page *****/
 .contact-us-banner {
 	height: 50rem;
