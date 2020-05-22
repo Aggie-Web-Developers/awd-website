@@ -1,6 +1,5 @@
 // JS File for About Us View
 
-
 $(function () {
 	
 	setInitialNavbarColors();
