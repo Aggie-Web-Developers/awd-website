@@ -1,6 +1,5 @@
 // JS File for Projects View
 
-
 $(function () {
 	// navbar configuration
 	$(document).scroll(function () {

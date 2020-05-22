@@ -1,6 +1,5 @@
 // JS File for Index View
 
-
 $(function () {
 	// navbar configuration
 	$(document).scroll(function () {
