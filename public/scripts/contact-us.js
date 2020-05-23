@@ -1,7 +1,8 @@
 // JS File for Conact Us View
 
 $(function () {
-	
+	document.title = 'AWD - Contact Us';
+	$('#divNav').addClass('contact-us-banner');
 	setInitialNavbarColors();
 
 	// navbar configuration
