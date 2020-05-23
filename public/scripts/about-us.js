@@ -1,7 +1,9 @@
 // JS File for About Us View
 
 $(function () {
-	
+	$('#divNav').addClass('about-us-banner');
+	document.title = 'AWD - About Us';
+
 	setInitialNavbarColors();
 
 	// navbar configuration

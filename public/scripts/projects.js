@@ -1,6 +1,9 @@
 // JS File for Projects View
 
 $(function () {
+	document.title = 'AWD - Projects';
+	$('#divNav').addClass('projects-banner');
+
 	// navbar configuration
 	$(document).scroll(function () {
 		$("#navbar").toggleClass('scrolled', $(this).scrollTop() > $("#navbar").height());
