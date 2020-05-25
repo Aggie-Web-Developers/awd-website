@@ -47,6 +47,14 @@ label.error {
 	z-index: 0;
 }
 
+.alert {
+	position: fixed;
+	cursor: pointer;
+	top: 6rem;
+	left: 50%;
+    transform: translate(-50%, 0);
+}
+
 .footer a {
 	color: #FFF;
 	transition: background-color .4s linear;

@@ -99,6 +99,55 @@ $(function () {
             error.appendTo(element.closest('.form-group'));
         }
     });
+
+	// handle form submission for general form
+    $("#frmGen").submit(function(e) {
+	    e.preventDefault();
+
+	    var form = $(this);
+	    var url = form.attr('action');
+
+	    $.ajax({
+			type: "POST",
+			url: url,
+			data: form.serialize(),
+			success: function(data) {
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#divGenContact').slideUp(1500);
+				$("#frmGen")[0].reset();
+
+				checkAlerts(data);
+			},
+			error: function (data){
+				checkAlerts(data.responseText);
+			}
+		});
+	});
+
+
+    // handle form submission for corporate form 
+	$("#frmCorp").submit(function(e) {
+	    e.preventDefault();
+
+	    var form = $(this);
+	    var url = form.attr('action');
+
+	    $.ajax({
+			type: "POST",
+			url: url,
+			data: form.serialize(),
+			success: function(data) {
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#divCorpContact').slideUp(1500);
+				$("#frmCorp")[0].reset();
+
+				checkAlerts(data);
+			},
+			error: function (data){
+				checkAlerts(data.responseText);
+			}
+		});
+	});
 });
 
 function setInitialNavbarColors() {
@@ -114,3 +163,20 @@ function scrollTo() {
     }, 600);
 }
 
+function checkAlerts(alert) {
+	var alertDiv = '';
+
+	if (alert && alert != ""){
+		if (alert.includes("success") || alert.includes("Success")){
+			alertDiv = "<div class='alert alert-success' role='alert'>"+ alert +"</div>";
+		} else {
+			alertDiv = "<div class='alert alert-danger' role='alert'>"+ alert +"</div>";
+		}
+
+		$('#navbar').hide().append(alertDiv).fadeIn(1000);
+
+		$('.alert').click(function() {
+			$(this).hide();
+		});
+	}
+}
