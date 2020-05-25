@@ -12,6 +12,19 @@ app.get("/", function(req, res){
 	res.render("index");
 });
 
+// handle signup
+app.post("/", function(req, res){
+	var email = req.body.txtEmail;
+
+	/* Insert Into Database
+	var query = "IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) " +
+				"BEGIN " + 
+				"INSERT INTO tbl_email_list (email) values (@email) " +
+				"END";*/
+
+	res.render("index");
+});
+
 app.get("/general-meetings", function(req, res){
 	res.render("general-meetings");
 });
@@ -30,6 +43,14 @@ app.get("/about-us", function(req, res){
 
 app.get("/contact-us", function(req, res){
 	res.render("contact-us");
+});
+
+app.post("/contact-us/general", function(req, res){
+	res.redirect("/contact-us");
+});
+
+app.post("/contact-us/corporate", function(req, res){
+	res.redirect("/contact-us");
 });
 
 app.listen("3000");

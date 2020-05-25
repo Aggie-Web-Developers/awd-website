@@ -21,6 +21,10 @@ label:focus,
     box-shadow: none !important;
 }
 
+label.error {
+	color: #ee5253;
+}
+
 .main-purple {
 	color: #341f97;
 }

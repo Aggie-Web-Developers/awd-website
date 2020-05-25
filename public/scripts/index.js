@@ -22,4 +22,19 @@ $(function () {
 	        opacity: "toggle"
 	    }, 300);
 	});
+
+	// validate email form
+	$("#frm").validate({
+        rules: {
+            txtEmail: { required: true, email: true }
+        },
+        messages: {
+            txtEmail: { 
+            	required: 'Please enter an email address.'
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.prependTo(element.closest('.col-lg-10'));
+        }
+    });
 });

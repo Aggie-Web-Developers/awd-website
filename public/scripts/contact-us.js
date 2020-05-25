@@ -53,6 +53,52 @@ $(function () {
 
 		scrollTo();
 	});
+
+	// validate general contact us form
+	$("#frmGen").validate({
+        ignore: ":hidden",
+        rules: {
+            txtNameGen: { required: true },
+            txtEmailGen: { required: true, email: true },
+            ddlSubjectGen: { required: true },
+            txtCommentsGen: { required: true },
+            chkTermsGen: { required: true },
+        },
+        messages: {
+            txtNameGen: { required: 'Please enter your name.' },
+            txtEmailGen: { required: 'Please enter an email address.' },
+            ddlSubjectGen: { required: 'Please select a reason for contacting us.' },
+            txtCommentsGen: { required: 'Please enter your comments or questions.' },
+            chkTermsGen: { required: 'You must agree to our terms and conditions.' },
+        },
+        errorPlacement: function(error, element) {
+            error.appendTo(element.closest('.form-group'));
+        }
+    });
+
+    // validate corporate contact us form
+	$("#frmCorp").validate({
+        ignore: ":hidden",
+        rules: {
+            txtNameCorp: { required: true },
+            txtCorp: { required: true },
+            txtEmailCorp: { required: true, email: true },
+            ddlSubjectCorp: { required: true },
+            txtCommentsCorp: { required: true },
+            chkTermsCorp: { required: true },
+        },
+        messages: {
+            txtNameCorp: { required: 'Please enter your name.' },
+            txtCorp: { required: 'Please enter the name of your company.' },
+            txtEmailCorp: { required: 'Please enter an email address.' },
+            ddlSubjectCorp: { required: 'Please select a reason for contacting us.' },
+            txtCommentsCorp: { required: 'Please enter your comments or questions.' },
+            chkTermsCorp: { required: 'You must agree to our terms and conditions.' },
+        },
+        errorPlacement: function(error, element) {
+            error.appendTo(element.closest('.form-group'));
+        }
+    });
 });
 
 function setInitialNavbarColors() {

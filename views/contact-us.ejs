@@ -27,9 +27,8 @@
 		<div class="container" id="divGenContact">
 			<div class="row justify-content-center my-5">
 				<div class="col-xs-10 col-md-8">
-					<!-- TODO: Link form -->
 					<h3 class="font-weight-bold mb-3">General Questions</h3>
-					<form>
+					<form id="frmGen" action="/contact-us/general" method="POST">
 						<div class="form-group">
 							<label for="txtNameGen">Your Name</label>
 							<input type="text" class="form-control" id="txtNameGen" name="txtNameGen" placeholder="Miss Reveille">
@@ -52,9 +51,9 @@
 						</div>
 						<div class="form-group">
 							<label for="txtCommentsGen">Question / Comments / Concerns</label>
-							<textarea class="form-control" id="txtCommentsGen" name="txtCommentsGen" rows="3">How can we help?</textarea>
+							<textarea class="form-control" id="txtCommentsGen" name="txtCommentsGen" rows="3"></textarea>
 						</div>
-						<div class="form-check">
+						<div class="form-group form-check">
 							<input type="checkbox" class="form-check-input checkmark" id="chkTermsGen" name="chkTermsGen">
 							<label class="form-check-label" for="chkTermsGen">I agree to the <a href="#">Terms & Conditions</a></label>
 						</div>
@@ -72,8 +71,7 @@
 			<div class="row justify-content-center my-5">
 				<div class="col-xs-10 col-md-8">
 					<h3 class="font-weight-bold mb-3">Corporate Outreach</h3>
-					<!-- TODO: Link form -->
-					<form>
+					<form id="frmCorp" action="/contact-us/corporate" method="POST">
 						<div class="form-group">
 							<label for="txtNameCorp">Your Name</label>
 							<input type="text" class="form-control" id="txtNameCorp" name="txtNameCorp" placeholder="Miss Reveille">
@@ -100,9 +98,9 @@
 						</div>
 						<div class="form-group">
 							<label for="txtCommentsCorp">Question / Comments / Concerns</label>
-							<textarea class="form-control" id="txtCommentsCorp" name="txtCommentsCorp"  rows="3">How can we help?</textarea>
+							<textarea class="form-control" id="txtCommentsCorp" name="txtCommentsCorp"  rows="3"></textarea>
 						</div>
-						<div class="form-check">
+						<div class="form-group form-check">
 							<input type="checkbox" class="form-check-input checkmark" id="chkTermsCorp" name="chkTermsCorp">
 							<label class="form-check-label" for="chkTermsCorp">I agree to the <a class="" href="#">Terms & Conditions</a></label>
 						</div>
