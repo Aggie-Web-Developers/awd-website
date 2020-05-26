@@ -28,16 +28,14 @@ var config = {
 };
 
 sql.connect(config).then(pool => {
-	console.log("Connecting to database: ");
-
 	if (pool.connected){
-		console.log("[OK]");
+		console.log("Connecting to database: [OK]");
 	}
 
 	return pool;
 }).catch(function(err) {
-	console.log("[FAILED]");
-	console.log(error);
+	console.log("Connecting to database: [FAILED]");
+	console.log(err);
 });
 
 
