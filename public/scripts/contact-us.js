@@ -54,8 +54,10 @@ $(function () {
 		scrollTo();
 	});
 
-	// validate general contact us form
-	$("#frmGen").validate({
+	// validation and ajax for general contact us form
+	$("#frmGen").submit(function(e) {
+    	e.preventDefault();
+	}).validate({
         ignore: ":hidden",
         rules: {
             txtNameGen: { required: true },
@@ -73,11 +75,35 @@ $(function () {
         },
         errorPlacement: function(error, element) {
             error.appendTo(element.closest('.form-group'));
-        }
+        },
+        submitHandler: function() {
+        	var form = $("#frmGen")
+	    	var url = form.attr('action');
+
+        	 $.ajax({
+				type: "POST",
+				url: url,
+				data: form.serialize(),
+				success: function(data) {
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#divGenContact').slideUp(1500);
+					$("#frmGen")[0].reset();
+
+					checkAlerts(data);
+				},
+				error: function (){
+					checkAlerts("Whoops! We encountered an error, and weren't able to send your message.");
+				}
+			});
+
+        	return false;
+        },
     });
 
-    // validate corporate contact us form
-	$("#frmCorp").validate({
+    // validation and ajax for corporate contact us form
+	$("#frmCorp").submit(function(e) {
+    	e.preventDefault();
+	}).validate({
         ignore: ":hidden",
         rules: {
             txtNameCorp: { required: true },
@@ -97,6 +123,28 @@ $(function () {
         },
         errorPlacement: function(error, element) {
             error.appendTo(element.closest('.form-group'));
+        },
+        submitHandler: function() {
+        	var form = $("#frmCorp")
+		    var url = form.attr('action');
+
+		    $.ajax({
+				type: "POST",
+				url: url,
+				data: form.serialize(),
+				success: function(data) {
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#divCorpContact').slideUp(1500);
+					$("#frmCorp")[0].reset();
+
+					checkAlerts(data);
+				},
+				error: function (){
+					checkAlerts("Whoops! We encountered an error, and weren't able to send your message.");
+				}
+			});
+
+			return false;
         }
     });
 });
@@ -114,3 +162,20 @@ function scrollTo() {
     }, 600);
 }
 
+function checkAlerts(alert) {
+	var alertDiv = '';
+
+	if (alert && alert != ""){
+		if (alert.includes("success") || alert.includes("Success")){
+			alertDiv = "<div class='alert alert-success' role='alert'>"+ alert +"</div>";
+		} else {
+			alertDiv = "<div class='alert alert-danger' role='alert'>"+ alert +"</div>";
+		}
+
+		$('#navbar').hide().append(alertDiv).fadeIn(1000);
+
+		$('.alert').click(function() {
+			$(this).hide();
+		});
+	}
+}
