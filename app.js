@@ -18,7 +18,7 @@ app.post("/", function(req, res){
 
 	/* Insert Into Database
 	var query = "IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) " +
-				"BEGIN " + 
+				"BEGIN " +
 				"INSERT INTO tbl_email_list (email) values (@email) " +
 				"END";*/
 
@@ -51,6 +51,10 @@ app.post("/contact-us/general", function(req, res){
 
 app.post("/contact-us/corporate", function(req, res){
 	res.redirect("/contact-us");
+});
+
+app.get("/*", function(req, res){
+	res.render("404");
 });
 
 app.listen(process.env.PORT || 8080);
