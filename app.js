@@ -174,6 +174,86 @@ app.post("/contact-us/corporate", function(req, res){
 	}
 });
 
+app.get("/unsubscribe/general/:id", function(req, res){
+	var sqlReq = new sql.Request();
+
+	sqlReq.input("unsubscribe_guid", sql.NVarChar, req.params.id);
+
+	var queryText = "UPDATE tbl_email_list SET deleted = 1 WHERE unsubscribe_guid = @unsubscribe_guid";
+
+	sqlReq.query(queryText, (err, result) => {
+		if (err){
+			res.status(400).send("We were unable to process your request, please contact us to resolve this issue.");
+			return;
+		} else if (result.rowsAffected != 0){
+			res.status(200).send("Unsubscribed successfully. Sorry to see you go! <a href='/resubscribe/general/" + req.params.id + "'>Resubscribe?</a>");
+			return;
+		} else {
+			res.status(400).send("We were unable to process your request, please contact us to resolve this issue.");
+		}
+	});
+});
+
+app.get("/resubscribe/general/:id", function(req, res){
+	var sqlReq = new sql.Request();
+
+	sqlReq.input("unsubscribe_guid", sql.NVarChar, req.params.id);
+
+	var queryText = "UPDATE tbl_email_list SET deleted = 0 WHERE unsubscribe_guid = @unsubscribe_guid";
+
+	sqlReq.query(queryText, (err, result) => {
+		if (err){
+			res.status(400).send("We were unable to process your request, please contact us to resolve this issue.");
+			return;
+		} else if (result.rowsAffected != 0){
+			res.status(200).send("Resubscribed successfully!");
+			return;
+		} else {
+			res.status(400).send("We were unable to process your request, please contact us to resolve this issue.");
+		}
+	});
+});
+
+app.get("/unsubscribe/corporate/:id", function(req, res){
+	var sqlReq = new sql.Request();
+
+	sqlReq.input("unsubscribe_guid", sql.NVarChar, req.params.id);
+
+	var queryText = "UPDATE tbl_corporate_email_list SET deleted = 1 WHERE unsubscribe_guid = @unsubscribe_guid";
+
+	sqlReq.query(queryText, (err, result) => {
+		if (err){
+			res.status(400).send("We were unable to process your request, please contact us to resolve this issue.");
+			return;
+		} else if (result.rowsAffected != 0){
+			res.status(200).send("Unsubscribed successfully. Sorry to see you go! <a href='/resubscribe/corporate/" + req.params.id + "'>Resubscribe?</a>");
+			return;
+		} else {
+			res.status(400).send("We were unable to process your request, please contact us to resolve this issue.");
+		}
+	});
+});
+
+app.get("/resubscribe/corporate/:id", function(req, res){
+	var sqlReq = new sql.Request();
+
+	sqlReq.input("unsubscribe_guid", sql.NVarChar, req.params.id);
+
+	var queryText = "UPDATE tbl_corporate_email_list SET deleted = 0 WHERE unsubscribe_guid = @unsubscribe_guid";
+
+	sqlReq.query(queryText, (err, result) => {
+		if (err){
+			res.status(400).send("We were unable to process your request, please contact us to resolve this issue.");
+			return;
+		} else if (result.rowsAffected != 0){
+			res.status(200).send("Resubscribed successfully!");
+			return;
+		} else {
+			res.status(400).send("We were unable to process your request, please contact us to resolve this issue.");
+		}
+	});
+});
+
 app.get("/*", function(req, res){
 	res.render("404");
 });
