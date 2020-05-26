@@ -14,7 +14,7 @@ var config = {
 	port: 1433,
 	user: "sa",
 	password: process.env.DB_PASSWORD,
-	database: "awd-site",
+	database: "awd-site-dev",
 	stream: false,
 	options: {
 		enableArithAbort: true,
@@ -45,7 +45,7 @@ app.get("/", function(req, res){
 	res.render("index");
 });
 
-// handle signup
+// handle email list signup from index page
 app.post("/", function(req, res){
 	var email = req.body.txtEmail;
 
@@ -58,14 +58,13 @@ app.post("/", function(req, res){
 					"INSERT INTO tbl_email_list (email) values (@email) " +
 					"END";
 
-	// TODO, better error handling
 	sqlReq.query(queryText, (err, result) => {
 		if (err){
-			console.log(err);
+			res.status(400).send();
+		} else if (req.body.chkNewsGen !== "on"){
+			res.status(200).send("Success! Our best owl has delivered your request.");
 		}
 	});
-
-	res.render("index");
 });
 
 app.get("/general-meetings", function(req, res){
@@ -105,7 +104,7 @@ app.post("/contact-us/general", function(req, res){
 
 	sqlReq.query(queryText, (err, result) => {
 		if (err){
-			res.status(400);
+			res.status(400).send();
 		} else if (req.body.chkNewsGen !== "on"){
 			res.status(200).send("Success! Our best owl is on the way with your message.");
 		}
@@ -122,7 +121,7 @@ app.post("/contact-us/general", function(req, res){
 
 		sqlReq.query(queryText, (err, result) => {
 			if (err){
-				res.status(400);
+				res.status(400).send();
 			} else {
 				res.status(200).send("Success! Our best owl is on the way with your message.");
 			}
