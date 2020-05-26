@@ -105,7 +105,7 @@ app.post("/contact-us/general", function(req, res){
 
 	sqlReq.query(queryText, (err, result) => {
 		if (err){
-			res.status(400).send("Whoops! We encountered an error, and weren't able to send your message.");
+			res.status(400);
 		} else if (req.body.chkNewsGen !== "on"){
 			res.status(200).send("Success! Our best owl is on the way with your message.");
 		}
@@ -122,7 +122,7 @@ app.post("/contact-us/general", function(req, res){
 
 		sqlReq.query(queryText, (err, result) => {
 			if (err){
-				res.status(400).send("Whoops! We encountered an error, and weren't able to send your message.");
+				res.status(400);
 			} else {
 				res.status(200).send("Success! Our best owl is on the way with your message.");
 			}
@@ -147,7 +147,7 @@ app.post("/contact-us/corporate", function(req, res){
 
 	sqlReq.query(queryText, (err, result) => {
 		if (err){
-			res.status(400).send("Whoops! We encountered an error, and weren't able to send your message.");
+			res.status(400);
 			return;
 		} else if (req.body.chkNewsCorp !== "on"){
 			res.status(200).send("Success! Our best owl is on the way with your message.");
@@ -166,7 +166,7 @@ app.post("/contact-us/corporate", function(req, res){
 
 		sqlReq.query(queryText, (err, result) => {
 			if (err){
-				res.status(400).send("Whoops! We encountered an error, and weren't able to send your message.");
+				res.status(400);
 				return;
 			} else {
 				res.status(200).send("Success! Our best owl is on the way with your message.");
