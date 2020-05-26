@@ -48,7 +48,6 @@ app.get("/", function(req, res){
 // handle email list signup from index page
 app.post("/", function(req, res){
 	var email = req.body.txtEmail;
-
 	var sqlReq = new sql.Request();
 
 	sqlReq.input("email", sql.NVarChar, email);
@@ -173,6 +172,10 @@ app.post("/contact-us/corporate", function(req, res){
 			}
 		});
 	}
+});
+
+app.get("/*", function(req, res){
+	res.render("404");
 });
 
 app.listen(process.env.PORT || 8080);
