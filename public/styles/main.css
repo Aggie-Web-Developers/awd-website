@@ -1056,7 +1056,7 @@ label.error {
 /***** /Project Cards/ *****/
 /***** /Projects Page/ *****/
 
-/***** /404 Page/ *****/
+/***** 404 Page *****/
 .notFound-banner {
  	background: url('../images/notFound3.jpg');
 	background-position: top;
@@ -1066,4 +1066,10 @@ label.error {
  	color: #fff;
  	overflow: hidden;
  	font-size: 1.25rem;
+ 	align-items: initial;
 }
+
+.notFound-header {
+	margin-top: 14rem;
+}
+/***** /404 Page/ *****/

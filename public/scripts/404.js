@@ -1,3 +1,5 @@
+// JS File for 404 View
+
 $(function () {
   document.title = 'AWD - 404';
 	$('#divNav').addClass('notFound-banner');
