@@ -2,7 +2,8 @@ var express        = require("express"),
 	app            = express(),
 	bodyParser     = require("body-parser"),
 	methodOverride = require("method-override"),
-	sql            = require("mssql");
+	sql            = require("mssql"),
+	email          = require("./email/email");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -103,6 +104,7 @@ app.post("/contact-us/general", function(req, res){
 		if (err){
 			res.status(400).send();
 		} else if (req.body.chkNewsGen !== "on"){
+			email.sendContactUsEmailGen(req.body);
 			res.status(200).send("Success! Our best owl is on the way with your message.");
 		}
 	});
@@ -120,6 +122,7 @@ app.post("/contact-us/general", function(req, res){
 			if (err){
 				res.status(400).send();
 			} else {
+				email.sendContactUsEmailGen(req.body);
 				res.status(200).send("Success! Our best owl is on the way with your message.");
 			}
 		});
@@ -146,6 +149,7 @@ app.post("/contact-us/corporate", function(req, res){
 			res.status(400);
 			return;
 		} else if (req.body.chkNewsCorp !== "on"){
+			email.sendContactUsEmailCorp(req.body);
 			res.status(200).send("Success! Our best owl is on the way with your message.");
 			return;
 		}
@@ -165,6 +169,7 @@ app.post("/contact-us/corporate", function(req, res){
 				res.status(400);
 				return;
 			} else {
+				email.sendContactUsEmailCorp(req.body);
 				res.status(200).send("Success! Our best owl is on the way with your message.");
 				return;
 			}
