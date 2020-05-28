@@ -265,6 +265,10 @@ app.get("/privacy-policy", function(req, res){
 	res.render("privacy-policy");
 });
 
+app.get('/sitemap.xml', function(req, res) {
+	res.sendFile(__dirname + '/sitemap.xml');
+});
+
 app.get("/*", function(req, res){
 	res.render("404");
 });
