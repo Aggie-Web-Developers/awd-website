@@ -257,6 +257,14 @@ app.get("/resubscribe/corporate/:id", function(req, res){
 	});
 });
 
+app.get("/terms-and-conditions", function(req, res){
+	res.render("terms-and-conditions");
+});
+
+app.get("/privacy-policy", function(req, res){
+	res.render("privacy-policy");
+});
+
 app.get("/*", function(req, res){
 	res.render("404");
 });

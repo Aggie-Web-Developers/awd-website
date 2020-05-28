@@ -1081,3 +1081,14 @@ label.error {
 	margin-top: 14rem;
 }
 /***** /404 Page/ *****/
+/***** Terms and Conditions + Privacy Policy Pages *****/
+.tac-banner {
+	height: 30rem;
+}
+
+@media (max-width: 560px){
+	.tac-header {
+    	font-size: 3rem;
+	}
+}
+/***** /Terms and Conditions + Privacy Policy Pages/ *****/
