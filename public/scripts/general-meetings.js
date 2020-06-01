@@ -1,7 +1,8 @@
 // JS File for General Meetings View
 
 $(function () {
-	document.title = 'AWD - General Meetings';
+	
+	setHeadElements();
 	$('#divNav').addClass('meetings-banner');
 
 	// navbar configuration
@@ -21,3 +22,8 @@ $(function () {
 	    }, 300);
 	});
 });
+
+function setHeadElements(){
+	document.title = 'AWD - General Meetings';
+	$('meta[name=description]').attr('content', 'Learn more about weekly general meetings at AWD.');
+}

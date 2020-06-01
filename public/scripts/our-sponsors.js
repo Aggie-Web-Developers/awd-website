@@ -1,7 +1,7 @@
 // JS File for Our Sponsors View
 
 $(function () {
-	document.title = 'AWD - Our Sponsors';
+	setHeadElements();
 	$('#divNav').addClass('sponsors-banner');
 
 	// navbar configuration
@@ -13,3 +13,8 @@ $(function () {
 		$("#navbar").addClass('scrolled');
 	});
 });
+
+function setHeadElements(){
+	document.title = 'AWD - Our Sponsors';
+	$('meta[name=description]').attr('content', 'Learn more about the sponsors of Aggie Web Developers.');
+}

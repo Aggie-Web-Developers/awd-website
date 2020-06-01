@@ -1,8 +1,8 @@
 // JS File for About Us View
 
 $(function () {
+	setHeadElements();
 	$('#divNav').addClass('about-us-banner');
-	document.title = 'AWD - About Us';
 
 	setInitialNavbarColors();
 
@@ -46,4 +46,9 @@ function setInitialNavbarColors(){
 		".navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
 
 	$('#mainLogo').css('color', '#341f97');
+}
+
+function setHeadElements(){
+	document.title = 'AWD - About Us';
+	$('meta[name=description]').attr('content', 'Learn more about Aggie Web Developers and what we do.');
 }
