@@ -1,7 +1,7 @@
 // JS File for Conact Us View
 
 $(function () {
-	document.title = 'AWD - Contact Us';
+	setHeadElements();
 	$('#divNav').addClass('contact-us-banner');
 	setInitialNavbarColors();
 
@@ -178,4 +178,9 @@ function checkAlerts(alert) {
 			$(this).hide();
 		});
 	}
+}
+
+function setHeadElements(){
+	document.title = 'AWD - Contact Us';
+	$('meta[name=description]').attr('content', 'Get in touch with Aggie Web Developers.');
 }

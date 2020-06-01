@@ -1,7 +1,7 @@
 // JS File for Projects View
 
 $(function () {
-	document.title = 'AWD - Projects';
+	setHeadElements();
 	$('#divNav').addClass('projects-banner');
 
 	// navbar configuration
@@ -23,3 +23,8 @@ $(function () {
 		});
 	});
 });
+
+function setHeadElements(){
+	document.title = 'AWD - Projects';
+	$('meta[name=description]').attr('content', 'View the projects completed and in progress by Aggie Web Developers.');
+}
