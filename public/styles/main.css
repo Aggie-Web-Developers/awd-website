@@ -743,12 +743,12 @@ label.error {
 }
 
 .photo-president {
-	background: url("https://avatars0.githubusercontent.com/u/30357632?s=460&v=4") no-repeat;
+	background: url("../images/Cole-Bio-Pic.jpg") no-repeat;
   	background-size: contain;
 }
 
 .photo-treasurer {
-	background: url("https://img.buzzfeed.com/thumbnailer-prod-us-east-1/6f1f6e8541404c6db1f0fa9c0d6de7f8/BFV12484_3-IngredientDinners-FB1080SQ.jpg") no-repeat;
+	background: url("https://avatars3.githubusercontent.com/u/54115478?s=460&v=4") no-repeat;
   	background-size: contain;
 }
 
