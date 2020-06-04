@@ -54,6 +54,8 @@ function setHeadElements(){
 }
 
 function isTouchDevice(){
+	var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
+
 	var mq = function (query) {
         return window.matchMedia(query).matches;
     }
