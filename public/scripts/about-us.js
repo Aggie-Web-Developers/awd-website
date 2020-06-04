@@ -3,8 +3,8 @@
 $(function () {
 	setHeadElements();
 	$('#divNav').addClass('about-us-banner');
+
 	setInitialNavbarColors();
-	handleTouchDevices()
 
 	// navbar configuration
 	$(document).scroll(function () {
@@ -51,26 +51,4 @@ function setInitialNavbarColors(){
 function setHeadElements(){
 	document.title = 'AWD - About Us';
 	$('meta[name=description]').attr('content', 'Learn more about Aggie Web Developers and what we do.');
-}
-
-function isTouchDevice(){
-	var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
-
-	var mq = function (query) {
-        return window.matchMedia(query).matches;
-    }
-
-    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
-        return true;
-    }
-
-    var query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('');
-    return mq(query);
-}
-function handleTouchDevices() {
-	if (isTouchDevice()){
-		$( ".hover-only" ).each(function() {
-		  this.hide();
-		});
-	}
 }
