@@ -46,6 +46,8 @@ function setInitialNavbarColors(){
 		".navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link").css('color', '#341f97');
 
 	$('#mainLogo').css('color', '#341f97');
+	$('.navbar-toggler').addClass('custom-toggler');
+	$('.navbar-toggler-icon').addClass('custom-toggler');
 }
 
 function setHeadElements(){
