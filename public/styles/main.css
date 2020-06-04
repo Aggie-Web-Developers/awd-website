@@ -670,21 +670,24 @@ label.error {
           transform-style: preserve-3d;
 }
 
-.officer-card-inner:hover {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
-  background-color: transparent;
-}
-
 /* Handle visibility of back of card and front of card on hover */
-.officer-card-inner:hover .social-icon {
-  opacity: 1;
-  top: 0;
+@media (hover: hover) {
+	.officer-card-inner:hover .social-icon {
+	  opacity: 1;
+	  top: 0;
+	}
+
+	.officer-card-inner:hover .officer-card-photo, .officer-card-inner:hover .front__footer {
+	  opacity: 0;
+	}
+
+	.officer-card-inner:hover {
+	  -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+	  background-color: #341f97;
+	}
 }
 
-.officer-card-inner:hover .officer-card-photo, .officer-card-inner:hover .front__footer {
-  opacity: 0;
-}
 
 .front, .back {
   position: relative;
