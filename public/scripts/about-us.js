@@ -3,8 +3,8 @@
 $(function () {
 	setHeadElements();
 	$('#divNav').addClass('about-us-banner');
-
 	setInitialNavbarColors();
+	handleTouchDevices()
 
 	// navbar configuration
 	$(document).scroll(function () {
