@@ -15,7 +15,7 @@ var config = {
 	port: 1433,
 	user: "sa",
 	password: process.env.DB_PASSWORD,
-	database: "awd-site-dev",
+	database: process.env.DB_PROD || "awd-site-dev",
 	stream: false,
 	options: {
 		enableArithAbort: true,
