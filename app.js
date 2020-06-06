@@ -1,14 +1,29 @@
-var express        = require("express"),
+var express        = require('express'),
+    session       = require('express-session'),
 	app            = express(),
-	bodyParser     = require("body-parser"),
-	methodOverride = require("method-override"),
-	sql            = require("mssql"),
-	email          = require("./email/email");
+	bodyParser     = require('body-parser'),
+	methodOverride = require('method-override'),
+	sql            = require('mssql'),
+	email          = require('./email/email'),
+	bcrypt         = require('bcrypt'),
+	initPassport   = require('./passport-config'),
+	passport       = require('passport'),
+	flash          =require('express-flash');
+
+initPassport(passport);
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(flash());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(session({
+	secret: process.env.SESSION_SECRET,
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 var config = {
 	server: process.env.DB_SERVER,
@@ -38,7 +53,6 @@ sql.connect(config).then(pool => {
 	console.log("Connecting to database: [FAILED]");
 	console.log(err);
 });
-
 
 app.get("/", function(req, res){
 	res.render("index");
@@ -269,8 +283,93 @@ app.get('/sitemap.xml', function(req, res) {
 	res.sendFile(__dirname + '/sitemap.xml');
 });
 
+app.get('/robots.txt', function(req, res) {
+	res.sendFile(__dirname + '/robots.txt');
+});
+
+app.use(function(req, res, next){
+	// store current user
+	res.locals.user = req.user;
+	next();
+});
+
+app.get('/portal/', checkAuthenticated, function(req, res) {
+	res.render('portal/');
+});
+
+app.get('/portal/login', checkNotAuthenticated, function(req, res) {
+	res.render("portal/login");
+});
+
+/*app.get('/portal/register', checkNotAuthenticated, function(req, res) {
+	res.render("portal/register");
+});*/
+
+app.post('/portal/login', checkNotAuthenticated, passport.authenticate('local', {
+	successRedirect: '/portal/',
+	failureRedirect: '/portal/login',
+	failureFlash: true
+}));
+
+/*app.post('/portal/register', checkNotAuthenticated, async function(req, res) {
+	try {
+		const hashedPassword = await bcrypt.hash(req.body.txtPassword, 10);
+
+		var sqlReq = new sql.Request();
+
+		sqlReq.input("first_name", sql.NVarChar, req.body.txtFirstName);
+		sqlReq.input("last_name", sql.NVarChar, req.body.txtLastName);
+		sqlReq.input("email", sql.NVarChar, req.body.txtEmailAddress);
+		sqlReq.input("password_hash", sql.NVarChar, hashedPassword);
+		sqlReq.input("receiveNewsletter", sql.Bit, req.body.chkNews === "on");
+
+
+		var queryText = "IF NOT EXISTS (SELECT * FROM tbl_user WHERE email = @email) " +
+						"BEGIN " + 
+						"INSERT INTO tbl_user (first_name, last_name, email, password_hash, receiveNewsletter) " +
+						"values (@first_name, @last_name, @email, @password_hash, @receiveNewsletter) " +
+						"END";
+
+		sqlReq.query(queryText, (err, result) => {
+			if (err){
+				console.log(err)
+				req.flash("error", "Error creating account. Please contact us if the error persists.");
+				res.redirect("/portal/register");
+			} else if (result.rowsAffected == 0){ 
+				req.flash("error", "Error creating account. Your email address in use.");
+				res.redirect("/portal/register");
+			} else {
+				res.redirect("/portal/login");
+			}
+		});
+	} catch {
+		res.redirect("/portal/register");
+	}
+});*/
+
+app.delete("/portal/logout", (req, res) => {
+	req.logOut();
+	res.redirect('/portal/login');
+});
+
 app.get("/*", function(req, res){
 	res.render("404");
 });
+
+function checkAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	} else {
+		res.redirect("/portal/login");
+	}
+}
+
+function checkNotAuthenticated(req, res, next) {
+	if (!req.isAuthenticated()){
+		return next();
+	} else {
+		res.redirect('/portal/')
+	}
+}
 
 app.listen(process.env.PORT || 8080);

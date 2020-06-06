@@ -30,7 +30,7 @@ label.error {
 }
 
 .main-blue {
-	color: #54a0ff
+	color: #54a0ff;
 }
 
 .page-banner {
@@ -53,6 +53,7 @@ label.error {
 	top: 6rem;
 	left: 50%;
     transform: translate(-50%, 0);
+    z-index: 1;
 }
 
 .footer a {
@@ -1095,3 +1096,52 @@ label.error {
 	}
 }
 /***** /Terms and Conditions + Privacy Policy Pages/ *****/
+/***** Portal *****/
+.portal-background {
+	background: url(../images/portal-background.jpg);
+	background-repeat: no-repeat;
+ 	background-size: cover;
+}
+
+#portalMainLogo {
+	color: #FFF;
+	font-size: 2rem;
+	font-weight: 900;
+	transition: color .4s linear;
+}
+
+#portalMainLogo {
+	color: #FFF;
+}
+
+#portalLinkUl .active>.nav-link {
+	color: #FFF;
+	font-weight: bold;
+	transition: color .4s linear;
+}
+
+.portal-footer {
+}
+
+.logout-button {
+    border: none;
+    color: #fff;
+    text-decoration: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/***** Forms *****/
+.form-container {
+    background: #fff;
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
+}
+/***** /Forms/ *****/
+/***** /Portal/ *****/
