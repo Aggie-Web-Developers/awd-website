@@ -1,7 +1,7 @@
 var express    = require("express"),
     router     = express.Router(),
     flash      = require('express-flash'),
-    sql        = require('mssql')
+    sql        = require('mssql'),
     middleware = require('../../middleware');
 
 router.get('/', middleware.checkAuthenticated, function(req, res) {
