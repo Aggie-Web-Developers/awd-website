@@ -70,7 +70,6 @@ app.use(indexRoutes);
 app.use("/portal", portalRoutes);
 app.use("/portal/events", eventRoutes);
 
-
 app.get("/*", function(req, res){
 	res.render("404");
 });
