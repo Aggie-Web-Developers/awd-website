@@ -25,12 +25,17 @@ label.error {
 	color: #ee5253;
 }
 
+.red-danger {
+	color: #ee5253;
+	font-weight: bold;
+}
+
 .main-purple {
 	color: #341f97;
 }
 
 .main-blue {
-	color: #54a0ff
+	color: #54a0ff;
 }
 
 .page-banner {
@@ -53,6 +58,7 @@ label.error {
 	top: 6rem;
 	left: 50%;
     transform: translate(-50%, 0);
+    z-index: 1;
 }
 
 .footer a {
@@ -1095,3 +1101,106 @@ label.error {
 	}
 }
 /***** /Terms and Conditions + Privacy Policy Pages/ *****/
+/***** Portal *****/
+.full-view {
+	height: 100%;
+}
+
+.portal-background {
+	background: rgb(238,174,202);
+	background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+ 	background-size: cover;
+ 	height: 100%;
+}
+
+#portalMainLogo {
+	color: #FFF;
+	font-size: 2rem;
+	font-weight: 900;
+	transition: color .4s linear;
+}
+
+#portalMainLogo {
+	color: #FFF;
+}
+
+#portalLinkUl .active>.nav-link {
+	color: #FFF;
+	font-weight: bold;
+	transition: color .4s linear;
+}
+
+.portal-card {
+	background-color: #341f97;
+	border-radius: 5px;
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	color: #fff;
+	cursor: pointer;
+	font-size: 4rem;
+	padding: 4rem 0;
+}
+
+.portal-card:hover {
+	background-color: #54a0ff;
+	color: #FFF;
+	transition: .5s ease-in;
+}
+
+.logout-button {
+    border: none;
+    color: #fff;
+    text-decoration: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/***** Portal Tables *****/
+.table-container{
+	background: #fff;
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
+	padding: 20px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    border: 1px solid #111;
+    background-color: #fff;
+
+    background: 0;
+}
+
+table.dataTable thead .sorting {
+  background-image: none;
+}
+table.dataTable thead .sorting_asc {
+  background-image: none;
+}
+table.dataTable thead .sorting_desc {
+  background-image: none;
+}
+table.dataTable thead .sorting_asc_disabled {
+  background-image: none;
+}
+table.dataTable thead .sorting_desc_disabled {
+  background-image: none;
+}
+/***** /Portal Tables/ *****/
+/***** Forms *****/
+.form-container {
+    background: #fff;
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
+}
+/***** /Forms/ *****/
+/***** /Portal/ *****/
