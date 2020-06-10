@@ -83,58 +83,34 @@
 			<h1 class="text-center">News and Events</h1>
 
 			<div class="row justify-content-center">
-				<div class="col-xs-12 col-md-6 col-lg-4 mt-4">
-					<div class="text-center justify-content-center">
-						<div class="card-container">
-						    <div class="column">
-						        <div class="post-module">
-						            <!-- Thumbnail-->
-						            <div class="thumbnail">
-										<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" />
-									</div>
-						            <!-- Post Content-->
-						            <div class="post-content">
-						                <div class="category">News</div>
-						                <h1 class="title">AWD Website</h1>
-						                <h2 class="sub_title">Organization Website Nearing Release</h2>
-						                <p class="description">
-						                	AWD is proud to announce the first version of our website is nearing completion. We will begin testing shortly before officially designating a release.
-						                </p>
-						                <div class="post-meta">
-						                	<span class="timestamp" title="News Post Date"><i class="far fa-calendar-alt mr-2"></i>Tuesday, June 2nd</span>
-						                </div>
-						                <div class="post-meta mt-2">
-						                	<span class="timestamp" title="Author"><i class="fas fa-user-edit mr-2"></i>Cole D. Connelly</span>
-						                </div>
-						            </div>
-						        </div>
-						    </div>
-						</div>
-					</div>
-				</div>
-
+			<% events.forEach(function(event) { %>
 				<div class="col-xs-12 col-md-6 col-lg-4 mt-4">
 					<div class="text-center justify-content-center">
 						<div class="card-container">
 						    <div class="column">
 						        <div class="post-module">
 						            <div class="thumbnail">
+					                <% if (event.type != "News") {%>
 						                <div class="date">
-						                    <div class="day">Day</div>
-						                    <div class="month">TBD</div>
-						                </div><img src="https://images.unsplash.com/photo-1586980368323-8ce5db4c85ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1015&q=80" /></div>
+						                	<div class="day"><%=event.event_time.toLocaleString('default', { day: 'numeric' })%></div>
+						                    <div class="month" id="divMonth"><%=event.event_time.toLocaleString('default', { month: 'short' })%></div>
+					                    </div>
+				                	<% } %>
+						                <img src="<%= event.image_link%>"></div>
 						            <div class="post-content">
-						                <div class="category">Meeting</div>
-						                <h1 class="title">Zoom Meeting</h1>
-						                <h2 class="sub_title">Virtual Informational & Social</h2>
-						                <p class="description">
-						                	Join AWD at a time TBD for our first *virtual* social. You will have a chance to learn more about the organization and have your questions answered. Details to come.
-						                </p>
+						                <div class="category"><%= event.type%></div>
+						                <h1 class="title"><%= event.name%></h1>
+						                <h2 class="sub_title"><%= event.summary%></h2>
+						                <p class="description"><%= event.descr%></p>
 						                <div class="post-meta">
-						                	<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i>TBD</span>
+						                	<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><%= event.event_time.toLocaleString([], { month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' })%></span>
 						                </div>
-						                <div class="post-meta mt-2">
-						                	<span class="timestamp"><i class="fas fa-map-marker-alt mr-2"></i>Zoom</span>
+						                <div class="post-meta mt-2 pm">
+					                	<% if (event.type == "News") {%>
+						                	<span class="timestamp" title="Author"><i class="fas fa-user-edit mr-2"></i><%= event.author %></span>
+					                	<% } else { %>
+					                		<span class="timestamp" title="Location"><i class="fas fa-map-marker-alt mr-2"></i><%= event.location %></span>
+					                	<% } %>
 						                </div>
 						            </div>
 						        </div>
@@ -142,6 +118,7 @@
 						</div>
 					</div>
 				</div>
+			<% }); %>
 			</div>
 		</div>
 

@@ -8,7 +8,9 @@ var express        = require('express'),
 	bcrypt         = require('bcrypt'),
 	initPassport   = require('./passport-config'),
 	passport       = require('passport'),
-	flash          =require('express-flash');
+	flash          = require('express-flash'),
+	eventRoutes    = require("./routes/portal/events")
+	middleware     = require('./middleware');
 
 initPassport(passport);
 
@@ -34,7 +36,8 @@ var config = {
 	stream: false,
 	options: {
 		enableArithAbort: true,
-		encrypt: false
+		encrypt: false,
+		useUTC: true
 	},
 	pool: {
 		max: 20,
@@ -55,7 +58,19 @@ sql.connect(config).then(pool => {
 });
 
 app.get("/", function(req, res){
-	res.render("index");
+	var sqlQuery = "SELECT e.*, (u.first_name + ' ' + u.last_name) as author " +
+				   "FROM tbl_events  e LEFT JOIN tbl_user u on u.id = e.creating_user_id " + 
+				   "WHERE e.[start_date] <= GETUTCDATE() AND e.[end_date] >= GETUTCDATE() AND e.deleted = 0";
+
+	var sqlReq = new sql.Request().query(sqlQuery, (err, result) => {
+		if (err){
+			console.log(err)
+			req.flash("error", "Error loading events.");
+			res.redirect("/");
+		} else {
+			res.render('index', { events: result.recordset });
+		}
+	});
 });
 
 // handle email list signup from index page
@@ -98,7 +113,6 @@ app.get("/about-us", function(req, res){
 app.get("/contact-us", function(req, res){
 	res.render("contact-us");
 });
-
 
 // ajax post route for general contact us form
 app.post("/contact-us/general", function(req, res){
@@ -293,25 +307,26 @@ app.use(function(req, res, next){
 	next();
 });
 
-app.get('/portal/', checkAuthenticated, function(req, res) {
+app.get('/portal/', middleware.checkAuthenticated, function(req, res) {
 	res.render('portal/');
 });
 
-app.get('/portal/login', checkNotAuthenticated, function(req, res) {
+app.get('/portal/login', middleware.checkNotAuthenticated, function(req, res) {
 	res.render("portal/login");
 });
 
-/*app.get('/portal/register', checkNotAuthenticated, function(req, res) {
-	res.render("portal/register");
-});*/
-
-app.post('/portal/login', checkNotAuthenticated, passport.authenticate('local', {
+app.post('/portal/login', middleware.checkNotAuthenticated, passport.authenticate('local', {
 	successRedirect: '/portal/',
 	failureRedirect: '/portal/login',
 	failureFlash: true
 }));
 
-/*app.post('/portal/register', checkNotAuthenticated, async function(req, res) {
+/*
+app.get('/portal/register', middleware.checkNotAuthenticated, function(req, res) {
+	res.render("portal/register");
+});
+
+app.post('/portal/register', middleware.checkNotAuthenticated, async function(req, res) {
 	try {
 		const hashedPassword = await bcrypt.hash(req.body.txtPassword, 10);
 
@@ -347,29 +362,15 @@ app.post('/portal/login', checkNotAuthenticated, passport.authenticate('local', 
 	}
 });*/
 
-app.delete("/portal/logout", (req, res) => {
+app.delete("/portal/logout", middleware.checkAuthenticated, (req, res) => {
 	req.logOut();
 	res.redirect('/portal/login');
 });
 
+app.use("/portal/events", eventRoutes);
+
 app.get("/*", function(req, res){
 	res.render("404");
 });
-
-function checkAuthenticated(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-	} else {
-		res.redirect("/portal/login");
-	}
-}
-
-function checkNotAuthenticated(req, res, next) {
-	if (!req.isAuthenticated()){
-		return next();
-	} else {
-		res.redirect('/portal/')
-	}
-}
 
 app.listen(process.env.PORT || 8080);
