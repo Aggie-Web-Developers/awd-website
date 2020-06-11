@@ -10,6 +10,6 @@ $(function () {
     });
 
     $('#divEmails').click(function() {
-        window.location.href = "/portal/email";
+        window.location.href = "/portal/emails";
     });
 });
