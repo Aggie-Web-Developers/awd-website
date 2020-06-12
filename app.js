@@ -1,5 +1,5 @@
 var express        = require('express'),
-    session       = require('express-session'),
+    session        = require('express-session'),
 	app            = express(),
 	bodyParser     = require('body-parser'),
 	methodOverride = require('method-override'),
@@ -12,6 +12,7 @@ var express        = require('express'),
 	indexRoutes    = require("./routes/index"),
 	eventRoutes    = require("./routes/portal/events"),
 	portalRoutes   = require("./routes/portal/index"),
+	emailRoutes   = require("./routes/portal/emails"),
 	middleware     = require('./middleware');
 
 initPassport(passport);
@@ -69,6 +70,7 @@ app.use(function(req, res, next){
 app.use(indexRoutes);
 app.use("/portal", portalRoutes);
 app.use("/portal/events", eventRoutes);
+app.use("/portal/emails", emailRoutes);
 
 app.get("/*", function(req, res){
 	res.render("404");

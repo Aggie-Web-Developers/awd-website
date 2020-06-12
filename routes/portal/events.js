@@ -9,7 +9,6 @@ router.get('/', middleware.checkAuthenticated, function(req, res) {
 		if (err){
 			console.log(err)
 			req.flash("error", "Error loading events.");
-			res.redirect("/portal/events/");
 		} else {
 			res.render('portal/events/index', { events: result.recordset });
 		}

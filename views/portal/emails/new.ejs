@@ -1,0 +1,52 @@
+<%- include('../partials/header') %>
+	<div class="container">
+		<div class="row mt-5">
+			<div class="col-12">
+				<h1>Create New Email</h1>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-center my-5 px-md-0 px-5">
+			<div class="col-xs-10 col-md-10 form-container p-4">
+				<h3 class="font-weight-bold mb-3">Create Email</h3>
+				<form id="frm" action="/portal/emails/new" method="POST">
+					<div class="form-group">
+						<label for="txtSubject">Email Subject</label>
+						<input type="text" class="form-control" id="txtSubject" name="txtSubject">
+					</div>
+					<div class="form-group">
+						<label for="ddlEmailType">Recipients</label>
+						<select class="form-control" id="ddlEmailType" name="ddlEmailType">
+							<option value="">Select One</option>
+							<option>All</option>
+							<option>Corporate</option>
+							<option>General</option>
+							<option>Staff</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="txtBody">Email Body</label>
+						<textarea id="txtBody" name="txtBody"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="txtSendDate">Schedule Send Date</label>
+						<input type="date" class="form-control" id="txtStartDate" name="txtSendDate" aria-describedby="dateHelp">
+						<small id="sendDateHelp" class="form-text text-muted">Schedule the date for the email to be sent. Leave blank to send manually later.</small>
+					</div>
+					<div class="form-group">
+						<label for="txtSendTime">Schedule Send Time</label>
+						<input type="time" class="form-control" id="txtSendTime" name="txtSendTime" aria-describedby="timeHelp">
+						<small id="timeHelp" class="form-text text-muted">Enter the time of the date above for the email to be sent in your local timezone. We will convert from your timezone to UTC automatically.</small>
+					</div>
+					<div class="form-check mt-3">
+						<input type="checkbox" class="form-check-input checkmark" id="chkDeleted" name="chkDeleted">
+						<label class="form-check-label" for="chkDeleted">Deleted?</label>
+					</div>
+					<button type="submit" class="btn btn-contact btn-contact-slim mt-4">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="/scripts/portal/emails/new.js"></script>
+<%- include('../partials/footer') %>
