@@ -1,4 +1,4 @@
-// JS File for Portal Event Management View
+// JS File for Portal Email Management View
 
 $(function () {
 	$('#tblEmails').DataTable({

@@ -7,7 +7,6 @@ var express    = require("express"),
 router.get('/', middleware.checkAuthenticated, function(req, res) {
 	var queryText =" SELECT em.*, e.name as event_name FROM tbl_emails em LEFT JOIN tbl_events e ON e.id = em.event_id ORDER BY em.deleted ASC, em.create_date DESC";
 
-
 	var sqlReq = new sql.Request().query(queryText, (err, result) => {
 		if (err){
 			console.log(err)
@@ -71,6 +70,8 @@ router.post('/new', middleware.checkAuthenticated, function(req, res) {
 	var sqlReq = new sql.Request();
 	var queryText = "";
 	
+
+	// If user has specified a date to send the email at
 	if (req.body.txtSendDate != "") {
 		var user_date = new Date(req.body.txtSendDate + " " + req.body.txtSendTime);
 		var converted_date = new Date(user_date.getTime()).toISOString().slice(0, 19).replace('T', ' ');

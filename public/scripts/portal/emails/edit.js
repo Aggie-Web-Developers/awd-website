@@ -1,4 +1,4 @@
-// JS File for Portal Email Management View
+// JS File for Portal Email Edit View
 
 $(function () {
     $('#txtBody').summernote();

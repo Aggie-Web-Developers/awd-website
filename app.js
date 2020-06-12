@@ -72,7 +72,6 @@ app.use("/portal", portalRoutes);
 app.use("/portal/events", eventRoutes);
 app.use("/portal/emails", emailRoutes);
 
-
 app.get("/*", function(req, res){
 	res.render("404");
 });
