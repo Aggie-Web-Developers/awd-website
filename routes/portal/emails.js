@@ -2,7 +2,8 @@ var express    = require("express"),
     router     = express.Router(),
     flash      = require('express-flash'),
     sql        = require('mssql'),
-    middleware = require('../../middleware');
+    middleware = require('../../middleware'),
+    email      = require('../../email/email');
 
 router.get('/', middleware.checkAuthenticated, function(req, res) {
 	var queryText =" SELECT em.*, e.name as event_name FROM tbl_emails em LEFT JOIN tbl_events e ON e.id = em.event_id ORDER BY em.deleted ASC, em.create_date DESC";
@@ -101,6 +102,18 @@ router.post('/new', middleware.checkAuthenticated, function(req, res) {
 			res.redirect("/portal/emails/");
 		}
 	});
+});
+
+router.get('/send/:id', middleware.checkAuthenticated, async function(req, res) {
+	let emailStatus = await email.sendAdminEmail(req.params.id);
+
+	if (emailStatus != "Success"){
+		req.flash("error", "Error sending email.");
+		res.redirect("/portal/emails/");
+	} else {
+		req.flash("success", "Success! Email sent.");
+		res.redirect("/portal/emails/");
+	}
 });
 
 module.exports = router;

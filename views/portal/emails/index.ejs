@@ -63,7 +63,7 @@
 					            		<td>Not Sent</td>
 					            	<% } %>
 
-					            	<% if (!email.sent_date){ %>
+					            	<% if (!email.sent_date && email.deleted == 0){ %>
 					            		<td class="text-center"><a href="/portal/emails/send/<%= email.id%>"><i class="fas fa-paper-plane main-purple font-weight-bold" title="Send Email"></i></a></td>
 					            	<% } else { %>
 					            		<td></td>
