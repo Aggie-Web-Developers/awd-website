@@ -1,6 +1,7 @@
 var aws       = require('aws-sdk'),
     path      = require('path'),
     sql       = require('mssql'),
+    schedule  = require("node-schedule"),
     mailerObj = {};
 
 aws.config.loadFromPath(path.join(__dirname, '../config.json'));
@@ -148,6 +149,25 @@ mailerObj.sendAdminEmail = async function(id){
 	      reject(err);
 	  });
   });
+}
+
+mailerObj.listenForScheduledEmails = function(){
+	// listen for emails to be sent every hour at the fifth minute
+	schedule.scheduleJob('5 * * * *', function() {
+		var sqlReq = new sql.Request().query("SELECT id FROM tbl_emails WHERE send_date <= GETUTCDATE() AND sent_date is NULL AND deleted = 0", (err, result) => {
+	        if (err) {
+	        	console.log("Error sending scheduled emails.");
+	        } else {
+	        	result.recordset.forEach(async function(result){
+			        let emailStatus = await mailerObj.sendAdminEmail(result.id);
+
+			        if (emailStatus != "Success"){
+			        	console.log("Error sending schedule email: ID: " + result.id);
+			        }
+		        });
+	        }
+	    });
+	});
 }
 
 function getEmailById(id) { 
