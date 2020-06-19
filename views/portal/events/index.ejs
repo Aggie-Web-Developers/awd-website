@@ -31,6 +31,7 @@
 					            <th>Web Start Date</th>
 					            <th>Web End Date</th>
 					            <th>Deleted</th>
+					            <th>Options</th>
 					        </tr>
 					    </thead>
 					    <tbody>
@@ -73,6 +74,12 @@
 
 					            	<% if (event.deleted == 1) { %>
 						            	<td class="red-danger">Yes</td>
+					            	<% } else { %>
+					            		<td></td>
+					            	<% }%>
+
+					            	<% if (!event.email_id && event.deleted == 0) { %>
+						            	<td class="text-center"><a href="/portal/events/createEmail/<%= event.id%>"><i class="far fa-envelope main-purple font-weight-bold" title="Create Event Email"></i></a></td>
 					            	<% } else { %>
 					            		<td></td>
 					            	<% }%>
