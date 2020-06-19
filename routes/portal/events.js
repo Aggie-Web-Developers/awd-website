@@ -2,10 +2,12 @@ var express    = require("express"),
     router     = express.Router(),
     flash      = require('express-flash'),
     sql        = require('mssql'),
-    middleware = require('../../middleware');
+    middleware = require('../../middleware'),
+    moment     = require('moment')
+    tz     = require('moment-timezone');
 
 router.get('/', middleware.checkAuthenticated, function(req, res) {
-	var sqlReq = new sql.Request().query("SELECT * FROM tbl_events ORDER BY deleted ASC, start_date ASC", (err, result) => {
+	var sqlReq = new sql.Request().query("SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.start_date ASC", (err, result) => {
 		if (err){
 			console.log(err)
 			req.flash("error", "Error loading events.");
@@ -109,6 +111,47 @@ router.post('/new', middleware.checkAuthenticated, function(req, res) {
 		} else {
 			req.flash("success", "Success! Event created.");
 			res.redirect("/portal/events/");
+		}
+	});
+});
+
+router.get('/createEmail/:id', middleware.checkAuthenticated, function(req, res) {
+	var sqlReq = new sql.Request().input("id", sql.Int, req.params.id).query("SELECT TOP 1 * FROM tbl_events WHERE id = @id", (err, result) => {
+		if (err){
+			req.flash("error", "Error creating event email.");
+			res.redirect("/portal/events/");
+		} else {
+			var event = result.recordset[0],
+				eventTime = moment(event.event_time).tz('America/Chicago').format('dddd, MMMM Do, h:MM A z'),
+				body = '',
+				queryText = "INSERT INTO tbl_emails " +
+					        "(subject, recip_type, body, sending_user_id, event_id) values " +
+				     	    "(@subject, @recip_type, @body, @sending_user_id, @event_id) ";
+
+     	    if (event.type != "News"){
+     	    	body = "<p>Howdy Developers,</p><p>We have scheduled a new " + event.type + " event for " + eventTime + 
+     	    	       ". See the event information below:</p><p><b>" + event.name + "</b> - " + eventTime + " - " + event.location + "</p>" +
+     	    	       "<p>" + event.descr + "</p><p>We hope to see you there!</p>";
+     	    } else {
+     	    	body = "<p>Howdy Developers,</p><p>" + event.descr + "</p>";
+     	    }
+
+			sqlReq.input("subject", sql.NVarChar, event.name);
+			sqlReq.input("recip_type", sql.NVarChar, "General");
+			sqlReq.input("body", sql.NVarChar, body);
+			sqlReq.input("event_id", sql.Int, req.params.id);
+			sqlReq.input("sending_user_id", sql.Int, req.user.id);
+
+			sqlReq.query(queryText, (err, result) => {
+				if (err || result.rowsAffected == 0){
+					console.log(err)
+					req.flash("error", "Error creating event email.");
+					res.redirect("/portal/events/");
+				} else {
+					req.flash("success", "Success! Event email created.");
+					res.redirect("/portal/emails/");
+				}
+			});
 		}
 	});
 });
