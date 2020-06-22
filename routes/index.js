@@ -7,9 +7,9 @@ var express    = require("express"),
     middleware = require('../middleware');
 
 router.get("/", function(req, res){
-	var sqlQuery = "SELECT e.*, (u.first_name + ' ' + u.last_name) as author " +
+	var sqlQuery = "SELECT TOP 3 e.*, (u.first_name + ' ' + u.last_name) as author " +
 				   "FROM tbl_events  e LEFT JOIN tbl_user u on u.id = e.creating_user_id " + 
-				   "WHERE e.[start_date] <= GETUTCDATE() AND e.[end_date] >= GETUTCDATE() AND e.deleted = 0";
+				   "WHERE e.[start_date] <= GETUTCDATE() AND e.[end_date] >= GETUTCDATE() AND e.deleted = 0 ORDER BY e.event_time ASC";
 
 	var sqlReq = new sql.Request().query(sqlQuery, (err, result) => {
 		if (err){
@@ -43,7 +43,18 @@ router.post("/", function(req, res){
 });
 
 router.get("/general-meetings", function(req, res){
-	res.render("general-meetings");
+	var sqlQuery = "SELECT TOP 3 e.*, (u.first_name + ' ' + u.last_name) as author " +
+				   "FROM tbl_events  e LEFT JOIN tbl_user u on u.id = e.creating_user_id " + 
+				   "WHERE e.[start_date] <= GETUTCDATE() AND e.[end_date] >= GETUTCDATE() AND e.deleted = 0 AND e.type != 'News' ORDER BY e.event_time ASC";
+
+	var sqlReq = new sql.Request().query(sqlQuery, (err, result) => {
+		if (err){
+			console.log(err)
+			req.flash("error", "Error loading events.");
+		} else {
+			res.render('general-meetings', { events: result.recordset });
+		}
+	});
 });
 
 router.get("/projects", function(req, res){
