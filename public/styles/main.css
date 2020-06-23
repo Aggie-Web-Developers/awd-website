@@ -870,6 +870,7 @@ label.error {
 
 .sponsors-image {
 	max-height: 15rem;
+	border-radius: 50%;
 }
 
 @media (max-width: 585px) {

@@ -62,7 +62,16 @@ router.get("/projects", function(req, res){
 });
 
 router.get("/our-sponsors", function(req, res){
-	res.render("our-sponsors");
+	var sqlQuery = "SELECT  * FROM tbl_sponsors WHERE deleted = 0 ORDER BY sponsor_date ASC";
+
+	var sqlReq = new sql.Request().query(sqlQuery, (err, result) => {
+		if (err){
+			console.log(err)
+			req.flash("error", "Error loading sponsors.");
+		} else {
+			res.render('our-sponsors', { sponsors: result.recordset });
+		}
+	});
 });
 
 router.get("/about-us", function(req, res){
