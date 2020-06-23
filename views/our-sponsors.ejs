@@ -12,34 +12,41 @@
 			</div>
 		</div>
 
-		<!--<div class="container">
-			<div class="row justify-content-around text-center mt-3 mb-5">
-				<div class="col-sm-12 col-lg-6 mt-5 justify-content-center">
-					<a href="https://tamu.edu"><img class="sponsors-image" alt="Monster's Inc Logo" src="/images/fictional-sponsors/mi.png"></a>
-					<h2 class="font-weight-bold text-uppercase mt-2">Monsters, Inc.</h2>
-					<h6 class="font-weight-bold text-uppercase mt-2">Partner Since 2020</h6>
-				</div>
+		<div class="container">
+			<% if (sponsors) {%>
+				<div class="row justify-content-around text-center mt-3 mb-5">
 
-				<div class="col-sm-12 col-lg-6 mt-5 justify-content-center">
-					<a href="https://tamu.edu"><img class="sponsors-image" alt="Wizengamot Logo" src="/images/fictional-sponsors/wizengamot.png"></a>
-					<h2 class="font-weight-bold text-uppercase mt-2">Wizengamot</h2>
-					<h6 class="font-weight-bold text-uppercase mt-2">Partner Since 2020</h6>
+				<% sponsors.forEach(function(sponsor) { 
+					var timeOffsetDate = new Date(Date.now());
+		    		var timeOffset = timeOffsetDate.getTimezoneOffset();
+			    	var sponsorDate = new Date(sponsor.sponsor_date.getTime() + (timeOffset*60*1000));
+				%>
+
+					<div class="col-sm-12 col-lg-6 mt-5 justify-content-center">
+						<a href="<%=sponsor.refer_url%>" target="_blank"><img class="sponsors-image" alt="<%=sponsor.name%> Logo" src="<%=sponsor.image_url%>"></a>
+						<h2 class="font-weight-bold text-uppercase mt-2"><%=sponsor.name%></h2>
+						<h6 class="font-weight-bold mt-2">Partner Since <%=sponsorDate.toLocaleDateString([], { month: 'long', year: 'numeric'})%></h6>
+					</div>
+				<% }); %>
 				</div>
-			</div>
-		</div>-->
+			<% }%>
+		</div>
 
 		<div class="container">
-			<!--<div class="row text-center my-5">
-				<div class="col-12">
-					<a href="/contact-us" class="btn btn-lg mt-3 btn-contact">Interested<span class="d-none d-md-inline"> in Becoming a Sponsor</span>?</a>
-				</div>
-			</div>-->
+			<% if (!sponsors || sponsors.length < 1) {%>
 			<div class="row text-center my-5">
 				<div class="col-12 my-5">
 					<h5>We are looking for sponsors that are ready to make a difference for our members.</h5>
 					<a href="/contact-us" class="btn btn-lg btn-contact mt-5"><span class="d-none d-md-inline">Ready to</span> Be the First?</a>
 				</div>
 			</div>
+			<% } else { %>
+			<div class="row text-center my-5">
+				<div class="col-12">
+					<a href="/contact-us" class="btn btn-lg mt-3 btn-contact">Interested<span class="d-none d-md-inline"> in Becoming a Sponsor</span>?</a>
+				</div>
+			</div>
+			<% } %>
 		</div>
 
 		<script src="/scripts/our-sponsors.js"></script>
