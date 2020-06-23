@@ -13,6 +13,7 @@ var express        = require('express'),
 	eventRoutes    = require("./routes/portal/events"),
 	portalRoutes   = require("./routes/portal/index"),
 	emailRoutes   = require("./routes/portal/emails"),
+	sponsorRoutes   = require("./routes/portal/sponsors"),
 	middleware     = require('./middleware');
 
 initPassport(passport);
@@ -71,6 +72,7 @@ app.use(indexRoutes);
 app.use("/portal", portalRoutes);
 app.use("/portal/events", eventRoutes);
 app.use("/portal/emails", emailRoutes);
+app.use("/portal/sponsors", sponsorRoutes);
 
 app.get("/*", function(req, res){
 	res.render("404");

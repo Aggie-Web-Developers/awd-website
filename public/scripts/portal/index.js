@@ -12,4 +12,12 @@ $(function () {
     $('#divEmails').click(function() {
         window.location.href = "/portal/emails";
     });
+
+    $('#divSponsors').click(function() {
+        window.location.href = "/portal/sponsors";
+    });
+
+    $('#divProjects').click(function() {
+        window.location.href = "/portal/projects";
+    });
 });

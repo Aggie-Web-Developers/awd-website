@@ -1,0 +1,60 @@
+<%- include('../partials/header') %>
+	<% if (messages.error) { %>
+	  <div class='alert alert-danger' role='alert'><%= messages.error %></div>
+	<% } %>
+	<% if (messages.success) { %>
+	  <div class='alert alert-success' role='alert'><%= messages.success %></div>
+	<% } %>
+
+	<div class="container">
+		<div class="row justify-content-around align-items-center mt-5">
+			<div class="col-5">
+				<h1>Manage Sponsors</h1>
+			</div>
+			<div class="col-7 text-right">
+				<a href="/portal/sponsors/new" class="btn btn-contact btn-contact-slim">New</a>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12">
+				<div class="container table-container mt-3">
+					<table id="tblSponsors" class="display">
+					    <thead>
+					        <tr>
+					            <th></th>
+					            <th>Name</th>
+					            <th>Sponsor Since</th>
+					            <th>Status</th>
+					        </tr>
+					    </thead>
+					    <tbody>
+					    	<% sponsors.forEach(function(sponsor) {
+					    		var timeOffsetDate = new Date(Date.now());
+					    		var timeOffset = timeOffsetDate.getTimezoneOffset();
+
+				    			if (sponsor.sponsor_date)
+							    	var sponsorDate = new Date(sponsor.sponsor_date.getTime() + (timeOffset*60*1000));
+				    		%>
+						    	<tr>
+						            <td></td>
+						            <td><a href="/portal/sponsors/edit/<%= sponsor.id%>"><%= sponsor.name %></a></td>
+						            <td><%= sponsorDate.toLocaleDateString() %></td>
+
+					            	<% if (sponsor.deleted == 1) { %>
+						            	<td class="red-danger">Deleted</td>
+					            	<% } else { %>
+					            		<td>Current</td>
+					            	<% } %>
+						        </tr>
+							<% });%>
+					    </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="/scripts/portal/sponsors/index.js"></script>
+<%- include('../partials/footer') %>
