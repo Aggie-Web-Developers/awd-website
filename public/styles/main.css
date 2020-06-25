@@ -761,6 +761,16 @@ label.error {
   	background-size: contain;
 }
 
+.photo-prc {
+	background: url("../images/Alan-Bio-Pic.jpg") no-repeat;
+  	background-size: contain;
+}
+
+.photo-secretary {
+	background: url("../images/Trey-Bio-Pic.jpg") no-repeat;
+  	background-size: contain;
+}
+
 .photo-default {
 	background: url("../images/AWD-logo.png") no-repeat;
   	background-size: contain;
