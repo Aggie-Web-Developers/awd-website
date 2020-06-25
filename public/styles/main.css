@@ -756,13 +756,13 @@ label.error {
   	background-size: contain;
 }
 
-.photo-treasurer {
-	background: url("https://avatars3.githubusercontent.com/u/54115478?s=460&v=4") no-repeat;
+.photo-vp {
+	background: url("../images/Vignesh-Bio-Pic.jpg") no-repeat;
   	background-size: contain;
 }
 
-.photo-vacant {
-	background: url("https://images.squarespace-cdn.com/content/v1/586c43ba725e250e1dc97018/1491492876275-63G54YF3HSEUN1844P21/ke17ZwdGBToddI8pDm48kOyctPanBqSdf7WQMpY1FsRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwwQIrqN0bcqL_6-iJCOAA0qwytzcs0JTq1XS2aqVbyK6GtMIM7F0DGeOwCXa63_4k/We+are+Hiring+Image+square-600xauto.jpg") no-repeat;
+.photo-default {
+	background: url("../images/AWD-Logo.png") no-repeat;
   	background-size: contain;
 }
 
