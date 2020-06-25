@@ -2,29 +2,29 @@
 	<div class="container">
 		<div class="row mt-5">
 			<div class="col-12">
-				<h1>Add New Sponsor</h1>
+				<h1>Add New Project</h1>
 			</div>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row justify-content-center my-5 px-md-0 px-5">
 			<div class="col-xs-10 col-md-10 form-container p-4">
-				<h3 class="font-weight-bold mb-3">Create Sponsor</h3>
-				<form id="frm" action="/portal/sponsors/new" method="POST">
+				<h3 class="font-weight-bold mb-3">Create Project</h3>
+				<form id="frm" action="/portal/projects/new" method="POST">
 					<div class="form-group">
-						<label for="txtName">Sponsor Name</label>
+						<label for="txtName">Project Name</label>
 						<input type="text" class="form-control" id="txtName" name="txtName">
 					</div>
 					<div class="form-group">
-						<label for="txtReferLink">Link to Sponsor</label>
+						<label for="txtReferLink">Link to Project</label>
 						<input type="text" class="form-control" id="txtReferLink" name="txtReferLink">
 					</div>
 					<div class="form-group">
-						<label for="txtImageLink">Sponsor Image</label>
+						<label for="txtImageLink">Project Image</label>
 						<input type="text" class="form-control" id="txtImageLink" name="txtImageLink">
 					</div>
 					<div class="form-group">
-						<label for="txtDate">Sponsor Date</label>
+						<label for="txtDate">Project Date</label>
 						<input type="date" class="form-control" id="txtDate" name="txtDate">
 					</div>
 					<div class="form-check mt-3">
@@ -36,5 +36,5 @@
 			</div>
 		</div>
 	</div>
-	<script src="/scripts/portal/sponsors/new.js"></script>
+	<script src="/scripts/portal/projects/new.js"></script>
 <%- include('../partials/footer') %>

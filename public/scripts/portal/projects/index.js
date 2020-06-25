@@ -1,7 +1,7 @@
 // JS File for Portal Sponsor Management View
 
 $(function () {
-	$('#tblSponsors').DataTable({
+	$('#tblProjects').DataTable({
 		"searching":   false,
         "ordering": false,
         "responsive": {
