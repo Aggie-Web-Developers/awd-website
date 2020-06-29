@@ -1,4 +1,4 @@
-// JS File for Portal Sponsor Management View
+// JS File for Portal Project Management View
 
 $(function () {
 	$('#tblProjects').DataTable({
