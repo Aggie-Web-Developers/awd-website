@@ -1,4 +1,55 @@
 <%- include('partials/header') %>
+<%
+	var hasCompleted = false;
+	var hasCurrent = false;
+
+	for(var i = 0; i < projects.length; i++) {
+	    if (projects[i].status == 'Completed') {
+	        hasCompleted = true;
+	    } else {
+	        hasCurrent = true;
+	    }
+
+	    var seconds = Math.floor((new Date() - projects[i].start_date) / 1000);
+
+		var interval = Math.floor(seconds / 31536000);
+
+		if (interval > 1) {
+			projects[i].start_date = interval + " years";
+			continue;
+		}
+		
+		interval = Math.floor(seconds / 2592000);
+		
+		if (interval > 1) {
+			projects[i].start_date = interval + " months";
+			continue;
+		}
+		
+		interval = Math.floor(seconds / 86400);
+		
+		if (interval > 1) {
+			projects[i].start_date = interval + " days";
+			continue;
+		}
+		
+		interval = Math.floor(seconds / 3600);
+		
+		if (interval > 1) {
+			projects[i].start_date = interval + " hours";
+			continue;
+		}
+		
+		interval = Math.floor(seconds / 60);
+		
+		if (interval > 1) {
+			projects[i].start_date = interval + " minutes";
+			continue;
+		}
+
+		projects[i].start_date = Math.floor(seconds) + " seconds";
+	}
+%>
 			<div class=" text-center">
 				<div class="container">
 					<div class="row justify-content-center">
@@ -16,50 +67,101 @@
 
 			<h1 class="text-center">Current Projects</h1>
 
+			<% if (!hasCurrent) {%>
+				<div class="row justify-content-center mt-4">
+					<h5>We're not currently working on anything, please check back soon.</h5>
+				</div>
+			<% } else {%>
 			<div class="row justify-content-center">
-
-				<div class="col-10 col-md-6 col-lg-4 mt-4">
-					<div class="text-center justify-content-center">
-						<div class="project-card-container">
-						    <div class="project-column">
-						        <div class="project-module">
-						            <!-- Project Thumbnail-->
-						            <div class="project-thumbnail">
-						                <img src="/images/sample-project-photo.png" />
-						            </div>
-						            <!-- Post Content-->
-						            <div class="project-content">
-						                <h1 class="title">AWD Site v1.0</h1>
-						                <h2 class="sub_title">Full Stack Development</h2>
-						                <p class="description">
-						                	<a class="btn btn-outline-purple mt-4" href="https://github.com/Aggie-Web-Developers/" target="_blank">View on <i class="fab fa-github-alt px-2"></i></a>
-						                	<a class="btn btn-purple mt-4" href="/" target="_blank">Preview Site</a>
-						                </p>
-						                <div class="project-button-info">
-						                	<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i>2 Months</span>
-						                </div>
-						                <div class="project-button-info mt-2">
-						                	<span class="project-timestamp" title="Current Status"><i class="fas fa-tasks mr-2"></i>Development</span>
-						                </div>
-						                <div class="project-button-info mt-2">
-						                	<span class="project-timestamp" title="Project Manager"><i class="fas fa-project-diagram mr-2"></i>Cole D. Connelly</span>
-						                </div>
-						            </div>
-						        </div>
-						    </div>
+			<% projects.forEach(function(project) { %>
+				<% if (project.status != 'Completed') { %>
+					<div class="col-10 col-md-6 col-lg-4 mt-4">
+						<div class="text-center justify-content-center">
+							<div class="project-card-container">
+							    <div class="project-column">
+							        <div class="project-module">
+							            <!-- Project Thumbnail-->
+							            <div class="project-thumbnail">
+							                <img src="<%=project.image_url%>" />
+							            </div>
+							            <!-- Post Content-->
+							            <div class="project-content">
+							                <h1 class="title"><%=project.name%></h1>
+							                <h2 class="sub_title"><%=project.work_done%></h2>
+							                <p class="description">
+							                	<a class="btn btn-outline-purple mt-4" href="<%=project.github_url%>" target="_blank">View on <i class="fab fa-github-alt px-2"></i></a>
+							                	<a class="btn btn-purple mt-4" href="<%=project.test_url%>" target="_blank">Preview Site</a>
+							                </p>
+							                <div class="project-button-info">
+							                	<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i><%=project.start_date%></span>
+							                </div>
+							                <div class="project-button-info mt-2">
+							                	<span class="project-timestamp" title="Current Status"><i class="fas fa-tasks mr-2"></i><%=project.status%></span>
+							                </div>
+							                <div class="project-button-info mt-2">
+							                	<span class="project-timestamp" title="Project Manager"><i class="fas fa-project-diagram mr-2"></i><%=project.manager%></span>
+							                </div>
+							            </div>
+							        </div>
+							    </div>
+							</div>
 						</div>
 					</div>
-				</div>		
+				<% } %>
+			<% }); %>
 			</div>
+			<% }%>
 		</div>
 
 		<div class="container my-5">
 
 			<h1 class="text-center">Completed Projects</h1>
 
-			<div class="row justify-content-center mt-4 mb-5">
-				<h5>We are working hard to bring you our first project completion.</h5>
+
+			<% if (!hasCompleted) {%>
+				<div class="row justify-content-center mt-4 mb-5">
+					<h5>We are working hard to bring you our first project completion.</h5>
+				</div>
+			<% } else {%>
+			<div class="row justify-content-center">
+			<% projects.forEach(function(project) { %>
+				<% if (project.status == 'Completed') { %>
+					<div class="col-10 col-md-6 col-lg-4 mt-4">
+						<div class="text-center justify-content-center">
+							<div class="project-card-container">
+							    <div class="project-column">
+							        <div class="project-module">
+							            <!-- Project Thumbnail-->
+							            <div class="project-thumbnail">
+							                <img src="<%=project.image_url%>" />
+							            </div>
+							            <!-- Post Content-->
+							            <div class="project-content">
+							                <h1 class="title"><%=project.name%></h1>
+							                <h2 class="sub_title"><%=project.work_done%></h2>
+							                <p class="description">
+							                	<a class="btn btn-outline-purple mt-4" href="<%=project.github_url%>" target="_blank">View on <i class="fab fa-github-alt px-2"></i></a>
+							                	<a class="btn btn-purple mt-4" href="<%=project.test_url%>" target="_blank">Preview Site</a>
+							                </p>
+							                <div class="project-button-info">
+							                	<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i><%=project.start_date%></span>
+							                </div>
+							                <div class="project-button-info mt-2">
+							                	<span class="project-timestamp" title="Current Status"><i class="fas fa-tasks mr-2"></i><%=project.status%></span>
+							                </div>
+							                <div class="project-button-info mt-2">
+							                	<span class="project-timestamp" title="Project Manager"><i class="fas fa-project-diagram mr-2"></i><%=project.manager%></span>
+							                </div>
+							            </div>
+							        </div>
+							    </div>
+							</div>
+						</div>
+					</div>
+				<% } %>
+			<% }); %>
 			</div>
+			<% }%>
 		</div>
 
 		<script src="scripts/projects.js"></script>
