@@ -1,14 +1,14 @@
 <%- include('../partials/header') %>
-<%  
+<%
 	const offset = event.event_time.getTimezoneOffset();
 	var temp_date = new Date(event.event_time.getTime() + (offset*60*1000*-1));
-    const eventDateFormatted = temp_date.toISOString().split('T')[0];
+		const eventDateFormatted = temp_date.toISOString().split('T')[0];
 
-    var webStartDateTemp = new Date(event.start_date.getTime());
-    const webStartDate  = webStartDateTemp.toISOString().split('T')[0];
+		var webStartDateTemp = new Date(event.start_date.getTime());
+		const webStartDate  = webStartDateTemp.toISOString().split('T')[0];
 
-    var webEndDateTemp = new Date(event.end_date.getTime());
-    const webEndDate  = webEndDateTemp.toISOString().split('T')[0];
+		var webEndDateTemp = new Date(event.end_date.getTime());
+		const webEndDate  = webEndDateTemp.toISOString().split('T')[0];
 %>
 
 	<div class="container">
@@ -89,27 +89,27 @@
 			<div class="col-xs-12 col-md-6 col-lg-4 mt-4">
 				<div class="text-center justify-content-center">
 					<div class="card-container">
-					    <div class="column">
-					        <div class="post-module">
-					            <div class="thumbnail">
-					                <div class="date">
-					                    <div class="day"></div>
-					                    <div class="month" id="divMonth"></div>
-					                </div><img id="imgEvent"/></div>
-					            <div class="post-content">
-					                <div class="category"></div>
-					                <h1 class="title"></h1>
-					                <h2 class="sub_title"></h2>
-					                <p class="description"></p>
-					                <div class="post-meta">
-					                	<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><span class="ts-1"></span></span>
-					                </div>
-					                <div class="post-meta mt-2 pm">
-					                	
-					                </div>
-					            </div>
-					        </div>
-					    </div>
+							<div class="column">
+									<div class="post-module">
+											<div class="thumbnail">
+													<div class="date">
+															<div class="day"></div>
+															<div class="month" id="divMonth"></div>
+													</div><img id="imgEvent"/></div>
+											<div class="post-content">
+													<div class="category"></div>
+													<h1 class="title"></h1>
+													<h2 class="sub_title"></h2>
+													<p class="description"></p>
+													<div class="post-meta">
+														<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><span class="ts-1"></span></span>
+													</div>
+													<div class="post-meta mt-2 pm">
+
+													</div>
+											</div>
+									</div>
+							</div>
 					</div>
 				</div>
 			</div>

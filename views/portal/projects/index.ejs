@@ -1,63 +1,65 @@
-<%- include('../partials/header') %>
-	<% if (messages.error) { %>
-	  <div class='alert alert-danger' role='alert'><%= messages.error %></div>
-	<% } %>
-	<% if (messages.success) { %>
-	  <div class='alert alert-success' role='alert'><%= messages.success %></div>
-	<% } %>
+<%- include('../partials/header') %> <% if (messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if (messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
+<% } %>
 
-	<div class="container">
-		<div class="row justify-content-around align-items-center mt-5">
-			<div class="col-5">
-				<h1>Manage Projects</h1>
-			</div>
-			<div class="col-7 text-right">
-				<a href="/portal/projects/new" class="btn btn-contact btn-contact-slim">New</a>
+<div class="container">
+	<div class="row justify-content-around align-items-center mt-5">
+		<div class="col-5">
+			<h1>Manage Projects</h1>
+		</div>
+		<div class="col-7 text-right">
+			<a href="/portal/projects/new" class="btn btn-contact btn-contact-slim"
+				>New</a
+			>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-12">
+			<div class="container table-container mt-3">
+				<table id="tblProjects" class="display">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Name</th>
+							<th>Work Done</th>
+							<th>Start Date</th>
+							<th>Manager</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% projects.forEach(function(project) { var timeOffsetDate = new
+						Date(Date.now()); var timeOffset =
+						timeOffsetDate.getTimezoneOffset(); if (project.start_date) var
+						startDate = new Date(project.start_date.getTime() +
+						(timeOffset*60*1000)); %>
+						<tr>
+							<td></td>
+							<td>
+								<a href="/portal/projects/edit/<%= project.id%>"
+									><%= project.name %></a
+								>
+							</td>
+							<td><%= project.work_done %></td>
+							<td><%= startDate.toLocaleDateString() %></td>
+							<td><%= project.manager %></td>
+							<% if (project.deleted == 1) { %>
+							<td class="red-danger">Deleted</td>
+							<% } else { %>
+							<td><%= project.status %></td>
+							<% } %>
+						</tr>
+						<% });%>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-12">
-				<div class="container table-container mt-3">
-					<table id="tblProjects" class="display">
-					    <thead>
-					        <tr>
-					            <th></th>
-					            <th>Name</th>
-					            <th>Work Done</th>
-					            <th>Start Date</th>
-					            <th>Manager</th>
-					            <th>Status</th>
-					        </tr>
-					    </thead>
-					    <tbody>
-					    	<% projects.forEach(function(project) {
-					    		var timeOffsetDate = new Date(Date.now());
-					    		var timeOffset = timeOffsetDate.getTimezoneOffset();
+</div>
 
-				    			if (project.start_date)
-							    	var startDate = new Date(project.start_date.getTime() + (timeOffset*60*1000));
-				    		%>
-						    	<tr>
-						            <td></td>
-						            <td><a href="/portal/projects/edit/<%= project.id%>"><%= project.name %></a></td>
-						            <td><%= project.work_done %></td>
-						            <td><%= startDate.toLocaleDateString() %></td>
-						            <td><%= project.manager %></td>
-					            	<% if (project.deleted == 1) { %>
-						            	<td class="red-danger">Deleted</td>
-					            	<% } else { %>
-					            		<td><%= project.status %></td>
-					            	<% } %>
-						        </tr>
-							<% });%>
-					    </tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<script src="/scripts/portal/projects/index.js"></script>
+<script src="/scripts/portal/projects/index.js"></script>
 <%- include('../partials/footer') %>

@@ -4,13 +4,13 @@
 	var hasCurrent = false;
 
 	for(var i = 0; i < projects.length; i++) {
-	    if (projects[i].status == 'Completed') {
-	        hasCompleted = true;
-	    } else {
-	        hasCurrent = true;
-	    }
+			if (projects[i].status == 'Completed') {
+					hasCompleted = true;
+			} else {
+					hasCurrent = true;
+			}
 
-	    var seconds = Math.floor((new Date() - projects[i].start_date) / 1000);
+			var seconds = Math.floor((new Date() - projects[i].start_date) / 1000);
 
 		var interval = Math.floor(seconds / 31536000);
 
@@ -18,30 +18,30 @@
 			projects[i].start_date = interval + " years";
 			continue;
 		}
-		
+
 		interval = Math.floor(seconds / 2592000);
-		
+
 		if (interval > 1) {
 			projects[i].start_date = interval + " months";
 			continue;
 		}
-		
+
 		interval = Math.floor(seconds / 86400);
-		
+
 		if (interval > 1) {
 			projects[i].start_date = interval + " days";
 			continue;
 		}
-		
+
 		interval = Math.floor(seconds / 3600);
-		
+
 		if (interval > 1) {
 			projects[i].start_date = interval + " hours";
 			continue;
 		}
-		
+
 		interval = Math.floor(seconds / 60);
-		
+
 		if (interval > 1) {
 			projects[i].start_date = interval + " minutes";
 			continue;
@@ -78,32 +78,32 @@
 					<div class="col-10 col-md-6 col-lg-4 mt-4">
 						<div class="text-center justify-content-center">
 							<div class="project-card-container">
-							    <div class="project-column">
-							        <div class="project-module">
-							            <!-- Project Thumbnail-->
-							            <div class="project-thumbnail">
-							                <img src="<%=project.image_url%>" />
-							            </div>
-							            <!-- Post Content-->
-							            <div class="project-content">
-							                <h1 class="title"><%=project.name%></h1>
-							                <h2 class="sub_title"><%=project.work_done%></h2>
-							                <p class="description">
-							                	<a class="btn btn-outline-purple mt-4" href="<%=project.github_url%>" target="_blank">View on <i class="fab fa-github-alt px-2"></i></a>
-							                	<a class="btn btn-purple mt-4" href="<%=project.test_url%>" target="_blank">Preview Site</a>
-							                </p>
-							                <div class="project-button-info">
-							                	<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i><%=project.start_date%></span>
-							                </div>
-							                <div class="project-button-info mt-2">
-							                	<span class="project-timestamp" title="Current Status"><i class="fas fa-tasks mr-2"></i><%=project.status%></span>
-							                </div>
-							                <div class="project-button-info mt-2">
-							                	<span class="project-timestamp" title="Project Manager"><i class="fas fa-project-diagram mr-2"></i><%=project.manager%></span>
-							                </div>
-							            </div>
-							        </div>
-							    </div>
+									<div class="project-column">
+											<div class="project-module">
+													<!-- Project Thumbnail-->
+													<div class="project-thumbnail">
+															<img src="<%=project.image_url%>" />
+													</div>
+													<!-- Post Content-->
+													<div class="project-content">
+															<h1 class="title"><%=project.name%></h1>
+															<h2 class="sub_title"><%=project.work_done%></h2>
+															<p class="description">
+																<a class="btn btn-outline-purple mt-4" href="<%=project.github_url%>" target="_blank">View on <i class="fab fa-github-alt px-2"></i></a>
+																<a class="btn btn-purple mt-4" href="<%=project.test_url%>" target="_blank">Preview Site</a>
+															</p>
+															<div class="project-button-info">
+																<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i><%=project.start_date%></span>
+															</div>
+															<div class="project-button-info mt-2">
+																<span class="project-timestamp" title="Current Status"><i class="fas fa-tasks mr-2"></i><%=project.status%></span>
+															</div>
+															<div class="project-button-info mt-2">
+																<span class="project-timestamp" title="Project Manager"><i class="fas fa-project-diagram mr-2"></i><%=project.manager%></span>
+															</div>
+													</div>
+											</div>
+									</div>
 							</div>
 						</div>
 					</div>
@@ -129,32 +129,32 @@
 					<div class="col-10 col-md-6 col-lg-4 mt-4">
 						<div class="text-center justify-content-center">
 							<div class="project-card-container">
-							    <div class="project-column">
-							        <div class="project-module">
-							            <!-- Project Thumbnail-->
-							            <div class="project-thumbnail">
-							                <img src="<%=project.image_url%>" />
-							            </div>
-							            <!-- Post Content-->
-							            <div class="project-content">
-							                <h1 class="title"><%=project.name%></h1>
-							                <h2 class="sub_title"><%=project.work_done%></h2>
-							                <p class="description">
-							                	<a class="btn btn-outline-purple mt-4" href="<%=project.github_url%>" target="_blank">View on <i class="fab fa-github-alt px-2"></i></a>
-							                	<a class="btn btn-purple mt-4" href="<%=project.test_url%>" target="_blank">Preview Site</a>
-							                </p>
-							                <div class="project-button-info">
-							                	<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i><%=project.start_date%></span>
-							                </div>
-							                <div class="project-button-info mt-2">
-							                	<span class="project-timestamp" title="Current Status"><i class="fas fa-tasks mr-2"></i><%=project.status%></span>
-							                </div>
-							                <div class="project-button-info mt-2">
-							                	<span class="project-timestamp" title="Project Manager"><i class="fas fa-project-diagram mr-2"></i><%=project.manager%></span>
-							                </div>
-							            </div>
-							        </div>
-							    </div>
+									<div class="project-column">
+											<div class="project-module">
+													<!-- Project Thumbnail-->
+													<div class="project-thumbnail">
+															<img src="<%=project.image_url%>" />
+													</div>
+													<!-- Post Content-->
+													<div class="project-content">
+															<h1 class="title"><%=project.name%></h1>
+															<h2 class="sub_title"><%=project.work_done%></h2>
+															<p class="description">
+																<a class="btn btn-outline-purple mt-4" href="<%=project.github_url%>" target="_blank">View on <i class="fab fa-github-alt px-2"></i></a>
+																<a class="btn btn-purple mt-4" href="<%=project.test_url%>" target="_blank">Preview Site</a>
+															</p>
+															<div class="project-button-info">
+																<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i><%=project.start_date%></span>
+															</div>
+															<div class="project-button-info mt-2">
+																<span class="project-timestamp" title="Current Status"><i class="fas fa-tasks mr-2"></i><%=project.status%></span>
+															</div>
+															<div class="project-button-info mt-2">
+																<span class="project-timestamp" title="Project Manager"><i class="fas fa-project-diagram mr-2"></i><%=project.manager%></span>
+															</div>
+													</div>
+											</div>
+									</div>
 							</div>
 						</div>
 					</div>

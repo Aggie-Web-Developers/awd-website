@@ -1,106 +1,170 @@
 <%- include('../partials/header') %>
-	<div class="container">
-		<div class="row mt-5">
-			<div class="col-12">
-				<h1>Create New Event</h1>
-			</div>
+<div class="container">
+	<div class="row mt-5">
+		<div class="col-12">
+			<h1>Create New Event</h1>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row justify-content-center my-5 px-md-0 px-5">
-			<div class="col-xs-10 col-md-10 form-container p-4">
-				<h3 class="font-weight-bold mb-3">Create Event</h3>
-				<form id="frm" action="/portal/events/new" method="POST">
-					<div class="form-group">
-						<label for="txtEventName">Event Name</label>
-						<input type="text" class="form-control" id="txtEventName" name="txtEventName">
-					</div>
-					<div class="form-group">
-						<label for="txtEventSubTitle">Event Sub-Title</label>
-						<input type="text" class="form-control" id="txtEventSubTitle" name="txtEventSubTitle">
-					</div>
-					<div class="form-group">
-						<label for="ddlEventType">News / Event Type</label>
-						<select class="form-control" id="ddlEventType" name="ddlEventType">
-							<option value="">Select One</option>
-							<option>Meeting</option>
-							<option>Lecture</option>
-							<option>News</option>
-							<option>Social</option>
-							<option>Workshop</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="txtDescr">Event Description</label>
-						<textarea class="form-control" id="txtDescr" name="txtDescr" rows="3"></textarea>
-					</div>
-					<div class="form-group" id="divLocation">
-						<label for="txtLocation">Event Location</label>
-						<input type="text" class="form-control" id="txtLocation" name="txtLocation">
-					</div>
-					<div class="form-group">
-						<label for="txtImage">Event Image</label>
-						<input type="text" class="form-control" id="txtImage" name="txtImage">
-					</div>
-					<div class="form-group">
-						<label for="txtDate">Event Date</label>
-						<input type="date" class="form-control" id="txtDate" name="txtDate">
-					</div>
-					<div class="form-group">
-						<label for="txtTime">Event Time</label>
-						<input type="time" class="form-control" id="txtTime" name="txtTime" aria-describedby="timeHelp">
-						<small id="timeHelp" class="form-text text-muted">Please enter in the timezone of your local system time. We will convert to UTC automatically.</small>
-					</div>
-					<div class="form-group">
-						<label for="txtStartDate">Display Start Date</label>
-						<input type="date" class="form-control" id="txtStartDate" name="txtStartDate" aria-describedby="dateHelp">
-						<small id="dateHelp" class="form-text text-muted">The dates will trigger the event to be show/hidden at 0:00 UTC time for the selected date.</small>
-					</div>
-					<div class="form-group">
-						<label for="txtEndDate">Display End Date</label>
-						<input type="date" class="form-control" id="txtEndDate" name="txtEndDate">
-					</div>
-					<div class="form-check mt-3">
-						<input type="checkbox" class="form-check-input checkmark" id="chkDeleted" name="chkDeleted">
-						<label class="form-check-label" for="chkDeleted">Deleted?</label>
-					</div>
-					<button type="button" class="btn btn-outline-purple btn-contact-slim mt-4 mr-3" id="btnPreview">Preview </button>
-					<button type="submit" class="btn btn-contact btn-contact-slim mt-4">Submit</button>
-				</form>
-			</div>
+</div>
+<div class="container">
+	<div class="row justify-content-center my-5 px-md-0 px-5">
+		<div class="col-xs-10 col-md-10 form-container p-4">
+			<h3 class="font-weight-bold mb-3">Create Event</h3>
+			<form id="frm" action="/portal/events/new" method="POST">
+				<div class="form-group">
+					<label for="txtEventName">Event Name</label>
+					<input
+						type="text"
+						class="form-control"
+						id="txtEventName"
+						name="txtEventName"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="txtEventSubTitle">Event Sub-Title</label>
+					<input
+						type="text"
+						class="form-control"
+						id="txtEventSubTitle"
+						name="txtEventSubTitle"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="ddlEventType">News / Event Type</label>
+					<select class="form-control" id="ddlEventType" name="ddlEventType">
+						<option value="">Select One</option>
+						<option>Meeting</option>
+						<option>Lecture</option>
+						<option>News</option>
+						<option>Social</option>
+						<option>Workshop</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="txtDescr">Event Description</label>
+					<textarea
+						class="form-control"
+						id="txtDescr"
+						name="txtDescr"
+						rows="3"
+					></textarea>
+				</div>
+				<div class="form-group" id="divLocation">
+					<label for="txtLocation">Event Location</label>
+					<input
+						type="text"
+						class="form-control"
+						id="txtLocation"
+						name="txtLocation"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="txtImage">Event Image</label>
+					<input
+						type="text"
+						class="form-control"
+						id="txtImage"
+						name="txtImage"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="txtDate">Event Date</label>
+					<input type="date" class="form-control" id="txtDate" name="txtDate" />
+				</div>
+				<div class="form-group">
+					<label for="txtTime">Event Time</label>
+					<input
+						type="time"
+						class="form-control"
+						id="txtTime"
+						name="txtTime"
+						aria-describedby="timeHelp"
+					/>
+					<small id="timeHelp" class="form-text text-muted"
+						>Please enter in the timezone of your local system time. We will
+						convert to UTC automatically.</small
+					>
+				</div>
+				<div class="form-group">
+					<label for="txtStartDate">Display Start Date</label>
+					<input
+						type="date"
+						class="form-control"
+						id="txtStartDate"
+						name="txtStartDate"
+						aria-describedby="dateHelp"
+					/>
+					<small id="dateHelp" class="form-text text-muted"
+						>The dates will trigger the event to be show/hidden at 0:00 UTC time
+						for the selected date.</small
+					>
+				</div>
+				<div class="form-group">
+					<label for="txtEndDate">Display End Date</label>
+					<input
+						type="date"
+						class="form-control"
+						id="txtEndDate"
+						name="txtEndDate"
+					/>
+				</div>
+				<div class="form-check mt-3">
+					<input
+						type="checkbox"
+						class="form-check-input checkmark"
+						id="chkDeleted"
+						name="chkDeleted"
+					/>
+					<label class="form-check-label" for="chkDeleted">Deleted?</label>
+				</div>
+				<button
+					type="button"
+					class="btn btn-outline-purple btn-contact-slim mt-4 mr-3"
+					id="btnPreview"
+				>
+					Preview
+				</button>
+				<button type="submit" class="btn btn-contact btn-contact-slim mt-4">
+					Submit
+				</button>
+			</form>
 		</div>
 	</div>
+</div>
 
-	<div class="container my-5" id="divPreview">
-		<div class="row justify-content-center">
-			<div class="col-xs-12 col-md-6 col-lg-4 mt-4">
-				<div class="text-center justify-content-center">
-					<div class="card-container">
-					    <div class="column">
-					        <div class="post-module">
-					            <div class="thumbnail">
-					                <div class="date">
-					                    <div class="day"></div>
-					                    <div class="month" id="divMonth"></div>
-					                </div><img id="imgEvent"/></div>
-					            <div class="post-content">
-					                <div class="category"></div>
-					                <h1 class="title"></h1>
-					                <h2 class="sub_title"></h2>
-					                <p class="description"></p>
-					                <div class="post-meta">
-					                	<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><span class="ts-1"></span></span>
-					                </div>
-					                <div class="post-meta mt-2 pm">
-					                	
-					                </div>
-					            </div>
-					        </div>
-					    </div>
+<div class="container my-5" id="divPreview">
+	<div class="row justify-content-center">
+		<div class="col-xs-12 col-md-6 col-lg-4 mt-4">
+			<div class="text-center justify-content-center">
+				<div class="card-container">
+					<div class="column">
+						<div class="post-module">
+							<div class="thumbnail">
+								<div class="date">
+									<div class="day"></div>
+									<div class="month" id="divMonth"></div>
+								</div>
+								<img id="imgEvent" />
+							</div>
+							<div class="post-content">
+								<div class="category"></div>
+								<h1 class="title"></h1>
+								<h2 class="sub_title"></h2>
+								<p class="description"></p>
+								<div class="post-meta">
+									<span class="timestamp"
+										><i class="far fa-calendar-alt mr-2"></i
+										><span class="ts-1"></span
+									></span>
+								</div>
+								<div class="post-meta mt-2 pm"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="/scripts/portal/events/new.js"></script>
+</div>
+<script src="/scripts/portal/events/new.js"></script>
 <%- include('../partials/footer') %>
