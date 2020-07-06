@@ -1,8 +1,8 @@
-var aws = require('aws-sdk'),
-	path = require('path'),
-	sql = require('mssql'),
-	schedule = require('node-schedule'),
-	mailerObj = {};
+const aws = require('aws-sdk');
+const path = require('path');
+const sql = require('mssql');
+const schedule = require('node-schedule');
+const mailerObj = {};
 
 aws.config.loadFromPath(path.join(__dirname, '../config.json'));
 var ses = new aws.SES();

@@ -1,10 +1,10 @@
-var express = require('express'),
-	router = express.Router(),
-	flash = require('express-flash'),
-	sql = require('mssql'),
-	middleware = require('../../middleware'),
-	moment = require('moment');
-tz = require('moment-timezone');
+const express = require('express');
+const router = express.Router();
+const flash = require('express-flash');
+const sql = require('mssql');
+const middleware = require('../../middleware');
+const moment = require('moment');
+const tz = require('moment-timezone');
 
 router.get('/', middleware.checkAuthenticated, function (req, res) {
 	var sqlReq = new sql.Request().query(

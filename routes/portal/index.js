@@ -1,10 +1,10 @@
-var express = require('express'),
-	router = express.Router(),
-	flash = require('express-flash'),
-	sql = require('mssql'),
-	passport = require('passport'),
-	bcrypt = require('bcrypt'),
-	middleware = require('../../middleware');
+const express = require('express');
+const router = express.Router();
+const flash = require('express-flash');
+const sql = require('mssql');
+const passport = require('passport');
+const bcrypt = require('bcrypt');
+const middleware = require('../../middleware');
 
 router.get('/', middleware.checkAuthenticated, function (req, res) {
 	res.render('portal/');
@@ -42,7 +42,7 @@ router.post('/register', middleware.checkNotAuthenticated, async function(req, r
 
 
 		var queryText = "IF NOT EXISTS (SELECT * FROM tbl_user WHERE email = @email) " +
-						"BEGIN " + 
+						"BEGIN " +
 						"INSERT INTO tbl_user (first_name, last_name, email, password_hash, receiveNewsletter) " +
 						"values (@first_name, @last_name, @email, @password_hash, @receiveNewsletter) " +
 						"END";
@@ -52,7 +52,7 @@ router.post('/register', middleware.checkNotAuthenticated, async function(req, r
 				console.log(err);
 				req.flash("error", "Error creating account. Please contact us if the error persists.");
 				res.redirect('/portal/register');
-			} else if (result.rowsAffected == 0) { 
+			} else if (result.rowsAffected == 0) {
 				req.flash("error", "Error creating account. Your email address in use.");
 				res.redirect('/portal/register');
 			} else {

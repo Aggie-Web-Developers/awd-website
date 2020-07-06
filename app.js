@@ -1,21 +1,21 @@
-var express = require('express'),
-	session = require('express-session'),
-	app = express(),
-	bodyParser = require('body-parser'),
-	methodOverride = require('method-override'),
-	sql = require('mssql'),
-	email = require('./email/email'),
-	bcrypt = require('bcrypt'),
-	initPassport = require('./passport-config'),
-	passport = require('passport'),
-	flash = require('express-flash'),
-	indexRoutes = require('./routes/index'),
-	eventRoutes = require('./routes/portal/events'),
-	portalRoutes = require('./routes/portal/index'),
-	emailRoutes = require('./routes/portal/emails'),
-	sponsorRoutes = require('./routes/portal/sponsors'),
-	projectRoutes = require('./routes/portal/projects'),
-	middleware = require('./middleware');
+const express = require('express');
+const session = require('express-session');
+const app = express();
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const sql = require('mssql');
+const email = require('./email/email');
+const bcrypt = require('bcrypt');
+const initPassport = require('./passport-config');
+const passport = require('passport');
+const flash = require('express-flash');
+const indexRoutes = require('./routes/index');
+const eventRoutes = require('./routes/portal/events');
+const portalRoutes = require('./routes/portal/index');
+const emailRoutes = require('./routes/portal/emails');
+const sponsorRoutes = require('./routes/portal/sponsors');
+const projectRoutes = require('./routes/portal/projects');
+const middleware = require('./middleware');
 
 initPassport(passport);
 
@@ -35,7 +35,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-var config = {
+const config = {
 	server: process.env.DB_SERVER,
 	port: 1433,
 	user: 'sa',

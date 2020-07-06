@@ -1,10 +1,10 @@
-var express = require('express'),
-	router = express.Router(),
-	flash = require('express-flash'),
-	sql = require('mssql'),
-	email = require('../email/email'),
-	path = require('path');
-middleware = require('../middleware');
+const express = require('express');
+const router = express.Router();
+const flash = require('express-flash');
+const sql = require('mssql');
+const email = require('../email/email');
+const path = require('path');
+const middleware = require('../middleware');
 
 router.get('/', function (req, res) {
 	var sqlQuery =
@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 		'FROM tbl_events  e LEFT JOIN tbl_user u on u.id = e.creating_user_id ' +
 		'WHERE e.[start_date] <= GETUTCDATE() AND e.[end_date] >= GETUTCDATE() AND e.deleted = 0 ORDER BY e.event_time ASC';
 
-	var sqlReq = new sql.Request().query(sqlQuery, (err, result) => {
+	new sql.Request().query(sqlQuery, (err, result) => {
 		if (err) {
 			console.log(err);
 			req.flash('error', 'Error loading events.');

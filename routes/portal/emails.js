@@ -1,9 +1,9 @@
-var express = require('express'),
-	router = express.Router(),
-	flash = require('express-flash'),
-	sql = require('mssql'),
-	middleware = require('../../middleware'),
-	email = require('../../email/email');
+const express = require('express');
+const router = express.Router();
+const flash = require('express-flash');
+const sql = require('mssql');
+const middleware = require('../../middleware');
+const email = require('../../email/email');
 
 router.get('/', middleware.checkAuthenticated, function (req, res) {
 	var queryText =
