@@ -120,7 +120,7 @@ router.get('/send/:id', middleware.checkAuthenticated, async function (
 	req,
 	res
 ) {
-	let emailStatus = await email.sendAdminEmail(req.params.id);
+	const emailStatus = await email.sendAdminEmail(req.params.id);
 
 	if (emailStatus != 'Success') {
 		req.flash('error', 'Error sending email.');

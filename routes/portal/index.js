@@ -24,7 +24,7 @@ router.post(
 	})
 );
 
-/*router.get('/register', middleware.checkNotAuthenticated, function(req, res) {
+/* router.get('/register', middleware.checkNotAuthenticated, function(req, res) {
 	res.render('portal/register');
 });
 

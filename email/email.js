@@ -75,12 +75,12 @@ mailerObj.sendContactUsEmailCorp = function (formData) {
 };
 
 mailerObj.sendAdminEmail = async function (id) {
-	let email = await getEmailById(id);
+	const email = await getEmailById(id);
 	var destinations = [];
 
 	if (email.recip_type == 'All') {
-		let generalRecipeints = await getGeneralRecipeints();
-		let corporateRecipeints = await getCorporateRecipeints();
+		const generalRecipeints = await getGeneralRecipeints();
+		const corporateRecipeints = await getCorporateRecipeints();
 
 		generalRecipeints.forEach(function (recip) {
 			var destination = {};
@@ -106,7 +106,7 @@ mailerObj.sendAdminEmail = async function (id) {
 			destinations.push(destination);
 		});
 	} else if (email.recip_type == 'Corporate') {
-		let corporateRecipeints = await getCorporateRecipeints();
+		const corporateRecipeints = await getCorporateRecipeints();
 
 		corporateRecipeints.forEach(function (recip) {
 			var destination = {};
@@ -120,7 +120,7 @@ mailerObj.sendAdminEmail = async function (id) {
 			destinations.push(destination);
 		});
 	} else if (email.recip_type == 'General') {
-		let generalRecipeints = await getGeneralRecipeints();
+		const generalRecipeints = await getGeneralRecipeints();
 
 		generalRecipeints.forEach(function (recip) {
 			var destination = {};
@@ -157,7 +157,7 @@ mailerObj.sendAdminEmail = async function (id) {
 	return new Promise((resolve, reject) => {
 		sendPromise
 			.then(async function (data) {
-				let emailSentStatus = await markEmailSent(email.id);
+				const emailSentStatus = await markEmailSent(email.id);
 				resolve(emailSentStatus);
 			})
 			.catch(function (err) {
@@ -176,7 +176,7 @@ mailerObj.listenForScheduledEmails = function () {
 					console.log('Error sending scheduled emails.');
 				} else {
 					result.recordset.forEach(async function (result) {
-						let emailStatus = await mailerObj.sendAdminEmail(result.id);
+						const emailStatus = await mailerObj.sendAdminEmail(result.id);
 
 						if (emailStatus != 'Success') {
 							console.log('Error sending schedule email: ID: ' + result.id);
