@@ -26,7 +26,8 @@
 		"prettier/prettier": "error",
 		"object-curly-spacing": "off",
 		"array-bracket-spacing": "off",
-		"no-invalid-this": 0
+		"no-invalid-this": 0,
+		"no-var": "off"
 	},
 	"globals": {
 		"io": true,
@@ -39,11 +40,7 @@
 	},
 	"parserOptions": {
 		"sourceType": "module",
-		"ecmaVersion": 2020,
-		"ecmaFeatures": {
-			"jsx": true,
-			"modules": true
-		}
+		"ecmaVersion": 2020
 	},
 	"plugins": ["prettier"]
 }
