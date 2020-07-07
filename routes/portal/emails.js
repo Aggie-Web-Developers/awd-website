@@ -58,6 +58,7 @@ router.put('/edit/:id', middleware.checkAuthenticated, function(req, res) {
 		.then(result => {
 			if (result.rowsAffected == 0){
 				req.flash("error", "Error updating email.");
+				res.redirect("/portal/emails/");
 			} else {
 				req.flash("success", "Success! Email updated.");
 				res.redirect("/portal/emails/");
@@ -101,6 +102,7 @@ router.post('/new', middleware.checkAuthenticated, function(req, res) {
 		.then(result => {
 			if (result.rowsAffected == 0){
 				req.flash("error", "Error creating email.");
+				res.redirect("/portal/emails/");
 			} else {
 				req.flash("success", "Success! Email created.");
 				res.redirect("/portal/emails/");
