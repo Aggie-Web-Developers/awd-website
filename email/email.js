@@ -7,7 +7,7 @@ var aws       = require('aws-sdk'),
 aws.config.loadFromPath(path.join(__dirname, '../config.json'));
 var ses = new aws.SES();
 
-mailerObj.sendContactUsEmailGen = function(formData){
+mailerObj.sendContactUsEmailGen = async function(formData){
   var content = "<p><b>Name:</b> " + formData.txtNameGen + "</p>";
   content    += "<p><b>Email:</b> " + formData.txtEmailGen + "</p>";
   content    += "<p><b>Subject:</b> " + formData.ddlSubjectGen + "</p>";
@@ -32,14 +32,16 @@ mailerObj.sendContactUsEmailGen = function(formData){
 
   var sendPromise = new aws.SES({apiVersion: '2010-12-01'}).sendTemplatedEmail(params).promise();
 
-  sendPromise.then(
-    function(data) {}).catch(
-      function(err) {
-      console.error(err, err.stack);
-    });
+  return new Promise((resolve, reject) => {
+  	sendPromise.then(async function(data) {
+	    resolve('Success');
+	  }).catch( function(err) {
+      resolve('Error');
+	  });
+  });
 }
 
-mailerObj.sendContactUsEmailCorp = function(formData){
+mailerObj.sendContactUsEmailCorp = async function(formData){
   var content = "<p><b>Name:</b> " + formData.txtNameCorp + "</p>";
   content    += "<p><b>Email:</b> " + formData.txtEmailCorp + "</p>";
   content    += "<p><b>Company:</b> " + formData.txtCorp + "</p>";
@@ -65,11 +67,13 @@ mailerObj.sendContactUsEmailCorp = function(formData){
 
   var sendPromise = new aws.SES({apiVersion: '2010-12-01'}).sendTemplatedEmail(params).promise();
 
-  sendPromise.then(
-    function(data) {}).catch(
-      function(err) {
-      console.error(err, err.stack);
-    });
+  return new Promise((resolve, reject) => {
+  	sendPromise.then(async function(data) {
+	    resolve('Success');
+	  }).catch( function(err) {
+      resolve('Error');
+	  });
+  });
 }
 
 mailerObj.sendAdminEmail = async function(id){

@@ -94,10 +94,15 @@ router.post("/contact-us/general", function(req, res){
 					"(contact_name, email, subject, comments) values " +
 					"(@contact_name, @email, @subject, @comments) ";
 
-	sqlReq.query(sqlQuery).then(result => {
+	sqlReq.query(sqlQuery).then(async result => {
 		if (req.body.chkNewsGen !== "on"){
-			email.sendContactUsEmailGen(req.body);
-			res.status(200).send("Success! Our best owl is on the way with your message.");
+			let emailStatus = await email.sendContactUsEmailGen(req.body);
+			
+			if (emailStatus == 'Success'){
+				res.status(200).send("Success! Our best owl is on the way with your message.");
+			} else {
+				res.status(400).send();
+			}
 		}
 	}).catch(err => {
 		res.status(400).send();
@@ -108,13 +113,18 @@ router.post("/contact-us/general", function(req, res){
 		sqlReq.input("email", sql.NVarChar, req.body.txtEmailGen);
 
 		sqlQuery = "IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) " +
-						"BEGIN " + 
-						"INSERT INTO tbl_email_list (email) values (@email) " +
-						"END";
+					"BEGIN " + 
+					"INSERT INTO tbl_email_list (email) values (@email) " +
+					"END";
 
-		sqlReq.query(sqlQuery).then(result => {
-			email.sendContactUsEmailGen(req.body);
-			res.status(200).send("Success! Our best owl is on the way with your message.");
+		sqlReq.query(sqlQuery).then(async result => {
+			let emailStatus = await email.sendContactUsEmailGen(req.body);
+			
+			if (emailStatus == 'Success'){
+				res.status(200).send("Success! Our best owl is on the way with your message.");
+			} else {
+				res.status(400).send();
+			}
 		}).catch(err => {
 			res.status(400).send();
 		});
@@ -135,10 +145,15 @@ router.post("/contact-us/corporate", function(req, res){
 					"(contact_type, company, contact_name, email, subject, comments) values " +
 					"('company', @company, @contact_name, @email, @subject, @comments) ";
 
-	sqlReq.query(sqlQuery).then(result => {
+	sqlReq.query(sqlQuery).then(async result => {
 		if (req.body.chkNewsCorp !== "on"){
-			email.sendContactUsEmailCorp(req.body);
-			res.status(200).send("Success! Our best owl is on the way with your message.");
+			let emailStatus = await email.sendContactUsEmailCorp(req.body);
+			
+			if (emailStatus == 'Success'){
+				res.status(200).send("Success! Our best owl is on the way with your message.");
+			} else {
+				res.status(400).send();
+			}
 		}
 	}).catch(err => {
 		res.status(400).send();
@@ -153,9 +168,14 @@ router.post("/contact-us/corporate", function(req, res){
 				   "INSERT INTO tbl_corporate_email_list (email) values (@email) " +
 				   "END";
 
-		sqlReq.query(sqlQuery).then(result => {
-			email.sendContactUsEmailCorp(req.body);
-			res.status(200).send("Success! Our best owl is on the way with your message.");
+		sqlReq.query(sqlQuery).then(async result => {
+			let emailStatus = await email.sendContactUsEmailCorp(req.body);
+			
+			if (emailStatus == 'Success'){
+				res.status(200).send("Success! Our best owl is on the way with your message.");
+			} else {
+				res.status(400).send();
+			}
 		}).catch(err => {
 			res.status(400).send();
 		});
