@@ -4,11 +4,8 @@ const localStrategy = require('passport-local').Strategy,
 
 function init(passport) {
 	const authenticateUser = async (email, password, done) => {
-		var sqlReq = new sql.Request(),
-		    user   = null;
-
-		let userQuery = await getUserByEmail(email);
-  		user = userQuery;
+		var sqlReq = new sql.Request()
+		let user = await getUserByEmail(email);
 
 		if (user == null){
 			return done(null, false, { message: 'Authentication failed. Please check you credentials.'});
@@ -32,12 +29,11 @@ function init(passport) {
 		try {
 			let user = await getUserById(id);
 
-			// TODO: Better error handling here
 			if (!user) {
-		  		return done(new Error('User could not be found.'));
-		}
+		  		return done(new Error('Deserialization error.'));
+			}
 			
-		done(null, user);
+			done(null, user);
 
 		} catch (e) {
 			done(e);
@@ -49,9 +45,10 @@ function getUserByEmail(email) {
 	return new Promise((resolve, reject) => {
 		var sqlReq = new sql.Request().input("email", sql.NVarChar, email);
 
-		sqlReq.query("SELECT TOP 1 * FROM tbl_user WHERE email = @email", (err, result) => {
-			if (err) reject(err); 
+		sqlReq.query("SELECT TOP 1 * FROM tbl_user WHERE email = @email").then(result => {
 			resolve(result.recordset[0]);
+		}).catch(err => {
+			resolve(null);
 		});
 	});
 }
@@ -60,9 +57,10 @@ function getUserById(id) {
 	return new Promise((resolve, reject) => {
 		var sqlReq = new sql.Request().input("id", sql.Int, id);
 
-		sqlReq.query("SELECT TOP 1 * FROM tbl_user WHERE id = @id", (err, result) => {
-	  		if (err) reject(err); 
-	  		resolve(result.recordset[0]);
+		sqlReq.query("SELECT TOP 1 * FROM tbl_user WHERE id = @id").then(result => {
+			resolve(result.recordset[0]);
+		}).catch(err => {
+			resolve(null);
 		});
 	});
 }
