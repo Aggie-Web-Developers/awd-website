@@ -43,22 +43,24 @@ router.post('/register', middleware.checkNotAuthenticated, async function(req, r
 						"values (@first_name, @last_name, @email, @password_hash, @receiveNewsletter) " +
 						"END";
 
-		sqlReq.query(queryText, (err, result) => {
-			if (err){
-				console.log(err);
-				req.flash("error", "Error creating account. Please contact us if the error persists.");
-				res.redirect('/portal/register');
-			} else if (result.rowsAffected == 0) { 
+		sqlReq.query(queryText).then(result => {
+			if (result.rowsAffected == 0) { 
 				req.flash("error", "Error creating account. Your email address in use.");
 				res.redirect('/portal/register');
 			} else {
+				req.flash("success", "Account created! Please log in.");
 				res.redirect('/portal/login');
 			}
+		}).catch(err => {
+			req.flash("error", "Error creating account. Please contact us if the error persists.");
+			res.redirect('/portal/register');
 		});
 	} catch {
+		req.flash("error", "Error creating account. Please contact us if the error persists.");
 		res.redirect('/portal/register');
 	}
-});*/
+});
+*/
 
 router.delete("/logout", middleware.checkAuthenticated, (req, res) => {
 	req.logOut();
