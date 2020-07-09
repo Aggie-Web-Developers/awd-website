@@ -5,6 +5,10 @@ $(function () {
 	setHeadElements();
 	$('#divNav').addClass('meetings-banner');
 
+	$('.alert').click(function() {
+		$(this).hide();
+	});
+
 	// navbar configuration
 	$(document).scroll(function () {
 		$("#navbar").toggleClass('scrolled', $(this).scrollTop() > $("#navbar").height());

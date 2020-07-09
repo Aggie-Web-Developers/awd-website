@@ -7,24 +7,28 @@ var express    = require("express"),
     tz     = require('moment-timezone');
 
 router.get('/', middleware.checkAuthenticated, function(req, res) {
-	var sqlReq = new sql.Request().query("SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.start_date ASC", (err, result) => {
-		if (err){
-			console.log(err)
-			req.flash("error", "Error loading events.");
-		} else {
-			res.render('portal/events/index', { events: result.recordset });
-		}
+	var sqlQuery = "SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.start_date ASC";
+	
+	var sqlReq = new sql.Request().query(sqlQuery).then(result => {
+		res.render('portal/events/index', { events: result.recordset });
+	}).catch(err => {
+		req.flash("error", "Error loading events.");
+		res.render('portal/events/index', { events: [] });
 	});
 });
 
 router.get('/edit/:id', middleware.checkAuthenticated, function(req, res) {
-	var sqlReq = new sql.Request().input("id", sql.Int, req.params.id).query("SELECT TOP 1 * FROM tbl_events WHERE id = @id", (err, result) => {
-		if (err){
+	var sqlReq = new sql.Request().input("id", sql.Int, req.params.id).query("SELECT TOP 1 * FROM tbl_events WHERE id = @id")
+		.then(result => {
+			if (result.recordset.length > 0) {
+				res.render('portal/events/edit', { event: result.recordset[0] });
+			} else {
+				req.flash("error", "Error event does not exist.");
+				res.redirect("/portal/events/");
+			}
+		}).catch(err => {
 			req.flash("error", "Error loading event.");
 			res.redirect("/portal/events/");
-		} else {
-			res.render('portal/events/edit', { event: result.recordset[0] });
-		}
 	});
 });
 
@@ -53,20 +57,23 @@ router.put('/edit/:id', middleware.checkAuthenticated, function(req, res) {
 	sqlReq.input("image_link", sql.NVarChar, req.body.txtImage);
 	sqlReq.input("creating_user_id", sql.Int, req.user.id);
 
-	var queryText = "UPDATE tbl_events SET " +
+	var sqlQuery = "UPDATE tbl_events SET " +
 					"name = @name, deleted = @deleted, type = @type, event_time = @event_time, summary= @summary, descr = @descr, start_date = @start_date, " + 
 					"end_date = @end_date, location= @location, image_link = @image_link, creating_user_id = @creating_user_id " +
 					"WHERE id = @id";
 
-	sqlReq.query(queryText, (err, result) => {
-		if (err || result.rowsAffected == 0){
-			console.log(err)
+	sqlReq.query(sqlQuery)
+		.then(result => {
+			if (result.rowsAffected == 0){
+				req.flash("error", "Error updating event.");
+				res.redirect("/portal/events/");
+			} else {
+				req.flash("success", "Success! Event updated.");
+				res.redirect("/portal/events/");
+			}
+		}).catch(err => {
 			req.flash("error", "Error updating event.");
 			res.redirect("/portal/events/");
-		} else {
-			req.flash("success", "Success! Event updated.");
-			res.redirect("/portal/events/");
-		}
 	});
 });
 
@@ -98,33 +105,34 @@ router.post('/new', middleware.checkAuthenticated, function(req, res) {
 	sqlReq.input("image_link", sql.NVarChar, req.body.txtImage);
 	sqlReq.input("creating_user_id", sql.Int, req.user.id);
 
-
-
-	var queryText = "INSERT INTO tbl_events " +
+	var sqlQuery = "INSERT INTO tbl_events " +
 					"(name, deleted, type, event_time, summary, descr, start_date, end_date, location, image_link, creating_user_id) values " +
 					"(@name, @deleted, @type, @event_time, @summary, @descr, @start_date, @end_date, @location, @image_link, @creating_user_id) ";
 
-	sqlReq.query(queryText, (err, result) => {
-		if (err || result.rowsAffected == 0){
-			console.log(err)
+	sqlReq.query(sqlQuery)
+		.then(result => {
+			if (result.rowsAffected == 0){
+				req.flash("error", "Error creating event.");
+				res.redirect("/portal/events/");
+			} else {
+				req.flash("success", "Success! Event created.");
+				res.redirect("/portal/events/");
+			}
+		}).catch(err => {
 			req.flash("error", "Error creating event.");
-		} else {
-			req.flash("success", "Success! Event created.");
 			res.redirect("/portal/events/");
-		}
 	});
 });
 
 router.get('/createEmail/:id', middleware.checkAuthenticated, function(req, res) {
-	var sqlReq = new sql.Request().input("id", sql.Int, req.params.id).query("SELECT TOP 1 * FROM tbl_events WHERE id = @id", (err, result) => {
-		if (err){
-			req.flash("error", "Error creating event email.");
-			res.redirect("/portal/events/");
-		} else {
+	var sqlReq = new sql.Request().input("id", sql.Int, req.params.id);
+
+	sqlReq.query("SELECT TOP 1 * FROM tbl_events WHERE id = @id")	
+		.then(result => {
 			var event = result.recordset[0],
 				eventTime = moment(event.event_time).tz('America/Chicago').format('dddd, MMMM Do, h:MM A z'),
 				body = '',
-				queryText = "INSERT INTO tbl_emails " +
+				sqlQuery = "INSERT INTO tbl_emails " +
 					        "(subject, recip_type, body, sending_user_id, event_id) values " +
 				     	    "(@subject, @recip_type, @body, @sending_user_id, @event_id) ";
 
@@ -141,18 +149,23 @@ router.get('/createEmail/:id', middleware.checkAuthenticated, function(req, res)
 			sqlReq.input("body", sql.NVarChar, body);
 			sqlReq.input("event_id", sql.Int, req.params.id);
 			sqlReq.input("sending_user_id", sql.Int, req.user.id);
-
-			sqlReq.query(queryText, (err, result) => {
-				if (err || result.rowsAffected == 0){
-					console.log(err)
+			
+			sqlReq.query(sqlQuery)
+				.then(result2 => {
+					if (result2.rowsAffected == 0){
+						req.flash("error", "Error creating event email.");
+						res.redirect("/portal/events/");
+					} else {
+						req.flash("success", "Success! Event email created.");
+						res.redirect("/portal/emails/");
+					}
+				}).catch(err2 => {
 					req.flash("error", "Error creating event email.");
 					res.redirect("/portal/events/");
-				} else {
-					req.flash("success", "Success! Event email created.");
-					res.redirect("/portal/emails/");
-				}
 			});
-		}
+		}).catch(err => {
+			req.flash("error", "Error creating event email.");
+			res.redirect("/portal/events/");
 	});
 });
 

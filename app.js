@@ -63,6 +63,21 @@ sql.connect(config).then(pool => {
 	console.log(err);
 });
 
+app.use(function(err, req, res, next) {
+	if (err && err == "Error: Deserialization error.") {
+        req.logout();
+		
+		if (req.originalUrl == "/portal/login") {
+            next();
+        } else {
+            req.flash("error", "Error: Please contact the System Administrator");
+            res.redirect("/portal/login");
+        }
+    } else {
+        next();
+    }
+});
+
 app.use(function(req, res, next){
 	// store current user
 	res.locals.user = req.user;
