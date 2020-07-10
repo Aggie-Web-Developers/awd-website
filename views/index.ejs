@@ -88,7 +88,7 @@
 
 			<h1 class="text-center">News and Events</h1>
 			
-			<% if (events) {%>
+			<% if (events && events.length > 0) {%>
 			<div class="row justify-content-center">
 				<% events.forEach(function(event) { %>
 					<div class="col-xs-12 col-md-6 col-lg-4 mt-4">
