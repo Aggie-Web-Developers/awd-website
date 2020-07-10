@@ -2,9 +2,13 @@ var aws       = require('aws-sdk'),
     path      = require('path'),
     sql       = require('mssql'),
     schedule  = require("node-schedule"),
+    dotenv    = require('dotenv').config(),
     mailerObj = {};
 
-aws.config.loadFromPath(path.join(__dirname, '../config.json'));
+aws.config.accessKeyId = process.env.accessKeyId;
+aws.config.secretAccessKey = process.env.secretAccessKey;
+aws.config.region = process.env.region;
+
 var ses = new aws.SES();
 
 mailerObj.sendContactUsEmailGen = async function(formData){

@@ -12,10 +12,11 @@ var express        = require('express'),
 	indexRoutes    = require("./routes/index"),
 	eventRoutes    = require("./routes/portal/events"),
 	portalRoutes   = require("./routes/portal/index"),
-	emailRoutes   = require("./routes/portal/emails"),
-	sponsorRoutes   = require("./routes/portal/sponsors"),
-	projectRoutes   = require("./routes/portal/projects"),
-	middleware     = require('./middleware');
+	emailRoutes    = require("./routes/portal/emails"),
+	sponsorRoutes  = require("./routes/portal/sponsors"),
+	projectRoutes  = require("./routes/portal/projects"),
+	middleware     = require('./middleware')
+	dotenv         = require('dotenv').config();
 
 initPassport(passport);
 
