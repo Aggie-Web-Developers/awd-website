@@ -6,8 +6,8 @@ $(function () {
 	$("#frm").validate({
         ignore: ":hidden",
         rules: {
-            email: { required: true, email: true },
-            password: { required: true },
+            email: { required: true, email: true, maxlength: 100 },
+            password: { required: true, maxlength: 50 },
         },
         messages: {
             email: { required: 'Please enter your email address.' },

@@ -4,9 +4,9 @@ $(function () {
    $("#frm").validate({
         ignore: ":hidden",
         rules: {
-            txtName: { required: true },
-            txtReferLink: { required: true },
-            txtImageLink: { required: true },
+            txtName: { required: true, maxlength: 50 },
+            txtReferLink: { required: true, maxlength: 100 },
+            txtImageLink: { required: true, maxlength: 500 },
             txtDate: { required: true }
         },
         errorPlacement: function (error, element) {
