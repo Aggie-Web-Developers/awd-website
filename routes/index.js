@@ -50,42 +50,45 @@ router.get('/general-meetings', function (req, res) {
 		'FROM tbl_events  e LEFT JOIN tbl_user u on u.id = e.creating_user_id ' +
 		"WHERE e.[start_date] <= GETUTCDATE() AND e.[end_date] >= GETUTCDATE() AND e.deleted = 0 AND e.type != 'News' ORDER BY e.event_time ASC";
 
-	var sqlReq = new sql.Request().query(sqlQuery, (err, result) => {
-		if (err) {
-			console.log(err);
-			req.flash('error', 'Error loading events.');
-		} else {
+	var sqlReq = new sql.Request()
+		.query(sqlQuery)
+		.then((result) => {
 			res.render('general-meetings', { events: result.recordset });
-		}
-	});
+		})
+		.catch((err) => {
+			req.flash('error', "Whoops! We couldn't grab meeting events.");
+			res.render('general-meetings', { events: null });
+		});
 });
 
 router.get('/projects', function (req, res) {
 	var sqlQuery =
 		'SELECT  * FROM tbl_projects WHERE deleted = 0 ORDER BY start_date ASC';
 
-	var sqlReq = new sql.Request().query(sqlQuery, (err, result) => {
-		if (err) {
-			console.log(err);
-			req.flash('error', 'Error loading projects.');
-		} else {
+	var sqlReq = new sql.Request()
+		.query(sqlQuery)
+		.then((result) => {
 			res.render('projects', { projects: result.recordset });
-		}
-	});
+		})
+		.catch((err) => {
+			req.flash('error', "Whoops! We couldn't grab our projects.");
+			res.render('projects', { projects: [] });
+		});
 });
 
 router.get('/our-sponsors', function (req, res) {
 	var sqlQuery =
 		'SELECT  * FROM tbl_sponsors WHERE deleted = 0 ORDER BY sponsor_date ASC';
 
-	var sqlReq = new sql.Request().query(sqlQuery, (err, result) => {
-		if (err) {
-			console.log(err);
-			req.flash('error', 'Error loading sponsors.');
-		} else {
+	var sqlReq = new sql.Request()
+		.query(sqlQuery)
+		.then((result) => {
 			res.render('our-sponsors', { sponsors: result.recordset });
-		}
-	});
+		})
+		.catch((err) => {
+			req.flash('error', 'Error loading sponsors.');
+			res.render('our-sponsors', { sponsors: null });
+		});
 });
 
 router.get('/about-us', function (req, res) {
@@ -105,42 +108,56 @@ router.post('/contact-us/general', function (req, res) {
 	sqlReq.input('subject', sql.NVarChar, req.body.ddlSubjectGen);
 	sqlReq.input('comments', sql.NVarChar, req.body.txtCommentsGen);
 
-	var queryText =
+	var sqlQuery =
 		'INSERT INTO tbl_contact_requests ' +
 		'(contact_name, email, subject, comments) values ' +
 		'(@contact_name, @email, @subject, @comments) ';
 
-	sqlReq.query(queryText, (err, result) => {
-		if (err) {
+	sqlReq
+		.query(sqlQuery)
+		.then(async (result) => {
+			if (req.body.chkNewsGen !== 'on') {
+				let emailStatus = await email.sendContactUsEmailGen(req.body);
+
+				if (emailStatus == 'Success') {
+					res
+						.status(200)
+						.send('Success! Our best owl is on the way with your message.');
+				} else {
+					res.status(400).send();
+				}
+			}
+		})
+		.catch((err) => {
 			res.status(400).send();
-		} else if (req.body.chkNewsGen !== 'on') {
-			email.sendContactUsEmailGen(req.body);
-			res
-				.status(200)
-				.send('Success! Our best owl is on the way with your message.');
-		}
-	});
+		});
 
 	if (req.body.chkNewsGen === 'on') {
 		sqlReq = new sql.Request();
 		sqlReq.input('email', sql.NVarChar, req.body.txtEmailGen);
 
-		var queryText =
+		sqlQuery =
 			'IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) ' +
 			'BEGIN ' +
 			'INSERT INTO tbl_email_list (email) values (@email) ' +
 			'END';
 
-		sqlReq.query(queryText, (err, result) => {
-			if (err) {
+		sqlReq
+			.query(sqlQuery)
+			.then(async (result) => {
+				let emailStatus = await email.sendContactUsEmailGen(req.body);
+
+				if (emailStatus == 'Success') {
+					res
+						.status(200)
+						.send('Success! Our best owl is on the way with your message.');
+				} else {
+					res.status(400).send();
+				}
+			})
+			.catch((err) => {
 				res.status(400).send();
-			} else {
-				email.sendContactUsEmailGen(req.body);
-				res
-					.status(200)
-					.send('Success! Our best owl is on the way with your message.');
-			}
-		});
+			});
 	}
 });
 
@@ -154,46 +171,56 @@ router.post('/contact-us/corporate', function (req, res) {
 	sqlReq.input('subject', sql.NVarChar, req.body.ddlSubjectCorp);
 	sqlReq.input('comments', sql.NVarChar, req.body.txtCommentsCorp);
 
-	var queryText =
+	var sqlQuery =
 		'INSERT INTO tbl_contact_requests ' +
 		'(contact_type, company, contact_name, email, subject, comments) values ' +
 		"('company', @company, @contact_name, @email, @subject, @comments) ";
 
-	sqlReq.query(queryText, (err, result) => {
-		if (err) {
-			res.status(400);
-			return;
-		} else if (req.body.chkNewsCorp !== 'on') {
-			email.sendContactUsEmailCorp(req.body);
-			res
-				.status(200)
-				.send('Success! Our best owl is on the way with your message.');
-			return;
-		}
-	});
+	sqlReq
+		.query(sqlQuery)
+		.then(async (result) => {
+			if (req.body.chkNewsCorp !== 'on') {
+				let emailStatus = await email.sendContactUsEmailCorp(req.body);
+
+				if (emailStatus == 'Success') {
+					res
+						.status(200)
+						.send('Success! Our best owl is on the way with your message.');
+				} else {
+					res.status(400).send();
+				}
+			}
+		})
+		.catch((err) => {
+			res.status(400).send();
+		});
 
 	if (req.body.chkNewsCorp === 'on') {
 		sqlReq = new sql.Request();
 		sqlReq.input('email', sql.NVarChar, req.body.txtEmailCorp);
 
-		var queryText =
+		sqlQuery =
 			'IF NOT EXISTS (SELECT * FROM tbl_corporate_email_list WHERE email = @email) ' +
 			'BEGIN ' +
 			'INSERT INTO tbl_corporate_email_list (email) values (@email) ' +
 			'END';
 
-		sqlReq.query(queryText, (err, result) => {
-			if (err) {
-				res.status(400);
-				return;
-			} else {
-				email.sendContactUsEmailCorp(req.body);
-				res
-					.status(200)
-					.send('Success! Our best owl is on the way with your message.');
-				return;
-			}
-		});
+		sqlReq
+			.query(sqlQuery)
+			.then(async (result) => {
+				let emailStatus = await email.sendContactUsEmailCorp(req.body);
+
+				if (emailStatus == 'Success') {
+					res
+						.status(200)
+						.send('Success! Our best owl is on the way with your message.');
+				} else {
+					res.status(400).send();
+				}
+			})
+			.catch((err) => {
+				res.status(400).send();
+			});
 	}
 });
 
@@ -202,34 +229,36 @@ router.get('/unsubscribe/general/:id', function (req, res) {
 
 	sqlReq.input('unsubscribe_guid', sql.NVarChar, req.params.id);
 
-	var queryText =
+	var sqlQuery =
 		'UPDATE tbl_email_list SET deleted = 1 WHERE unsubscribe_guid = @unsubscribe_guid';
 
-	sqlReq.query(queryText, (err, result) => {
-		if (err) {
+	sqlReq
+		.query(sqlQuery)
+		.then((result) => {
+			if (result.rowsAffected != 0) {
+				res
+					.status(200)
+					.send(
+						"Unsubscribed successfully. Sorry to see you go! <a href='/resubscribe/general/" +
+							req.params.id +
+							"'>Resubscribe?</a>"
+					);
+				return;
+			} else {
+				res
+					.status(400)
+					.send(
+						'We were unable to process your request, please contact us to resolve this issue.'
+					);
+			}
+		})
+		.catch((err) => {
 			res
 				.status(400)
 				.send(
 					'We were unable to process your request, please contact us to resolve this issue.'
 				);
-			return;
-		} else if (result.rowsAffected != 0) {
-			res
-				.status(200)
-				.send(
-					"Unsubscribed successfully. Sorry to see you go! <a href='/resubscribe/general/" +
-						req.params.id +
-						"'>Resubscribe?</a>"
-				);
-			return;
-		} else {
-			res
-				.status(400)
-				.send(
-					'We were unable to process your request, please contact us to resolve this issue.'
-				);
-		}
-	});
+		});
 });
 
 router.get('/resubscribe/general/:id', function (req, res) {
@@ -237,28 +266,30 @@ router.get('/resubscribe/general/:id', function (req, res) {
 
 	sqlReq.input('unsubscribe_guid', sql.NVarChar, req.params.id);
 
-	var queryText =
+	var sqlQuery =
 		'UPDATE tbl_email_list SET deleted = 0 WHERE unsubscribe_guid = @unsubscribe_guid';
 
-	sqlReq.query(queryText, (err, result) => {
-		if (err) {
+	sqlReq
+		.query(sqlQuery)
+		.then((result) => {
+			if (result.rowsAffected != 0) {
+				res.status(200).send('Resubscribed successfully!');
+				return;
+			} else {
+				res
+					.status(400)
+					.send(
+						'We were unable to process your request, please contact us to resolve this issue.'
+					);
+			}
+		})
+		.catch((err) => {
 			res
 				.status(400)
 				.send(
 					'We were unable to process your request, please contact us to resolve this issue.'
 				);
-			return;
-		} else if (result.rowsAffected != 0) {
-			res.status(200).send('Resubscribed successfully!');
-			return;
-		} else {
-			res
-				.status(400)
-				.send(
-					'We were unable to process your request, please contact us to resolve this issue.'
-				);
-		}
-	});
+		});
 });
 
 router.get('/unsubscribe/corporate/:id', function (req, res) {
@@ -266,34 +297,36 @@ router.get('/unsubscribe/corporate/:id', function (req, res) {
 
 	sqlReq.input('unsubscribe_guid', sql.NVarChar, req.params.id);
 
-	var queryText =
+	var sqlQuery =
 		'UPDATE tbl_corporate_email_list SET deleted = 1 WHERE unsubscribe_guid = @unsubscribe_guid';
 
-	sqlReq.query(queryText, (err, result) => {
-		if (err) {
+	sqlReq
+		.query(sqlQuery)
+		.then((result) => {
+			if (result.rowsAffected != 0) {
+				res
+					.status(200)
+					.send(
+						"Unsubscribed successfully. Sorry to see you go! <a href='/resubscribe/corporate/" +
+							req.params.id +
+							"'>Resubscribe?</a>"
+					);
+				return;
+			} else {
+				res
+					.status(400)
+					.send(
+						'We were unable to process your request, please contact us to resolve this issue.'
+					);
+			}
+		})
+		.catch((err) => {
 			res
 				.status(400)
 				.send(
 					'We were unable to process your request, please contact us to resolve this issue.'
 				);
-			return;
-		} else if (result.rowsAffected != 0) {
-			res
-				.status(200)
-				.send(
-					"Unsubscribed successfully. Sorry to see you go! <a href='/resubscribe/corporate/" +
-						req.params.id +
-						"'>Resubscribe?</a>"
-				);
-			return;
-		} else {
-			res
-				.status(400)
-				.send(
-					'We were unable to process your request, please contact us to resolve this issue.'
-				);
-		}
-	});
+		});
 });
 
 router.get('/resubscribe/corporate/:id', function (req, res) {
@@ -301,28 +334,30 @@ router.get('/resubscribe/corporate/:id', function (req, res) {
 
 	sqlReq.input('unsubscribe_guid', sql.NVarChar, req.params.id);
 
-	var queryText =
+	var sqlQuery =
 		'UPDATE tbl_corporate_email_list SET deleted = 0 WHERE unsubscribe_guid = @unsubscribe_guid';
 
-	sqlReq.query(queryText, (err, result) => {
-		if (err) {
+	sqlReq
+		.query(sqlQuery)
+		.then((result) => {
+			if (result.rowsAffected != 0) {
+				res.status(200).send('Resubscribed successfully!');
+				return;
+			} else {
+				res
+					.status(400)
+					.send(
+						'We were unable to process your request, please contact us to resolve this issue.'
+					);
+			}
+		})
+		.catch((err) => {
 			res
 				.status(400)
 				.send(
 					'We were unable to process your request, please contact us to resolve this issue.'
 				);
-			return;
-		} else if (result.rowsAffected != 0) {
-			res.status(200).send('Resubscribed successfully!');
-			return;
-		} else {
-			res
-				.status(400)
-				.send(
-					'We were unable to process your request, please contact us to resolve this issue.'
-				);
-		}
-	});
+		});
 });
 
 router.get('/terms-and-conditions', function (req, res) {

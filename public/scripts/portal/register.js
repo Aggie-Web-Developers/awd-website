@@ -41,6 +41,39 @@ $(function () {
 		},
 	});
 
+	$('#frm').validate({
+		rules: {
+			txtFirstName: { required: true, maxlength: 100 },
+			txtLastName: { required: true, maxlength: 100 },
+			txtEmailAddress: { required: true, email: true, maxlength: 100 },
+			chkTerms: { required: true },
+			txtPassword: { required: true, strongpassword: true, maxlength: 50 },
+			txtConfirmPassword: {
+				required: true,
+				equalTo: '#txtPassword',
+				maxlength: 50,
+			},
+		},
+		messages: {
+			txtPassword: {
+				required: ' Please enter a password.',
+				strongpassword:
+					'Your password must be 12-50 characters, a character of each case, a number, and a special character.',
+			},
+			txtConfirmPassword: {
+				required: ' Please confirm your password.',
+				equalTo: ' Your passwords do not match.',
+			},
+			txtFirstName: { required: 'Please enter your first name.' },
+			txtLastName: { required: 'Please enter your last name.' },
+			txtEmailAddress: { required: 'Please enter your email address.' },
+			chkTerms: { required: 'You must agree to our terms and conditions.' },
+		},
+		errorPlacement: function (error, element) {
+			error.appendTo(element.closest('.form-group'));
+		},
+	});
+
 	$('.alert').click(function () {
 		$(this).hide();
 	});

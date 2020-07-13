@@ -27,7 +27,9 @@
 		"object-curly-spacing": "off",
 		"array-bracket-spacing": "off",
 		"no-invalid-this": 0,
-		"no-var": "off"
+		"no-var": "off",
+		"no-unused-vars": "off",
+		"prefer-const": "warn"
 	},
 	"globals": {
 		"io": true,

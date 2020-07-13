@@ -4,7 +4,10 @@ const sql = require('mssql');
 const schedule = require('node-schedule');
 const mailerObj = {};
 
-aws.config.loadFromPath(path.join(__dirname, '../config.json'));
+aws.config.accessKeyId = process.env.accessKeyId;
+aws.config.secretAccessKey = process.env.secretAccessKey;
+aws.config.region = process.env.region;
+
 var ses = new aws.SES();
 
 mailerObj.sendContactUsEmailGen = function (formData) {
@@ -222,7 +225,7 @@ function getCorporateRecipeints() {
 				if (!err) {
 					resolve(result.recordset);
 				} else {
-					reject('Error getting recipients.');
+					resolve('Error');
 				}
 			}
 		);

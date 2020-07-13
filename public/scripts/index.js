@@ -6,6 +6,10 @@ $(function () {
 	$('#divNav').removeClass('page-banner');
 	$('#frm').removeClass('d-none');
 
+	$('.alert').click(function () {
+		$(this).hide();
+	});
+
 	// navbar configuration
 	$(document).scroll(function () {
 		$('#navbar').toggleClass(
@@ -36,7 +40,7 @@ $(function () {
 		})
 		.validate({
 			rules: {
-				txtEmail: { required: true, email: true },
+				txtEmail: { required: true, email: true, maxlength: 100 },
 			},
 			messages: {
 				txtEmail: {

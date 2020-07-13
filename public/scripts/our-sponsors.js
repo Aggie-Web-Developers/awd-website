@@ -4,6 +4,10 @@ $(function () {
 	setHeadElements();
 	$('#divNav').addClass('sponsors-banner');
 
+	$('.alert').click(function () {
+		$(this).hide();
+	});
+
 	// navbar configuration
 	$(document).scroll(function () {
 		$('#navbar').toggleClass(

@@ -1,5 +1,7 @@
 <%- include('partials/header') %> <% if (messages.error) { %>
 <div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if (messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
 <% } %>
 
 <div class="container">

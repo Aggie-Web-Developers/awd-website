@@ -63,6 +63,13 @@
 			</div>
 		</div>
 
+		<% if (messages.error) { %>
+			<div class='alert alert-danger' role='alert'><%= messages.error %></div>
+		<% } %>
+		<% if (messages.success) { %>
+			<div class='alert alert-success' role='alert'><%= messages.success %></div>
+		<% } %>
+
 		<div class="container my-5">
 
 			<h1 class="text-center">Current Projects</h1>
