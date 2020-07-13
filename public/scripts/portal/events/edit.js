@@ -52,17 +52,17 @@ $(function () {
     $("#frm").validate({
         ignore: ":hidden",
         rules: {
-            txtEventName: { required: true },
-            txtEventSubTitle: { required: true },
-            txtDescr: { required: true },
-            txtImage: { required: true },
-            txtDate: { required: true},
-            txtLocation: { required: true},
-            txtStartDate: { required: true},
-            txtEndDate: { required: true},
-            txtLocation: { required: true},
-            txtTime: { required: true},
-            ddlEventType: { required: true}
+            txtEventName: { required: true, maxlength: 50 },
+            txtEventSubTitle: { required: true, maxlength: 50 },
+            txtDescr: { required: true, maxlength: 250 },
+            txtImage: { required: true, maxlength: 500 },
+            txtDate: { required: true },
+            txtLocation: { required: true },
+            txtStartDate: { required: true },
+            txtEndDate: { required: true },
+            txtLocation: { required: true, maxlength: 25 },
+            txtTime: { required: true },
+            ddlEventType: { required: true }
         },
         errorPlacement: function (error, element) {
             error.appendTo(element.closest('.form-group'));

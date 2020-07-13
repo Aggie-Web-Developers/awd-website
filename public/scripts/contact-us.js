@@ -60,10 +60,10 @@ $(function () {
 	}).validate({
         ignore: ":hidden",
         rules: {
-            txtNameGen: { required: true },
-            txtEmailGen: { required: true, email: true },
+            txtNameGen: { required: true, maxlength: 100 },
+            txtEmailGen: { required: true, email: true, maxlength: 100 },
             ddlSubjectGen: { required: true },
-            txtCommentsGen: { required: true },
+            txtCommentsGen: { required: true, maxlength: 2000 },
             chkTermsGen: { required: true },
         },
         messages: {
@@ -106,11 +106,11 @@ $(function () {
 	}).validate({
         ignore: ":hidden",
         rules: {
-            txtNameCorp: { required: true },
-            txtCorp: { required: true },
-            txtEmailCorp: { required: true, email: true },
+            txtNameCorp: { required: true, maxlength: 100 },
+            txtCorp: { required: true, maxlength: 100 },
+            txtEmailCorp: { required: true, email: true, maxlength: 100 },
             ddlSubjectCorp: { required: true },
-            txtCommentsCorp: { required: true },
+            txtCommentsCorp: { required: true, maxlength: 2000 },
             chkTermsCorp: { required: true },
         },
         messages: {

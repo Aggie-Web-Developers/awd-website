@@ -8,17 +8,17 @@ $(function () {
 
     $("#frm").validate({
         rules: {
-            txtFirstName: { required: true },
-            txtLastName: { required: true },
-            txtEmailAddress: { required: true, email: true },
+            txtFirstName: { required: true, maxlength: 100 },
+            txtLastName: { required: true, maxlength: 100 },
+            txtEmailAddress: { required: true, email: true, maxlength: 100 },
             chkTerms: { required: true },
-            txtPassword: { required: true, strongpassword: true },
-            txtConfirmPassword: { required: true, equalTo: "#txtPassword" } 
+            txtPassword: { required: true, strongpassword: true, maxlength: 50 },
+            txtConfirmPassword: { required: true, equalTo: "#txtPassword", maxlength: 50 } 
         },
         messages: {
             txtPassword: {
                 required: ' Please enter a password.',
-                strongpassword: 'Your password must include 12 characters, a character of each case, a number, and a special character.',
+                strongpassword: 'Your password must be 12-50 characters, a character of each case, a number, and a special character.',
             },
             txtConfirmPassword: {
                 required: ' Please confirm your password.',

@@ -4,13 +4,13 @@ $(function () {
     $("#frm").validate({
         ignore: ":hidden",
         rules: {
-            txtName: { required: true },
-            txtWork: { required: true },
-            txtStatus: { required: true },
-            txtManager: { required: true },
-            txtTestLink: { required: true },
-            txtGithub: { required: true },
-            txtImageLink: { required: true },
+            txtName: { required: true, maxlength: 50 },
+            txtWork: { required: true, maxlength: 50 },
+            txtStatus: { required: true, maxlength: 25 },
+            txtManager: { required: true, maxlength: 50 },
+            txtTestLink: { required: true, maxlength: 150  },
+            txtGithub: { required: true, maxlength: 150  },
+            txtImageLink: { required: true, maxlength: 500 },
             txtDate: { required: true }
         },
         errorPlacement: function (error, element) {

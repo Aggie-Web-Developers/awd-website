@@ -32,7 +32,7 @@ $(function () {
     	e.preventDefault();
 	}).validate({
         rules: {
-            txtEmail: { required: true, email: true }
+            txtEmail: { required: true, email: true, maxlength: 100 }
         },
         messages: {
             txtEmail: { 

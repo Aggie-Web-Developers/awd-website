@@ -6,8 +6,8 @@ $(function () {
     $("#frm").validate({
         ignore: ":hidden",
         rules: {
-            txtSubject: { required: true },
-            txtBody: { required: true },
+            txtSubject: { required: true, maxlength: 50 },
+            txtBody: { required: true, maxlength: 5000 },
             ddlEmailType: { required: true }
         },
         errorPlacement: function (error, element) {
