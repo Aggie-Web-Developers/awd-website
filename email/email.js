@@ -10,7 +10,7 @@ aws.config.region = process.env.region;
 
 var ses = new aws.SES();
 
-mailerObj.sendContactUsEmailGen = function (formData) {
+mailerObj.sendContactUsEmailGen = async function (formData) {
 	var content = '<p><b>Name:</b> ' + formData.txtNameGen + '</p>';
 	content += '<p><b>Email:</b> ' + formData.txtEmailGen + '</p>';
 	content += '<p><b>Subject:</b> ' + formData.ddlSubjectGen + '</p>';
@@ -36,14 +36,18 @@ mailerObj.sendContactUsEmailGen = function (formData) {
 		.sendTemplatedEmail(params)
 		.promise();
 
-	sendPromise
-		.then(function (data) {})
-		.catch(function (err) {
-			console.error(err, err.stack);
-		});
+	return new Promise((resolve, reject) => {
+		sendPromise
+			.then(async function (data) {
+				resolve('Success');
+			})
+			.catch(function (err) {
+				resolve('Error');
+			});
+	});
 };
 
-mailerObj.sendContactUsEmailCorp = function (formData) {
+mailerObj.sendContactUsEmailCorp = async function (formData) {
 	var content = '<p><b>Name:</b> ' + formData.txtNameCorp + '</p>';
 	content += '<p><b>Email:</b> ' + formData.txtEmailCorp + '</p>';
 	content += '<p><b>Company:</b> ' + formData.txtCorp + '</p>';
@@ -70,20 +74,36 @@ mailerObj.sendContactUsEmailCorp = function (formData) {
 		.sendTemplatedEmail(params)
 		.promise();
 
-	sendPromise
-		.then(function (data) {})
-		.catch(function (err) {
-			console.error(err, err.stack);
-		});
+	return new Promise((resolve, reject) => {
+		sendPromise
+			.then(async function (data) {
+				resolve('Success');
+			})
+			.catch(function (err) {
+				resolve('Error');
+			});
+	});
 };
 
 mailerObj.sendAdminEmail = async function (id) {
-	const email = await getEmailById(id);
+	let email = await getEmailById(id);
 	var destinations = [];
 
+	if (email == 'Error') {
+		return new Promise((resolve, reject) => {
+			resolve('Email failed to send. Error retrieving email.');
+		});
+	}
+
 	if (email.recip_type == 'All') {
-		const generalRecipeints = await getGeneralRecipeints();
-		const corporateRecipeints = await getCorporateRecipeints();
+		let generalRecipeints = await getGeneralRecipeints();
+		let corporateRecipeints = await getCorporateRecipeints();
+
+		if (generalRecipeints == 'Error' || corporateRecipeints == 'Error') {
+			return new Promise((resolve, reject) => {
+				resolve('Email failed to send. Error retrieving email.');
+			});
+		}
 
 		generalRecipeints.forEach(function (recip) {
 			var destination = {};
@@ -109,7 +129,13 @@ mailerObj.sendAdminEmail = async function (id) {
 			destinations.push(destination);
 		});
 	} else if (email.recip_type == 'Corporate') {
-		const corporateRecipeints = await getCorporateRecipeints();
+		let corporateRecipeints = await getCorporateRecipeints();
+
+		if (corporateRecipeints == 'Error') {
+			return new Promise((resolve, reject) => {
+				resolve('Email failed to send. Error retrieving email.');
+			});
+		}
 
 		corporateRecipeints.forEach(function (recip) {
 			var destination = {};
@@ -123,7 +149,13 @@ mailerObj.sendAdminEmail = async function (id) {
 			destinations.push(destination);
 		});
 	} else if (email.recip_type == 'General') {
-		const generalRecipeints = await getGeneralRecipeints();
+		let generalRecipeints = await getGeneralRecipeints();
+
+		if (generalRecipeints == 'Error') {
+			return new Promise((resolve, reject) => {
+				resolve('Email failed to send. Error retrieving email.');
+			});
+		}
 
 		generalRecipeints.forEach(function (recip) {
 			var destination = {};
@@ -160,11 +192,11 @@ mailerObj.sendAdminEmail = async function (id) {
 	return new Promise((resolve, reject) => {
 		sendPromise
 			.then(async function (data) {
-				const emailSentStatus = await markEmailSent(email.id);
+				let emailSentStatus = await markEmailSent(email.id);
 				resolve(emailSentStatus);
 			})
 			.catch(function (err) {
-				reject(err);
+				resolve('Email failed to send');
 			});
 	});
 };
@@ -172,22 +204,22 @@ mailerObj.sendAdminEmail = async function (id) {
 mailerObj.listenForScheduledEmails = function () {
 	// listen for emails to be sent every hour at the fifth minute
 	schedule.scheduleJob('5 * * * *', function () {
-		var sqlReq = new sql.Request().query(
-			'SELECT id FROM tbl_emails WHERE send_date <= GETUTCDATE() AND sent_date is NULL AND deleted = 0',
-			(err, result) => {
-				if (err) {
-					console.log('Error sending scheduled emails.');
-				} else {
-					result.recordset.forEach(async function (result) {
-						const emailStatus = await mailerObj.sendAdminEmail(result.id);
+		var sqlReq = new sql.Request()
+			.query(
+				'SELECT id FROM tbl_emails WHERE send_date <= GETUTCDATE() AND sent_date is NULL AND deleted = 0'
+			)
+			.then((result) => {
+				result.recordset.forEach(async function (result) {
+					let emailStatus = await mailerObj.sendAdminEmail(result.id);
 
-						if (emailStatus != 'Success') {
-							console.log('Error sending schedule email: ID: ' + result.id);
-						}
-					});
-				}
-			}
-		);
+					if (emailStatus != 'Success') {
+						console.log('Error sending schedule email: ID: ' + result.id);
+					}
+				});
+			})
+			.catch((err) => {
+				console.log('Error sending scheduled emails.');
+			});
 	});
 };
 
@@ -195,40 +227,46 @@ function getEmailById(id) {
 	return new Promise((resolve, reject) => {
 		var sqlReq = new sql.Request().input('id', sql.Int, id);
 
-		sqlReq.query(
-			'SELECT TOP 1 * FROM tbl_emails WHERE id = @id AND sent_date is NULL',
-			(err, result) => {
-				if (err) reject(err);
+		sqlReq
+			.query(
+				'SELECT TOP 1 * FROM tbl_emails WHERE id = @id AND sent_date is NULL'
+			)
+			.then((result) => {
 				resolve(result.recordset[0]);
-			}
-		);
+			})
+			.catch((err) => {
+				resolve('Error');
+			});
 	});
 }
 
 function getGeneralRecipeints() {
 	return new Promise((resolve, reject) => {
-		var sqlReq = new sql.Request().query(
-			'SELECT email, unsubscribe_guid FROM tbl_email_list WHERE deleted = 0',
-			(err, result) => {
-				if (err) reject(err);
+		var sqlReq = new sql.Request()
+			.query(
+				'SELECT email, unsubscribe_guid FROM tbl_email_list WHERE deleted = 0'
+			)
+			.then((result) => {
 				resolve(result.recordset);
-			}
-		);
+			})
+			.catch((err) => {
+				resolve('Error');
+			});
 	});
 }
 
 function getCorporateRecipeints() {
 	return new Promise((resolve, reject) => {
-		var sqlReq = new sql.Request().query(
-			'SELECT email, unsubscribe_guid FROM tbl_corporate_email_list WHERE deleted = 0',
-			(err, result) => {
-				if (!err) {
-					resolve(result.recordset);
-				} else {
-					resolve('Error');
-				}
-			}
-		);
+		var sqlReq = new sql.Request()
+			.query(
+				'SELECT email, unsubscribe_guid FROM tbl_corporate_email_list WHERE deleted = 0'
+			)
+			.then((result) => {
+				resolve(result.recordset);
+			})
+			.catch((err) => {
+				resolve('Error');
+			});
 	});
 }
 
@@ -236,13 +274,13 @@ function markEmailSent(id) {
 	return new Promise((resolve, reject) => {
 		var sqlReq = new sql.Request()
 			.input('id', sql.Int, id)
-			.query(
-				'UPDATE tbl_emails SET sent_date = GETUTCDATE() WHERE id = @id',
-				(err, result) => {
-					if (err) reject(err);
-					resolve('Success');
-				}
-			);
+			.query('UPDATE tbl_emails SET sent_date = GETUTCDATE() WHERE id = @id')
+			.then((result) => {
+				resolve('Success');
+			})
+			.catch((err) => {
+				resolve('Error marking email as sent.');
+			});
 	});
 }
 

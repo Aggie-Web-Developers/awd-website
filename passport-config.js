@@ -41,8 +41,6 @@ function init(passport) {
 			}
 
 			done(null, user);
-
-			done(null, user);
 		} catch (e) {
 			done(e);
 		}

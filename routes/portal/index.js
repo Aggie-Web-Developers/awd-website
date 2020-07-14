@@ -24,53 +24,57 @@ router.post(
 	})
 );
 
-/* router.get('/register', middleware.checkNotAuthenticated, function(req, res) {
+router.get('/register', middleware.checkNotAuthenticated, function (req, res) {
 	res.render('portal/register');
 });
 
-router.post('/register', middleware.checkNotAuthenticated, async function(req, res) {
+/* router.post('/register', middleware.checkNotAuthenticated, async function (
+	req,
+	res
+) {
 	try {
 		const hashedPassword = await bcrypt.hash(req.body.txtPassword, 10);
-
 		var sqlReq = new sql.Request();
-
-		sqlReq.input("first_name", sql.NVarChar, req.body.txtFirstName);
-		sqlReq.input("last_name", sql.NVarChar, req.body.txtLastName);
-		sqlReq.input("email", sql.NVarChar, req.body.txtEmailAddress);
-		sqlReq.input("password_hash", sql.NVarChar, hashedPassword);
-		sqlReq.input("receiveNewsletter", sql.Bit, req.body.chkNews === "on");
-
-
-		var queryText = "IF NOT EXISTS (SELECT * FROM tbl_user WHERE email = @email) " +
-						"BEGIN " +
-						"INSERT INTO tbl_user (first_name, last_name, email, password_hash, receiveNewsletter) " +
-						"values (@first_name, @last_name, @email, @password_hash, @receiveNewsletter) " +
-						"END";
-
-		sqlReq.query(queryText, (err, result) => {
-			if (err){
-				console.log(err);
-				req.flash("error", "Error creating account. Please contact us if the error persists.");
+		sqlReq.input('first_name', sql.NVarChar, req.body.txtFirstName);
+		sqlReq.input('last_name', sql.NVarChar, req.body.txtLastName);
+		sqlReq.input('email', sql.NVarChar, req.body.txtEmailAddress);
+		sqlReq.input('password_hash', sql.NVarChar, hashedPassword);
+		sqlReq.input('receiveNewsletter', sql.Bit, req.body.chkNews === 'on');
+		var queryText =
+			'IF NOT EXISTS (SELECT * FROM tbl_user WHERE email = @email) ' +
+			'BEGIN ' +
+			'INSERT INTO tbl_user (first_name, last_name, email, password_hash, receiveNewsletter) ' +
+			'values (@first_name, @last_name, @email, @password_hash, @receiveNewsletter) ' +
+			'END';
+		sqlReq
+			.query(queryText)
+			.then((result) => {
+				if (result.rowsAffected == 0) {
+					req.flash(
+						'error',
+						'Error creating account. Your email address in use.'
+					);
+					res.redirect('/portal/register');
+				} else {
+					req.flash('success', 'Account created! Please log in.');
+					res.redirect('/portal/login');
+				}
+			})
+			.catch((err) => {
+				req.flash(
+					'error',
+					'Error creating account. Please contact us if the error persists.'
+				);
 				res.redirect('/portal/register');
-			} else if (result.rowsAffected == 0) {
-		sqlReq.query(queryText).then(result => {
-			if (result.rowsAffected == 0) {
-				req.flash("error", "Error creating account. Your email address in use.");
-				res.redirect('/portal/register');
-			} else {
-				req.flash("success", "Account created! Please log in.");
-				res.redirect('/portal/login');
-			}
-		}).catch(err => {
-			req.flash("error", "Error creating account. Please contact us if the error persists.");
-			res.redirect('/portal/register');
-		});
+			});
 	} catch {
-		req.flash("error", "Error creating account. Please contact us if the error persists.");
+		req.flash(
+			'error',
+			'Error creating account. Please contact us if the error persists.'
+		);
 		res.redirect('/portal/register');
 	}
-});
-*/
+}); */
 
 router.delete('/logout', middleware.checkAuthenticated, (req, res) => {
 	req.logOut();

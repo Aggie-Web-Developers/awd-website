@@ -7,29 +7,35 @@ const moment = require('moment');
 const tz = require('moment-timezone');
 
 router.get('/', middleware.checkAuthenticated, function (req, res) {
-	var sqlReq = new sql.Request().query(
-		'SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.start_date ASC',
-		(err, result) => {
-			if (err) {
-				console.log(err);
-				req.flash('error', 'Error loading events.');
-			} else {
-				res.render('portal/events/index', { events: result.recordset });
-			}
-		}
-	);
+	var sqlQuery =
+		'SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.start_date ASC';
+
+	var sqlReq = new sql.Request()
+		.query(sqlQuery)
+		.then((result) => {
+			res.render('portal/events/index', { events: result.recordset });
+		})
+		.catch((err) => {
+			req.flash('error', 'Error loading events.');
+			res.render('portal/events/index', { events: [] });
+		});
 });
 
 router.get('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 	var sqlReq = new sql.Request()
 		.input('id', sql.Int, req.params.id)
-		.query('SELECT TOP 1 * FROM tbl_events WHERE id = @id', (err, result) => {
-			if (err) {
-				req.flash('error', 'Error loading event.');
-				res.redirect('/portal/events/');
-			} else {
+		.query('SELECT TOP 1 * FROM tbl_events WHERE id = @id')
+		.then((result) => {
+			if (result.recordset.length > 0) {
 				res.render('portal/events/edit', { event: result.recordset[0] });
+			} else {
+				req.flash('error', 'Error event does not exist.');
+				res.redirect('/portal/events/');
 			}
+		})
+		.catch((err) => {
+			req.flash('error', 'Error loading event.');
+			res.redirect('/portal/events/');
 		});
 });
 

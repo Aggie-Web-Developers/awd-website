@@ -12,14 +12,15 @@ router.get('/', function (req, res) {
 		'FROM tbl_events  e LEFT JOIN tbl_user u on u.id = e.creating_user_id ' +
 		'WHERE e.[start_date] <= GETUTCDATE() AND e.[end_date] >= GETUTCDATE() AND e.deleted = 0 ORDER BY e.event_time ASC';
 
-	new sql.Request().query(sqlQuery, (err, result) => {
-		if (err) {
-			console.log(err);
-			req.flash('error', 'Error loading events.');
-		} else {
+	var sqlReq = new sql.Request()
+		.query(sqlQuery)
+		.then((result) => {
 			res.render('index', { events: result.recordset });
-		}
-	});
+		})
+		.catch((err) => {
+			req.flash('error', "Whoops! We couldn't grab the news or events.");
+			res.render('index', { events: null });
+		});
 });
 
 // handle email list signup from index page
@@ -29,19 +30,20 @@ router.post('/', function (req, res) {
 
 	sqlReq.input('email', sql.NVarChar, email);
 
-	var queryText =
+	var sqlQuery =
 		'IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) ' +
 		'BEGIN ' +
 		'INSERT INTO tbl_email_list (email) values (@email) ' +
 		'END';
 
-	sqlReq.query(queryText, (err, result) => {
-		if (err) {
-			res.status(400).send();
-		} else if (req.body.chkNewsGen !== 'on') {
+	sqlReq
+		.query(sqlQuery)
+		.then((result) => {
 			res.status(200).send('Success! Our best owl has delivered your request.');
-		}
-	});
+		})
+		.catch((err) => {
+			res.status(400).send();
+		});
 });
 
 router.get('/general-meetings', function (req, res) {
