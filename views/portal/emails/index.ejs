@@ -1,82 +1,91 @@
-<%- include('../partials/header') %>
-	<% if (messages.error) { %>
-	  <div class='alert alert-danger' role='alert'><%= messages.error %></div>
-	<% } %>
-	<% if (messages.success) { %>
-	  <div class='alert alert-success' role='alert'><%= messages.success %></div>
-	<% } %>
+<%- include('../partials/header') %> <% if (messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if (messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
+<% } %>
 
-	<div class="container">
-		<div class="row justify-content-around align-items-center mt-5">
-			<div class="col-5">
-				<h1>Manage Emails</h1>
-			</div>
-			<div class="col-7 text-right">
-				<a href="/portal/emails/new" class="btn btn-contact btn-contact-slim">New</a>
+<div class="container">
+	<div class="row justify-content-around align-items-center mt-5">
+		<div class="col-5">
+			<h1>Manage Emails</h1>
+		</div>
+		<div class="col-7 text-right">
+			<a href="/portal/emails/new" class="btn btn-contact btn-contact-slim"
+				>New</a
+			>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-12">
+			<div class="container table-container mt-3">
+				<table id="tblEmails" class="display">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Subject</th>
+							<th>Recipients</th>
+							<th>Event</th>
+							<th>Create Date</th>
+							<th>Send Date</th>
+							<th>Status</th>
+							<th class="text-center">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% emails.forEach(function(email) {%>
+						<tr>
+							<td></td>
+							<td>
+								<a href="/portal/emails/edit/<%= email.id%>"
+									><%= email.subject %></a
+								>
+							</td>
+							<td><%= email.recip_type %></td>
+							<td><%= email.event_name %></td>
+
+							<% if (email.create_date) { var email_time = new
+							Date(email.create_date); %>
+							<td>
+								<%= email_time.toLocaleTimeString([], { month: 'long', day:
+								'numeric', hour: '2-digit', minute:'2-digit' }) %>
+							</td>
+							<% } else { %>
+							<td></td>
+							<% }%> <% if (email.send_date) { %>
+							<td>
+								<%= email.send_date.toLocaleTimeString([], { month: 'long', day:
+								'numeric', hour: '2-digit', minute:'2-digit' }) %>
+							</td>
+							<% } else { %>
+							<td></td>
+							<% }%> <% if (email.deleted == 1) { %>
+							<td class="red-danger">Deleted</td>
+							<% } else if (email.sent_date){ %>
+							<td>Sent</td>
+							<% } else { %>
+							<td>Not Sent</td>
+							<% } %> <% if (!email.sent_date && email.deleted == 0){ %>
+							<td class="text-center">
+								<a href="/portal/emails/send/<%= email.id%>"
+									><i
+										class="fas fa-paper-plane main-purple font-weight-bold"
+										title="Send Email"
+									></i
+								></a>
+							</td>
+							<% } else { %>
+							<td></td>
+							<% } %>
+						</tr>
+						<% });%>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-12">
-				<div class="container table-container mt-3">
-					<table id="tblEmails" class="display">
-					    <thead>
-					        <tr>
-					            <th></th>
-					            <th>Subject</th>
-					            <th>Recipients</th>
-					            <th>Event</th>
-					            <th>Create Date</th>
-					            <th>Send Date</th>
-					            <th>Status</th>
-					            <th class="text-center">Options</th>
-					        </tr>
-					    </thead>
-					    <tbody>
-					    	<% emails.forEach(function(email) {%>
-						    	<tr>
-						            <td></td>
-						            <td><a href="/portal/emails/edit/<%= email.id%>"><%= email.subject %></a></td>
-						            <td><%= email.recip_type %></td>
-						            <td><%= email.event_name %></td>
+</div>
 
-						            <% if (email.create_date) {  
-						            	var email_time = new Date(email.create_date);
-					            	%>
-						            	<td><%= email_time.toLocaleTimeString([], { month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' }) %></td>
-					            	<% } else { %>
-					            		<td></td>
-					            	<% }%>
-
-						            <% if (email.send_date) { %>
-						            	<td><%= email.send_date.toLocaleTimeString([], { month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' }) %></td>
-					            	<% } else { %>
-					            		<td></td>
-					            	<% }%>
-
-					            	<% if (email.deleted == 1) { %>
-						            	<td class="red-danger">Deleted</td>
-					            	<% } else if (email.sent_date){ %>
-					            		<td>Sent</td>
-					            	<% } else { %>
-					            		<td>Not Sent</td>
-					            	<% } %>
-
-					            	<% if (!email.sent_date && email.deleted == 0){ %>
-					            		<td class="text-center"><a href="/portal/emails/send/<%= email.id%>"><i class="fas fa-paper-plane main-purple font-weight-bold" title="Send Email"></i></a></td>
-					            	<% } else { %>
-					            		<td></td>
-					            	<% } %>
-					            	
-						        </tr>
-							<% });%>
-					    </tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<script src="/scripts/portal/emails/index.js"></script>
+<script src="/scripts/portal/emails/index.js"></script>
 <%- include('../partials/footer') %>

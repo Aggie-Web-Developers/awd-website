@@ -1,12 +1,12 @@
 <%- include('../partials/header') %>
-<%  
+<%
 	var sendDateFormatted= "";
 
 	if (email.send_date) {
 		const offset = email.send_date.getTimezoneOffset();
-		
+
 		var temp_date = new Date(email.send_date.getTime() + (offset*60*1000*-1));
-   		sendDateFormatted = temp_date.toISOString().split('T')[0];
+	 		sendDateFormatted = temp_date.toISOString().split('T')[0];
 	}
 %>
 
@@ -33,7 +33,6 @@
 							<option <%=email.recip_type == "All" ? "selected" : ""%>>All</option>
 							<option <%=email.recip_type == "Corporate" ? "selected" : ""%>>Corporate</option>
 							<option <%=email.recip_type == "General" ? "selected" : ""%>>General</option>
-							<option <%=email.recip_type == "Staff" ? "selected" : ""%>>Staff</option>
 						</select>
 					</div>
 					<div class="form-group">

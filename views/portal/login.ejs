@@ -1,30 +1,40 @@
-<%- include('partials/header') %>
-	<% if (messages.error) { %>
-		<div class='alert alert-danger' role='alert'><%= messages.error %></div>
-	<% } %>
-	<% if (messages.success) { %>
-		<div class='alert alert-success' role='alert'><%= messages.success %></div>
-	<% } %>
+<%- include('partials/header') %> <% if (messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if (messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
+<% } %>
 
-	<div class="container">
-
-		<div class="row justify-content-center my-auto px-md-0 px-5">
-			<div class="col-xs-10 col-md-7 form-container p-4">
-				<h3 class="font-weight-bold mb-3">Login</h3>
-				<form id="frm" action="/portal/login" method="POST">
-					<div class="form-group">
-						<label for="email">Email address</label>
-						<input type="email" class="form-control" id="email" name="email" placeholder="howdy@aggiedevelopers.com">
-					</div>
-					<div class="form-group">
-						<label for="password">Password</label>
-						<input type="password" class="form-control" id="password" name="password">
-					</div>
-					<button type="submit" class="btn btn-contact btn-contact-slim mt-2">Login</button>
-				</form>
-			</div>
+<div class="container">
+	<div class="row justify-content-center my-auto px-md-0 px-5">
+		<div class="col-xs-10 col-md-7 form-container p-4">
+			<h3 class="font-weight-bold mb-3">Login</h3>
+			<form id="frm" action="/portal/login" method="POST">
+				<div class="form-group">
+					<label for="email">Email address</label>
+					<input
+						type="email"
+						class="form-control"
+						id="email"
+						name="email"
+						placeholder="howdy@aggiedevelopers.com"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input
+						type="password"
+						class="form-control"
+						id="password"
+						name="password"
+					/>
+				</div>
+				<button type="submit" class="btn btn-contact btn-contact-slim mt-2">
+					Login
+				</button>
+			</form>
 		</div>
 	</div>
+</div>
 
-		<script src="/scripts/portal/login.js"></script>
+<script src="/scripts/portal/login.js"></script>
 <%- include('partials/footer') %>

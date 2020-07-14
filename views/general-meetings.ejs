@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<div class="row mt-5">
-				
+
 			</div>
 		</div>
 
@@ -56,34 +56,34 @@
 				<div class="col-xs-12 col-md-6 col-lg-4 mt-4">
 					<div class="text-center justify-content-center">
 						<div class="card-container">
-						    <div class="column">
-						        <div class="post-module">
-						            <div class="thumbnail">
-					                <% if (event.type != "News") {%>
-						                <div class="date">
-						                	<div class="day"><%=event.event_time.toLocaleString('default', { day: 'numeric' })%></div>
-						                    <div class="month" id="divMonth"><%=event.event_time.toLocaleString('default', { month: 'short' })%></div>
-					                    </div>
-				                	<% } %>
-						                <img src="<%= event.image_link%>"></div>
-						            <div class="post-content">
-						                <div class="category"><%= event.type%></div>
-						                <h1 class="title"><%= event.name%></h1>
-						                <h2 class="sub_title"><%= event.summary%></h2>
-						                <p class="description"><%- event.descr%></p>
-						                <div class="post-meta">
-						                	<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><%= event.event_time.toLocaleString([], { month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' })%></span>
-						                </div>
-						                <div class="post-meta mt-2 pm">
-					                	<% if (event.type == "News") {%>
-						                	<span class="timestamp" title="Author"><i class="fas fa-user-edit mr-2"></i><%= event.author %></span>
-					                	<% } else { %>
-					                		<span class="timestamp" title="Location"><i class="fas fa-map-marker-alt mr-2"></i><%= event.location %></span>
-					                	<% } %>
-						                </div>
-						            </div>
-						        </div>
-						    </div>
+								<div class="column">
+										<div class="post-module">
+												<div class="thumbnail">
+													<% if (event.type != "News") {%>
+														<div class="date">
+															<div class="day"><%=event.event_time.toLocaleString('default', { day: 'numeric' })%></div>
+																<div class="month" id="divMonth"><%=event.event_time.toLocaleString('default', { month: 'short' })%></div>
+															</div>
+													<% } %>
+														<img src="<%= event.image_link%>"></div>
+												<div class="post-content">
+														<div class="category"><%= event.type%></div>
+														<h1 class="title"><%= event.name%></h1>
+														<h2 class="sub_title"><%= event.summary%></h2>
+														<p class="description"><%- event.descr%></p>
+														<div class="post-meta">
+															<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><%= event.event_time.toLocaleString([], { month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' })%></span>
+														</div>
+														<div class="post-meta mt-2 pm">
+														<% if (event.type == "News") {%>
+															<span class="timestamp" title="Author"><i class="fas fa-user-edit mr-2"></i><%= event.author %></span>
+														<% } else { %>
+															<span class="timestamp" title="Location"><i class="fas fa-map-marker-alt mr-2"></i><%= event.location %></span>
+														<% } %>
+														</div>
+												</div>
+										</div>
+								</div>
 						</div>
 					</div>
 				</div>

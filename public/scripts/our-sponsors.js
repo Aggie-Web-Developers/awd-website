@@ -4,21 +4,27 @@ $(function () {
 	setHeadElements();
 	$('#divNav').addClass('sponsors-banner');
 
-	$('.alert').click(function() {
+	$('.alert').click(function () {
 		$(this).hide();
 	});
 
 	// navbar configuration
 	$(document).scroll(function () {
-		$("#navbar").toggleClass('scrolled', $(this).scrollTop() > $("#navbar").height());
+		$('#navbar').toggleClass(
+			'scrolled',
+			$(this).scrollTop() > $('#navbar').height()
+		);
 	});
 
-	$('.navbar-toggler').on('click', function() {
-		$("#navbar").addClass('scrolled');
+	$('.navbar-toggler').on('click', function () {
+		$('#navbar').addClass('scrolled');
 	});
 });
 
-function setHeadElements(){
+function setHeadElements() {
 	document.title = 'AWD - Our Sponsors';
-	$('meta[name=description]').attr('content', 'Learn more about the sponsors of Aggie Web Developers.');
+	$('meta[name=description]').attr(
+		'content',
+		'Learn more about the sponsors of Aggie Web Developers.'
+	);
 }
