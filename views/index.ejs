@@ -1,0 +1,140 @@
+<%- include('partials/header') %>
+			<div class="container content">
+				<div class="d-flex-inline flex-row text-center">
+					<div class="col-xs-12">
+						<h1 class="home-banner-header">Aggie Web Developers</h1>
+					</div>
+				</div>
+			</div>
+
+			<form id="frm" action="/" method="POST" class="d-none mt-5">
+				<div class="d-none d-sm-flex flex-row justify-content-center">
+					<div class="col-lg-10 col-xl-6">
+						<div class="input-group input-group-lg mb-3">
+							<input type="email" id="txtEmail" name="txtEmail" class="form-control input-lg" placeholder="howdy@aggiedevelopers.com" required>
+
+							<div class="input-group-append">
+								<button class="btn" id="btnSubmitHome" type="submit">Join Our Community</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<% if (messages.error) { %>
+			<div class='alert alert-danger' role='alert'><%= messages.error %></div>
+		<% } %>
+		<% if (messages.success) { %>
+			<div class='alert alert-success' role='alert'><%= messages.success %></div>
+		<% } %>
+
+		<div class="container my-5">
+			<div class="d-flex flex-row my-4">
+				<div class="col-sm-12 text-center">
+					<h1 class="home-icon">We are</h1>
+				</div>
+			</div>
+			<div class="d-lg-flex flex-row justify-content-between">
+				<div class="col-sm-12 col-lg-4 text-center">
+					<h1 class="home-icon main-purple"><i class="fas fa-chalkboard-teacher"></i></h1>
+					<h2>Leaders</h2>
+					<p>
+						Brainstorming ideas, spreading knowledge, and empowering success in one another. AWD strives for selfless devotion towards nourishing a space that supports the next generation of web developers.
+					</p>
+				</div>
+				<div class="col-sm-12 col-lg-4 text-center">
+					<h1 class="home-icon main-purple"><i class="fas fa-users"></i></h1>
+					<h2>Learners</h2>
+					<p>
+						Whether you're neck-deep in full-stack adaptive design or just getting started with "Hello World!", AWD promotes a collaborative and engaging environment that will help you learn, regardless of skill level.
+					</p>
+				</div>
+				<div class="col-sm-12 col-lg-4 text-center">
+					<h1 class="home-icon main-purple"><i class="fas fa-terminal"></i></h1>
+					<h2>Web Developers</h2>
+					<p>
+						Others tend to place web development into the "programming" category, we place a spotlight on design. Projects you develop at AWD will give you the "Wow!" factor employers are seeking.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="activities-banner-img py-4">
+			<div class="container">
+				<div class="d-flex flex-row my-4">
+					<div class="col-sm-12 text-center">
+						<h1 class="what-can-we-do">What Can We Do For You?</h1>
+					</div>
+				</div>
+				<div class="d-lg-flex flex-row justify-content-between mt-5">
+					<div class="col-sm-12 col-lg-6 text-center mt-5">
+						<h2 class="font-weight-bold">Workshops</h2>
+						<p class="px-2">
+							Weekly workshops alternate between beginner and advanced sessions, each allowing you to gain hands-on experience in web development and design.
+						</p>
+					</div>
+					<div class="col-sm-12 col-lg-6 text-center mt-5">
+						<h2 class="font-weight-bold">Projects</h2>
+						<p class="px-2">
+							Real semester-long projects led by seasoned product managers, using a consistent tech stack and held to realistic deadlines.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container my-5">
+
+			<h1 class="text-center">News and Events</h1>
+
+			<% if (events && events.length > 0) {%>
+			<div class="row justify-content-center">
+				<% events.forEach(function(event) { %>
+					<div class="col-xs-12 col-md-6 col-lg-4 mt-4">
+						<div class="text-center justify-content-center">
+							<div class="card-container">
+								<div class="column">
+									<div class="post-module">
+										<div class="thumbnail">
+										<% if (event.type != "News") {%>
+											<div class="date">
+												<div class="day"><%=event.event_time.toLocaleString('default', { day: 'numeric' })%></div>
+												<div class="month" id="divMonth"><%=event.event_time.toLocaleString('default', { month: 'short' })%></div>
+											</div>
+										<% } %>
+											<img src="<%= event.image_link%>"></div>
+										<div class="post-content">
+											<div class="category"><%= event.type%></div>
+											<h1 class="title"><%= event.name%></h1>
+											<h2 class="sub_title"><%= event.summary%></h2>
+											<p class="description"><%- event.descr%></p>
+											<div class="post-meta">
+												<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><%= event.event_time.toLocaleString([], { month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' })%></span>
+											</div>
+											<div class="post-meta mt-2 pm">
+											<% if (event.type == "News") {%>
+												<span class="timestamp" title="Author"><i class="fas fa-user-edit mr-2"></i><%= event.author %></span>
+											<% } else { %>
+												<span class="timestamp" title="Location"><i class="fas fa-map-marker-alt mr-2"></i><%= event.location %></span>
+											<% } %>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% }); %>
+			</div>
+			<% } else {%>
+			<div class="row justify-content-center mt-4 mb-5">
+				<div class="col-12 text-center">
+					<h5>No news is good news, please check back soon.</h5>
+				</div>
+			</div>
+			<% } %>
+		</div>
+
+		<script src="/scripts/index.js"></script>
+<%- include('partials/footer') %>

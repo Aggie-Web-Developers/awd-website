@@ -1,0 +1,99 @@
+<%- include('../partials/header') %> <% if (messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if (messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
+<% } %>
+
+<div class="container">
+	<div class="row justify-content-around align-items-center mt-5">
+		<div class="col-5">
+			<h1>Manage Events</h1>
+		</div>
+		<div class="col-7 text-right">
+			<a href="/portal/events/new" class="btn btn-contact btn-contact-slim"
+				>New</a
+			>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-12">
+			<div class="container table-container mt-3">
+				<table id="tblEvents" class="display">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Name</th>
+							<th>Category</th>
+							<th>Date</th>
+							<th>Location</th>
+							<th>Web Start Date</th>
+							<th>Web End Date</th>
+							<th>Deleted</th>
+							<th>Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% events.forEach(function(event) { var timeOffsetDate = new
+						Date(Date.now()); var timeOffset =
+						timeOffsetDate.getTimezoneOffset(); if (event.start_date) var
+						webStartDate = new Date(event.start_date.getTime() +
+						(timeOffset*60*1000)); if (event.end_date) var webEndDate = new
+						Date(event.end_date.getTime() + (timeOffset*60*1000)); %>
+						<tr>
+							<td></td>
+							<td>
+								<a href="/portal/events/edit/<%= event.id%>"
+									><%= event.name %></a
+								>
+							</td>
+
+							<td><%= event.type %></td>
+							<% if (event.event_time) { var event_time = new
+							Date(event.event_time); %>
+							<td>
+								<%= event_time.toLocaleTimeString([], { month: 'long', day:
+								'numeric', hour: '2-digit', minute:'2-digit' }) %>
+							</td>
+							<% } else { %>
+							<td></td>
+							<% }%>
+
+							<td><%= event.location %></td>
+
+							<% if (event.start_date) { %>
+							<td><%= webStartDate.toLocaleDateString() %></td>
+							<% } else { %>
+							<td></td>
+							<% }%> <% if (event.end_date) { %>
+							<td><%= webEndDate.toLocaleDateString() %></td>
+							<% } else { %>
+							<td></td>
+							<% }%> <% if (event.deleted == 1) { %>
+							<td class="red-danger">Yes</td>
+							<% } else { %>
+							<td></td>
+							<% }%> <% if (!event.email_id && event.deleted == 0) { %>
+							<td class="text-center">
+								<a href="/portal/events/createEmail/<%= event.id%>"
+									><i
+										class="far fa-envelope main-purple font-weight-bold"
+										title="Create Event Email"
+									></i
+								></a>
+							</td>
+							<% } else { %>
+							<td></td>
+							<% }%>
+						</tr>
+						<% });%>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/scripts/portal/events/index.js"></script>
+<%- include('../partials/footer') %>

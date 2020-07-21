@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+			<div class=" text-center">
+				<div class="container">
+					<div class="row justify-content-center">
+						<h1 class="font-weight-bold page-header px-2">Our Sponsors</h1>
+					</div>
+
+					<div class="row mt-5">
+						<h4 class="sponsors-text">AWD is proud to partner with organizations that reflect our unique mission and values, and provide our members with opportunities for professional and personal growth.</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<% if (messages.error) { %>
+			<div class='alert alert-danger' role='alert'><%= messages.error %></div>
+		<% } %>
+		<% if (messages.success) { %>
+			<div class='alert alert-success' role='alert'><%= messages.success %></div>
+		<% } %>
+
+		<div class="container">
+			<% if (sponsors) {%>
+				<div class="row justify-content-around text-center mt-3 mb-5">
+
+				<% sponsors.forEach(function(sponsor) {
+					var timeOffsetDate = new Date(Date.now());
+						var timeOffset = timeOffsetDate.getTimezoneOffset();
+						var sponsorDate = new Date(sponsor.sponsor_date.getTime() + (timeOffset*60*1000));
+				%>
+
+					<div class="col-sm-12 col-lg-6 mt-5 justify-content-center">
+						<a href="<%=sponsor.refer_url%>" target="_blank"><img class="sponsors-image" alt="<%=sponsor.name%> Logo" src="<%=sponsor.image_url%>"></a>
+						<h2 class="font-weight-bold text-uppercase mt-2"><%=sponsor.name%></h2>
+						<h6 class="font-weight-bold mt-2">Partner Since <%=sponsorDate.toLocaleDateString([], { month: 'long', year: 'numeric'})%></h6>
+					</div>
+				<% }); %>
+				</div>
+			<% }%>
+		</div>
+
+		<div class="container">
+			<% if (!sponsors || sponsors.length < 1) {%>
+			<div class="row text-center my-5">
+				<div class="col-12 my-5">
+					<h5>We are looking for sponsors that are ready to make a difference for our members.</h5>
+					<a href="/contact-us" class="btn btn-lg btn-contact mt-5"><span class="d-none d-md-inline">Ready to</span> Be the First?</a>
+				</div>
+			</div>
+			<% } else { %>
+			<div class="row text-center my-5">
+				<div class="col-12">
+					<a href="/contact-us" class="btn btn-lg mt-3 btn-contact">Interested<span class="d-none d-md-inline"> in Becoming a Sponsor</span>?</a>
+				</div>
+			</div>
+			<% } %>
+		</div>
+
+		<script src="/scripts/our-sponsors.js"></script>
+<%- include('partials/footer') %>

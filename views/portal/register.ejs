@@ -1,0 +1,101 @@
+<%- include('partials/header') %> <% if (messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %>
+
+<div class="container">
+	<div class="row justify-content-center my-5 px-md-0 px-5">
+		<div class="col-xs-10 col-md-7 form-container p-4">
+			<h3 class="font-weight-bold mb-3">Register</h3>
+			<form id="frm" action="/portal/register" method="POST">
+				<div class="form-group">
+					<label for="txtName">First Name</label>
+					<input
+						type="text"
+						class="form-control"
+						id="txtFirstName"
+						name="txtFirstName"
+						placeholder="Miss"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="txtName">Last Name</label>
+					<input
+						type="text"
+						class="form-control"
+						id="txtLastName"
+						name="txtLastName"
+						placeholder="Reveille"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="txtEmailAddress">Email address</label>
+					<input
+						type="email"
+						class="form-control"
+						id="txtEmailAddress"
+						name="txtEmailAddress"
+						aria-describedby="emailHelp"
+						placeholder="howdy@aggiedevelopers.com"
+					/>
+					<small id="emailHelp" class="form-text text-muted"
+						>We do not share your email with anyone.</small
+					>
+				</div>
+				<div class="form-group">
+					<label for="txtPassword">Password</label>
+					<input
+						type="password"
+						class="form-control"
+						id="txtPassword"
+						name="txtPassword"
+						aria-describedby="passwordHelp"
+					/>
+					<small id="passwordHelp" class="form-text text-muted"
+						>Your password must include 12 characters, a character of each case,
+						a number, and a special character.</small
+					>
+				</div>
+				<div class="form-group">
+					<label for="txtConfirmPassword">Confirm Password</label>
+					<input
+						type="password"
+						class="form-control"
+						id="txtConfirmPassword"
+						name="txtConfirmPassword"
+					/>
+				</div>
+				<div class="form-group form-check">
+					<input
+						type="checkbox"
+						class="form-check-input checkmark"
+						id="chkTerms"
+						name="chkTerms"
+					/>
+					<label class="form-check-label" for="chkTerms"
+						>I agree to the
+						<a href="/terms-and-conditions" target="_blank"
+							>Terms & Conditions</a
+						></label
+					>
+				</div>
+				<div class="form-check mt-3">
+					<input
+						type="checkbox"
+						class="form-check-input checkmark"
+						id="chkNews"
+						name="chkNews"
+					/>
+					<label class="form-check-label" for="chkNews"
+						>Join Our Newsletter</label
+					>
+				</div>
+				<button type="submit" class="btn btn-contact btn-contact-slim mt-4">
+					Submit
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script src="/scripts/portal/register.js"></script>
+<%- include('partials/footer') %>
