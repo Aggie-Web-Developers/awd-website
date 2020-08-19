@@ -172,11 +172,9 @@ mailerObj.sendAdminEmail = async function (id) {
 
 	var params = {
 		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
-		Template: 'AWD-General-Email-Template',
+		Template: 'AWD-Branded-Email-Template',
 		DefaultTemplateData:
 			'{"Subject": "' +
-			email.subject +
-			'", "title": "' +
 			email.subject +
 			'", "content": "' +
 			email.body.replace(/"/g, "'") +
