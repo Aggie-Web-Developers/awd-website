@@ -9,7 +9,7 @@
 <div class="container">
 	<div class="row justify-content-center my-5 px-md-0 px-5">
 		<div class="col-xs-10 col-md-10 form-container p-4">
-			<h3 class="font-weight-bold mb-3">Create Email</h3>
+			<h1 class="page-title">Create Email</h1>
 			<form id="frm" action="/portal/emails/new" method="POST">
 				<div class="form-group">
 					<label for="txtSubject">Email Subject</label>
@@ -34,13 +34,13 @@
 					<textarea id="txtBody" name="txtBody"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="txtSendDate">Schedule Send Date</label>
+					<label for="txtStartDate">Schedule Send Date</label>
 					<input
 						type="date"
 						class="form-control"
 						id="txtStartDate"
 						name="txtSendDate"
-						aria-describedby="dateHelp"
+						aria-describedby="sendDateHelp"
 					/>
 					<small id="sendDateHelp" class="form-text text-muted"
 						>Schedule the date for the email to be sent. Leave blank to send
