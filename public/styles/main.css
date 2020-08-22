@@ -913,6 +913,15 @@ label.error {
 	border-radius: 50%;
 }
 
+.sponsors-text {
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+
+.sponsor-name {
+	font-size: 2rem;
+}
+
 @media (max-width: 585px) {
 	.sponsors-text {
 		font-size: 1.4rem;
