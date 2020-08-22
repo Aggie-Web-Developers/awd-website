@@ -20,7 +20,7 @@
 	<div class="container">
 		<div class="row justify-content-center my-5 px-md-0 px-5">
 			<div class="col-xs-10 col-md-10 form-container p-4">
-				<h3 class="font-weight-bold mb-3">Edit Email</h3>
+				<h2 class="page-title">Edit Email</h2>
 				<form id="frm" action="/portal/emails/edit/<%= email.id %>?_method=PUT" method="POST">
 					<div class="form-group">
 						<label for="txtSubject">Email Subject</label>
@@ -40,8 +40,8 @@
 						<textarea id="txtBody" name="txtBody"><%=email.body%></textarea>
 					</div>
 					<div class="form-group">
-						<label for="txtSendDate">Schedule Send Date</label>
-						<input type="date" class="form-control" id="txtStartDate" name="txtSendDate" aria-describedby="dateHelp" value="<%=sendDateFormatted %>">
+						<label for="txtStartDate">Schedule Send Date</label>
+						<input type="date" class="form-control" id="txtStartDate" name="txtSendDate" aria-describedby="sendDateHelp" value="<%=sendDateFormatted %>">
 						<small id="sendDateHelp" class="form-text text-muted">Schedule the date for the email to be sent. Leave blank to send manually later.</small>
 					</div>
 					<div class="form-group">

@@ -11,6 +11,7 @@
 				<div class="d-none d-sm-flex flex-row justify-content-center">
 					<div class="col-lg-10 col-xl-6">
 						<div class="input-group input-group-lg mb-3">
+							<label class="hidden" for="txtEmail">Your Email</label>
 							<input type="email" id="txtEmail" name="txtEmail" class="form-control input-lg" placeholder="howdy@aggiedevelopers.com" required>
 
 							<div class="input-group-append">
@@ -37,21 +38,21 @@
 			</div>
 			<div class="d-lg-flex flex-row justify-content-between">
 				<div class="col-sm-12 col-lg-4 text-center">
-					<h1 class="home-icon main-purple"><i class="fas fa-chalkboard-teacher"></i></h1>
+					<i class="fas fa-chalkboard-teacher home-icon main-purple mb-3"></i>
 					<h2>Leaders</h2>
 					<p>
 						Brainstorming ideas, spreading knowledge, and empowering success in one another. AWD strives for selfless devotion towards nourishing a space that supports the next generation of web developers.
 					</p>
 				</div>
 				<div class="col-sm-12 col-lg-4 text-center">
-					<h1 class="home-icon main-purple"><i class="fas fa-users"></i></h1>
+					<i class="fas fa-users home-icon main-purple mb-3"></i>
 					<h2>Learners</h2>
 					<p>
 						Whether you're neck-deep in full-stack adaptive design or just getting started with "Hello World!", AWD promotes a collaborative and engaging environment that will help you learn, regardless of skill level.
 					</p>
 				</div>
 				<div class="col-sm-12 col-lg-4 text-center">
-					<h1 class="home-icon main-purple"><i class="fas fa-terminal"></i></h1>
+					<i class="fas fa-terminal home-icon main-purple mb-3"></i>
 					<h2>Web Developers</h2>
 					<p>
 						Others tend to place web development into the "programming" category, we place a spotlight on design. Projects you develop at AWD will give you the "Wow!" factor employers are seeking.
@@ -103,7 +104,7 @@
 												<div class="month" id="divMonth"><%=event.event_time.toLocaleString('default', { month: 'short' })%></div>
 											</div>
 										<% } %>
-											<img src="<%= event.image_link%>"></div>
+											<img src="<%= event.image_link%>" alt="<%= event.name%> Thumbnail"></div>
 										<div class="post-content">
 											<div class="category"><%= event.type%></div>
 											<h1 class="title"><%= event.name%></h1>
@@ -130,7 +131,7 @@
 			<% } else {%>
 			<div class="row justify-content-center mt-4 mb-5">
 				<div class="col-12 text-center">
-					<h5>No news is good news, please check back soon.</h5>
+					<h1 class="no-event-text">No news is good news, please check back soon.</h1>
 				</div>
 			</div>
 			<% } %>

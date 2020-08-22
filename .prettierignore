@@ -3,4 +3,4 @@ build/
 dist/
 .yarn/
 .vscode/
-./views/partials/header.ejs
+**/header.ejs

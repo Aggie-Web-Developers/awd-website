@@ -24,17 +24,17 @@
 
 			<div class="row mt-4 align-items-sm-start align-items-center">
 				<div class="col-md-3 col-6 text-center">
-					<h1 class="font-weight-bold main-purple meetings-icon"><i class="fas fa-calendar-day"></i></h1>
-					<h4 class="pt-3">Time TBD</h4>
+					<i class="font-weight-bold main-purple meetings-icon fas fa-calendar-day mb-3"></i>
+					<h1 class="event-title pt-3">Time TBD</h1>
 				</div>
 
 				<div class="col-md-3 col-6 text-center">
-					<h1 class="font-weight-bold main-purple meetings-icon"><i class="fas fa-map-marker-alt"></i></h1>
-					<h4 class="pt-3">Location TBD</h4>
+					<i class="font-weight-bold main-purple meetings-icon fas fa-map-marker-alt mb-3"></i>
+					<h1 class="event-title pt-3">Location TBD</h1>
 				</div>
 
 				<div class="d-none d-md-block col-md-6 text-left">
-					<p class="lead">At AWD we host a weekly meeting open to all members, Texas A&M students, faculty, and staff. The first hour of our meeting consists of updates, company presentation, or lecture series. The second hour of our meeting consists of a beginner or advanced workshop.</p>
+					<p class="lead font-weight-normal">At AWD we host a weekly meeting open to all members, Texas A&M students, faculty, and staff. The first hour of our meeting consists of updates, company presentation, or lecture series. The second hour of our meeting consists of a beginner or advanced workshop.</p>
 				</div>
 			</div>
 			<div class="row mt-5">
@@ -48,7 +48,7 @@
 
 			<% if (!events || events.length < 1) {%>
 			<div class="row justify-content-center mt-4 mb-5">
-				<h5>We don't have any meeting events scheduled, please check back soon.</h5>
+				<h1 class="no-event-text">We don't have any meeting events scheduled, please check back soon.</h1>
 			</div>
 			<% } else {%>
 			<div class="row justify-content-center">
@@ -65,7 +65,7 @@
 																<div class="month" id="divMonth"><%=event.event_time.toLocaleString('default', { month: 'short' })%></div>
 															</div>
 													<% } %>
-														<img src="<%= event.image_link%>"></div>
+														<img src="<%= event.image_link%>" alt="<%= event.name%> Thumbnail"></div>
 												<div class="post-content">
 														<div class="category"><%= event.type%></div>
 														<h1 class="title"><%= event.name%></h1>
