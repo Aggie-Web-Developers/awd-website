@@ -1181,6 +1181,12 @@ label.error {
 	height: 100%;
 }
 
+.page-title {
+	font-size: 1.75rem;
+	font-weight: bold;
+	margin-bottom: 1rem !important;
+}
+
 .portal-background {
 	background: rgb(238, 174, 202);
 	background: radial-gradient(
