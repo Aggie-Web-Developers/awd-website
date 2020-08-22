@@ -951,6 +951,14 @@ label.error {
 	font-size: 4rem;
 }
 
+.event-title {
+	font-size: 1.5rem;
+}
+
+.no-event-text {
+	font-size: 1.25rem;
+}
+
 @media (max-width: 535px) {
 	.meetings-banner {
 		background-position: 75% 80%;
