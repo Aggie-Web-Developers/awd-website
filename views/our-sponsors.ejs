@@ -6,7 +6,7 @@
 					</div>
 
 					<div class="row mt-5">
-						<h4 class="sponsors-text">AWD is proud to partner with organizations that reflect our unique mission and values, and provide our members with opportunities for professional and personal growth.</h4>
+						<h2 class="sponsors-text">AWD is proud to partner with organizations that reflect our unique mission and values, and provide our members with opportunities for professional and personal growth.</h2>
 					</div>
 				</div>
 			</div>
@@ -31,8 +31,8 @@
 
 					<div class="col-sm-12 col-lg-6 mt-5 justify-content-center">
 						<a href="<%=sponsor.refer_url%>" target="_blank"><img class="sponsors-image" alt="<%=sponsor.name%> Logo" src="<%=sponsor.image_url%>"></a>
-						<h2 class="font-weight-bold text-uppercase mt-2"><%=sponsor.name%></h2>
-						<h6 class="font-weight-bold mt-2">Partner Since <%=sponsorDate.toLocaleDateString([], { month: 'long', year: 'numeric'})%></h6>
+						<h1 class="font-weight-bold sponsor-name text-uppercase mt-2"><%=sponsor.name%></h1>
+						<p class="font-weight-bold mt-2">Partner Since <%=sponsorDate.toLocaleDateString([], { month: 'long', year: 'numeric'})%></p>
 					</div>
 				<% }); %>
 				</div>

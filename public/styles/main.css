@@ -20,6 +20,10 @@ label:focus,
 	box-shadow: none !important;
 }
 
+.hidden {
+	display: none;
+}
+
 label.error {
 	color: #ee5253;
 }
@@ -35,6 +39,10 @@ label.error {
 
 .main-blue {
 	color: #54a0ff;
+}
+
+.font-500 {
+	font-weight: 500;
 }
 
 .page-banner {
@@ -638,6 +646,21 @@ label.error {
 	font-size: 4rem;
 }
 
+.value-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.officer-name {
+	font-size: 1.75rem;
+}
+
+.officer-title {
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
 @media (max-width: 425px) {
 	.about-us-subheader {
 		font-size: 2.4rem;
@@ -835,6 +858,17 @@ label.error {
 	color: #212529;
 }
 
+.contact-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.contact-form-title {
+	font-size: 1.75rem;
+	margin-bottom: 1rem !important;
+	font-weight: bold;
+}
+
 .btn-contact {
 	border-top-right-radius: 38px;
 	border-bottom-right-radius: 38px;
@@ -890,6 +924,15 @@ label.error {
 	border-radius: 50%;
 }
 
+.sponsors-text {
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+
+.sponsor-name {
+	font-size: 2rem;
+}
+
 @media (max-width: 585px) {
 	.sponsors-text {
 		font-size: 1.4rem;
@@ -928,6 +971,14 @@ label.error {
 	font-size: 4rem;
 }
 
+.event-title {
+	font-size: 1.5rem;
+}
+
+.no-event-text {
+	font-size: 1.25rem;
+}
+
 @media (max-width: 535px) {
 	.meetings-banner {
 		background-position: 75% 80%;
@@ -941,6 +992,11 @@ label.error {
 	background-position: 100% 80%;
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+
+.projects-text {
+	font-size: 1.5rem;
+	font-weight: 500;
 }
 
 @media (max-width: 585px) {
@@ -1063,7 +1119,6 @@ label.error {
 
 .project-module .project-content .project-button-info {
 	margin: 30px 0 0;
-	color: #999999;
 }
 
 .project-module .project-content .project-button-info .timestamp {
@@ -1124,6 +1179,12 @@ label.error {
 /***** Portal *****/
 .full-view {
 	height: 100%;
+}
+
+.page-title {
+	font-size: 1.75rem;
+	font-weight: bold;
+	margin-bottom: 1rem !important;
 }
 
 .portal-background {

@@ -5,10 +5,10 @@
 <div class="container">
 	<div class="row justify-content-center my-5 px-md-0 px-5">
 		<div class="col-xs-10 col-md-7 form-container p-4">
-			<h3 class="font-weight-bold mb-3">Register</h3>
+			<h1 class="page-title">Register</h1>
 			<form id="frm" action="/portal/register" method="POST">
 				<div class="form-group">
-					<label for="txtName">First Name</label>
+					<label for="txtFirstName">First Name</label>
 					<input
 						type="text"
 						class="form-control"
@@ -18,7 +18,7 @@
 					/>
 				</div>
 				<div class="form-group">
-					<label for="txtName">Last Name</label>
+					<label for="txtLastName">Last Name</label>
 					<input
 						type="text"
 						class="form-control"
@@ -73,7 +73,10 @@
 					/>
 					<label class="form-check-label" for="chkTerms"
 						>I agree to the
-						<a href="/terms-and-conditions" target="_blank"
+						<a
+							href="/terms-and-conditions"
+							class="font-weight-bold"
+							target="_blank"
 							>Terms & Conditions</a
 						></label
 					>

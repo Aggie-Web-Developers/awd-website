@@ -23,7 +23,7 @@
 				<table id="tblEmails" class="display">
 					<thead>
 						<tr>
-							<th></th>
+							<td></td>
 							<th>Subject</th>
 							<th>Recipients</th>
 							<th>Event</th>
@@ -38,7 +38,9 @@
 						<tr>
 							<td></td>
 							<td>
-								<a href="/portal/emails/edit/<%= email.id%>"
+								<a
+									href="/portal/emails/edit/<%= email.id%>"
+									class="font-weight-bold"
 									><%= email.subject %></a
 								>
 							</td>
