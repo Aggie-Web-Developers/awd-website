@@ -646,6 +646,21 @@ label.error {
 	font-size: 4rem;
 }
 
+.value-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.officer-name {
+	font-size: 1.75rem;
+}
+
+.officer-title {
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
 @media (max-width: 425px) {
 	.about-us-subheader {
 		font-size: 2.4rem;
