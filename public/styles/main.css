@@ -974,6 +974,11 @@ label.error {
 	background-size: cover;
 }
 
+.projects-text {
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+
 @media (max-width: 585px) {
 	.projects-text {
 		font-size: 1.25rem;
@@ -1094,7 +1099,6 @@ label.error {
 
 .project-module .project-content .project-button-info {
 	margin: 30px 0 0;
-	color: #999999;
 }
 
 .project-module .project-content .project-button-info .timestamp {
