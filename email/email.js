@@ -87,7 +87,9 @@ mailerObj.sendContactUsEmailCorp = async function (formData) {
 
 mailerObj.sendAdminEmail = async function (id) {
 	let email = await getEmailById(id);
+	var success = true;
 	var destinations = [];
+	var sendList = [];
 
 	if (email == 'Error') {
 		return new Promise((resolve, reject) => {
@@ -170,33 +172,45 @@ mailerObj.sendAdminEmail = async function (id) {
 		});
 	}
 
-	var params = {
-		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
-		Template: 'AWD-Branded-Email-Template',
-		DefaultTemplateData:
-			'{"Subject": "' +
-			email.subject +
-			'", "content": "' +
-			email.body.replace(/"/g, "'") +
-			'"}',
-		ReplyToAddresses: ['aggiedevelopers@gmail.com'],
-		Destinations: destinations,
-	};
+	// SES only allows 50 destinations at a time, so we must split the destinations array into smaller arrays
+	while (destinations.length > 0) sendList.push(destinations.splice(0, 45));
+	console.log(sendList);
 
-	var sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
-		.sendBulkTemplatedEmail(params)
-		.promise();
+	sendList.forEach(function (recips) {
+		var params = {
+			Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
+			Template: 'AWD-Branded-Email-Template',
+			DefaultTemplateData:
+				'{"Subject": "' +
+				email.subject +
+				'", "content": "' +
+				email.body.replace(/"/g, "'") +
+				'"}',
+			ReplyToAddresses: ['aggiedevelopers@gmail.com'],
+			Destinations: recips,
+		};
 
-	return new Promise((resolve, reject) => {
+		var sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
+			.sendBulkTemplatedEmail(params)
+			.promise();
+
 		sendPromise
-			.then(async function (data) {
-				let emailSentStatus = await markEmailSent(email.id);
-				resolve(emailSentStatus);
+			.then(function (data) {
+				success = true;
 			})
 			.catch(function (err) {
-				console.log(err);
-				resolve('Email failed to send');
+				success = false;
 			});
+	});
+
+	return new Promise(async (resolve, reject) => {
+		if (success) {
+			let emailSentStatus = await markEmailSent(email.id);
+			resolve(emailSentStatus);
+		} else {
+			console.log(err);
+			resolve('Email failed to send');
+		}
 	});
 };
 
