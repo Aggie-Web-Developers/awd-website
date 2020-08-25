@@ -194,6 +194,7 @@ mailerObj.sendAdminEmail = async function (id) {
 				resolve(emailSentStatus);
 			})
 			.catch(function (err) {
+				console.log(err);
 				resolve('Email failed to send');
 			});
 	});
@@ -248,6 +249,7 @@ function getGeneralRecipeints() {
 				resolve(result.recordset);
 			})
 			.catch((err) => {
+				console.log(err);
 				resolve('Error');
 			});
 	});
