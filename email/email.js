@@ -223,9 +223,9 @@ async function sendBulkMail(email, recips) {
 		.sendBulkTemplatedEmail(params)
 		.promise();
 
-	return new Promise(async (resolve, reject) => {
-		await sendPromise
-			.then(async function (data) {
+	return new Promise((resolve, reject) => {
+		sendPromise
+			.then(function (data) {
 				if (data.Status[0].Error) throw data.Status[0];
 				else resolve('Success');
 			})
