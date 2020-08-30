@@ -174,45 +174,67 @@ mailerObj.sendAdminEmail = async function (id) {
 
 	// SES only allows 50 destinations at a time, so we must split the destinations array into smaller arrays
 	while (destinations.length > 0) sendList.push(destinations.splice(0, 45));
-	console.log(sendList);
-
-	sendList.forEach(function (recips) {
-		var params = {
-			Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
-			Template: 'AWD-Branded-Email-Template',
-			DefaultTemplateData:
-				'{"Subject": "' +
-				email.subject +
-				'", "content": "' +
-				email.body.replace(/"/g, "'") +
-				'"}',
-			ReplyToAddresses: ['aggiedevelopers@gmail.com'],
-			Destinations: recips,
-		};
-
-		var sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
-			.sendBulkTemplatedEmail(params)
-			.promise();
-
-		sendPromise
-			.then(function (data) {
-				success = true;
-			})
-			.catch(function (err) {
-				success = false;
-			});
-	});
 
 	return new Promise(async (resolve, reject) => {
+		var success = await attemptSend(email, sendList);
+
 		if (success) {
-			let emailSentStatus = await markEmailSent(email.id);
-			resolve(emailSentStatus);
+			var markedSent = await markEmailSent(email.id);
+
+			if (markedSent) resolve('Success');
+			else resolve('Email failed to send.');
 		} else {
-			console.log(err);
-			resolve('Email failed to send');
+			resolve('Email failed to send.');
 		}
 	});
 };
+
+async function attemptSend(email, sendList) {
+	const promises = sendList.map(async function (recips) {
+		return await sendBulkMail(email, recips);
+	});
+
+	return new Promise(async (resolve, reject) => {
+		await Promise.all(promises)
+			.then(function () {
+				resolve(true);
+			})
+			.catch((err) => {
+				resolve(false);
+			});
+	});
+}
+
+async function sendBulkMail(email, recips) {
+	var params = {
+		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
+		Template: 'AWD-Branded-Email-Template',
+		DefaultTemplateData:
+			'{"Subject": "' +
+			email.subject +
+			'", "content": "' +
+			email.body.replace(/"/g, "'") +
+			'"}',
+		ReplyToAddresses: ['aggiedevelopers@gmail.com'],
+		Destinations: recips,
+	};
+
+	var sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
+		.sendBulkTemplatedEmail(params)
+		.promise();
+
+	return new Promise((resolve, reject) => {
+		sendPromise
+			.then(function (data) {
+				if (data.Status[0].Error) throw data.Status[0];
+				else resolve('Success');
+			})
+			.catch(function (err) {
+				console.log(err);
+				reject(new Error(err));
+			});
+	});
+}
 
 mailerObj.listenForScheduledEmails = function () {
 	// listen for emails to be sent every hour at the fifth minute
@@ -290,10 +312,10 @@ function markEmailSent(id) {
 			.input('id', sql.Int, id)
 			.query('UPDATE tbl_emails SET sent_date = GETUTCDATE() WHERE id = @id')
 			.then((result) => {
-				resolve('Success');
+				resolve(true);
 			})
 			.catch((err) => {
-				resolve('Error marking email as sent.');
+				resolve(false);
 			});
 	});
 }
