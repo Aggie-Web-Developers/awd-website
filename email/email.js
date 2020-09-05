@@ -16,7 +16,7 @@ mailerObj.sendContactUsEmailGen = async function (formData) {
 	content += '<p><b>Subject:</b> ' + formData.ddlSubjectGen + '</p>';
 	content += '<p><b>Comments:</b></p><p>' + formData.txtCommentsGen + '</p>';
 
-	content = content.replace(/(?:\r\n|\r|\n)/g, '<br>');
+	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '<br>');
 
 	const params = {
 		Destination: {
@@ -27,7 +27,7 @@ mailerObj.sendContactUsEmailGen = async function (formData) {
 		Template: 'AWD-Contact-Us-Notification-Template',
 		TemplateData:
 			'{ "title": "New General Contact Us Submission", "content": "' +
-			content.replace('\n', '< /br>') +
+			content +
 			'" }',
 		ReplyToAddresses: ['no-reply@aggiedevelopers.com'],
 	};
@@ -54,7 +54,7 @@ mailerObj.sendContactUsEmailCorp = async function (formData) {
 	content += '<p><b>Subject:</b> ' + formData.ddlSubjectCorp + '</p>';
 	content += '<p><b>Comments:</b></p><p>' + formData.txtCommentsCorp + '</p>';
 
-	content = content.replace(/(?:\r\n|\r|\n)/g, '<br>');
+	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '<br>');
 
 	const params = {
 		Destination: {
@@ -65,7 +65,7 @@ mailerObj.sendContactUsEmailCorp = async function (formData) {
 		Template: 'AWD-Contact-Us-Notification-Template',
 		TemplateData:
 			'{ "title": "New Corporate Contact Us Submission", "content": "' +
-			content.replace('\n', '< /br>') +
+			content +
 			'" }',
 		ReplyToAddresses: ['no-reply@aggiedevelopers.com'],
 	};
@@ -253,7 +253,7 @@ async function sendBulkMail(email, recips) {
 			'{"Subject": "' +
 			email.subject +
 			'", "content": "' +
-			email.body.replace(/"/g, "'") +
+			email.body.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '<br>') +
 			'"}',
 		ReplyToAddresses: ['aggiedevelopers@gmail.com'],
 		Destinations: recips,
