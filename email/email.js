@@ -8,17 +8,17 @@ aws.config.accessKeyId = process.env.accessKeyId;
 aws.config.secretAccessKey = process.env.secretAccessKey;
 aws.config.region = process.env.region;
 
-var ses = new aws.SES();
+const ses = new aws.SES();
 
 mailerObj.sendContactUsEmailGen = async function (formData) {
-	var content = '<p><b>Name:</b> ' + formData.txtNameGen + '</p>';
+	let content = '<p><b>Name:</b> ' + formData.txtNameGen + '</p>';
 	content += '<p><b>Email:</b> ' + formData.txtEmailGen + '</p>';
 	content += '<p><b>Subject:</b> ' + formData.ddlSubjectGen + '</p>';
 	content += '<p><b>Comments:</b></p><p>' + formData.txtCommentsGen + '</p>';
 
 	content = content.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
-	var params = {
+	const params = {
 		Destination: {
 			BccAddresses: ['aggiedevelopers@gmail.com'],
 			ToAddresses: [],
@@ -32,7 +32,7 @@ mailerObj.sendContactUsEmailGen = async function (formData) {
 		ReplyToAddresses: ['no-reply@aggiedevelopers.com'],
 	};
 
-	var sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
+	const sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
 		.sendTemplatedEmail(params)
 		.promise();
 
@@ -48,7 +48,7 @@ mailerObj.sendContactUsEmailGen = async function (formData) {
 };
 
 mailerObj.sendContactUsEmailCorp = async function (formData) {
-	var content = '<p><b>Name:</b> ' + formData.txtNameCorp + '</p>';
+	let content = '<p><b>Name:</b> ' + formData.txtNameCorp + '</p>';
 	content += '<p><b>Email:</b> ' + formData.txtEmailCorp + '</p>';
 	content += '<p><b>Company:</b> ' + formData.txtCorp + '</p>';
 	content += '<p><b>Subject:</b> ' + formData.ddlSubjectCorp + '</p>';
@@ -56,7 +56,7 @@ mailerObj.sendContactUsEmailCorp = async function (formData) {
 
 	content = content.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
-	var params = {
+	const params = {
 		Destination: {
 			BccAddresses: ['aggiedevelopers@gmail.com'],
 			ToAddresses: [],
@@ -70,7 +70,7 @@ mailerObj.sendContactUsEmailCorp = async function (formData) {
 		ReplyToAddresses: ['no-reply@aggiedevelopers.com'],
 	};
 
-	var sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
+	const sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
 		.sendTemplatedEmail(params)
 		.promise();
 
@@ -86,10 +86,9 @@ mailerObj.sendContactUsEmailCorp = async function (formData) {
 };
 
 mailerObj.sendAdminEmail = async function (id) {
-	let email = await getEmailById(id);
-	var success = true;
-	var destinations = [];
-	var sendList = [];
+	const email = await getEmailById(id);
+	const destinations = [];
+	const sendList = [];
 
 	if (email == 'Error') {
 		return new Promise((resolve, reject) => {
@@ -98,8 +97,8 @@ mailerObj.sendAdminEmail = async function (id) {
 	}
 
 	if (email.recip_type == 'All') {
-		let generalRecipeints = await getGeneralRecipeints();
-		let corporateRecipeints = await getCorporateRecipeints();
+		const generalRecipeints = await getGeneralRecipeints();
+		const corporateRecipeints = await getCorporateRecipeints();
 
 		if (generalRecipeints == 'Error' || corporateRecipeints == 'Error') {
 			return new Promise((resolve, reject) => {
@@ -108,8 +107,8 @@ mailerObj.sendAdminEmail = async function (id) {
 		}
 
 		generalRecipeints.forEach(function (recip) {
-			var destination = {};
-			var toAddress = {};
+			const destination = {};
+			const toAddress = {};
 
 			toAddress['ToAddresses'] = [recip.email];
 
@@ -120,8 +119,8 @@ mailerObj.sendAdminEmail = async function (id) {
 		});
 
 		corporateRecipeints.forEach(function (recip) {
-			var destination = {};
-			var toAddress = {};
+			const destination = {};
+			const toAddress = {};
 
 			toAddress['ToAddresses'] = [recip.email];
 
@@ -131,7 +130,7 @@ mailerObj.sendAdminEmail = async function (id) {
 			destinations.push(destination);
 		});
 	} else if (email.recip_type == 'Corporate') {
-		let corporateRecipeints = await getCorporateRecipeints();
+		const corporateRecipeints = await getCorporateRecipeints();
 
 		if (corporateRecipeints == 'Error') {
 			return new Promise((resolve, reject) => {
@@ -140,8 +139,8 @@ mailerObj.sendAdminEmail = async function (id) {
 		}
 
 		corporateRecipeints.forEach(function (recip) {
-			var destination = {};
-			var toAddress = {};
+			const destination = {};
+			const toAddress = {};
 
 			toAddress['ToAddresses'] = [recip.email];
 
@@ -151,7 +150,7 @@ mailerObj.sendAdminEmail = async function (id) {
 			destinations.push(destination);
 		});
 	} else if (email.recip_type == 'General') {
-		let generalRecipeints = await getGeneralRecipeints();
+		const generalRecipeints = await getGeneralRecipeints();
 
 		if (generalRecipeints == 'Error') {
 			return new Promise((resolve, reject) => {
@@ -160,8 +159,8 @@ mailerObj.sendAdminEmail = async function (id) {
 		}
 
 		generalRecipeints.forEach(function (recip) {
-			var destination = {};
-			var toAddress = {};
+			const destination = {};
+			const toAddress = {};
 
 			toAddress['ToAddresses'] = [recip.email];
 
@@ -176,13 +175,54 @@ mailerObj.sendAdminEmail = async function (id) {
 	while (destinations.length > 0) sendList.push(destinations.splice(0, 45));
 
 	return new Promise(async (resolve, reject) => {
-		var success = await attemptSend(email, sendList);
+		const success = await attemptSend(email, sendList);
 
 		if (success) {
-			var markedSent = await markEmailSent(email.id);
+			const markedSent = await markEmailSent(email.id);
 
 			if (markedSent) resolve('Success');
 			else resolve('Email failed to send.');
+		} else {
+			resolve('Email failed to send.');
+		}
+	});
+};
+
+mailerObj.sendTestEmail = async function (id) {
+	const email = await getEmailById(id);
+	const destinations = [];
+	const sendList = [];
+	const destination = {};
+	const toAddress = {};
+
+	if (email == 'Error') {
+		return new Promise((resolve, reject) => {
+			resolve('Email failed to send. Error retrieving email.');
+		});
+	}
+
+	email.subject = 'TEST: ' + email.subject;
+
+	toAddress['ToAddresses'] = [
+		'anguyen120@tamu.edu',
+		'aggiedevelopers@gmail.com',
+	];
+
+	destination['Destination'] = toAddress;
+
+	destination['ReplacementTemplateData'] =
+		'{ "unsubscribe":"general/' + '' + '" }';
+
+	destinations.push(destination);
+
+	// SES only allows 50 destinations at a time, so we must split the destinations array into smaller arrays
+	while (destinations.length > 0) sendList.push(destinations.splice(0, 45));
+
+	return new Promise(async (resolve, reject) => {
+		const success = await attemptSend(email, sendList);
+
+		if (success) {
+			resolve('Success');
 		} else {
 			resolve('Email failed to send.');
 		}
@@ -206,7 +246,7 @@ async function attemptSend(email, sendList) {
 }
 
 async function sendBulkMail(email, recips) {
-	var params = {
+	const params = {
 		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
 		Template: 'AWD-Branded-Email-Template',
 		DefaultTemplateData:
@@ -219,7 +259,7 @@ async function sendBulkMail(email, recips) {
 		Destinations: recips,
 	};
 
-	var sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
+	const sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
 		.sendBulkTemplatedEmail(params)
 		.promise();
 
@@ -239,13 +279,13 @@ async function sendBulkMail(email, recips) {
 mailerObj.listenForScheduledEmails = function () {
 	// listen for emails to be sent every hour at the fifth minute
 	schedule.scheduleJob('5 * * * *', function () {
-		var sqlReq = new sql.Request()
+		const sqlReq = new sql.Request()
 			.query(
 				'SELECT id FROM tbl_emails WHERE send_date <= GETUTCDATE() AND sent_date is NULL AND deleted = 0'
 			)
 			.then((result) => {
 				result.recordset.forEach(async function (result) {
-					let emailStatus = await mailerObj.sendAdminEmail(result.id);
+					const emailStatus = await mailerObj.sendAdminEmail(result.id);
 
 					if (emailStatus != 'Success') {
 						console.log('Error sending schedule email: ID: ' + result.id);
@@ -260,7 +300,7 @@ mailerObj.listenForScheduledEmails = function () {
 
 function getEmailById(id) {
 	return new Promise((resolve, reject) => {
-		var sqlReq = new sql.Request().input('id', sql.Int, id);
+		const sqlReq = new sql.Request().input('id', sql.Int, id);
 
 		sqlReq
 			.query(
@@ -277,7 +317,7 @@ function getEmailById(id) {
 
 function getGeneralRecipeints() {
 	return new Promise((resolve, reject) => {
-		var sqlReq = new sql.Request()
+		const sqlReq = new sql.Request()
 			.query(
 				'SELECT email, unsubscribe_guid FROM tbl_email_list WHERE deleted = 0'
 			)
@@ -293,7 +333,7 @@ function getGeneralRecipeints() {
 
 function getCorporateRecipeints() {
 	return new Promise((resolve, reject) => {
-		var sqlReq = new sql.Request()
+		const sqlReq = new sql.Request()
 			.query(
 				'SELECT email, unsubscribe_guid FROM tbl_corporate_email_list WHERE deleted = 0'
 			)
@@ -308,7 +348,7 @@ function getCorporateRecipeints() {
 
 function markEmailSent(id) {
 	return new Promise((resolve, reject) => {
-		var sqlReq = new sql.Request()
+		const sqlReq = new sql.Request()
 			.input('id', sql.Int, id)
 			.query('UPDATE tbl_emails SET sent_date = GETUTCDATE() WHERE id = @id')
 			.then((result) => {

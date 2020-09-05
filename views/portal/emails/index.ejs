@@ -70,6 +70,12 @@
 							<td>Not Sent</td>
 							<% } %> <% if (!email.sent_date && email.deleted == 0){ %>
 							<td class="text-center">
+								<a href="/portal/emails/test-send/<%= email.id%>"
+									><i
+										class="fas fa-vial main-purple font-weight-bold mr-3"
+										title="Send Test Email"
+									></i
+								></a>
 								<a href="/portal/emails/send/<%= email.id%>"
 									><i
 										class="fas fa-paper-plane main-purple font-weight-bold"

@@ -149,4 +149,19 @@ router.get('/send/:id', middleware.checkAuthenticated, async function (
 	}
 });
 
+router.get('/test-send/:id', middleware.checkAuthenticated, async function (
+	req,
+	res
+) {
+	const emailStatus = await email.sendTestEmail(req.params.id);
+
+	if (emailStatus != 'Success') {
+		req.flash('error', 'Error sending test email.');
+		res.redirect('/portal/emails/');
+	} else {
+		req.flash('success', 'Success! Test email sent.');
+		res.redirect('/portal/emails/');
+	}
+});
+
 module.exports = router;

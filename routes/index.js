@@ -119,7 +119,7 @@ router.post('/contact-us/general', function (req, res) {
 		.query(sqlQuery)
 		.then(async (result) => {
 			if (req.body.chkNewsGen !== 'on') {
-				let emailStatus = await email.sendContactUsEmailGen(req.body);
+				const emailStatus = await email.sendContactUsEmailGen(req.body);
 
 				if (emailStatus == 'Success') {
 					res
@@ -147,7 +147,7 @@ router.post('/contact-us/general', function (req, res) {
 		sqlReq
 			.query(sqlQuery)
 			.then(async (result) => {
-				let emailStatus = await email.sendContactUsEmailGen(req.body);
+				const emailStatus = await email.sendContactUsEmailGen(req.body);
 
 				if (emailStatus == 'Success') {
 					res
@@ -182,7 +182,7 @@ router.post('/contact-us/corporate', function (req, res) {
 		.query(sqlQuery)
 		.then(async (result) => {
 			if (req.body.chkNewsCorp !== 'on') {
-				let emailStatus = await email.sendContactUsEmailCorp(req.body);
+				const emailStatus = await email.sendContactUsEmailCorp(req.body);
 
 				if (emailStatus == 'Success') {
 					res
@@ -210,7 +210,7 @@ router.post('/contact-us/corporate', function (req, res) {
 		sqlReq
 			.query(sqlQuery)
 			.then(async (result) => {
-				let emailStatus = await email.sendContactUsEmailCorp(req.body);
+				const emailStatus = await email.sendContactUsEmailCorp(req.body);
 
 				if (emailStatus == 'Success') {
 					res
