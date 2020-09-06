@@ -37,7 +37,14 @@
 					</div>
 					<div class="form-group">
 						<label for="txtBody">Email Body</label>
-						<textarea id="txtBody" name="txtBody"><%=email.body%></textarea>
+						<small id="imageSizeHelp" class="form-text text-muted pb-3"
+							>When inserting images, please do not exceed a width of 500.</small
+						>
+						<textarea
+							id="txtBody"
+							name="txtBody"
+							aria-describedby="imageSizeHelp"
+						><%=email.body%></textarea>
 					</div>
 					<div class="form-group">
 						<label for="txtStartDate">Schedule Send Date</label>
