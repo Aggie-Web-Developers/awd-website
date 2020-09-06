@@ -16,7 +16,7 @@ mailerObj.sendContactUsEmailGen = async function (formData) {
 	content += '<p><b>Subject:</b> ' + formData.ddlSubjectGen + '</p>';
 	content += '<p><b>Comments:</b></p><p>' + formData.txtCommentsGen + '</p>';
 
-	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '<br>');
+	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '');
 
 	const params = {
 		Destination: {
@@ -54,7 +54,7 @@ mailerObj.sendContactUsEmailCorp = async function (formData) {
 	content += '<p><b>Subject:</b> ' + formData.ddlSubjectCorp + '</p>';
 	content += '<p><b>Comments:</b></p><p>' + formData.txtCommentsCorp + '</p>';
 
-	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '<br>');
+	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '');
 
 	const params = {
 		Destination: {
@@ -253,7 +253,7 @@ async function sendBulkMail(email, recips) {
 			'{"Subject": "' +
 			email.subject +
 			'", "content": "' +
-			email.body.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '<br>') +
+			email.body.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '') +
 			'"}',
 		ReplyToAddresses: ['aggiedevelopers@gmail.com'],
 		Destinations: recips,

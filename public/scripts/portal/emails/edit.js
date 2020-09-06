@@ -1,7 +1,14 @@
 // JS File for Portal Email Edit View
 
 $(function () {
-	setupSummerNote();
+	tinymce.init({
+		selector: '#txtBody',
+		plugins: ['image link autoresize'],
+		content_style: "body { font-family: 'Open Sans', sans-serif; }",
+		toolbar:
+			'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image |',
+		autoresize_on_init: true,
+	});
 
 	$('#frm').validate({
 		ignore: ':hidden, .note-editor *',
@@ -14,15 +21,3 @@ $(function () {
 		},
 	});
 });
-
-function setupSummerNote() {
-	$('#txtBody').summernote({
-		fontNames: ['Open Sans'],
-		fontName: 'Open Sans',
-	});
-
-	$('.note-editor .note-editable').css({
-		'line-height': '0.8',
-		'font-family': '"Open Sans", sans-serif',
-	});
-}
