@@ -276,27 +276,27 @@ async function sendBulkMail(email, recips) {
 	});
 }
 
-mailerObj.listenForScheduledEmails = function () {
-	// listen for emails to be sent every hour at the fifth minute
-	schedule.scheduleJob('5 * * * *', function () {
-		const sqlReq = new sql.Request()
-			.query(
-				'SELECT id FROM tbl_emails WHERE send_date <= GETUTCDATE() AND sent_date is NULL AND deleted = 0'
-			)
-			.then((result) => {
-				result.recordset.forEach(async function (result) {
-					const emailStatus = await mailerObj.sendAdminEmail(result.id);
+// mailerObj.listenForScheduledEmails = function () {
+// 	// listen for emails to be sent every hour at the fifth minute
+// 	schedule.scheduleJob('5 * * * *', function () {
+// 		const sqlReq = new sql.Request()
+// 			.query(
+// 				'SELECT id FROM tbl_emails WHERE send_date <= GETUTCDATE() AND sent_date is NULL AND deleted = 0'
+// 			)
+// 			.then((result) => {
+// 				result.recordset.forEach(async function (result) {
+// 					const emailStatus = await mailerObj.sendAdminEmail(result.id);
 
-					if (emailStatus != 'Success') {
-						console.log('Error sending schedule email: ID: ' + result.id);
-					}
-				});
-			})
-			.catch((err) => {
-				console.log('Error sending scheduled emails.');
-			});
-	});
-};
+// 					if (emailStatus != 'Success') {
+// 						console.log('Error sending schedule email: ID: ' + result.id);
+// 					}
+// 				});
+// 			})
+// 			.catch((err) => {
+// 				console.log('Error sending scheduled emails.');
+// 			});
+// 	});
+// };
 
 function getEmailById(id) {
 	return new Promise((resolve, reject) => {
