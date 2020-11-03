@@ -5,6 +5,7 @@ const sql = require('mssql');
 const email = require('../email/email');
 const path = require('path');
 const middleware = require('../middleware');
+const fetch = require('node-fetch');
 
 router.get('/', function (req, res) {
 	var sqlQuery =
@@ -103,58 +104,85 @@ router.get('/contact-us', function (req, res) {
 
 // ajax post route for general contact us form
 router.post('/contact-us/general', function (req, res) {
-	var sqlReq = new sql.Request();
+	if (
+		req.body.hiddenGenRecaptcha === undefined ||
+		req.body.hiddenGenRecaptcha === null ||
+		req.body.hiddenGenRecaptcha === ''
+	) {
+		res.status(400).send();
+	} else {
+		const secretKey = process.env.captchaSecret;
+		const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.hiddenGenRecaptcha}&remoteip=${req.connection.remoteAddress}`;
 
-	sqlReq.input('contact_name', sql.NVarChar, req.body.txtNameGen);
-	sqlReq.input('email', sql.NVarChar, req.body.txtEmailGen);
-	sqlReq.input('subject', sql.NVarChar, req.body.ddlSubjectGen);
-	sqlReq.input('comments', sql.NVarChar, req.body.txtCommentsGen);
-
-	var sqlQuery =
-		'INSERT INTO tbl_contact_requests ' +
-		'(contact_name, email, subject, comments) values ' +
-		'(@contact_name, @email, @subject, @comments) ';
-
-	sqlReq
-		.query(sqlQuery)
-		.then(async (result) => {
-			if (req.body.chkNewsGen !== 'on') {
-				const emailStatus = await email.sendContactUsEmailGen(req.body);
-
-				if (emailStatus == 'Success') {
-					res
-						.status(200)
-						.send('Success! Our best owl is on the way with your message.');
-				} else {
-					res.status(400).send();
+		const response = fetch(verifyUrl)
+			.then((res) => res.json())
+			.then((json) => {
+				if (json.success !== undefined && !json.success) {
+					throw new Error('Captcha verification failed');
 				}
-			}
-		})
-		.catch((err) => {
-			res.status(400).send();
-		});
+			})
+			.then(() => {
+				var sqlReq = new sql.Request();
 
-	if (req.body.chkNewsGen === 'on') {
-		sqlReq = new sql.Request();
-		sqlReq.input('email', sql.NVarChar, req.body.txtEmailGen);
+				sqlReq.input('contact_name', sql.NVarChar, req.body.txtNameGen);
+				sqlReq.input('email', sql.NVarChar, req.body.txtEmailGen);
+				sqlReq.input('subject', sql.NVarChar, req.body.ddlSubjectGen);
+				sqlReq.input('comments', sql.NVarChar, req.body.txtCommentsGen);
 
-		sqlQuery =
-			'IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) ' +
-			'BEGIN ' +
-			'INSERT INTO tbl_email_list (email) values (@email) ' +
-			'END';
+				var sqlQuery =
+					'INSERT INTO tbl_contact_requests ' +
+					'(contact_name, email, subject, comments) values ' +
+					'(@contact_name, @email, @subject, @comments) ';
 
-		sqlReq
-			.query(sqlQuery)
-			.then(async (result) => {
-				const emailStatus = await email.sendContactUsEmailGen(req.body);
+				sqlReq
+					.query(sqlQuery)
+					.then(async (result) => {
+						if (req.body.chkNewsGen !== 'on') {
+							const emailStatus = await email.sendContactUsEmailGen(req.body);
 
-				if (emailStatus == 'Success') {
-					res
-						.status(200)
-						.send('Success! Our best owl is on the way with your message.');
-				} else {
-					res.status(400).send();
+							if (emailStatus == 'Success') {
+								res
+									.status(200)
+									.send(
+										'Success! Our best owl is on the way with your message.'
+									);
+							} else {
+								res.status(400).send();
+							}
+						}
+					})
+					.catch((err) => {
+						res.status(400).send();
+					});
+
+				if (req.body.chkNewsGen === 'on') {
+					sqlReq = new sql.Request();
+					sqlReq.input('email', sql.NVarChar, req.body.txtEmailGen);
+
+					sqlQuery =
+						'IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) ' +
+						'BEGIN ' +
+						'INSERT INTO tbl_email_list (email) values (@email) ' +
+						'END';
+
+					sqlReq
+						.query(sqlQuery)
+						.then(async (result) => {
+							const emailStatus = await email.sendContactUsEmailGen(req.body);
+
+							if (emailStatus == 'Success') {
+								res
+									.status(200)
+									.send(
+										'Success! Our best owl is on the way with your message.'
+									);
+							} else {
+								res.status(400).send();
+							}
+						})
+						.catch((err) => {
+							res.status(400).send();
+						});
 				}
 			})
 			.catch((err) => {
@@ -165,59 +193,86 @@ router.post('/contact-us/general', function (req, res) {
 
 // ajax post route for corporate contact us form
 router.post('/contact-us/corporate', function (req, res) {
-	var sqlReq = new sql.Request();
+	if (
+		req.body.hiddenCorpRecaptcha === undefined ||
+		req.body.hiddenCorpRecaptcha === null ||
+		req.body.hiddenCorpRecaptcha === ''
+	) {
+		res.status(400).send();
+	} else {
+		const secretKey = process.env.captchaSecret;
+		const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.hiddenCorpRecaptcha}&remoteip=${req.connection.remoteAddress}`;
 
-	sqlReq.input('contact_name', sql.NVarChar, req.body.txtNameCorp);
-	sqlReq.input('company', sql.NVarChar, req.body.txtCorp);
-	sqlReq.input('email', sql.NVarChar, req.body.txtEmailCorp);
-	sqlReq.input('subject', sql.NVarChar, req.body.ddlSubjectCorp);
-	sqlReq.input('comments', sql.NVarChar, req.body.txtCommentsCorp);
-
-	var sqlQuery =
-		'INSERT INTO tbl_contact_requests ' +
-		'(contact_type, company, contact_name, email, subject, comments) values ' +
-		"('company', @company, @contact_name, @email, @subject, @comments) ";
-
-	sqlReq
-		.query(sqlQuery)
-		.then(async (result) => {
-			if (req.body.chkNewsCorp !== 'on') {
-				const emailStatus = await email.sendContactUsEmailCorp(req.body);
-
-				if (emailStatus == 'Success') {
-					res
-						.status(200)
-						.send('Success! Our best owl is on the way with your message.');
-				} else {
-					res.status(400).send();
+		const response = fetch(verifyUrl)
+			.then((res) => res.json())
+			.then((json) => {
+				if (json.success !== undefined && !json.success) {
+					throw new Error('Captcha verification failed');
 				}
-			}
-		})
-		.catch((err) => {
-			res.status(400).send();
-		});
+			})
+			.then(() => {
+				var sqlReq = new sql.Request();
 
-	if (req.body.chkNewsCorp === 'on') {
-		sqlReq = new sql.Request();
-		sqlReq.input('email', sql.NVarChar, req.body.txtEmailCorp);
+				sqlReq.input('contact_name', sql.NVarChar, req.body.txtNameCorp);
+				sqlReq.input('company', sql.NVarChar, req.body.txtCorp);
+				sqlReq.input('email', sql.NVarChar, req.body.txtEmailCorp);
+				sqlReq.input('subject', sql.NVarChar, req.body.ddlSubjectCorp);
+				sqlReq.input('comments', sql.NVarChar, req.body.txtCommentsCorp);
 
-		sqlQuery =
-			'IF NOT EXISTS (SELECT * FROM tbl_corporate_email_list WHERE email = @email) ' +
-			'BEGIN ' +
-			'INSERT INTO tbl_corporate_email_list (email) values (@email) ' +
-			'END';
+				var sqlQuery =
+					'INSERT INTO tbl_contact_requests ' +
+					'(contact_type, company, contact_name, email, subject, comments) values ' +
+					"('company', @company, @contact_name, @email, @subject, @comments) ";
 
-		sqlReq
-			.query(sqlQuery)
-			.then(async (result) => {
-				const emailStatus = await email.sendContactUsEmailCorp(req.body);
+				sqlReq
+					.query(sqlQuery)
+					.then(async (result) => {
+						if (req.body.chkNewsCorp !== 'on') {
+							const emailStatus = await email.sendContactUsEmailCorp(req.body);
 
-				if (emailStatus == 'Success') {
-					res
-						.status(200)
-						.send('Success! Our best owl is on the way with your message.');
-				} else {
-					res.status(400).send();
+							if (emailStatus == 'Success') {
+								res
+									.status(200)
+									.send(
+										'Success! Our best owl is on the way with your message.'
+									);
+							} else {
+								res.status(400).send();
+							}
+						}
+					})
+					.catch((err) => {
+						res.status(400).send();
+					});
+
+				if (req.body.chkNewsCorp === 'on') {
+					sqlReq = new sql.Request();
+					sqlReq.input('email', sql.NVarChar, req.body.txtEmailCorp);
+
+					sqlQuery =
+						'IF NOT EXISTS (SELECT * FROM tbl_corporate_email_list WHERE email = @email) ' +
+						'BEGIN ' +
+						'INSERT INTO tbl_corporate_email_list (email) values (@email) ' +
+						'END';
+
+					sqlReq
+						.query(sqlQuery)
+						.then(async (result) => {
+							const emailStatus = await email.sendContactUsEmailCorp(req.body);
+
+							if (emailStatus == 'Success') {
+								res
+									.status(200)
+									.send(
+										'Success! Our best owl is on the way with your message.'
+									);
+							} else {
+								res.status(400).send();
+							}
+						})
+						.catch((err) => {
+							res.status(400).send();
+						});
 				}
 			})
 			.catch((err) => {
