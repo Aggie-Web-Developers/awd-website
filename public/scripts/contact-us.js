@@ -68,13 +68,14 @@ $(function () {
 			e.preventDefault();
 		})
 		.validate({
-			ignore: ':hidden',
+			ignore: ':hidden:not(#hiddenGenRecaptcha)',
 			rules: {
 				txtNameGen: { required: true },
 				txtEmailGen: { required: true, email: true },
 				ddlSubjectGen: { required: true },
 				txtCommentsGen: { required: true },
 				chkTermsGen: { required: true },
+				hiddenGenRecaptcha: { required: true },
 			},
 			messages: {
 				txtNameGen: { required: 'Please enter your name.' },
@@ -87,6 +88,9 @@ $(function () {
 				},
 				chkTermsGen: {
 					required: 'You must agree to our terms and conditions.',
+				},
+				hiddenGenRecaptcha: {
+					required: 'Please complete the CAPTCHA.',
 				},
 			},
 			errorPlacement: function (error, element) {
@@ -104,6 +108,8 @@ $(function () {
 						$('html, body').animate({ scrollTop: 0 }, 'slow');
 						$('#divGenContact').slideUp(1500);
 						$('#frmGen')[0].reset();
+
+						$('#hiddenGenRecaptcha').val('');
 
 						checkAlerts(data);
 					},
@@ -124,7 +130,7 @@ $(function () {
 			e.preventDefault();
 		})
 		.validate({
-			ignore: ':hidden',
+			ignore: ':hidden:not(#hiddenCorpRecaptcha)',
 			rules: {
 				txtNameCorp: { required: true },
 				txtCorp: { required: true },
@@ -132,6 +138,7 @@ $(function () {
 				ddlSubjectCorp: { required: true },
 				txtCommentsCorp: { required: true },
 				chkTermsCorp: { required: true },
+				hiddenCorpRecaptcha: { required: true },
 			},
 			messages: {
 				txtNameCorp: { required: 'Please enter your name.' },
@@ -145,6 +152,9 @@ $(function () {
 				},
 				chkTermsCorp: {
 					required: 'You must agree to our terms and conditions.',
+				},
+				hiddenCorpRecaptcha: {
+					required: 'Please complete the CAPTCHA.',
 				},
 			},
 			errorPlacement: function (error, element) {
@@ -162,6 +172,8 @@ $(function () {
 						$('html, body').animate({ scrollTop: 0 }, 'slow');
 						$('#divCorpContact').slideUp(1500);
 						$('#frmCorp')[0].reset();
+
+						$('#hiddenCorpRecaptcha').val('');
 
 						checkAlerts(data);
 					},
@@ -224,4 +236,24 @@ function setHeadElements() {
 		'content',
 		'Get in touch with Aggie Web Developers.'
 	);
+}
+
+function CaptchaCallback() {
+	var widgetId1;
+	var widgetId2;
+	widgetId1 = grecaptcha.render('genCaptcha', {
+		sitekey: '6LdEY94ZAAAAABoFUprOOSUaWB6Zo32-WnxFaVek',
+		callback: setGenCaptcha,
+	});
+	widgetId2 = grecaptcha.render('corpCaptcha', {
+		sitekey: '6LdEY94ZAAAAABoFUprOOSUaWB6Zo32-WnxFaVek',
+		callback: setCorpCaptcha,
+	});
+}
+
+function setGenCaptcha(response) {
+	$('#hiddenGenRecaptcha').val(response);
+}
+function setCorpCaptcha(response) {
+	$('#hiddenCorpRecaptcha').val(response);
 }
