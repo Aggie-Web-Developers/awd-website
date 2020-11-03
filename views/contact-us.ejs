@@ -61,6 +61,12 @@
 							<input type="checkbox" class="form-check-input checkmark" id="chkNewsGen" name="chkNewsGen">
 							<label class="form-check-label" for="chkNewsGen">Join Our Newsletter</label>
 						</div>
+
+						<div class="form-group mt-3">
+							<div id="genCaptcha" class="g-recaptcha" data-sitekey="6LdEY94ZAAAAABoFUprOOSUaWB6Zo32-WnxFaVek"></div>
+							<input type="hidden" class="required" name="hiddenGenRecaptcha" id="hiddenGenRecaptcha">
+						</div>
+						
 						<button type="submit" class="btn btn-contact btn-contact-slim mt-4">Send an Owl</button>
 					</form>
 				</div>
@@ -108,11 +114,18 @@
 							<input type="checkbox" class="form-check-input checkmark" id="chkNewsCorp" name="chkNewsCorp">
 							<label class="form-check-label" for="chkNewsCorp">Join Our Corporate Newsletter</label>
 						</div>
+
+						<div class="form-group mt-3">
+							<div id="corpCaptcha" class="g-recaptcha" data-sitekey="6LdEY94ZAAAAABoFUprOOSUaWB6Zo32-WnxFaVek"></div>
+							<input type="hidden" class="required" name="hiddenCorpRecaptcha" id="hiddenCorpRecaptcha">
+						</div>
+
 						<button type="submit" class="btn btn-contact btn-contact-slim mt-4">Send an Owl</button>
 					</form>
 				</div>
 			</div>
 		</div>
 
+		<script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
 		<script src="/scripts/contact-us.js"></script>
 <%- include('partials/footer') %>
