@@ -112,7 +112,7 @@ router.post('/contact-us/general', function (req, res) {
 		res.status(400).send();
 	} else {
 		const secretKey = process.env.captchaSecret;
-		const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&respone=${req.body.hiddenGenRecaptcha}&remoteip=${req.connection.remoteAddress}`;
+		const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.hiddenGenRecaptcha}&remoteip=${req.connection.remoteAddress}`;
 
 		const response = fetch(verifyUrl)
 			.then((res) => res.json())
@@ -201,7 +201,7 @@ router.post('/contact-us/corporate', function (req, res) {
 		res.status(400).send();
 	} else {
 		const secretKey = process.env.captchaSecret;
-		const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&respone=${req.body.hiddenCorpRecaptcha}&remoteip=${req.connection.remoteAddress}`;
+		const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.hiddenCorpRecaptcha}&remoteip=${req.connection.remoteAddress}`;
 
 		const response = fetch(verifyUrl)
 			.then((res) => res.json())
