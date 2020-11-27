@@ -31,7 +31,7 @@
 
 					<div class="col-sm-12 col-lg-6 mt-5 justify-content-center">
 						<a href="<%=sponsor.refer_url%>" target="_blank"><img class="sponsors-image" alt="<%=sponsor.name%> Logo" src="<%=sponsor.image_url%>"></a>
-						<h1 class="font-weight-bold sponsor-name text-uppercase mt-2"><%=sponsor.name%></h1>
+						<h3 class="font-weight-bold sponsor-name text-uppercase mt-2"><%=sponsor.name%></h3>
 						<p class="font-weight-bold mt-2">Partner Since <%=sponsorDate.toLocaleDateString([], { month: 'long', year: 'numeric'})%></p>
 					</div>
 				<% }); %>
@@ -43,7 +43,7 @@
 			<% if (!sponsors || sponsors.length < 1) {%>
 			<div class="row text-center my-5">
 				<div class="col-12 my-5">
-					<h5>We are looking for sponsors that are ready to make a difference for our members.</h5>
+					<h3 class="font-125">We are looking for sponsors that are ready to make a difference for our members.</h3>
 					<a href="/contact-us" class="btn btn-lg btn-contact mt-5"><span class="d-none d-md-inline">Ready to</span> Be the First?</a>
 				</div>
 			</div>

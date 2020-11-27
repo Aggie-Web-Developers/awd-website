@@ -72,11 +72,11 @@
 
 		<div class="container my-5">
 
-			<h1 class="text-center">Current Projects</h1>
+			<h2 class="text-center font-25">Current Projects</h2>
 
 			<% if (!hasCurrent) {%>
 				<div class="row justify-content-center mt-4">
-					<h5>We're not currently working on anything, please check back soon.</h5>
+					<h3>We're not currently working on anything, please check back soon.</h3>
 				</div>
 			<% } else {%>
 			<div class="row justify-content-center">
@@ -93,8 +93,8 @@
 													</div>
 													<!-- Post Content-->
 													<div class="project-content">
-															<h1 class="title"><%=project.name%></h1>
-															<h2 class="sub_title"><%=project.work_done%></h2>
+															<h3 class="title"><%=project.name%></h3>
+															<h4 class="sub_title"><%=project.work_done%></h4>
 															<p class="description">
 																<a class="btn btn-outline-purple mt-4" href="<%=project.github_url%>" target="_blank">View on <i class="fab fa-github-alt px-2"></i></a>
 																<a class="btn btn-purple mt-4" href="<%=project.test_url%>" target="_blank">Preview Site</a>
@@ -122,12 +122,12 @@
 
 		<div class="container my-5">
 
-			<h1 class="text-center">Completed Projects</h1>
+			<h2 class="text-center font-25">Completed Projects</h2>
 
 
 			<% if (!hasCompleted) {%>
 				<div class="row justify-content-center mt-4 mb-5">
-					<h5>We are working hard to bring you our first project completion.</h5>
+					<h3>We are working hard to bring you our first project completion.</h3>
 				</div>
 			<% } else {%>
 			<div class="row justify-content-center">
@@ -144,8 +144,8 @@
 													</div>
 													<!-- Post Content-->
 													<div class="project-content">
-															<h1 class="title"><%=project.name%></h1>
-															<h2 class="sub_title"><%=project.work_done%></h2>
+															<h3 class="title"><%=project.name%></h3>
+															<h4 class="sub_title"><%=project.work_done%></h4>
 															<p class="description">
 																<a class="btn btn-outline-purple mt-4" href="<%=project.github_url%>" target="_blank">View on <i class="fab fa-github-alt px-2"></i></a>
 																<a class="btn btn-purple mt-4" href="<%=project.test_url%>" target="_blank">Preview Site</a>
