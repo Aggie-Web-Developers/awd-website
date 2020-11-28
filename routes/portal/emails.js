@@ -46,14 +46,16 @@ router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 
 	if (req.body.txtSendDate != '') {
 		var user_date = new Date(req.body.txtSendDate + ' ' + req.body.txtSendTime);
-		var converted_date = new Date(
-			user_date.getTime() + user_date.getTimezoneOffset() * 60000
-		)
-			.toISOString()
-			.slice(0, 19)
-			.replace('T', ' ');
 
-		sqlReq.input('send_date', sql.NVarChar, converted_date);
+		user_date.setMinutes(
+			user_date.getMinutes() + user_date.getTimezoneOffset()
+		);
+
+		sqlReq.input(
+			'send_date',
+			sql.NVarChar,
+			moment(user_date).format('YYYY-MM-DD HH:mm:ss')
+		);
 
 		sqlQuery =
 			'UPDATE tbl_emails ' +
@@ -99,14 +101,16 @@ router.post('/new', middleware.checkAuthenticated, function (req, res) {
 	// If user has specified a date to send the email at
 	if (req.body.txtSendDate != '') {
 		var user_date = new Date(req.body.txtSendDate + ' ' + req.body.txtSendTime);
-		var converted_date = new Date(
-			user_date.getTime() + user_date.getTimezoneOffset() * 60000
-		)
-			.toISOString()
-			.slice(0, 19)
-			.replace('T', ' ');
 
-		sqlReq.input('send_date', sql.NVarChar, converted_date);
+		user_date.setMinutes(
+			user_date.getMinutes() + user_date.getTimezoneOffset()
+		);
+
+		sqlReq.input(
+			'send_date',
+			sql.NVarChar,
+			moment(user_date).format('YYYY-MM-DD HH:mm:ss')
+		);
 
 		sqlQuery =
 			'INSERT INTO tbl_emails ' +
