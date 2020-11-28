@@ -4,6 +4,8 @@ const flash = require('express-flash');
 const sql = require('mssql');
 const middleware = require('../../middleware');
 const email = require('../../email/email');
+const moment = require('moment');
+const tz = require('moment-timezone');
 
 router.get('/', middleware.checkAuthenticated, function (req, res) {
 	var sqlQuery =
@@ -44,11 +46,16 @@ router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 
 	if (req.body.txtSendDate != '') {
 		var user_date = new Date(req.body.txtSendDate + ' ' + req.body.txtSendTime);
-		var converted_date = new Date(user_date.getTime())
-			.toISOString()
-			.slice(0, 19)
-			.replace('T', ' ');
-		sqlReq.input('send_date', sql.NVarChar, converted_date);
+
+		user_date.setMinutes(
+			user_date.getMinutes() + user_date.getTimezoneOffset()
+		);
+
+		sqlReq.input(
+			'send_date',
+			sql.NVarChar,
+			moment(user_date).format('YYYY-MM-DD HH:mm:ss')
+		);
 
 		sqlQuery =
 			'UPDATE tbl_emails ' +
@@ -94,11 +101,16 @@ router.post('/new', middleware.checkAuthenticated, function (req, res) {
 	// If user has specified a date to send the email at
 	if (req.body.txtSendDate != '') {
 		var user_date = new Date(req.body.txtSendDate + ' ' + req.body.txtSendTime);
-		var converted_date = new Date(user_date.getTime())
-			.toISOString()
-			.slice(0, 19)
-			.replace('T', ' ');
-		sqlReq.input('send_date', sql.NVarChar, converted_date);
+
+		user_date.setMinutes(
+			user_date.getMinutes() + user_date.getTimezoneOffset()
+		);
+
+		sqlReq.input(
+			'send_date',
+			sql.NVarChar,
+			moment(user_date).format('YYYY-MM-DD HH:mm:ss')
+		);
 
 		sqlQuery =
 			'INSERT INTO tbl_emails ' +

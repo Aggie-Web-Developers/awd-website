@@ -5,8 +5,8 @@
 	if (email.send_date) {
 		const offset = email.send_date.getTimezoneOffset();
 
-		var temp_date = new Date(email.send_date.getTime() + (offset*60*1000*-1));
-	 		sendDateFormatted = temp_date.toISOString().split('T')[0];
+		var temp_date = new Date(email.send_date.getTime() + (offset*-60000));
+		sendDateFormatted = temp_date.toISOString().split('T')[0];
 	}
 %>
 

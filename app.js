@@ -101,6 +101,6 @@ app.get('/*', function (req, res) {
 	res.render('404');
 });
 
-//email.listenForScheduledEmails();
+email.listenForScheduledEmails();
 
 app.listen(process.env.PORT || 8080);
