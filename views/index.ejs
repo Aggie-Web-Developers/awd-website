@@ -33,27 +33,27 @@
 		<div class="container my-5">
 			<div class="d-flex flex-row my-4">
 				<div class="col-sm-12 text-center">
-					<h1 class="home-icon">We are</h1>
+					<h2 class="home-icon">We are</h2>
 				</div>
 			</div>
 			<div class="d-lg-flex flex-row justify-content-between">
 				<div class="col-sm-12 col-lg-4 text-center">
 					<i class="fas fa-chalkboard-teacher home-icon main-purple mb-3"></i>
-					<h2>Leaders</h2>
+					<h3>Leaders</h3>
 					<p>
 						Brainstorming ideas, spreading knowledge, and empowering success in one another. AWD strives for selfless devotion towards nourishing a space that supports the next generation of web developers.
 					</p>
 				</div>
 				<div class="col-sm-12 col-lg-4 text-center">
 					<i class="fas fa-users home-icon main-purple mb-3"></i>
-					<h2>Learners</h2>
+					<h3>Learners</h3>
 					<p>
 						Whether you're neck-deep in full-stack adaptive design or just getting started with "Hello World!", AWD promotes a collaborative and engaging environment that will help you learn, regardless of skill level.
 					</p>
 				</div>
 				<div class="col-sm-12 col-lg-4 text-center">
 					<i class="fas fa-terminal home-icon main-purple mb-3"></i>
-					<h2>Web Developers</h2>
+					<h3>Web Developers</h3>
 					<p>
 						Others tend to place web development into the "programming" category, we place a spotlight on design. Projects you develop at AWD will give you the "Wow!" factor employers are seeking.
 					</p>
@@ -65,18 +65,18 @@
 			<div class="container">
 				<div class="d-flex flex-row my-4">
 					<div class="col-sm-12 text-center">
-						<h1 class="what-can-we-do">What Can We Do For You?</h1>
+						<h2 class="what-can-we-do">What Can We Do For You?</h2>
 					</div>
 				</div>
-				<div class="d-lg-flex flex-row justify-content-between mt-5">
-					<div class="col-sm-12 col-lg-6 text-center mt-5">
-						<h2 class="font-weight-bold">Workshops</h2>
+				<div class="d-lg-flex flex-row justify-content-between">
+					<div class="col-sm-12 col-lg-6 text-center mt-5 mt-md-3">
+						<h3 class="font-weight-bold">Workshops</h3>
 						<p class="px-2">
-							Weekly workshops alternate between beginner and advanced sessions, each allowing you to gain hands-on experience in web development and design.
+							Weekly workshops allowing you to gain hands-on experience in web development and design.
 						</p>
 					</div>
-					<div class="col-sm-12 col-lg-6 text-center mt-5">
-						<h2 class="font-weight-bold">Projects</h2>
+					<div class="col-sm-12 col-lg-6 text-center mt-5 mt-md-3">
+						<h3 class="font-weight-bold">Projects</h3>
 						<p class="px-2">
 							Real semester-long projects led by seasoned product managers, using a consistent tech stack and held to realistic deadlines.
 						</p>
@@ -87,7 +87,7 @@
 
 		<div class="container my-5">
 
-			<h1 class="text-center">News and Events</h1>
+			<h2 class="text-center font-25">News and Events</h2>
 
 			<% if (events && events.length > 0) {%>
 			<div class="row justify-content-center">
@@ -107,8 +107,8 @@
 											<img src="<%= event.image_link%>" alt="<%= event.name%> Thumbnail"></div>
 										<div class="post-content">
 											<div class="category"><%= event.type%></div>
-											<h1 class="title"><%= event.name%></h1>
-											<h2 class="sub_title"><%= event.summary%></h2>
+											<p class="title"><%= event.name%></h3>
+											<p class="sub_title"><%= event.summary%></h4>
 											<p class="description"><%- event.descr%></p>
 											<div class="post-meta">
 												<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><%= event.event_time.toLocaleString([], { month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' })%></span>
@@ -131,7 +131,7 @@
 			<% } else {%>
 			<div class="row justify-content-center mt-4 mb-5">
 				<div class="col-12 text-center">
-					<h1 class="no-event-text">No news is good news, please check back soon.</h1>
+					<h3 class="no-event-text">No news is good news, please check back soon.</h3>
 				</div>
 			</div>
 			<% } %>
