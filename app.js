@@ -39,7 +39,7 @@ app.use(passport.session());
 const config = {
 	server: process.env.DB_SERVER,
 	port: 1433,
-	user: 'sa',
+	user: process.env.DB_USER || '',
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_PROD || 'awd-site-dev',
 	stream: false,
