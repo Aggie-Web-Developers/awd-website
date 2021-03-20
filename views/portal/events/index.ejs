@@ -32,6 +32,7 @@
 							<th>Web End Date</th>
 							<th>Deleted</th>
 							<th>Options</th>
+							<th>Recording URL</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -85,6 +86,13 @@
 									></i
 								></a>
 							</td>
+							<% } else { %>
+								<td></td>
+							<% }%> <% if (event.rec_url) { %>
+								<td class="text-center">
+									<a href="<%= event.rec_url %>" target="_blank"
+									>Link</a>
+								</td>
 							<% } else { %>
 							<td></td>
 							<% }%>

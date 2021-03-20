@@ -72,11 +72,12 @@ router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 	sqlReq.input('location', sql.NVarChar, req.body.txtLocation);
 	sqlReq.input('image_link', sql.NVarChar, req.body.txtImage);
 	sqlReq.input('creating_user_id', sql.Int, req.user.id);
+	sqlReq.input('rec_url', sql.NVarChar, req.body.txtRecLink)
 
 	var sqlQuery =
 		'UPDATE tbl_events SET ' +
 		'name = @name, deleted = @deleted, type = @type, event_time = @event_time, summary= @summary, descr = @descr, start_date = @start_date, ' +
-		'end_date = @end_date, location= @location, image_link = @image_link, creating_user_id = @creating_user_id ' +
+		'end_date = @end_date, location= @location, image_link = @image_link, creating_user_id = @creating_user_id, rec_url = @rec_url ' +
 		'WHERE id = @id';
 
 	sqlReq
@@ -84,6 +85,7 @@ router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 		.then((result) => {
 			if (result.rowsAffected == 0) {
 				req.flash('error', 'Error updating event.');
+				print("row not affected");
 				res.redirect('/portal/events/');
 			} else {
 				req.flash('success', 'Success! Event updated.');
@@ -132,11 +134,12 @@ router.post('/new', middleware.checkAuthenticated, function (req, res) {
 	sqlReq.input('location', sql.NVarChar, req.body.txtLocation);
 	sqlReq.input('image_link', sql.NVarChar, req.body.txtImage);
 	sqlReq.input('creating_user_id', sql.Int, req.user.id);
+	sqlReq.input('rec_url', sql.NVarChar, req.body.txtRecLink);
 
 	var sqlQuery =
 		'INSERT INTO tbl_events ' +
-		'(name, deleted, type, event_time, summary, descr, start_date, end_date, location, image_link, creating_user_id) values ' +
-		'(@name, @deleted, @type, @event_time, @summary, @descr, @start_date, @end_date, @location, @image_link, @creating_user_id) ';
+		'(name, deleted, type, event_time, summary, descr, start_date, end_date, location, image_link, creating_user_id, rec_url) values ' +
+		'(@name, @deleted, @type, @event_time, @summary, @descr, @start_date, @end_date, @location, @image_link, @creating_user_id, @rec_url) ';
 
 	sqlReq
 		.query(sqlQuery)

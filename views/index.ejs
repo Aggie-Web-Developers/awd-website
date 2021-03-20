@@ -113,6 +113,9 @@
 											<div class="post-meta">
 												<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><%= event.event_time.toLocaleString([], { month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' })%></span>
 											</div>
+											<% if (event.rec_link) {%>
+											<a href="<%= events.rec_link %>" target="_blank">Recording Link</a>
+											<% } %>
 											<div class="post-meta mt-2 pm">
 											<% if (event.type == "News") {%>
 												<span class="timestamp" title="Author"><i class="fas fa-user-edit mr-2"></i><%= event.author %></span>

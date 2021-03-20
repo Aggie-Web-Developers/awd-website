@@ -56,6 +56,10 @@ $(function () {
 		$('.category').html($('#ddlEventType').val());
 		$('.sub_title').html($('#txtEventSubTitle').val());
 		$('.description').html($('#txtDescr').val());
+		
+		if($('#txtRecLink').val() != "") {
+			$('.rec_url').html("<a href='" + $('#txtRecLink').val() + "' target='_blank'>Recording Link</a>");
+		}
 
 		$('#divPreview').show();
 	});
@@ -69,6 +73,7 @@ $(function () {
 			txtImage: { required: true, maxlength: 500 },
 			txtDate: { required: true },
 			txtLocation: { required: true },
+			txtRecLink: { maxlength: 255 },
 			txtStartDate: { required: true },
 			txtEndDate: { required: true },
 			txtLocation: { required: true, maxlength: 25 },
