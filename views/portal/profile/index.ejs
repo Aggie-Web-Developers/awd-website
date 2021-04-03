@@ -1,0 +1,49 @@
+<%- include('../partials/header') %> <% if (messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if (messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
+<% } %>
+
+<div class="container">
+	<div class="row justify-content-around align-items-center mt-5">
+		<div class="col">
+			<h1>My Profile</h1>
+		</div>
+		<div class="col-7 text-right">
+			<a href="/portal/projects/edit" class="btn btn-contact btn-contact-slim">Edit</a>
+		</div>
+	</div>
+</div>
+<div class="container" id="profilePane">
+	<div class="row justify-content-around">
+		<div class="flex-column p-3">
+            <img id="profilePicture" src="/images/AWD-logo.png" alt="Profile Picture">
+		</div>
+        <div class="col p-3">
+            <h2><%= user.first_name %> <%= user.last_name %></h2>
+            <p><%= user.isAdmin ? 'Admin' : 'Member' %></p>
+            <hr>
+			<div class="row">
+				<div class="flex-column pl-3">
+					<p>Joined:</p>
+					<p>Email:</p>
+					<p>Website:</p>
+				</div>
+				<div class="col">
+					<p><%= user.create_date.toLocaleString('default', { month: 'short', year: 'numeric' }) %></p>
+					<p><a href="mailto:<%= user.email %>"><%= user.email %></a></p>
+					<p><a href="//<%= user.website %>" target="_blank"><%= user.website %></a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- <div class="row">
+		<div class="col p-3">
+			<h3>Bio</h3>
+			<p><%= user.bio ? user.bio : "There's nothing here!" %></p>
+		</div>
+	</div> -->
+</div>
+
+<script src="/scripts/portal/sponsors/index.js"></script>
+<%- include('../partials/footer') %>

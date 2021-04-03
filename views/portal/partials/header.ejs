@@ -87,8 +87,11 @@
 					></i
 				></a>
 				<div class="ml-auto">
-					<ul class="nav navbar-nav" id="portalLinkUl">
+					<ul class="nav align-items-center" id="portalLinkUl">
 						<% if (user) { %>
+						<li class="nav-item active">
+							<a class="nav-link" href="/portal/profile">My Profile</a>
+						</li>
 						<li class="nav-item active">
 							<form action="/portal/logout?_method=DELETE" method="POST">
 								<button class="logout-button" type="submit">Logout</button>
