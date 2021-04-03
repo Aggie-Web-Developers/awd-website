@@ -14,6 +14,10 @@ router.get('/login', middleware.checkNotAuthenticated, function (req, res) {
 	res.render('portal/login');
 });
 
+router.get('/loginMember', middleware.checkNotAuthenticated, function (req, res) {
+	res.render('portal/MemberPage_login');
+});
+
 router.post(
 	'/login',
 	middleware.checkNotAuthenticated,
