@@ -1217,7 +1217,7 @@ label.error {
 	color: #fff;
 }
 
-#portalLinkUl .active > .nav-link {
+.portalLinkUl .active > .nav-link {
 	color: #fff;
 	font-weight: bold;
 	transition: color 0.4s linear;
