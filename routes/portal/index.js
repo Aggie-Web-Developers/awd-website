@@ -28,7 +28,7 @@ router.get('/register', middleware.checkNotAuthenticated, function (req, res) {
 	res.render('portal/register');
 });
 
-router.post('/register', middleware.checkNotAuthenticated, async function (
+/* router.post('/register', middleware.checkNotAuthenticated, async function (
 	req,
 	res
 ) {
@@ -74,7 +74,7 @@ router.post('/register', middleware.checkNotAuthenticated, async function (
 		);
 		res.redirect('/portal/register');
 	}
-});
+}); */
 
 router.delete('/logout', middleware.checkAuthenticated, (req, res) => {
 	req.logOut();
