@@ -77,7 +77,7 @@
 	<body class="portal-background">
 		<div id="divNav" class="navbar-fixed-top color-white">
 			<nav
-				class="navbar navbar-expand-lg navbar-light navbar-main mb-5 scrolled px-5"
+				class="navbar navbar-expand-lg navbar-dark navbar-main mb-5 scrolled px-5"
 				id="navbar"
 			>
 				<a id="portalMainLogo" class="navbar-brand" href="/portal/"
@@ -86,23 +86,40 @@
 						aria-hidden="true"
 					></i
 				></a>
-				<div class="ml-auto">
-					<ul class="nav align-items-center" id="portalLinkUl">
+				<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target=".dual-collapse2" aria-label="Expand Navigation Options" aria-expanded="false">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse dual-collapse2">
+					<ul class="nav navbar-nav portalLinkUl">
 						<% if (user) { %>
 						<li class="nav-item active">
-							<a class="nav-link" href="/portal/profile">My Profile</a>
+							<a class="nav-link" href="/portal/events">Events</a>
 						</li>
 						<li class="nav-item active">
-							<form action="/portal/logout?_method=DELETE" method="POST">
-								<button class="logout-button" type="submit">Logout</button>
-							</form>
-						</li>
-						<% } else { %>
-						<li class="nav-item active">
-							<a class="nav-link" href="/portal/login">Login</a>
+							<a class="nav-link" href="/portal/recordings">Recordings</a>
 						</li>
 						<% } %>
 					</ul>
+				</div>
+				<div class="navbar-collapse collapse dual-collapse2">
+					<div class="ml-auto">
+						<ul class="nav navbar-nav portalLinkUl">
+							<% if (user) { %>
+							<li class="nav-item active">
+								<a class="nav-link" href="/portal/profile">My Profile</a>
+							</li>
+							<li class="nav-item">
+								<form action="/portal/logout?_method=DELETE" method="POST">
+									<button class="nav-link logout-button active" type="submit">Logout</button>
+								</form>
+							</li>
+							<% } else { %>
+							<li class="nav-item active">
+								<a class="nav-link" href="/portal/login">Login</a>
+							</li>
+							<% } %>
+						</ul>
+					</div>
 				</div>
 			</nav>
 		</div>
