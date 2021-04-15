@@ -7,82 +7,62 @@
 	<div class="container">
 		<div class="row justify-content-around align-items-center mt-5">
 			<div class="col-5">
-				<h1>Recordings</h1>
+				<h1>Event Recordings</h1>
 			</div>
 			<div class="col-7 text-right">
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-12">
-				<div class="container table-container mt-3">
-					<table id="tblEvents" class="display">
-						<thead>
-							<tr>
-								<td></td>
-								<th>Name</th>
-								<th>Category</th>
-								<th>Date</th>
-								<th>Location</th>
-								<th>Web Start Date</th>
-								<th>Web End Date</th>
-								<th>Recording URL</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% events.forEach(function(event) { var timeOffsetDate = new
-							Date(Date.now()); var timeOffset =
-							timeOffsetDate.getTimezoneOffset(); if (event.start_date) var
-							webStartDate = new Date(event.start_date.getTime() +
-							(timeOffset*60*1000)); if (event.end_date) var webEndDate = new
-							Date(event.end_date.getTime() + (timeOffset*60*1000)); %>
-							<tr>
-								<td></td>
-								<td>
-									<p
-										href="/portal/events/edit/<%= event.id%>"
-										class="font-weight-bold"
-										><%= event.name %></p
-									>
-								</td>
-	
-								<td><%= event.type %></td>
-								<% if (event.event_time) { var event_time = new
-								Date(event.event_time); %>
-								<td>
-									<%= event_time.toLocaleTimeString([], { month: 'long', day:
-									'numeric', hour: '2-digit', minute:'2-digit' }) %>
-								</td>
-								<% } else { %>
-								<td></td>
-								<% }%>
-	
-								<td><%= event.location %></td>
-	
-								<% if (event.start_date) { %>
-								<td><%= webStartDate.toLocaleDateString() %></td>
-								<% } else { %>
-								<td></td>
-								<% }%> <% if (event.end_date) { %>
-								<td><%= webEndDate.toLocaleDateString() %></td>
-								<% } else { %>
-								<td></td>
-								<% }%> <% if (event.rec_url) { %>
-									<td class="text-center">
-										<a href="<%= event.rec_url %>" target="_blank"
-										>Recording Link</a>
-									</td>
-								<% } else { %>
-								<td></td>
-								<% }%>
-							</tr>
-							<% });%>
-						</tbody>
-					</table>
+
+	<div class="container my-5">
+	<% if (events && events.length > 0) {%>
+		<div class="card-deck justify-content-center">
+			<% events.forEach(function(event) { %>
+				<div class="col-xs-12 col-md-6 col-lg-4 mt-4">
+					<div class="text-center justify-content-center">
+						<div class="card-container">
+							<div class="column">
+								<div class="post-module">
+									<div class="thumbnail">
+									<% if (event.rec_url) {%>
+										<div class="date">
+											<div class="day"><%=event.event_time.toLocaleString('default', { day: 'numeric' })%></div>
+											<div class="month" id="divMonth"><%=event.event_time.toLocaleString('default', { month: 'short' })%></div>
+										</div>
+										<img src="<%= event.image_link%>" alt="<%= event.name%> Thumbnail">
+									</div>
+									<div class="post-content">
+										<div class="category"><%= event.type%></div>
+										<p class="title"><%= event.name%></h3>
+										<p class="sub_title"><%= event.summary%></h4>
+										<p class="description"><%= event.descr%></p>
+										<a type="button" class="btn btn-purple-wide" href="<%= event.rec_url %>" target="_blank">Recording Link</a>
+										<div class="post-meta">
+											<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><%= event.event_time.toLocaleString([], { month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' })%></span>
+										</div>
+										<div class="post-meta mt-2 pm">
+										<% if (event.type == "News") {%>
+											<span class="timestamp" title="Author"><i class="fas fa-user-edit mr-2"></i><%= event.author %></span>
+										<% } else { %>
+											<span class="timestamp" title="Location"><i class="fas fa-map-marker-alt mr-2"></i><%= event.location %></span>
+										<% } %>
+										</div>
+									</div>
+									<% } %>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+			<% }); %>
+		</div>
+		<% } else {%>
+		<div class="row justify-content-center mt-4 mb-5">
+			<div class="col-12 text-center">
+				<h3 class="no-event-text">No recordings available right now, please check back soon.</h3>
 			</div>
 		</div>
+		<% } %>
 	</div>
 	
 	<script src="/scripts/portal/events/index.js"></script>

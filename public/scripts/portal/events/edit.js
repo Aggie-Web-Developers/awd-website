@@ -58,7 +58,11 @@ $(function () {
 		$('.description').html($('#txtDescr').val());
 		
 		if($('#txtRecLink').val() != "") {
-			$('.rec_url').html("<a href='" + $('#txtRecLink').val() + "' target='_blank'>Recording Link</a>");
+			$('.rec_url').html(
+				"<a href='" + 
+				$('#txtRecLink').val() + 
+				"' target='_blank'>Recording Link</a>"
+			);
 		}
 
 		$('#divPreview').show();

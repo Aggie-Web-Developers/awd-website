@@ -95,6 +95,21 @@ label.error {
 	padding-left: 1rem;
 }
 
+.btn-purple-wide {
+	border-radius: 38px;
+	background-color: #341f97;
+	color: #fff;
+	z-index: 0;
+	width: 100%;
+}
+
+.btn-purple-wide:hover {
+	background-color: #fff;
+	border-color: #341f97;
+	color: #341f97;
+	transition: 0.8s;
+}
+
 .btn-purple {
 	border-radius: 38px;
 	background-color: #341f97;
