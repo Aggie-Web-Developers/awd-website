@@ -14,7 +14,6 @@ router.get('/', middleware.checkAuthenticated, function (req, res) {
 		res.render('portal/profile/index', { user_position: result.recordset[0].name });
 	})
 	.catch((err) => {
-		req.flash('error', 'Unable to load position in organization');
 		res.render('portal/profile/index', { user_position: 'Member' });
 	});
 });
