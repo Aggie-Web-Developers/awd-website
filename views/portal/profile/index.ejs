@@ -14,16 +14,17 @@
 		</div>
 	</div>
 </div>
-<div class="container" id="profilePane">
-	<div class="row justify-content-center">
+<div class="container">
+	<div class="row justify-content-center mx-1"  id="profilePane">
 		<div class="flex-column p-3">
             <img id="profilePicture" src="/images/AWD-logo.png" alt="Profile Picture">
 		</div>
         <div class="col p-3">
+			<div class="container">
             <h2><%= user.first_name %> <%= user.last_name %></h2>
             <p><%= user_position %></p>
             <hr>
-			<div class="row">
+			<div class="row flex-nowrap">
 				<div class="flex-column pl-3">
 					<p>Joined:</p>
 					<p>Email:</p>
@@ -35,6 +36,7 @@
 					<p><a href="//<%= user.website %>" target="_blank"><%= user.website %></a></p>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
     <!-- <div class="row">
