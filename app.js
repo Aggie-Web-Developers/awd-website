@@ -16,6 +16,7 @@ const portalRoutes = require('./routes/portal/index');
 const emailRoutes = require('./routes/portal/emails');
 const sponsorRoutes = require('./routes/portal/sponsors');
 const projectRoutes = require('./routes/portal/projects');
+const recordingRoutes = require('./routes/portal/recordings');
 const profileRoutes = require('./routes/portal/profile');
 const middleware = require('./middleware');
 
@@ -97,6 +98,7 @@ app.use('/portal/events', eventRoutes);
 app.use('/portal/emails', emailRoutes);
 app.use('/portal/sponsors', sponsorRoutes);
 app.use('/portal/projects', projectRoutes);
+app.use('/portal/recordings', recordingRoutes);
 app.use('/portal/profile', profileRoutes);
 
 app.get('/*', function (req, res) {

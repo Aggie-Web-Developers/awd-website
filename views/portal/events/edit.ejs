@@ -65,6 +65,16 @@
 						<small id="timeHelp" class="form-text text-muted">Please enter in the timezone of your local system time. We will convert to UTC automatically.</small>
 					</div>
 					<div class="form-group">
+						<label for="txtRecLink">Event Recording Link</label>
+						<input
+							type="text"
+							class="form-control"
+							id="txtRecLink"
+							name="txtRecLink"
+							value="<%= event.rec_url %>"
+						/>
+					</div>
+					<div class="form-group">
 						<label for="txtStartDate">Display Start Date</label>
 						<input type="date" class="form-control" id="txtStartDate" name="txtStartDate" value="<%=webStartDate%>" aria-describedby="dateHelp">
 						<small id="dateHelp" class="form-text text-muted">The dates will trigger the event to be show/hidden at 0:00 UTC time for the selected date.</small>
