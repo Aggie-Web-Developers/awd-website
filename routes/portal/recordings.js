@@ -7,8 +7,7 @@ const moment = require('moment');
 const tz = require('moment-timezone');
 
 router.get('/', middleware.checkAuthenticated, function (req, res) {
-	var sqlQuery =
-		'SELECT e.* FROM tbl_events e WHERE rec_url <> \'\'';
+	var sqlQuery = "SELECT e.* FROM tbl_events e WHERE rec_url <> ''";
 
 	var sqlReq = new sql.Request()
 		.query(sqlQuery)

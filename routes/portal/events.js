@@ -72,7 +72,7 @@ router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 	sqlReq.input('location', sql.NVarChar, req.body.txtLocation);
 	sqlReq.input('image_link', sql.NVarChar, req.body.txtImage);
 	sqlReq.input('creating_user_id', sql.Int, req.user.id);
-	sqlReq.input('rec_url', sql.NVarChar, req.body.txtRecLink)
+	sqlReq.input('rec_url', sql.NVarChar, req.body.txtRecLink);
 
 	var sqlQuery =
 		'UPDATE tbl_events SET ' +
@@ -85,7 +85,7 @@ router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 		.then((result) => {
 			if (result.rowsAffected == 0) {
 				req.flash('error', 'Error updating event.');
-				print("row not affected");
+				print('row not affected');
 				res.redirect('/portal/events/');
 			} else {
 				req.flash('success', 'Success! Event updated.');
