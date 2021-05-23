@@ -54,6 +54,14 @@ $(function () {
 		$('.sub_title').html($('#txtEventSubTitle').val());
 		$('.description').html($('#txtDescr').val());
 
+		if ($('#txtRecLink').val() != '') {
+			$('.rec_url').html(
+				"<a href='" +
+					$('#txtRecLink').val() +
+					"' target='_blank'>Recording Link</a>"
+			);
+		}
+
 		$('#divPreview').show();
 	});
 
