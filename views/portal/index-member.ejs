@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 <div class="container">
 	<div class="row justify-content-center mt-5">
-		<h1 style="color:rgb(117, 110, 216)"> Howdy, <%= user.first_name %>!</h1>
+		<h1>Howdy, <%= user.first_name %>!</h1>
 	</div>
 </div>
 <div class="container">
@@ -11,7 +11,7 @@
 				<i class="fas fa-calendar-day"></i>
 			</div>
 			<div class="row justify-content-center">
-				<h2 class="pt-4">Viewing Events</h2>
+				<h2 class="pt-4">View Events</h2>
 			</div>
 		</div>
 
@@ -24,7 +24,10 @@
 			</div>
 		</div>
 
-		<div class="col-10 col-md-3 text-center portal-card mt-5" id="divViewUserProfile">
+		<div
+			class="col-10 col-md-3 text-center portal-card mt-5"
+			id="divViewUserProfile"
+		>
 			<div class="row justify-content-center">
 				<i class="fas fa-address-card"></i>
 			</div>
@@ -34,7 +37,10 @@
 		</div>
 	</div>
 	<div class="row justify-content-around">
-		<div class="col-10 col-md-3 text-center portal-card mt-5" id="divEditUserProfile">
+		<div
+			class="col-10 col-md-3 text-center portal-card mt-5"
+			id="divEditUserProfile"
+		>
 			<div class="row justify-content-center">
 				<i class="far fa-edit"></i>
 			</div>
@@ -44,5 +50,5 @@
 		</div>
 	</div>
 </div>
-<script src="/scripts/portal/MemberIndex.js"></script>
+<script src="/scripts/portal/index-member.js"></script>
 <%- include('partials/footer') %>

@@ -6,14 +6,14 @@ $(function () {
 	});
 
 	$('#divRecords').click(function () {
-		window.location.href = '/portal/records';
+		window.location.href = '/portal/recordings';
 	});
 
 	$('#divViewUserProfile').click(function () {
-		window.location.href = '/portal/viewuserprofile';
+		window.location.href = '/portal/profile';
 	});
 
 	$('#divEditUserProfile').click(function () {
-		window.location.href = '/portal/edituserprofile';
+		window.location.href = '#';
 	});
 });

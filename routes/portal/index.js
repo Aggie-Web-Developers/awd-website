@@ -7,7 +7,11 @@ const bcrypt = require('bcrypt');
 const middleware = require('../../middleware');
 
 router.get('/', middleware.checkAuthenticated, function (req, res) {
-	res.render('portal/');
+	if (req.user.officer_id == null) {
+		res.redirect('member');
+	} else {
+		res.render('portal/');
+	}
 });
 
 router.get('/login', middleware.checkNotAuthenticated, function (req, res) {
@@ -15,7 +19,7 @@ router.get('/login', middleware.checkNotAuthenticated, function (req, res) {
 });
 
 router.get('/member', middleware.checkAuthenticated, function (req, res) {
-	res.render('portal/MemberPage');
+	res.render('portal/index-member');
 });
 
 router.post(
