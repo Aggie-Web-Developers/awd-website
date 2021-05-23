@@ -13,8 +13,8 @@ router.get('/', middleware.checkAuthenticated, function (req, res) {
 router.get('/login', middleware.checkNotAuthenticated, function (req, res) {
 	res.render('portal/login');
 });
-//check notauthentticated not login, return back to main
-router.get('/loginMember', middleware.checkAuthenticated, function (req, res) {
+
+router.get('/member', middleware.checkAuthenticated, function (req, res) {
 	res.render('portal/MemberPage');
 });
 

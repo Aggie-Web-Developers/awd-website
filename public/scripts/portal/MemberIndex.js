@@ -1,7 +1,7 @@
 // JS File for Portal Index View
 
 $(function () {
-	$('#divEvents').click(function () { //# processing
+	$('#divEvents').click(function () {
 		window.location.href = '/portal/events';
 	});
 
