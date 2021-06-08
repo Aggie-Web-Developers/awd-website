@@ -4,50 +4,55 @@
 	var hasCurrent = false;
 
 	for(var i = 0; i < projects.length; i++) {
-			if (projects[i].status == 'Completed') {
-					hasCompleted = true;
-			} else {
-					hasCurrent = true;
-			}
+		if (projects[i].status == 'Completed') {
+			hasCompleted = true;
+		} else {
+			hasCurrent = true;		
+		}
 
+		if (projects[i].end_date && projects[i].end_date.toLocaleDateString() !== '12/31/1899') {
+			var seconds = Math.floor((projects[i].end_date - projects[i].start_date) / 1000);
+		} else {
 			var seconds = Math.floor((new Date() - projects[i].start_date) / 1000);
+		}
 
 		var interval = Math.floor(seconds / 31536000);
 
 		if (interval > 1) {
-			projects[i].start_date = interval + " years";
+			projects[i].duration = interval + " years";
 			continue;
 		}
 
 		interval = Math.floor(seconds / 2592000);
 
 		if (interval > 1) {
-			projects[i].start_date = interval + " months";
+			projects[i].duration = interval + " months";
 			continue;
 		}
 
 		interval = Math.floor(seconds / 86400);
 
 		if (interval > 1) {
-			projects[i].start_date = interval + " days";
+			projects[i].duration = interval + " days";
 			continue;
 		}
 
 		interval = Math.floor(seconds / 3600);
 
 		if (interval > 1) {
-			projects[i].start_date = interval + " hours";
+			projects[i].duration = interval + " hours";
 			continue;
 		}
 
 		interval = Math.floor(seconds / 60);
 
 		if (interval > 1) {
-			projects[i].start_date = interval + " minutes";
+			projects[i].duration = interval + " minutes";
 			continue;
 		}
 
-		projects[i].start_date = Math.floor(seconds) + " seconds";
+		projects[i].duration = Math.floor(seconds) + " seconds";
+
 	}
 %>
 			<div class=" text-center">
@@ -100,7 +105,7 @@
 																<a class="btn btn-purple mt-4" href="<%=project.test_url%>" target="_blank">Preview Site</a>
 															</p>
 															<div class="project-button-info">
-																<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i><%=project.start_date%></span>
+																<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i><%=project.duration%></span>
 															</div>
 															<div class="project-button-info mt-2">
 																<span class="project-timestamp" title="Current Status"><i class="fas fa-tasks mr-2"></i><%=project.status%></span>
@@ -151,7 +156,7 @@
 																<a class="btn btn-purple mt-4" href="<%=project.test_url%>" target="_blank">Preview Site</a>
 															</p>
 															<div class="project-button-info">
-																<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i><%=project.start_date%></span>
+																<span class="project-timestamp" title="Project Duration"><i class="fas fa-clock mr-2"></i><%=project.duration%></span>
 															</div>
 															<div class="project-button-info mt-2">
 																<span class="project-timestamp" title="Current Status"><i class="fas fa-tasks mr-2"></i><%=project.status%></span>
