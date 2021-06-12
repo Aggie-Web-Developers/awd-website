@@ -14,6 +14,6 @@ $(function () {
 	});
 
 	$('#divEditUserProfile').click(function () {
-		window.location.href = '#';
+		window.location.href = '/portal/profile/edit';
 	});
 });
