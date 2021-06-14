@@ -1,16 +1,21 @@
 // JS File for Portal Project Edit View
 
-jQuery.validator.addMethod("greaterThan", 
-function(value, element, params) {
-	if (!value) return true;
+jQuery.validator.addMethod(
+	'greaterThan',
+	function (value, element, params) {
+		if (!value) return true;
 
-    if (!/Invalid|NaN/.test(new Date(value))) {
-        return new Date(value) > new Date($(params).val());
-    }
+		if (!/Invalid|NaN/.test(new Date(value))) {
+			return new Date(value) > new Date($(params).val());
+		}
 
-    return isNaN(value) && isNaN($(params).val()) 
-        || (Number(value) > Number($(params).val())); 
-}, 'End date must be after the start date.');
+		return (
+			(isNaN(value) && isNaN($(params).val())) ||
+			Number(value) > Number($(params).val())
+		);
+	},
+	'End date must be after the start date.'
+);
 
 $(function () {
 	$('#frm').validate({
@@ -24,7 +29,7 @@ $(function () {
 			txtGithub: { required: true, maxlength: 150 },
 			txtImageLink: { required: true, maxlength: 500 },
 			txtStartDate: { required: true },
-			txtEndDate: { required: false, greaterThan: '#txtStartDate' }
+			txtEndDate: { required: false, greaterThan: '#txtStartDate' },
 		},
 		errorPlacement: function (error, element) {
 			error.appendTo(element.closest('.form-group'));

@@ -33,13 +33,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% projects.forEach(function(project) { var timeOffsetDate = new
-						Date(Date.now()); var timeOffset =
-						timeOffsetDate.getTimezoneOffset(); if (project.start_date) var
-						startDate = new Date(project.start_date.getTime() +
-						(timeOffset*60*1000)); if (project.end_date) var
-						endDate = new Date(project.end_date.getTime() +
-						(timeOffset*60*1000)); %>
+						<% projects.forEach(function(project) { 
+							var timeOffsetDate = new Date(Date.now()); 
+							var timeOffset = timeOffsetDate.getTimezoneOffset();
+							
+							if (project.start_date) 
+								var startDate = new Date(project.start_date.getTime() + (timeOffset*60*1000));
+							
+							if (project.end_date) 
+								var endDate = new Date(project.end_date.getTime() + (timeOffset*60*1000)); %>
 						<tr>
 							<td></td>
 							<td>
@@ -51,9 +53,12 @@
 							</td>
 							<td><%= project.work_done %></td>
 							<td><%= startDate.toLocaleDateString() %></td>
-							<% if (endDate && endDate.toLocaleDateString() !== '12/31/1899') { %>
+							<% if (endDate && endDate.toLocaleDateString() !== '12/31/1899') {
+							%>
 							<td><%= endDate.toLocaleDateString() %></td>
-							<% } else { %><td></td><% } %>
+							<% } else { %>
+							<td></td>
+							<% } %>
 							<td><%= project.manager %></td>
 							<% if (project.deleted == 1) { %>
 							<td class="red-danger">Deleted</td>
