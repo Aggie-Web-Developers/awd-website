@@ -10,7 +10,7 @@
 			hasCurrent = true;		
 		}
 
-		if (projects[i].end_date && projects[i].end_date.toLocaleDateString() !== '12/31/1899') {
+		if (projects[i].end_date) {
 			var seconds = Math.floor((projects[i].end_date - projects[i].start_date) / 1000);
 		} else {
 			var seconds = Math.floor((new Date() - projects[i].start_date) / 1000);
@@ -86,7 +86,7 @@
 			<% } else {%>
 			<div class="row justify-content-center">
 			<% projects.forEach(function(project) { %>
-				<% if (project.status != 'Completed') { %>
+				<% if (!project.end_date) { %>
 					<div class="col-10 col-md-6 col-lg-4 mt-4">
 						<div class="text-center justify-content-center">
 							<div class="project-card-container">
@@ -137,7 +137,7 @@
 			<% } else {%>
 			<div class="row justify-content-center">
 			<% projects.forEach(function(project) { %>
-				<% if (project.status == 'Completed') { %>
+				<% if (project.end_date) { %>
 					<div class="col-10 col-md-6 col-lg-4 mt-4">
 						<div class="text-center justify-content-center">
 							<div class="project-card-container">

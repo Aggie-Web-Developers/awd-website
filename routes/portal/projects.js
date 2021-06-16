@@ -51,7 +51,12 @@ router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 	sqlReq.input('test_url', sql.NVarChar, req.body.txtTestLink);
 	sqlReq.input('github_url', sql.NVarChar, req.body.txtGithub);
 	sqlReq.input('start_date', sql.NVarChar, req.body.txtStartDate);
-	sqlReq.input('end_date', sql.NVarChar, req.body.txtEndDate);
+
+	sqlReq.input(
+		'end_date',
+		sql.NVarChar,
+		req.body.txtEndDate == '' ? null : req.body.txtEndDate // if end_date is null, insert a null value into the db
+	);
 
 	sqlReq
 		.query(sqlQuery)
@@ -95,7 +100,12 @@ router.post('/new', middleware.checkAuthenticated, function (req, res) {
 	sqlReq.input('test_url', sql.NVarChar, req.body.txtTestLink);
 	sqlReq.input('github_url', sql.NVarChar, req.body.txtGithub);
 	sqlReq.input('start_date', sql.NVarChar, req.body.txtStartDate);
-	sqlReq.input('end_date', sql.NVarChar, req.body.txtEndDate);
+
+	sqlReq.input(
+		'end_date',
+		sql.NVarChar,
+		req.body.txtEndDate == '' ? null : req.body.txtEndDate // if end_date is null, insert a null value into the db
+	);
 
 	sqlReq
 		.query(sqlQuery)
