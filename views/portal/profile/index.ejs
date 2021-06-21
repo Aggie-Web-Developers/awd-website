@@ -17,7 +17,7 @@
 <div class="container mt-3">
 	<div class="row justify-content-center mx-1"  id="profilePane">
 		<div class="flex-column p-3">
-            <img id="profilePicture" src="/images/AWD-logo.png" alt="Profile Picture">
+            <img id="profilePicture" src="<%= user.image_url ? user.image_url : '/images/AWD-logo.png' %>" alt="Profile Picture">
 		</div>
         <div class="col p-3">
 			<div class="container">

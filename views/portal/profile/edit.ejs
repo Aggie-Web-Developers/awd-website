@@ -13,6 +13,7 @@
 				id="frm"
 				action="/portal/profile/edit?_method=PUT"
 				method="POST"
+				enctype="multipart/form-data"
 			>
 				<div class="form-group">
 					<label for="txtUserFirstName">First Name</label>
@@ -54,14 +55,15 @@
 						value="<%= user.website %>"
 					/>
 				</div>
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label for="fileProfilePicture">Profile Picture</label>
                     <input
                         type="file"
                         class="form-control"
                         id="fileProfilePicture"
+						name="fileProfilePicture"
                     />
-                </div> -->
+                </div>
 				<button type="submit" class="btn btn-contact btn-contact-slim mt-4">
 					Submit
 				</button>
