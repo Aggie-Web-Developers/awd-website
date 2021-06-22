@@ -18,6 +18,11 @@ const sponsorRoutes = require('./routes/portal/sponsors');
 const projectRoutes = require('./routes/portal/projects');
 const middleware = require('./middleware');
 
+console.error = (err) => {
+	email.sendErrorEmail(err)
+	console.log(err)
+}
+
 initPassport(passport);
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -66,7 +71,7 @@ sql
 	})
 	.catch(function (err) {
 		console.log('Connecting to database: [FAILED]');
-		console.log(err);
+		console.error(err);
 	});
 
 app.use(function (err, req, res, next) {

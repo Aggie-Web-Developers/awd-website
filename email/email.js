@@ -9,6 +9,49 @@ aws.config.secretAccessKey = process.env.secretAccessKey;
 aws.config.region = process.env.region;
 
 const ses = new aws.SES();
+//sends an email to the dev accoutn whenver a server error occurs
+//err is the error that occurs
+mailerObj.sendErrorEmail = async function (err) {
+
+	//body of the email
+	let content = '<p><b>Error:</b> ' + err + '</p>';
+
+	//makes the function/api/PCo gds happy
+	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '');
+
+	//used to set parameters/arguments in the email API for sending an email
+	const params = {
+		Destination: {
+			BccAddresses: [], //BCC this address (none)
+			ToAddresses: ['jeremydspotts@gmail.com'], //send to this address
+		},
+		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>', //send from this address
+		Template: 'AWD-Contact-Us-Notification-Template',  //template name **CHANGE??**
+		TemplateData:										//Also change this????
+			'{ "title": "AWD Website Error Notification", "content": "' +
+			content +
+			'" }',
+		ReplyToAddresses: ['jeremydspotts@gmail.com'],
+	};
+
+	//who knows what this is
+	const sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
+		.sendTemplatedEmail(params)
+		.promise();
+
+	//this means nothing to me
+	return new Promise((resolve, reject) => {
+		sendPromise
+			.then(async function (data) {
+				resolve('Success');
+			})
+			.catch(function (err) {
+				resolve('Error');
+			});
+	});
+};
+
+///END ERROR FUNCTION///
 
 mailerObj.sendContactUsEmailGen = async function (formData) {
 	let content = '<p><b>Name:</b> ' + formData.txtNameGen + '</p>';
@@ -42,6 +85,7 @@ mailerObj.sendContactUsEmailGen = async function (formData) {
 				resolve('Success');
 			})
 			.catch(function (err) {
+				console.error(err);
 				resolve('Error');
 			});
 	});
@@ -74,12 +118,14 @@ mailerObj.sendContactUsEmailCorp = async function (formData) {
 		.sendTemplatedEmail(params)
 		.promise();
 
+
 	return new Promise((resolve, reject) => {
 		sendPromise
 			.then(async function (data) {
 				resolve('Success');
 			})
 			.catch(function (err) {
+				console.error(err);
 				resolve('Error');
 			});
 	});
@@ -240,6 +286,7 @@ async function attemptSend(email, sendList) {
 				resolve(true);
 			})
 			.catch((err) => {
+				console.error(err);
 				resolve(false);
 			});
 	});
@@ -293,6 +340,7 @@ mailerObj.listenForScheduledEmails = function () {
 				});
 			})
 			.catch((err) => {
+				console.error(err);
 				console.log('Error sending scheduled emails.');
 			});
 	});
@@ -310,6 +358,7 @@ function getEmailById(id) {
 				resolve(result.recordset[0]);
 			})
 			.catch((err) => {
+				console.error(err);
 				resolve('Error');
 			});
 	});
@@ -341,6 +390,7 @@ function getCorporateRecipeints() {
 				resolve(result.recordset);
 			})
 			.catch((err) => {
+				console.error(err);
 				resolve('Error');
 			});
 	});
@@ -355,6 +405,7 @@ function markEmailSent(id) {
 				resolve(true);
 			})
 			.catch((err) => {
+				console.error(err);
 				resolve(false);
 			});
 	});
