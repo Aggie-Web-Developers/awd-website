@@ -4,7 +4,7 @@ const flash = require('express-flash');
 const sql = require('mssql');
 const middleware = require('../../middleware');
 
-router.get('/', middleware.checkAuthenticated, function (req, res) {
+router.get('/', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request()
 		.query('SELECT * FROM tbl_projects ORDER BY create_date ASC')
 		.then((result) => {
@@ -16,7 +16,7 @@ router.get('/', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.get('/edit/:id', middleware.checkAuthenticated, function (req, res) {
+router.get('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request()
 		.input('id', sql.Int, req.params.id)
 		.query('SELECT TOP 1 * FROM tbl_projects WHERE id = @id')
@@ -34,7 +34,7 @@ router.get('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
+router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request();
 	var sqlQuery =
 		'UPDATE tbl_projects ' +
@@ -69,11 +69,11 @@ router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.get('/new', middleware.checkAuthenticated, function (req, res) {
+router.get('/new', middleware.checkIsOfficer, function (req, res) {
 	res.render('portal/projects/new');
 });
 
-router.post('/new', middleware.checkAuthenticated, function (req, res) {
+router.post('/new', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request();
 
 	var sqlQuery =

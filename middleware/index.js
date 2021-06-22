@@ -16,4 +16,14 @@ mwObject.checkNotAuthenticated = function (req, res, next) {
 	}
 };
 
+mwObject.checkIsOfficer = function (req, res, next) {
+	if (!req.isAuthenticated()) {
+		res.redirect('/portal/login');
+	} else if (req.user.officer_id == null || req.user.officer_id <= 0) {
+		res.redirect('/portal/member');
+	} else {
+		return next();
+	}
+};
+
 module.exports = mwObject;
