@@ -20,7 +20,7 @@ mailerObj.sendErrorEmail = async function (err) {
 	const params = {
 		Destination: {
 			BccAddresses: [],
-			ToAddresses: ['cdconn00@gmail.com'],
+			ToAddresses: ['aggiedevelopers@gmail.com'],
 		},
 		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
 		Template: 'AWD-Error-Email', // template name **CHANGE??**
@@ -30,7 +30,7 @@ mailerObj.sendErrorEmail = async function (err) {
 			'", "content": "' +
 			content +
 			'"}',
-		ReplyToAddresses: ['cdconn00@gmail.com'],
+		ReplyToAddresses: ['aggiedevelopers@gmail.com'],
 	};
 
 	const sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
