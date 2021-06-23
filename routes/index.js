@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 		"SELECT TOP 3 e.*, (u.first_name + ' ' + u.last_name) as author " +
 		'FROM tbl_events  e LEFT JOIN tbl_user u on u.id = e.creating_user_id ' +
 		'WHERE e.[start_date] <= GETUTCDATE() AND e.[end_date] >= GETUTCDATE() AND e.deleted = 0 ORDER BY e.event_time ASC';
-	
+
 	var sqlReq = new sql.Request()
 		.query(sqlQuery)
 		.then((result) => {

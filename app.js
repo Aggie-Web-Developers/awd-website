@@ -18,10 +18,11 @@ const sponsorRoutes = require('./routes/portal/sponsors');
 const projectRoutes = require('./routes/portal/projects');
 const middleware = require('./middleware');
 
-console.error = (err) => {
-	email.sendErrorEmail(err)
-	console.log(err)
-}
+// overload console.error to send error emails when an error occurs
+console.error = async (err) => {
+	await email.sendErrorEmail(err); // send error email
+	console.log(err); // print error to console
+};
 
 initPassport(passport);
 

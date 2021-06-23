@@ -9,49 +9,45 @@ aws.config.secretAccessKey = process.env.secretAccessKey;
 aws.config.region = process.env.region;
 
 const ses = new aws.SES();
-//sends an email to the dev accoutn whenver a server error occurs
-//err is the error that occurs
+
+// sends an email to the org email when an error occurs
 mailerObj.sendErrorEmail = async function (err) {
+	const siteType = process.env.NODE_ENV == 'prod' ? 'Production' : 'Dev';
 
-	//body of the email
 	let content = '<p><b>Error:</b> ' + err + '</p>';
+	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, ''); // make content string safe for template data
 
-	//makes the function/api/PCo gds happy
-	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '');
-
-	//used to set parameters/arguments in the email API for sending an email
 	const params = {
 		Destination: {
-			BccAddresses: [], //BCC this address (none)
-			ToAddresses: ['jeremydspotts@gmail.com'], //send to this address
+			BccAddresses: [],
+			ToAddresses: ['cdconn00@gmail.com'],
 		},
-		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>', //send from this address
-		Template: 'AWD-Contact-Us-Notification-Template',  //template name **CHANGE??**
-		TemplateData:										//Also change this????
-			'{ "title": "AWD Website Error Notification", "content": "' +
+		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
+		Template: 'AWD-Error-Email', // template name **CHANGE??**
+		TemplateData:
+			'{ "Subject": "ERROR: AWD SITE - ' +
+			siteType +
+			'", "content": "' +
 			content +
-			'" }',
-		ReplyToAddresses: ['jeremydspotts@gmail.com'],
+			'"}',
+		ReplyToAddresses: ['cdconn00@gmail.com'],
 	};
 
-	//who knows what this is
 	const sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
 		.sendTemplatedEmail(params)
 		.promise();
 
-	//this means nothing to me
 	return new Promise((resolve, reject) => {
 		sendPromise
 			.then(async function (data) {
 				resolve('Success');
 			})
 			.catch(function (err) {
+				console.log(err);
 				resolve('Error');
 			});
 	});
 };
-
-///END ERROR FUNCTION///
 
 mailerObj.sendContactUsEmailGen = async function (formData) {
 	let content = '<p><b>Name:</b> ' + formData.txtNameGen + '</p>';
@@ -117,7 +113,6 @@ mailerObj.sendContactUsEmailCorp = async function (formData) {
 	const sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
 		.sendTemplatedEmail(params)
 		.promise();
-
 
 	return new Promise((resolve, reject) => {
 		sendPromise
