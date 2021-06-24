@@ -1239,6 +1239,7 @@ label.error {
 }
 
 .portal-card {
+	display: block;
 	background-color: #341f97;
 	border-radius: 5px;
 	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
@@ -1248,12 +1249,14 @@ label.error {
 	cursor: pointer;
 	font-size: 4rem;
 	padding: 4rem 0;
+	text-decoration: none;
 }
 
 .portal-card:hover {
 	background-color: #54a0ff;
 	color: #fff;
 	transition: 0.5s ease-in;
+	text-decoration: none;
 }
 
 .logout-button {
