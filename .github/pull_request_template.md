@@ -24,9 +24,9 @@
 
 #### Notes for Reviewer (@cdconn00)
 
-> *Please update this PR information accordingly. We'll use this as part of our release notes in monthly communications.*
+> *Please describe any thing your reviewer may need to consider when reviewing this PR.*
 > 
-> *Please target your PR to 'master' branch. Released documents are in `live` branch.*
+> *Please target your PR to `develop` branch. If your PR is a hotfix, it may need to be targeted to `main`. Ask your PM if you are unsure.*
 > 
 > _(DELETE THIS PARAGRAPH AFTER READING)_
 
