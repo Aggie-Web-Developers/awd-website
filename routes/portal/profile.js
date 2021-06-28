@@ -6,6 +6,9 @@ const AWS = require('aws-sdk');
 const multer = require('multer');
 const uuidv4 = require('uuid/v4');
 
+// Create Multer instance that stores file in buffer
+const upload = multer();
+
 router.get('/', middleware.checkAuthenticated, function (req, res) {
 	var sqlQuery =
 		'SELECT tbl_officer_positions.name FROM tbl_user INNER JOIN tbl_officer_positions ON tbl_user.officer_id = tbl_officer_positions.id WHERE tbl_user.id = @id;';
@@ -21,38 +24,37 @@ router.get('/', middleware.checkAuthenticated, function (req, res) {
 		.catch((err) => {
 			res.render('portal/profile', { user_position: 'Member' });
 		});
-
 });
 
 router.get('/edit', middleware.checkAuthenticated, function (req, res) {
 	res.render('portal/profile/edit');
 });
 
-// Create Multer instance that stores file in buffer
-const upload = multer();
-
-router.put('/edit', upload.single('fileProfilePicture'), async function (req, res) {
+router.put('/edit', upload.single('fileProfilePicture'), async function (
+	req,
+	res
+) {
 	var s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 
 	var uploaded = { Location: null };
 
 	if (req.file) {
 		// Create a random (version 4) UUID to use as image name
-		var filename = uuidv4();
-	
+		var filename = uuidv4(); // TODO: add file extensions to the end of the filename (i didnt know it worked without this, but just ic case [i.e. 23187sdhagdg213easj.png])
+
 		AWS.config.update({
 			accessKeyId: process.env.S3_ACCESS_KEY,
 			secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
 			region: process.env.S3_REGION,
 		});
-	
-		var uploadParams = { 
+
+		var uploadParams = {
 			Bucket: 'awd-site-dev',
 			Key: filename,
 			Body: req.file.buffer,
-			ContentType: 'image/png'
+			ContentType: 'image/png', // TODO: this should be image/ the image type, ie image/jpg, image/bmp. We should be able to get this infor from multer
 		};
-	
+
 		// Upload image to S3 bucket, receive the URL it's stored at
 		uploaded = await s3.upload(uploadParams).promise();
 	}
@@ -65,10 +67,10 @@ router.put('/edit', upload.single('fileProfilePicture'), async function (req, re
 
 		var deleteParams = {
 			Bucket: 'awd-site-dev',
-			Key: previousKey
+			Key: previousKey,
 		};
 
-		s3.deleteObject(deleteParams);
+		s3.deleteObject(deleteParams); // TODO: this may need to be awaited and have a .promise() callback to work, I dont think it is working right now
 	}
 
 	var sqlReq = new sql.Request();
