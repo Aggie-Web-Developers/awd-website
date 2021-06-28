@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const flash = require('express-flash');
 const sql = require('mssql');
 const middleware = require('../../middleware');
 const AWS = require('aws-sdk');
-const fs = require('fs');
 const multer = require('multer');
 const uuidv4 = require('uuid/v4');
 
