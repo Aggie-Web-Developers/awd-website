@@ -24,17 +24,19 @@ $(function () {
 	var fileProfilePicture = document.getElementById('fileProfilePicture');
 	var $modal = $('#modal');
 	var cropper = null;
+	var isCropped = false;
     
+	// Get URL of uploaded image to display within cropping modal
 	fileProfilePicture.addEventListener('change', function (e) {
 	  	var files = e.target.files;
 		var done = function (url) {
-			fileProfilePicture.value = '';
 			uploadedImage.src = url;
 			$modal.modal('show');
 		};
 		var reader;
 		var file;
   
+		isCropped = false;
 		if (files && files.length > 0) {
 			file = files[0];
   
@@ -50,6 +52,7 @@ $(function () {
 		}
 	});
   
+	// Create or destory Cropper instance based on modal visibility
 	$modal.on('shown.bs.modal', function () {
 	    cropper = new Cropper(uploadedImage, {
 			aspectRatio: 1,
@@ -58,8 +61,11 @@ $(function () {
 	}).on('hidden.bs.modal', function () {
 		  cropper.destroy();
 		  cropper = null;
+		  // Removes uploaded file if not cropped
+		  if (!isCropped) fileProfilePicture.value = '';
 	});
   
+	// Create blob object to include cropped image in PUT request
 	$('#crop').on('click', function () {
 		if (cropper) {
 			cropper.getCroppedCanvas({
@@ -69,26 +75,30 @@ $(function () {
 				croppedImage = blob;
 			});
 	    }
-
+		isCropped = true;
 		$modal.modal('hide');
 	});
 
+	// Make PUT request on submission
 	$('#submitButton').on('click', function () {
 		var formData = new FormData(document.getElementById('frm'));
+		// Replace uploaded image with cropped image
 		if (croppedImage) formData.set('fileProfilePicture', croppedImage, 'profile.png');
-		// for (var value of formData.values()) {
-		// 	console.log(value);
-		// }
+
 		$.ajax({
-			url: '/portal/profile/edit',
 			method: 'PUT',
 			contentType: false,
 			data: formData,
  			processData: false,
-			error: function (xhr, status, error) {
-				var errorMessage = xhr.status + ': ' + xhr.statusText
-				alert('Error: ' + errorMessage);
-			}
+			success: function (data, textStatus) {
+				alert( 'Success! Profile updated.' );
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				alert( 'Error updating profile.' );
+			},
+			complete: function (jqXHR, textStatus) {
+				window.location.href = '../profile';
+			},
 		});
 	});
 });

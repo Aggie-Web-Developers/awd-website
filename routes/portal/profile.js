@@ -89,16 +89,13 @@ router.put('/edit', upload.single('fileProfilePicture'), async function (req, re
 		.query(sqlQuery)
 		.then((result) => {
 			if (result.rowsAffected == 0) {
-				req.flash('error', 'Error updating profile.');
-				res.redirect('/portal/profile');
+				res.sendStatus(500);
 			} else {
-				req.flash('success', 'Success! Profile updated.');
-				res.redirect('/portal/profile');
+				res.sendStatus(200);
 			}
 		})
 		.catch((err) => {
-			req.flash('error', 'Error updating profile.');
-			res.redirect('/portal/profile');
+			res.sendStatus(500);
 		});
 });
 
