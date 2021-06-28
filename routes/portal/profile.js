@@ -35,24 +35,23 @@ router.put('/edit', upload.single('fileProfilePicture'), async function (
 	res
 ) {
 	var s3 = new AWS.S3({ apiVersion: '2006-03-01' });
+	AWS.config.update({
+		accessKeyId: process.env.S3_ACCESS_KEY,
+		secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+		region: process.env.S3_REGION,
+	});
 
 	var uploaded = { Location: null };
 
 	if (req.file) {
 		// Create a random (version 4) UUID to use as image name
-		var filename = uuidv4(); // TODO: add file extensions to the end of the filename (i didnt know it worked without this, but just ic case [i.e. 23187sdhagdg213easj.png])
-
-		AWS.config.update({
-			accessKeyId: process.env.S3_ACCESS_KEY,
-			secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-			region: process.env.S3_REGION,
-		});
-
+		var filename = uuidv4();
+		
 		var uploadParams = {
 			Bucket: 'awd-site-dev',
 			Key: filename,
 			Body: req.file.buffer,
-			ContentType: 'image/png', // TODO: this should be image/ the image type, ie image/jpg, image/bmp. We should be able to get this infor from multer
+			ContentType: req.file.mimetype,
 		};
 
 		// Upload image to S3 bucket, receive the URL it's stored at
@@ -70,7 +69,10 @@ router.put('/edit', upload.single('fileProfilePicture'), async function (
 			Key: previousKey,
 		};
 
-		s3.deleteObject(deleteParams); // TODO: this may need to be awaited and have a .promise() callback to work, I dont think it is working right now
+		s3.deleteObject(deleteParams, function(err, data) {
+			if (err) console.log(err, err.stack); // error
+			else console.log(); // deleted
+		}); 
 	}
 
 	var sqlReq = new sql.Request();
