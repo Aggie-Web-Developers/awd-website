@@ -20,8 +20,9 @@ const middleware = require('./middleware');
 
 // overload console.error to send error emails when an error occurs
 console.error = async (err) => {
-	await email.sendErrorEmail(err); // send error email
-	console.log(err); // print error to console
+	
+	console.log(err.stack); // print error to console
+	await email.sendErrorEmail(err.stack.toString()); // send error email
 };
 
 initPassport(passport);

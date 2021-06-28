@@ -61,6 +61,8 @@ router.get('/register', middleware.checkNotAuthenticated, function (req, res) {
 				}
 			})
 			.catch((err) => {
+				console.error(err);
+
 				req.flash(
 					'error',
 					'Error creating account. Please contact us if the error persists.'

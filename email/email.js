@@ -15,7 +15,8 @@ mailerObj.sendErrorEmail = async function (err) {
 	const siteType = process.env.NODE_ENV == 'prod' ? 'Production' : 'Dev';
 
 	let content = '<p><b>Error:</b> ' + err + '</p>';
-	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, ''); // make content string safe for template data
+	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '<br>'); // make content string safe for template data
+	content = content.replace(/\\/g, "/");
 
 	const params = {
 		Destination: {
@@ -23,14 +24,14 @@ mailerObj.sendErrorEmail = async function (err) {
 			ToAddresses: ['aggiedevelopers@gmail.com'],
 		},
 		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
-		Template: 'AWD-Error-Email', // template name **CHANGE??**
+		Template: 'AWD-Error-Email',
 		TemplateData:
 			'{ "Subject": "ERROR: AWD SITE - ' +
 			siteType +
 			'", "content": "' +
 			content +
 			'"}',
-		ReplyToAddresses: ['aggiedevelopers@gmail.com'],
+		ReplyToAddresses: ['no-reply@aggiedevelopers.com'],
 	};
 
 	const sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
