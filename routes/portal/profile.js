@@ -46,7 +46,7 @@ router.put('/edit', upload.single('fileProfilePicture'), async function (
 	if (req.file) {
 		// Create a random (version 4) UUID to use as image name
 		var filename = uuidv4();
-		
+
 		var uploadParams = {
 			Bucket: 'awd-site-dev',
 			Key: filename,
@@ -69,10 +69,9 @@ router.put('/edit', upload.single('fileProfilePicture'), async function (
 			Key: previousKey,
 		};
 
-		s3.deleteObject(deleteParams, function(err, data) {
-			if (err) console.log(err, err.stack); // error
-			else console.log(); // deleted
-		}); 
+		s3.deleteObject(deleteParams, function (err, data) {
+			if (err) console.error(err);
+		});
 	}
 
 	var sqlReq = new sql.Request();
