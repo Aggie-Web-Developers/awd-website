@@ -95,6 +95,21 @@ label.error {
 	padding-left: 1rem;
 }
 
+.btn-purple-wide {
+	border-radius: 38px;
+	background-color: #341f97;
+	color: #fff;
+	z-index: 0;
+	width: 100%;
+}
+
+.btn-purple-wide:hover {
+	background-color: #fff;
+	border-color: #341f97;
+	color: #341f97;
+	transition: 0.8s;
+}
+
 .btn-purple {
 	border-radius: 38px;
 	background-color: #341f97;
@@ -1222,13 +1237,14 @@ label.error {
 	color: #fff;
 }
 
-#portalLinkUl .active > .nav-link {
+.portalLinkUl .active > .nav-link {
 	color: #fff;
 	font-weight: bold;
 	transition: color 0.4s linear;
 }
 
 .portal-card {
+	display: block;
 	background-color: #341f97;
 	border-radius: 5px;
 	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
@@ -1238,12 +1254,14 @@ label.error {
 	cursor: pointer;
 	font-size: 4rem;
 	padding: 4rem 0;
+	text-decoration: none;
 }
 
 .portal-card:hover {
 	background-color: #54a0ff;
 	color: #fff;
 	transition: 0.5s ease-in;
+	text-decoration: none;
 }
 
 .logout-button {
@@ -1301,4 +1319,19 @@ table.dataTable thead .sorting_desc_disabled {
 	border-radius: 5px;
 }
 /***** /Forms/ *****/
+/***** Profile Page *****/
+#profilePane {
+	background-color: #fff;
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
+}
+
+#profilePicture {
+	height: 13rem;
+	border: solid #341f97;
+	border-radius: 100%;
+}
+/***** /Profile Page/ *****/
 /***** /Portal/ *****/

@@ -39,6 +39,13 @@
 			href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
 			rel="stylesheet"
 		/>
+		<link 
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css"
+			integrity="sha512-0SPWAwpC/17yYyZ/4HSllgaK7/gg9OlVozq8K7rf3J8LvCjYEEIfzzpnA2/SSjpGIunCSD18r3UhvDcu/xncWA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
 		<link rel="stylesheet" href="/styles/main.css" />
 
 		<script
@@ -57,6 +64,7 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
 		<script
 			type="text/javascript"
 			charset="utf8"
@@ -72,12 +80,18 @@
 			src="https://cdn.datatables.net/v/bs4/dt-1.10.21/r-2.2.5/datatables.min.js"
 		></script>
 		<script src="https://cdn.tiny.cloud/1/0gmrfx67xwd932ip2v4jczrmjxulhqkwzjd99wpt9uqvgfuc/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js" 
+			integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww==" 
+			crossorigin="anonymous" 
+			referrerpolicy="no-referrer"
+		></script>
 	</head>
 
 	<body class="portal-background">
 		<div id="divNav" class="navbar-fixed-top color-white">
 			<nav
-				class="navbar navbar-expand-lg navbar-light navbar-main mb-5 scrolled px-5"
+				class="navbar navbar-expand-lg navbar-dark navbar-main mb-5 scrolled px-5"
 				id="navbar"
 			>
 				<a id="portalMainLogo" class="navbar-brand" href="/portal/"
@@ -86,20 +100,40 @@
 						aria-hidden="true"
 					></i
 				></a>
-				<div class="ml-auto">
-					<ul class="nav navbar-nav" id="portalLinkUl">
+				<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target=".dual-collapse2" aria-label="Expand Navigation Options" aria-expanded="false">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse dual-collapse2">
+					<ul class="nav navbar-nav portalLinkUl">
 						<% if (user) { %>
 						<li class="nav-item active">
-							<form action="/portal/logout?_method=DELETE" method="POST">
-								<button class="logout-button" type="submit">Logout</button>
-							</form>
+							<a class="nav-link" href="/portal/events">Events</a>
 						</li>
-						<% } else { %>
 						<li class="nav-item active">
-							<a class="nav-link" href="/portal/login">Login</a>
+							<a class="nav-link" href="/portal/recordings">Recordings</a>
 						</li>
 						<% } %>
 					</ul>
+				</div>
+				<div class="navbar-collapse collapse dual-collapse2">
+					<div class="ml-auto">
+						<ul class="nav navbar-nav portalLinkUl">
+							<% if (user) { %>
+							<li class="nav-item active">
+								<a class="nav-link" href="/portal/profile">My Profile</a>
+							</li>
+							<li class="nav-item">
+								<form action="/portal/logout?_method=DELETE" method="POST">
+									<button class="nav-link logout-button active" type="submit">Logout</button>
+								</form>
+							</li>
+							<% } else { %>
+							<li class="nav-item active">
+								<a class="nav-link" href="/portal/login">Login</a>
+							</li>
+							<% } %>
+						</ul>
+					</div>
 				</div>
 			</nav>
 		</div>

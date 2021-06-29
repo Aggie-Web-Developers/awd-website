@@ -19,6 +19,7 @@ router.get('/', function (req, res) {
 			res.render('index', { events: result.recordset });
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', "Whoops! We couldn't grab the news or events.");
 			res.render('index', { events: null });
 		});
@@ -43,6 +44,7 @@ router.post('/', function (req, res) {
 			res.status(200).send('Success! Our best owl has delivered your request.');
 		})
 		.catch((err) => {
+			console.error(err);
 			res.status(400).send();
 		});
 });
@@ -59,6 +61,7 @@ router.get('/general-meetings', function (req, res) {
 			res.render('general-meetings', { events: result.recordset });
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', "Whoops! We couldn't grab meeting events.");
 			res.render('general-meetings', { events: null });
 		});
@@ -74,6 +77,7 @@ router.get('/projects', function (req, res) {
 			res.render('projects', { projects: result.recordset });
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', "Whoops! We couldn't grab our projects.");
 			res.render('projects', { projects: [] });
 		});
@@ -89,6 +93,7 @@ router.get('/our-sponsors', function (req, res) {
 			res.render('our-sponsors', { sponsors: result.recordset });
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error loading sponsors.');
 			res.render('our-sponsors', { sponsors: null });
 		});
@@ -152,6 +157,7 @@ router.post('/contact-us/general', function (req, res) {
 						}
 					})
 					.catch((err) => {
+						console.error(err);
 						res.status(400).send();
 					});
 
@@ -181,11 +187,13 @@ router.post('/contact-us/general', function (req, res) {
 							}
 						})
 						.catch((err) => {
+							console.error(err);
 							res.status(400).send();
 						});
 				}
 			})
 			.catch((err) => {
+				console.error(err);
 				res.status(400).send();
 			});
 	}
@@ -242,6 +250,7 @@ router.post('/contact-us/corporate', function (req, res) {
 						}
 					})
 					.catch((err) => {
+						console.error(err);
 						res.status(400).send();
 					});
 
@@ -271,11 +280,13 @@ router.post('/contact-us/corporate', function (req, res) {
 							}
 						})
 						.catch((err) => {
+							console.error(err);
 							res.status(400).send();
 						});
 				}
 			})
 			.catch((err) => {
+				console.error(err);
 				res.status(400).send();
 			});
 	}
@@ -310,6 +321,7 @@ router.get('/unsubscribe/general/:id', function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			res
 				.status(400)
 				.send(
@@ -341,6 +353,7 @@ router.get('/resubscribe/general/:id', function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			res
 				.status(400)
 				.send(
@@ -378,6 +391,7 @@ router.get('/unsubscribe/corporate/:id', function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			res
 				.status(400)
 				.send(
@@ -409,6 +423,7 @@ router.get('/resubscribe/corporate/:id', function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			res
 				.status(400)
 				.send(

@@ -109,7 +109,7 @@
 											<div class="category"><%= event.type%></div>
 											<p class="title"><%= event.name%></h3>
 											<p class="sub_title"><%= event.summary%></h4>
-											<p class="description"><%- event.descr%></p>
+											<p class="description"><%= event.descr%></p>
 											<div class="post-meta">
 												<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i><%= event.event_time.toLocaleString([], { month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' })%></span>
 											</div>
