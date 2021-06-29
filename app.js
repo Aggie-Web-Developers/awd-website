@@ -20,7 +20,6 @@ const middleware = require('./middleware');
 
 // overload console.error to send error emails when an error occurs
 console.error = async (err) => {
-	
 	console.log(err.stack); // print error to console
 	await email.sendErrorEmail(err.stack.toString()); // send error email
 };

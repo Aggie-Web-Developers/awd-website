@@ -16,7 +16,7 @@ mailerObj.sendErrorEmail = async function (err) {
 
 	let content = '<p><b>Error:</b> ' + err + '</p>';
 	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '<br>'); // make content string safe for template data
-	content = content.replace(/\\/g, "/");
+	content = content.replace(/\\/g, '/');
 
 	const params = {
 		Destination: {
@@ -313,7 +313,7 @@ async function sendBulkMail(email, recips) {
 				else resolve('Success');
 			})
 			.catch(function (err) {
-				console.log(err);
+				console.error(err);
 				reject(new Error(err));
 			});
 	});
@@ -370,7 +370,7 @@ function getGeneralRecipeints() {
 				resolve(result.recordset);
 			})
 			.catch((err) => {
-				console.log(err);
+				console.error(err);
 				resolve('Error');
 			});
 	});
