@@ -6,7 +6,7 @@ const middleware = require('../../middleware');
 const moment = require('moment');
 const tz = require('moment-timezone');
 
-router.get('/', middleware.checkAuthenticated, function (req, res) {
+router.get('/', middleware.checkIsOfficer, function (req, res) {
 	var sqlQuery =
 		'SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.start_date ASC';
 
@@ -22,7 +22,7 @@ router.get('/', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.get('/edit/:id', middleware.checkAuthenticated, function (req, res) {
+router.get('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request()
 		.input('id', sql.Int, req.params.id)
 		.query('SELECT TOP 1 * FROM tbl_events WHERE id = @id')
@@ -41,7 +41,7 @@ router.get('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
+router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request();
 
 	var user_date = new Date(req.body.txtDate + ' ' + req.body.txtTime);
@@ -99,11 +99,11 @@ router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.get('/new', middleware.checkAuthenticated, function (req, res) {
+router.get('/new', middleware.checkIsOfficer, function (req, res) {
 	res.render('portal/events/new');
 });
 
-router.post('/new', middleware.checkAuthenticated, function (req, res) {
+router.post('/new', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request();
 
 	var user_date = new Date(req.body.txtDate + ' ' + req.body.txtTime);
@@ -159,7 +159,7 @@ router.post('/new', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.get('/createEmail/:id', middleware.checkAuthenticated, function (
+router.get('/createEmail/:id', middleware.checkIsOfficer, function (
 	req,
 	res
 ) {

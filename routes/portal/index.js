@@ -6,12 +6,16 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const middleware = require('../../middleware');
 
-router.get('/', middleware.checkAuthenticated, function (req, res) {
+router.get('/', middleware.checkIsOfficer, function (req, res) {
 	res.render('portal/');
 });
 
 router.get('/login', middleware.checkNotAuthenticated, function (req, res) {
 	res.render('portal/login');
+});
+
+router.get('/member', middleware.checkAuthenticated, function (req, res) {
+	res.render('portal/index-member');
 });
 
 router.post(
@@ -28,7 +32,7 @@ router.get('/register', middleware.checkNotAuthenticated, function (req, res) {
 	res.render('portal/register');
 });
 
-/* router.post('/register', middleware.checkNotAuthenticated, async function (
+router.post('/register', middleware.checkNotAuthenticated, async function (
 	req,
 	res
 ) {
@@ -76,7 +80,7 @@ router.get('/register', middleware.checkNotAuthenticated, function (req, res) {
 		);
 		res.redirect('/portal/register');
 	}
-}); */
+}); 
 
 router.delete('/logout', middleware.checkAuthenticated, (req, res) => {
 	req.logOut();

@@ -7,7 +7,7 @@ const email = require('../../email/email');
 const moment = require('moment');
 const tz = require('moment-timezone');
 
-router.get('/', middleware.checkAuthenticated, function (req, res) {
+router.get('/', middleware.checkIsOfficer, function (req, res) {
 	var sqlQuery =
 		'SELECT em.*, e.name as event_name FROM tbl_emails em LEFT JOIN tbl_events e ON e.id = em.event_id ORDER BY em.deleted ASC, em.create_date DESC';
 
@@ -23,7 +23,7 @@ router.get('/', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.get('/edit/:id', middleware.checkAuthenticated, function (req, res) {
+router.get('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request()
 		.input('id', sql.Int, req.params.id)
 		.query('SELECT TOP 1 * FROM tbl_emails WHERE id = @id')
@@ -42,7 +42,7 @@ router.get('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
+router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request();
 	var sqlQuery = '';
 
@@ -93,11 +93,11 @@ router.put('/edit/:id', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.get('/new', middleware.checkAuthenticated, function (req, res) {
+router.get('/new', middleware.checkIsOfficer, function (req, res) {
 	res.render('portal/emails/new');
 });
 
-router.post('/new', middleware.checkAuthenticated, function (req, res) {
+router.post('/new', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request();
 	var sqlQuery = '';
 
@@ -150,7 +150,7 @@ router.post('/new', middleware.checkAuthenticated, function (req, res) {
 		});
 });
 
-router.get('/send/:id', middleware.checkAuthenticated, async function (
+router.get('/send/:id', middleware.checkIsOfficer, async function (
 	req,
 	res
 ) {
@@ -165,7 +165,7 @@ router.get('/send/:id', middleware.checkAuthenticated, async function (
 	}
 });
 
-router.get('/test-send/:id', middleware.checkAuthenticated, async function (
+router.get('/test-send/:id', middleware.checkIsOfficer, async function (
 	req,
 	res
 ) {
