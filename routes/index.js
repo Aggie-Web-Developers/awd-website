@@ -9,7 +9,7 @@ const fetch = require('node-fetch');
 
 router.get('/', function (req, res) {
 	var sqlQuery =
-		"ELECT TOP 3 e.*, (u.first_name + ' ' + u.last_name) as author " +
+		"SELECT TOP 3 e.*, (u.first_name + ' ' + u.last_name) as author " +
 		'FROM tbl_events  e LEFT JOIN tbl_user u on u.id = e.creating_user_id ' +
 		'WHERE e.[start_date] <= GETUTCDATE() AND e.[end_date] >= GETUTCDATE() AND e.deleted = 0 ORDER BY e.event_time ASC';
 
