@@ -11,6 +11,7 @@ router.get('/', middleware.checkIsOfficer, function (req, res) {
 			res.render('portal/sponsors/index', { sponsors: result.recordset });
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error loading sponsors.');
 			res.render('portal/sponsors/index', { sponsors: [] });
 		});
@@ -29,6 +30,7 @@ router.get('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error loading sponsors.');
 			res.redirect('/portal/sponsors/');
 		});
@@ -59,6 +61,7 @@ router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error updating sponsor.');
 			res.redirect('/portal/sponsors/');
 		});
@@ -98,6 +101,7 @@ router.post('/new', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error creating sponsor.');
 			res.redirect('/portal/sponsors/');
 		});

@@ -11,6 +11,7 @@ router.get('/', middleware.checkIsOfficer, function (req, res) {
 			res.render('portal/projects/index', { projects: result.recordset });
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error loading projects.');
 			res.render('portal/projects/index', { projects: [] });
 		});
@@ -29,6 +30,7 @@ router.get('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error loading project.');
 			res.redirect('/portal/projects/');
 		});
@@ -64,6 +66,7 @@ router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error updating project.');
 			res.redirect('/portal/projects/');
 		});
@@ -107,6 +110,7 @@ router.post('/new', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error creating project.');
 			res.redirect('/portal/projects/');
 		});

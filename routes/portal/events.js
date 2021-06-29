@@ -16,6 +16,7 @@ router.get('/', middleware.checkIsOfficer, function (req, res) {
 			res.render('portal/events/index', { events: result.recordset });
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error loading events.');
 			res.render('portal/events/index', { events: [] });
 		});
@@ -34,6 +35,7 @@ router.get('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error loading event.');
 			res.redirect('/portal/events/');
 		});
@@ -91,6 +93,7 @@ router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error updating event.');
 			res.redirect('/portal/events/');
 		});
@@ -150,6 +153,7 @@ router.post('/new', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error creating event.');
 			res.redirect('/portal/events/');
 		});
@@ -212,11 +216,13 @@ router.get('/createEmail/:id', middleware.checkIsOfficer, function (
 					}
 				})
 				.catch((err2) => {
+					console.error(err);
 					req.flash('error', 'Error creating event email.');
 					res.redirect('/portal/events/');
 				});
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error creating event email.');
 			res.redirect('/portal/events/');
 		});

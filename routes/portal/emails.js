@@ -17,6 +17,7 @@ router.get('/', middleware.checkIsOfficer, function (req, res) {
 			res.render('portal/emails/index', { emails: result.recordset });
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error loading emails.');
 			res.render('portal/emails/index', { emails: [] });
 		});
@@ -35,6 +36,7 @@ router.get('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error loading selected email.');
 			res.redirect('/portal/emails/');
 		});
@@ -85,6 +87,7 @@ router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error updating email.');
 			res.redirect('/portal/emails/');
 		});
@@ -141,6 +144,7 @@ router.post('/new', middleware.checkIsOfficer, function (req, res) {
 			}
 		})
 		.catch((err) => {
+			console.error(err);
 			req.flash('error', 'Error creating email.');
 			res.redirect('/portal/emails/');
 		});

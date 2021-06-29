@@ -803,12 +803,17 @@ label.error {
 }
 
 .photo-president {
-	background: url('../images/Cole-Bio-Pic.jpg') no-repeat;
+	background: url('../images/Vignesh-Bio-Pic.jpg') no-repeat;
 	background-size: contain;
 }
 
 .photo-vp {
-	background: url('../images/Vignesh-Bio-Pic.jpg') no-repeat;
+	background: url('../images/Cole-Bio-Pic.jpg') no-repeat;
+	background-size: contain;
+}
+
+.photo-pc {
+	background: url('../images/Michaela-Bio-Pic.jpg') no-repeat;
 	background-size: contain;
 }
 

@@ -20,6 +20,12 @@ const recordingRoutes = require('./routes/portal/recordings');
 const profileRoutes = require('./routes/portal/profile');
 const middleware = require('./middleware');
 
+// overload console.error to send error emails when an error occurs
+console.error = async (err) => {
+	console.log(err.stack); // print error to console
+	await email.sendErrorEmail(err.stack.toString()); // send error email
+};
+
 initPassport(passport);
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -68,7 +74,7 @@ sql
 	})
 	.catch(function (err) {
 		console.log('Connecting to database: [FAILED]');
-		console.log(err);
+		console.error(err);
 	});
 
 app.use(function (err, req, res, next) {

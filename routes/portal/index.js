@@ -65,6 +65,8 @@ router.post('/register', middleware.checkNotAuthenticated, async function (
 				}
 			})
 			.catch((err) => {
+				console.error(err);
+
 				req.flash(
 					'error',
 					'Error creating account. Please contact us if the error persists.'
