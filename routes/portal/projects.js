@@ -41,7 +41,7 @@ router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 	var sqlQuery =
 		'UPDATE tbl_projects ' +
 		'SET name = @name, work_done = @work_done, status = @status, manager = @manager, test_url = @test_url, github_url = @github_url, ' +
-		'start_date = @start_date, deleted = @deleted, image_url = @image_url WHERE id=@id';
+		'start_date = @start_date, end_date = @end_date, deleted = @deleted, image_url = @image_url WHERE id=@id';
 
 	sqlReq.input('id', sql.Int, req.params.id);
 	sqlReq.input('name', sql.NVarChar, req.body.txtName);
@@ -52,7 +52,13 @@ router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 	sqlReq.input('image_url', sql.NVarChar, req.body.txtImageLink);
 	sqlReq.input('test_url', sql.NVarChar, req.body.txtTestLink);
 	sqlReq.input('github_url', sql.NVarChar, req.body.txtGithub);
-	sqlReq.input('start_date', sql.NVarChar, req.body.txtDate);
+	sqlReq.input('start_date', sql.NVarChar, req.body.txtStartDate);
+
+	sqlReq.input(
+		'end_date',
+		sql.NVarChar,
+		req.body.txtEndDate == '' ? null : req.body.txtEndDate // if end_date is null, insert a null value into the db
+	);
 
 	sqlReq
 		.query(sqlQuery)
@@ -80,12 +86,12 @@ router.post('/new', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request();
 
 	var sqlQuery =
-		'INSERT INTO tbl_projects (name, work_done, status, manager, test_url, github_url, start_date, deleted, image_url) VALUES ' +
-		'(@name, @work_done, @status, @manager, @test_url, @github_url, @start_date, @deleted,  @image_url)';
+		'INSERT INTO tbl_projects (name, work_done, status, manager, test_url, github_url, start_date, end_date, deleted, image_url) VALUES ' +
+		'(@name, @work_done, @status, @manager, @test_url, @github_url, @start_date, @end_date, @deleted,  @image_url)';
 
 	var queryText =
-		'INSERT INTO tbl_projects (name, work_done, status, manager, test_url, github_url, start_date, deleted, image_url) VALUES ' +
-		'(@name, @work_done, @status, @manager, @test_url, @github_url, @start_date, @deleted,  @image_url)';
+		'INSERT INTO tbl_projects (name, work_done, status, manager, test_url, github_url, start_date, end_date, deleted, image_url) VALUES ' +
+		'(@name, @work_done, @status, @manager, @test_url, @github_url, @start_date, @end_date, @deleted,  @image_url)';
 
 	sqlReq.input('id', sql.Int, req.params.id);
 	sqlReq.input('name', sql.NVarChar, req.body.txtName);
@@ -96,7 +102,13 @@ router.post('/new', middleware.checkIsOfficer, function (req, res) {
 	sqlReq.input('image_url', sql.NVarChar, req.body.txtImageLink);
 	sqlReq.input('test_url', sql.NVarChar, req.body.txtTestLink);
 	sqlReq.input('github_url', sql.NVarChar, req.body.txtGithub);
-	sqlReq.input('start_date', sql.NVarChar, req.body.txtDate);
+	sqlReq.input('start_date', sql.NVarChar, req.body.txtStartDate);
+
+	sqlReq.input(
+		'end_date',
+		sql.NVarChar,
+		req.body.txtEndDate == '' ? null : req.body.txtEndDate // if end_date is null, insert a null value into the db
+	);
 
 	sqlReq
 		.query(sqlQuery)

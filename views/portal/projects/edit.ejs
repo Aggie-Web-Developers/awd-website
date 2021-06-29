@@ -1,6 +1,12 @@
-<%- include('../partials/header') %> <% var dateFormatted= ""; if
-(project.start_date) { var temp_date = new Date(project.start_date);
-dateFormatted = temp_date.toISOString().split('T')[0]; } %>
+<%- include('../partials/header') %>
+<% var startDateFormatted= "";
+if (project.start_date) { var temp_date = new Date(project.start_date);
+startDateFormatted = temp_date.toISOString().split('T')[0]; } 
+var endDateFormatted= "";
+if (project.end_date && project.end_date.toLocaleDateString() !== '12/31/1899') {
+	var temp_date = new Date(project.end_date);
+	endDateFormatted = temp_date.toISOString().split('T')[0];
+}%>
 <div class="container">
 	<div class="row mt-5">
 		<div class="col-12">
@@ -92,9 +98,19 @@ dateFormatted = temp_date.toISOString().split('T')[0]; } %>
 					<input
 						type="date"
 						class="form-control"
-						id="txtDate"
-						name="txtDate"
-						value="<%=dateFormatted%>"
+						id="txtStartDate"
+						name="txtStartDate"
+						value="<%=startDateFormatted%>"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="txtDate">Project End Date</label>
+					<input
+						type="date"
+						class="form-control"
+						id="txtEndDate"
+						name="txtEndDate"
+						value="<%=endDateFormatted%>"
 					/>
 				</div>
 				<div class="form-check mt-3">
