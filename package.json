@@ -18,6 +18,9 @@
 	"bugs": {
 		"url": "https://github.com/cdconn00/awd-website/issues"
 	},
+	"engines": {
+		"node": "^14.0.0"
+	},
 	"homepage": "https://github.com/cdconn00/awd-website#readme",
 	"dependencies": {
 		"aws-sdk": "^2.684.0",
