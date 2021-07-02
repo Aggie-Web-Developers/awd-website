@@ -78,7 +78,28 @@ router.post('/register', middleware.checkNotAuthenticated, async function (
 		);
 		res.redirect('/portal/register');
 	}
-}); 
+});
+
+router.get('/activate/:id', function (req, res) {
+	var sqlReq = new sql.Request();
+
+	sqlReq.input('activation_id', sql.UniqueIdentifier, req.params.id);
+
+	var sqlQuery =
+		'UPDATE tbl_user SET activation_id = NULL WHERE activation_id = @activation_id';
+
+	sqlReq
+		.query(sqlQuery)
+		.then((result) => {
+			if (result.rowsAffected != 0) req.flash('success', 'Email validated successfully!');				
+			else req.flash('error', 'We were unable to process your request, please contact us to resolve this issue.');
+			res.redirect('/portal/login');
+		})
+		.catch((err) => {
+			req.flash('error', 'We were unable to process your request, please contact us to resolve this issue.');
+			res.redirect('/portal/login');
+		});
+});
 
 router.delete('/logout', middleware.checkAuthenticated, (req, res) => {
 	req.logOut();
