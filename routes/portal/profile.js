@@ -19,7 +19,6 @@ router.get('/', middleware.checkAuthenticated, function (req, res) {
 		.catch((err) => {
 			res.render('portal/profile', { user_position: 'Member' });
 		});
-
 });
 
 router.get('/edit', middleware.checkAuthenticated, function (req, res) {

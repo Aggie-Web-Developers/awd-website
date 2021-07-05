@@ -83,6 +83,8 @@ router.post('/register', middleware.checkNotAuthenticated, async function (
 router.get('/activate/:id', function (req, res) {
 	var sqlReq = new sql.Request();
 
+	// TODO: Add validation to make sure id is a unique identifier (when i visit the page with http://localhost:8080/portal/activate/dsuashdjsad I get errors)
+
 	sqlReq.input('activation_id', sql.UniqueIdentifier, req.params.id);
 
 	var sqlQuery =
@@ -91,12 +93,25 @@ router.get('/activate/:id', function (req, res) {
 	sqlReq
 		.query(sqlQuery)
 		.then((result) => {
-			if (result.rowsAffected != 0) req.flash('success', 'Email validated successfully!');				
-			else req.flash('error', 'We were unable to process your request, please contact us to resolve this issue.');
+			if (result.rowsAffected != 0) {
+				req.flash('success', 'Email validated successfully!'); // TODO: The query works as intended, but there is no success message being displayed on the login page
+				// Check and make sure we have something setup on login.ejs that handles flashes of type success and not just error
+			} else {
+				req.flash(
+					'error',
+					'We were unable to process your request, please contact us to resolve this issue.'
+				);
+			}
+
 			res.redirect('/portal/login');
 		})
 		.catch((err) => {
-			req.flash('error', 'We were unable to process your request, please contact us to resolve this issue.');
+			console.error(err);
+
+			req.flash(
+				'error',
+				'We were unable to process your request, please contact us to resolve this issue.'
+			);
 			res.redirect('/portal/login');
 		});
 });
