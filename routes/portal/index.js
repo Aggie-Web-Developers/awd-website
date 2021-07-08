@@ -81,39 +81,46 @@ router.post('/register', middleware.checkNotAuthenticated, async function (
 });
 
 router.get('/activate/:id', function (req, res) {
-	var sqlReq = new sql.Request();
+	const uuidv4 = new RegExp('^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$', 'i');
 
-	// TODO: Add validation to make sure id is a unique identifier (when i visit the page with http://localhost:8080/portal/activate/dsuashdjsad I get errors)
+	if (uuidv4.test(req.params.id)) {
+		var sqlReq = new sql.Request();
 
-	sqlReq.input('activation_id', sql.UniqueIdentifier, req.params.id);
+		sqlReq.input('activation_id', sql.UniqueIdentifier, req.params.id);
 
-	var sqlQuery =
-		'UPDATE tbl_user SET activation_id = NULL WHERE activation_id = @activation_id';
+		var sqlQuery =
+			'UPDATE tbl_user SET activation_id = NULL WHERE activation_id = @activation_id';
 
-	sqlReq
-		.query(sqlQuery)
-		.then((result) => {
-			if (result.rowsAffected != 0) {
-				req.flash('success', 'Email validated successfully!'); // TODO: The query works as intended, but there is no success message being displayed on the login page
-				// Check and make sure we have something setup on login.ejs that handles flashes of type success and not just error
-			} else {
+		sqlReq
+			.query(sqlQuery)
+			.then((result) => {
+				if (result.rowsAffected != 0) {
+					req.flash('success', 'Email validated successfully!');
+				} else {
+					req.flash(
+						'error',
+						'We were unable to process your request, please contact us to resolve this issue.'
+					);
+				}
+
+				res.redirect('/portal/login');
+			})
+			.catch((err) => {
+				console.error(err);
+
 				req.flash(
 					'error',
 					'We were unable to process your request, please contact us to resolve this issue.'
 				);
-			}
-
-			res.redirect('/portal/login');
-		})
-		.catch((err) => {
-			console.error(err);
-
-			req.flash(
-				'error',
-				'We were unable to process your request, please contact us to resolve this issue.'
-			);
-			res.redirect('/portal/login');
-		});
+				res.redirect('/portal/login');
+			});
+	} else {
+		req.flash(
+			'error',
+			'Invalid activation link. Please contact us if this is an error.'
+		);
+		res.redirect('/portal/login');
+	}
 });
 
 router.delete('/logout', middleware.checkAuthenticated, (req, res) => {
