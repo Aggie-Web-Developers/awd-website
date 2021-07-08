@@ -22,6 +22,7 @@
 			<div class="col-xs-10 col-md-10 form-container p-4">
 				<h2 class="page-title">Edit Email</h2>
 				<form id="frm" action="/portal/emails/edit/<%= email.id %>?_method=PUT" method="POST">
+					<input type="hidden" id="hdnTimezoneOffset" name="hdnTimezoneOffset" />
 					<div class="form-group">
 						<label for="txtSubject">Email Subject</label>
 						<input type="text" class="form-control" id="txtSubject" name="txtSubject" value="<%=email.subject%>">
