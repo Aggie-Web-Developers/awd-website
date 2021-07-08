@@ -49,7 +49,7 @@ router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 	if (req.body.txtSendDate != '') {
 		var user_date = new Date(req.body.txtSendDate + ' ' + req.body.txtSendTime);
 
-		user_date = user_date.setMinutes(
+		user_date.setMinutes(
 			user_date.getMinutes() + Number(req.body.hdnTimezoneOffset) // Combine user's time with their timezone offset (stored in hidden variable)
 		);
 
