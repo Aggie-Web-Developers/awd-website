@@ -1,6 +1,8 @@
 // JS File for Portal Email New View
 
 $(function () {
+	const currentDate = new Date();
+
 	tinymce.init({
 		selector: '#txtBody',
 		plugins: ['image link autoresize'],
@@ -9,6 +11,8 @@ $(function () {
 			'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image |',
 		autoresize_on_init: true,
 	});
+
+	$('#hdnTimezoneOffset').val(currentDate.getTimezoneOffset());
 
 	$('#frm').validate({
 		ignore: ':hidden',

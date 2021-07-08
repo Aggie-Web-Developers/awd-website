@@ -50,7 +50,7 @@ router.put('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 		var user_date = new Date(req.body.txtSendDate + ' ' + req.body.txtSendTime);
 
 		user_date.setMinutes(
-			user_date.getMinutes() + user_date.getTimezoneOffset()
+			user_date.getMinutes() + Number(req.body.hdnTimezoneOffset) // Combine user's time with their timezone offset (stored in hidden variable)
 		);
 
 		sqlReq.input(
@@ -106,7 +106,7 @@ router.post('/new', middleware.checkIsOfficer, function (req, res) {
 		var user_date = new Date(req.body.txtSendDate + ' ' + req.body.txtSendTime);
 
 		user_date.setMinutes(
-			user_date.getMinutes() + user_date.getTimezoneOffset()
+			user_date.getMinutes() + Number(req.body.hdnTimezoneOffset) // Combine user's time with their timezone offset (stored in hidden variable)
 		);
 
 		sqlReq.input(
@@ -150,10 +150,7 @@ router.post('/new', middleware.checkIsOfficer, function (req, res) {
 		});
 });
 
-router.get('/send/:id', middleware.checkIsOfficer, async function (
-	req,
-	res
-) {
+router.get('/send/:id', middleware.checkIsOfficer, async function (req, res) {
 	const emailStatus = await email.sendAdminEmail(req.params.id);
 
 	if (emailStatus != 'Success') {

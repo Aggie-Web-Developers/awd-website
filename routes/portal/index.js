@@ -80,7 +80,7 @@ router.post('/register', middleware.checkNotAuthenticated, async function (
 		);
 		res.redirect('/portal/register');
 	}
-}); 
+});
 
 router.delete('/logout', middleware.checkAuthenticated, (req, res) => {
 	req.logOut();

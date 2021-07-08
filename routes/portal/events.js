@@ -159,10 +159,7 @@ router.post('/new', middleware.checkIsOfficer, function (req, res) {
 		});
 });
 
-router.get('/createEmail/:id', middleware.checkIsOfficer, function (
-	req,
-	res
-) {
+router.get('/createEmail/:id', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request().input('id', sql.Int, req.params.id);
 
 	sqlReq
