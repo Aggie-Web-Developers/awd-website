@@ -18,6 +18,7 @@ const sponsorRoutes = require('./routes/portal/sponsors');
 const projectRoutes = require('./routes/portal/projects');
 const recordingRoutes = require('./routes/portal/recordings');
 const profileRoutes = require('./routes/portal/profile');
+const officerRoutes = require('./routes/portal/officers');
 const middleware = require('./middleware');
 
 // overload console.error to send error emails when an error occurs
@@ -106,6 +107,7 @@ app.use('/portal/sponsors', sponsorRoutes);
 app.use('/portal/projects', projectRoutes);
 app.use('/portal/recordings', recordingRoutes);
 app.use('/portal/profile', profileRoutes);
+app.use('/portal/officers', officerRoutes);
 
 app.get('/*', function (req, res) {
 	res.render('404');

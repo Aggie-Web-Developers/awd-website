@@ -1,0 +1,56 @@
+<%- include('../partials/header') %> <% if (messages.error) { %>
+    <div class="alert alert-danger" role="alert"><%= messages.error %></div>
+    <% } %> <% if (messages.success) { %>
+    <div class="alert alert-success" role="alert"><%= messages.success %></div>
+    <% } %>
+    
+    <div class="container">
+        <div class="row justify-content-around align-items-center mt-5">
+            <div class="col-5">
+                <h1>Manage Officers</h1>
+            </div>
+            <div class="col-7 text-right">
+                <a href="/portal/officers/new" class="btn btn-contact btn-contact-slim"
+                    >New</a
+                >
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="container table-container mt-3">
+                    <table id="tblOfficers" class="display">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <th>Position</th>
+                                <th>Person</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% officers.forEach(function(officer) {  %>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <a
+                                        href="/portal/officers/edit/<%= officer.id%>"
+                                        class="font-weight-bold"
+                                        ><%= officer.name %></a
+                                    >
+                                </td>
+    
+                                <td><%= officer.user_name %></td>
+    
+                                
+                            </tr>
+                            <% });%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/scripts/portal/officers/index.js"></script>
+    <%- include('../partials/footer') %>
