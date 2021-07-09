@@ -81,8 +81,12 @@ router.post('/register', middleware.checkNotAuthenticated, async function (
 });
 
 router.get('/activate/:id', function (req, res) {
-	const uuidv4 = new RegExp('^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$', 'i');
+	const uuidv4 = new RegExp(
+		'^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$',
+		'i'
+	);
 
+	// Verify the id passed in a valid UUID
 	if (uuidv4.test(req.params.id)) {
 		var sqlReq = new sql.Request();
 
@@ -95,7 +99,10 @@ router.get('/activate/:id', function (req, res) {
 			.query(sqlQuery)
 			.then((result) => {
 				if (result.rowsAffected != 0) {
-					req.flash('success', 'Email validated successfully!');
+					req.flash(
+						'success',
+						'Email verified, please log in to access your account.'
+					);
 				} else {
 					req.flash(
 						'error',
@@ -117,7 +124,7 @@ router.get('/activate/:id', function (req, res) {
 	} else {
 		req.flash(
 			'error',
-			'Invalid activation link. Please contact us if this is an error.'
+			'We were unable to process your request, please contact us to resolve this issue.'
 		);
 		res.redirect('/portal/login');
 	}
