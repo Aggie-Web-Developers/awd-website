@@ -1,6 +1,6 @@
 # awd-website
 ### Aggie Web Developers
-### Current Project Manager: Leo Miao
+### Current Project Manager: Cole Connelly
 
 <br>
 
@@ -24,4 +24,4 @@ All PRs should point to `develop`, and will be reviewed and merged accordingly.
 
 # Questions/Concerns
 
-Feel free to direct any questions, concerns, or comments to the Project Manager (@Mr-Fabulous), @Vigasaurus or @cdconn00
+Feel free to direct any questions, concerns, or comments to the Project Manager (@cdconn00), @Vigasaurus or @cdconn00

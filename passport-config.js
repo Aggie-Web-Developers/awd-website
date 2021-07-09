@@ -25,6 +25,8 @@ function init(passport) {
 				});
 			}
 		} catch (err) {
+			console.error(err);
+
 			return done(e);
 		}
 	};
@@ -42,6 +44,8 @@ function init(passport) {
 
 			done(null, user);
 		} catch (e) {
+			console.error(e);
+
 			done(e);
 		}
 	});
@@ -57,6 +61,8 @@ function getUserByEmail(email) {
 				resolve(result.recordset[0]);
 			})
 			.catch((err) => {
+				console.error(err);
+
 				resolve(null);
 			});
 	});
@@ -72,6 +78,8 @@ function getUserById(id) {
 				resolve(result.recordset[0]);
 			})
 			.catch((err) => {
+				console.error(err);
+
 				resolve(null);
 			});
 	});

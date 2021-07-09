@@ -18,7 +18,14 @@ const sponsorRoutes = require('./routes/portal/sponsors');
 const projectRoutes = require('./routes/portal/projects');
 const recordingRoutes = require('./routes/portal/recordings');
 const profileRoutes = require('./routes/portal/profile');
+const officerRoutes = require('./routes/portal/officers');
 const middleware = require('./middleware');
+
+// overload console.error to send error emails when an error occurs
+console.error = async (err) => {
+	console.log(err.stack); // print error to console
+	await email.sendErrorEmail(err.stack.toString()); // send error email
+};
 
 initPassport(passport);
 
@@ -68,7 +75,7 @@ sql
 	})
 	.catch(function (err) {
 		console.log('Connecting to database: [FAILED]');
-		console.log(err);
+		console.error(err);
 	});
 
 app.use(function (err, req, res, next) {
@@ -100,6 +107,7 @@ app.use('/portal/sponsors', sponsorRoutes);
 app.use('/portal/projects', projectRoutes);
 app.use('/portal/recordings', recordingRoutes);
 app.use('/portal/profile', profileRoutes);
+app.use('/portal/officers', officerRoutes);
 
 app.get('/*', function (req, res) {
 	res.render('404');

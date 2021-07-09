@@ -9,11 +9,7 @@
 <div class="container mt-3">
 	<div class="row justify-content-center mx-1">
 		<div class="col form-container p-4">
-			<form
-				id="frm"
-				action="/portal/profile/edit?_method=PUT"
-				method="POST"
-			>
+			<form id="frm">
 				<div class="form-group">
 					<label for="txtUserFirstName">First Name</label>
 					<input
@@ -54,18 +50,40 @@
 						value="<%= user.website %>"
 					/>
 				</div>
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label for="fileProfilePicture">Profile Picture</label>
                     <input
                         type="file"
-                        class="form-control"
+                        class="form-control-file"
                         id="fileProfilePicture"
+						name="fileProfilePicture"
+						accept="image/*"
                     />
-                </div> -->
-				<button type="submit" class="btn btn-contact btn-contact-slim mt-4">
-					Submit
-				</button>
+                </div>
 			</form>
+			<button class="btn btn-contact btn-contact-slim mt-4" id="submitButton">
+				Submit
+			</button>
+		</div>
+		<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" style="display: none;" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			  	<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalLabel">Crop Image</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="img-container">
+							<img class="mw-100" id="uploadedImage" src="">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-contact btn-contact-slim" id="crop">Crop</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
