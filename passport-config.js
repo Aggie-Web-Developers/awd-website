@@ -17,7 +17,7 @@ function init(passport) {
 		}
 		else if (user.activation_id !== null) {
 			return done(null, false, {
-				message: 'Login prohibited. Please validate your email.',
+				message: 'Login prohibited. Please verify your email address.',
 			});
 		}
 
