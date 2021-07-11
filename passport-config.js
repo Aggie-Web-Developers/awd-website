@@ -12,7 +12,12 @@ function init(passport) {
 
 		if (user == null) {
 			return done(null, false, {
-				message: 'Authentication failed. Please check you credentials.',
+				message: 'Authentication failed. Please check your credentials.',
+			});
+		}
+		else if (user.activation_id !== null) {
+			return done(null, false, {
+				message: 'Login prohibited. Please validate your email.',
 			});
 		}
 
@@ -21,7 +26,7 @@ function init(passport) {
 				return done(null, user);
 			} else {
 				return done(null, false, {
-					message: 'Authentication failed. Please check you credentials.',
+					message: 'Authentication failed. Please check your credentials.',
 				});
 			}
 		} catch (err) {
