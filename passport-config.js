@@ -14,10 +14,9 @@ function init(passport) {
 			return done(null, false, {
 				message: 'Authentication failed. Please check your credentials.',
 			});
-		}
-		else if (user.activation_id !== null) {
+		} else if (user.activation_id !== null) {
 			return done(null, false, {
-				message: 'Login prohibited. Please verify your email address.',
+				message: 'Authentication failed. Please check your credentials.',
 			});
 		}
 
