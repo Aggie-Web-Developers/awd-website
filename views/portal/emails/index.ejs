@@ -45,12 +45,9 @@
 							</td>
 							<td><%= email.recip_type %></td>
 
-							<% if (email.create_date) { var email_time = new
-							Date(email.create_date); %>
-							<td>
-								<%= email_time.toLocaleTimeString([], { month: 'long', day:
-								'numeric', hour: '2-digit', minute:'2-digit' }) %>
-							</td>
+							<% if (email.create_date) { %>
+							<!-- Date added as utc, then converted with front-end js to user's timezone (public/scripts/portal/emails/index.js)-->
+							<td class="date"><%= email.create_date.toISOString(); %></td>
 							<% } else { %>
 							<td></td>
 							<% }%> <% if (email.send_date) { %>

@@ -28,7 +28,7 @@ $(function () {
 });
 
 function convertSendDatesToLocalTime() {
-	// send dates are loaded in as utc, this function converts to local and updates all the dates
+	// send/create dates are loaded in as utc, this function converts to local and updates all the dates
 
 	$('.date').each(function () {
 		if ($(this).text() != '') {
