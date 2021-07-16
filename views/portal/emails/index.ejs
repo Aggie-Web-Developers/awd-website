@@ -26,7 +26,6 @@
 							<td></td>
 							<th>Subject</th>
 							<th>Recipients</th>
-							<th>Event</th>
 							<th>Create Date</th>
 							<th>Send Date</th>
 							<th>Status</th>
@@ -45,21 +44,15 @@
 								>
 							</td>
 							<td><%= email.recip_type %></td>
-							<td><%= email.event_name %></td>
 
-							<% if (email.create_date) { var email_time = new
-							Date(email.create_date); %>
-							<td>
-								<%= email_time.toLocaleTimeString([], { month: 'long', day:
-								'numeric', hour: '2-digit', minute:'2-digit' }) %>
-							</td>
+							<% if (email.create_date) { %>
+							<!-- Date added as utc, then converted with front-end js to user's timezone (public/scripts/portal/emails/index.js)-->
+							<td class="date"><%= email.create_date.toISOString(); %></td>
 							<% } else { %>
 							<td></td>
 							<% }%> <% if (email.send_date) { %>
-							<td>
-								<%= email.send_date.toLocaleTimeString([], { month: 'long', day:
-								'numeric', hour: '2-digit', minute:'2-digit' }) %>
-							</td>
+							<!-- Date added as utc, then converted with front-end js to user's timezone (public/scripts/portal/emails/index.js)-->
+							<td class="date"><%= email.send_date.toISOString(); %></td>
 							<% } else { %>
 							<td></td>
 							<% }%> <% if (email.deleted == 1) { %>
