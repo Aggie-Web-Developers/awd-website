@@ -22,6 +22,7 @@
 				<form id="frm" action="/portal/emails/edit/<%= email.id %>?_method=PUT" method="POST">
 
 					<input type="hidden" id="hdnTimezoneOffset" name="hdnTimezoneOffset" />
+					<!-- hdnSendDateUTC set as utc, then converted with front-end js to user's timezone and set in appropriate inputs (public/scripts/portal/emails/eedit.js)-->
 					<input type="hidden" id="hdnSendDateUTC" value="<%=sendDateFormatted%>" />
 
 					<div class="form-group">
