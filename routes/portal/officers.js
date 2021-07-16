@@ -24,14 +24,12 @@ router.get('/', middleware.checkIsOfficer, function (req, res) {
 
 router.get('/edit/:id', middleware.checkIsOfficer, function (req, res) {
 	var sqlQuery =
-	"SELECT id, CONCAT(first_name, ' ', last_name) AS name FROM tbl_user";
+		"SELECT id, CONCAT(first_name, ' ', last_name) AS name FROM tbl_user";
 
 	var sqlReq = new sql.Request()
 		.query(sqlQuery)
 		.then((result) => {
-			console.log(result.recordset);
-			res.send("OK");
-			//res.render('portal/officers/index', { officers: result.recordset });
+			res.render('portal/officers/edit', { users: result.recordset });
 		})
 		.catch((err) => {
 			console.error(err);
