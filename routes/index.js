@@ -101,32 +101,17 @@ router.get('/our-sponsors', function (req, res) {
 
 router.get('/about-us', function (req, res) {
 	var sqlQuery =
-		'SELECT * FROM tbl_officer_positions ORDER BY id ASC';
-
-	var positions;
-	var sqlReq = new sql.Request()
-		.query(sqlQuery)
-		.then((result) => {
-			positions = result.recordset;
-		})
-		.catch((err) => {
-			console.error(err);
-			req.flash('error', 'Error loading officer positions.');
-			positions = null;
-		});
-
-	sqlQuery =
-		'SELECT * FROM tbl_user WHERE officer_id IS NOT NULL ORDER BY officer_id ASC';
+		'SELECT p.*, u.first_name, u.last_name, u.website, u.image_url FROM tbl_officer_positions p LEFT JOIN tbl_user u ON p.id = u.officer_id';
 
 	sqlReq = new sql.Request()
 		.query(sqlQuery)
 		.then((result) => {
-			res.render('about-us', { officers: result.recordset, positions: positions });
+			res.render('about-us', { officers: result.recordset });
 		})
 		.catch((err) => {
 			console.error(err);
 			req.flash('error', 'Error loading officers.');
-			res.render('about-us', { officers: null, positions: positions });
+			res.render('about-us', { officers: null });
 		});
 });
 

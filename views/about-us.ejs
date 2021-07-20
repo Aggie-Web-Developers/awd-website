@@ -84,12 +84,9 @@
 		<div class="container my-5">
 
 			<div class="row justify-content-around">
-				<% if (officers && positions) {
-					var i = 0;
-					positions.forEach(function(position) {
-						if (typeof officers[i] !== 'undefined' && officers[i].officer_id == position.id) { 
-							officer = officers[i]; 
-							++i; %>
+				<% if (officers) {
+					officers.forEach(function(officer) {
+						if (officer.first_name) { %>
 							<div class="col-10 col-md-6 col-lg-4">
 								<div class="officer-card">
 									<div class="officer-card-inner">
@@ -103,7 +100,7 @@
 											<div class="officer-card-body">
 												<h3 class="officer-name"><%=officer.first_name + " " + officer.last_name%></h3>
 												<!-- <p>he/him/his</p> -->
-												<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i><%=position.name%></h4>
+												<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i><%=officer.name%></h4>
 												<!-- <p><i class="fas fa-star mr-2"></i>Co-Founder</p> -->
 												<!-- <p><i class="fas fa-map-marker-alt front-icons mr-2"></i>Austin, TX</p> -->
 												<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
@@ -130,7 +127,7 @@
 											<div class="officer-card-body">
 												<h3 class="officer-name">Vacant</h3>
 												<p></p>
-												<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i><%=position.name%></h4>
+												<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i><%=officer.name%></h4>
 												<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
 											</div>
 										</div>
