@@ -6,9 +6,9 @@ const middleware = require('../../middleware');
 const moment = require('moment');
 const tz = require('moment-timezone');
 
-router.get('/',  function (req, res) {
+router.get('/', middleware.checkAuthenticated, function (req, res) {
 	var sqlQuery =
-		'SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.start_date ASC';
+		'SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.event_time DESC';
 
 	var sqlReq = new sql.Request()
 		.query(sqlQuery)
@@ -22,19 +22,19 @@ router.get('/',  function (req, res) {
 		});
 });
 
-router.get('/manage-events', middleware.checkIsOfficer, function (req, res) {
+router.get('/manage', middleware.checkIsOfficer, function (req, res) {
 	var sqlQuery =
-		'SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.start_date ASC';
+		'SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.event_time DESC';
 
 	var sqlReq = new sql.Request()
 		.query(sqlQuery)
 		.then((result) => {
-			res.render('portal/events/manage-events', { events: result.recordset });
+			res.render('portal/events/manage', { events: result.recordset });
 		})
 		.catch((err) => {
 			console.error(err);
 			req.flash('error', 'Error loading events.');
-			res.render('portal/events/manage-events', { events: [] });
+			res.render('portal/events/manage', { events: [] });
 		});
 });
 
@@ -175,10 +175,7 @@ router.post('/new', middleware.checkIsOfficer, function (req, res) {
 		});
 });
 
-router.get('/createEmail/:id', middleware.checkIsOfficer, function (
-	req,
-	res
-) {
+router.get('/createEmail/:id', middleware.checkIsOfficer, function (req, res) {
 	var sqlReq = new sql.Request().input('id', sql.Int, req.params.id);
 
 	sqlReq
