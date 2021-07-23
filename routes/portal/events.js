@@ -6,7 +6,7 @@ const middleware = require('../../middleware');
 const moment = require('moment');
 const tz = require('moment-timezone');
 
-router.get('/', middleware.checkIsOfficer, function (req, res) {
+router.get('/',  function (req, res) {
 	var sqlQuery =
 		'SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.start_date ASC';
 
@@ -19,6 +19,22 @@ router.get('/', middleware.checkIsOfficer, function (req, res) {
 			console.error(err);
 			req.flash('error', 'Error loading events.');
 			res.render('portal/events/index', { events: [] });
+		});
+});
+
+router.get('/manage-events', middleware.checkIsOfficer, function (req, res) {
+	var sqlQuery =
+		'SELECT e.*, em.id as email_id FROM tbl_events e LEFT JOIN tbl_emails em ON em.event_id = e.id ORDER BY e.deleted ASC, e.start_date ASC';
+
+	var sqlReq = new sql.Request()
+		.query(sqlQuery)
+		.then((result) => {
+			res.render('portal/events/manage-events', { events: result.recordset });
+		})
+		.catch((err) => {
+			console.error(err);
+			req.flash('error', 'Error loading events.');
+			res.render('portal/events/manage-events', { events: [] });
 		});
 });
 

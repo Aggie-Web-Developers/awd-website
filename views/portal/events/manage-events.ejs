@@ -5,15 +5,15 @@
 <% } %>
 
 <div class="container">
-	<div class="row align-items-center mt-5">
+	<div class="row justify-content-around align-items-center mt-5">
 		<div class="col-5">
-			<h1>View Events</h1>
+			<h1>Manage Events</h1>
 		</div>
-		<!-- <div class="col-7 text-right">
+		<div class="col-7 text-right">
 			<a href="/portal/events/new" class="btn btn-contact btn-contact-slim"
 				>New</a
 			>
-		</div> -->
+		</div>
 	</div>
 </div>
 <div class="container">
@@ -44,13 +44,11 @@
 						<tr>
 							<td></td>
 							<td>
-								<!-- <a
+								<a
 									href="/portal/events/edit/<%= event.id%>"
-									class="font-weight-bold" -->
-									<!-- > -->
-									<%= event.name %>
-									<!-- </a
-								> -->
+									class="font-weight-bold"
+									><%= event.name %></a
+								>
 							</td>
 
 							<td><%= event.type %></td>
@@ -80,12 +78,12 @@
 							<td></td>
 							<% }%> <% if (!event.email_id && event.deleted == 0) { %>
 							<td class="text-center">
-								<!-- <a href="/portal/events/createEmail/<%= event.id%>"
+								<a href="/portal/events/createEmail/<%= event.id%>"
 									><i
 										class="far fa-envelope main-purple font-weight-bold"
 										title="Create Event Email"
 									></i
-								></a> -->
+								></a>
 							</td>
 							<% } else { %>
 							<td></td>
