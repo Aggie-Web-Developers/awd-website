@@ -5,6 +5,7 @@ const sql = require('mssql');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const middleware = require('../../middleware');
+const { v4: uuidv4 } = require('uuid');
 
 router.get('/', middleware.checkIsOfficer, function (req, res) {
 	res.render('portal/');
@@ -44,10 +45,15 @@ router.post('/register', middleware.checkNotAuthenticated, async function (
 		sqlReq.input('email', sql.NVarChar, req.body.txtEmailAddress);
 		sqlReq.input('password_hash', sql.NVarChar, hashedPassword);
 		sqlReq.input('receiveNewsletter', sql.Bit, req.body.chkNews === 'on');
+		//Edit sqlReq if needed
+		const user_id = uuidv4();
+		const linkType = process.env.NODE_ENV == 'prod' ? 'aggiedevelopers.com' : 'localhost:8080';
+		const link = "http://"+linkType+"/portal/activate/"+user_id
+		//"https://www.youtube.com/watch?v=dQw4w9WgXcQ"; //TODO: construct actual link
 		var queryText =
 			'IF NOT EXISTS (SELECT * FROM tbl_user WHERE email = @email) ' +
 			'BEGIN ' +
-			'INSERT INTO tbl_user (first_name, last_name, email, password_hash, receiveNewsletter) ' +
+			'INSERT INTO tbl_user (first_name, last_name, email, password_hash, receiveNewsletter, user_id) ' +
 			'values (@first_name, @last_name, @email, @password_hash, @receiveNewsletter) ' +
 			'END';
 		sqlReq
@@ -60,6 +66,7 @@ router.post('/register', middleware.checkNotAuthenticated, async function (
 					);
 					res.redirect('/portal/register');
 				} else {
+					mailerObj.sendValidationEmail(req.body.txtEmailAddress, link);
 					req.flash('success', 'Account created! Please log in.');
 					res.redirect('/portal/login');
 				}
