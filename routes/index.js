@@ -69,7 +69,7 @@ router.get('/general-meetings', function (req, res) {
 
 router.get('/projects', function (req, res) {
 	var sqlQuery =
-		'SELECT  * FROM tbl_projects WHERE deleted = 0 ORDER BY start_date ASC';
+		'SELECT * FROM tbl_projects WHERE deleted = 0 ORDER BY start_date ASC';
 
 	var sqlReq = new sql.Request()
 		.query(sqlQuery)
@@ -85,7 +85,7 @@ router.get('/projects', function (req, res) {
 
 router.get('/our-sponsors', function (req, res) {
 	var sqlQuery =
-		'SELECT  * FROM tbl_sponsors WHERE deleted = 0 ORDER BY sponsor_date ASC';
+		'SELECT * FROM tbl_sponsors WHERE deleted = 0 ORDER BY sponsor_date ASC';
 
 	var sqlReq = new sql.Request()
 		.query(sqlQuery)
@@ -100,7 +100,19 @@ router.get('/our-sponsors', function (req, res) {
 });
 
 router.get('/about-us', function (req, res) {
-	res.render('about-us');
+	var sqlQuery =
+		'SELECT p.*, u.first_name, u.last_name, u.website, u.image_url FROM tbl_officer_positions p LEFT JOIN tbl_user u ON p.id = u.officer_id';
+
+	sqlReq = new sql.Request()
+		.query(sqlQuery)
+		.then((result) => {
+			res.render('about-us', { officers: result.recordset });
+		})
+		.catch((err) => {
+			console.error(err);
+			req.flash('error', 'Error loading officers.');
+			res.render('about-us', { officers: null });
+		});
 });
 
 router.get('/contact-us', function (req, res) {
