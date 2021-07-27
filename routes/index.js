@@ -30,23 +30,30 @@ router.post('/', function (req, res) {
 	var email = req.body.txtEmail;
 	var sqlReq = new sql.Request();
 
-	sqlReq.input('email', sql.NVarChar, email);
+	if (req.body.txtEmail == null || req.body.txtEmail == '') {
+		// if a null or empty email is submitted, then send back a 400 error. (prevents spam bots from causing errors on this endpoint endlessly)
+		res.status(400).send();
+	} else {
+		sqlReq.input('email', sql.NVarChar, email);
 
-	var sqlQuery =
-		'IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) ' +
-		'BEGIN ' +
-		'INSERT INTO tbl_email_list (email) values (@email) ' +
-		'END';
+		var sqlQuery =
+			'IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) ' +
+			'BEGIN ' +
+			'INSERT INTO tbl_email_list (email) values (@email) ' +
+			'END';
 
-	sqlReq
-		.query(sqlQuery)
-		.then((result) => {
-			res.status(200).send('Success! Our best owl has delivered your request.');
-		})
-		.catch((err) => {
-			console.error(err);
-			res.status(400).send();
-		});
+		sqlReq
+			.query(sqlQuery)
+			.then((result) => {
+				res
+					.status(200)
+					.send('Success! Our best owl has delivered your request.');
+			})
+			.catch((err) => {
+				console.error(err);
+				res.status(500).send();
+			});
+	}
 });
 
 router.get('/general-meetings', function (req, res) {

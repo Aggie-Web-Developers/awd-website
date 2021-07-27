@@ -4,6 +4,7 @@
 	"description": "The website for Aggie Web Developers.",
 	"main": "app.js",
 	"scripts": {
+		"start": "nodemon app.js  --watch routes --watch middleware --watch app.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"lint": "eslint \"{views,public,routes,middleware,email}/**/*.js\"",
 		"prettier": "prettier \"**/*.{js,css}\"",
