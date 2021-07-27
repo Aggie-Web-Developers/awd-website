@@ -5,15 +5,15 @@
 <% } %>
 
 <div class="container">
-	<div class="row align-items-center mt-5">
+	<div class="row justify-content-around align-items-center mt-5">
 		<div class="col-5">
-			<h1>View Events</h1>
+			<h1>Manage Events</h1>
 		</div>
-		<!-- <div class="col-7 text-right">
+		<div class="col-7 text-right">
 			<a href="/portal/events/new" class="btn btn-contact btn-contact-slim"
 				>New</a
 			>
-		</div> -->
+		</div>
 	</div>
 </div>
 <div class="container">
@@ -28,7 +28,10 @@
 							<th>Category</th>
 							<th>Date</th>
 							<th>Location</th>
-							<th>Recording</th>
+							<th>Web Start Date</th>
+							<th>Web End Date</th>
+							<th>Deleted</th>
+							<th>Options</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -41,7 +44,11 @@
 						<tr>
 							<td></td>
 							<td>
-								<%= event.name %>
+								<a
+									href="/portal/events/edit/<%= event.id%>"
+									class="font-weight-bold"
+									><%= event.name %></a
+								>
 							</td>
 
 							<td><%= event.type %></td>
@@ -49,7 +56,7 @@
 							Date(event.event_time); %>
 							<td>
 								<%= event_time.toLocaleTimeString([], { month: 'long', day:
-								'numeric', year: 'numeric', hour: '2-digit', minute:'2-digit' }) %>
+								'numeric', hour: '2-digit', minute:'2-digit' }) %>
 							</td>
 							<% } else { %>
 							<td></td>
@@ -57,12 +64,29 @@
 
 							<td><%= event.location %></td>
 
-							<% if (event.rec_url) { %>
-								<td class="font-weight-bold">
-									<a href="<%= event.rec_url%>" target="_blank">View Recording</a>
-								</td>
+							<% if (event.start_date) { %>
+							<td><%= webStartDate.toLocaleDateString() %></td>
 							<% } else { %>
-								<td></td>
+							<td></td>
+							<% }%> <% if (event.end_date) { %>
+							<td><%= webEndDate.toLocaleDateString() %></td>
+							<% } else { %>
+							<td></td>
+							<% }%> <% if (event.deleted == 1) { %>
+							<td class="red-danger">Yes</td>
+							<% } else { %>
+							<td></td>
+							<% }%> <% if (!event.email_id && event.deleted == 0) { %>
+							<td class="text-center">
+								<a href="/portal/events/createEmail/<%= event.id%>"
+									><i
+										class="far fa-envelope main-purple font-weight-bold"
+										title="Create Event Email"
+									></i
+								></a>
+							</td>
+							<% } else { %>
+							<td></td>
 							<% }%>
 						</tr>
 						<% });%>

@@ -3,6 +3,8 @@
 $(function () {
 	const currentDate = new Date();
 
+	populateSendDate();
+
 	tinymce.init({
 		selector: '#txtBody',
 		plugins: ['image link autoresize'],
@@ -25,3 +27,27 @@ $(function () {
 		},
 	});
 });
+
+function populateSendDate() {
+	// check if a hidden variable is set with a send date, if so, convert to user's local time and populate form fields
+	if ($('#hdnSendDateUTC').val() != '') {
+		const sendDate = new Date($('#hdnSendDateUTC').val());
+
+		$('#txtSendDate').val(formatDate(sendDate));
+		$('#txtSendTime').val(
+			sendDate.toLocaleTimeString([], {
+				hour: '2-digit',
+				minute: '2-digit',
+				hour12: false,
+			})
+		);
+	}
+}
+
+function formatDate(date) {
+	// format date as YYYY-MM-DD (format needed to update value of a input[type="date"] field)
+	const day = ('0' + date.getDate()).slice(-2);
+	const month = ('0' + (date.getMonth() + 1)).slice(-2);
+
+	return date.getFullYear() + '-' + month + '-' + day;
+}
