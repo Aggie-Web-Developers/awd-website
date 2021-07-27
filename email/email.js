@@ -50,11 +50,12 @@ mailerObj.sendErrorEmail = async function (err) {
 	});
 };
 
+mailerObj.sendValidationEmail = async function (firstName, email, link) {
+	let content =
+		`<p>Howdy ${firstName}, </p>` +
+		`<p>Thanks for creating an account on the Aggie Web Developers website. Follow the link below to verify your account, and access our portal.</p>` +
+		`<p><a href='${link}' target='_blank'>Verify My Account</a></p>`;
 
-mailerObj.sendValidationEmail = async function (email, link) {
-	//const siteType = process.env.NODE_ENV == 'prod' ? 'Production' : 'Dev';
-
-	let content = '<p>Please click this link to validate your AWD account: '+ link+'</p>';
 	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '<br>'); // make content string safe for template data
 
 	const params = {
@@ -65,8 +66,9 @@ mailerObj.sendValidationEmail = async function (email, link) {
 		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
 		Template: 'AWD-Error-Email',
 		TemplateData:
-			'{ "Subject": "Validate AWD Account<br>' 
-			+ content +
+			'{ "Subject": "Validate Your AWD Account' +
+			'", "content": "' +
+			content +
 			'"}',
 		ReplyToAddresses: ['no-reply@aggiedevelopers.com'],
 	};
@@ -81,7 +83,7 @@ mailerObj.sendValidationEmail = async function (email, link) {
 				resolve('Success');
 			})
 			.catch(function (err) {
-				console.log(err);
+				console.error(err);
 				resolve('Error');
 			});
 	});
