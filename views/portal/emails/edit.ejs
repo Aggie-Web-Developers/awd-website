@@ -3,10 +3,8 @@
 	var sendDateFormatted= "";
 
 	if (email.send_date) {
-		const offset = email.send_date.getTimezoneOffset();
-
-		var temp_date = new Date(email.send_date.getTime() + (offset*-60000));
-		sendDateFormatted = temp_date.toISOString().split('T')[0];
+		// If send date exists, save a hidden variable with the UTC time. We'll use front end JS to convert the time and populate the fields.
+		sendDateFormatted = email.send_date.toISOString();
 	}
 %>
 
@@ -22,7 +20,11 @@
 			<div class="col-xs-10 col-md-10 form-container p-4">
 				<h2 class="page-title">Edit Email</h2>
 				<form id="frm" action="/portal/emails/edit/<%= email.id %>?_method=PUT" method="POST">
+
 					<input type="hidden" id="hdnTimezoneOffset" name="hdnTimezoneOffset" />
+					<!-- hdnSendDateUTC set as utc, then converted with front-end js to user's timezone and set in appropriate inputs (public/scripts/portal/emails/eedit.js)-->
+					<input type="hidden" id="hdnSendDateUTC" value="<%=sendDateFormatted%>" />
+
 					<div class="form-group">
 						<label for="txtSubject">Email Subject</label>
 						<input type="text" class="form-control" id="txtSubject" name="txtSubject" value="<%=email.subject%>">
@@ -49,12 +51,12 @@
 					</div>
 					<div class="form-group">
 						<label for="txtStartDate">Schedule Send Date</label>
-						<input type="date" class="form-control" id="txtStartDate" name="txtSendDate" aria-describedby="sendDateHelp" value="<%=sendDateFormatted %>">
+						<input type="date" class="form-control" id="txtSendDate" name="txtSendDate" aria-describedby="sendDateHelp">
 						<small id="sendDateHelp" class="form-text text-muted">Schedule the date for the email to be sent. Leave blank to send manually later.</small>
 					</div>
 					<div class="form-group">
 						<label for="txtSendTime">Schedule Send Time</label>
-						<input type="time" class="form-control" id="txtSendTime" name="txtSendTime" value="<%=email.send_date ? (email.send_date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false}) : ""%>" aria-describedby="timeHelp">
+						<input type="time" class="form-control" id="txtSendTime" name="txtSendTime" aria-describedby="timeHelp">
 						<small id="timeHelp" class="form-text text-muted">Enter the time of the date above for the email to be sent in your local timezone. We will convert from your timezone to UTC automatically.</small>
 					</div>
 					<div class="form-check mt-3">

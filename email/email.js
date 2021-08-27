@@ -50,6 +50,44 @@ mailerObj.sendErrorEmail = async function (err) {
 	});
 };
 
+mailerObj.sendValidationEmail = async function (firstName, email, link) {
+	let content =
+		`<p>Howdy ${firstName}, </p>` +
+		`<p>Thanks for creating an account on the Aggie Web Developers website. Follow the link below to verify your account, and access our portal.</p>` +
+		`<p><a href='${link}' target='_blank'>Verify My Account</a></p>`;
+
+	content = content.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, '<br>'); // make content string safe for template data
+
+	const params = {
+		Destination: {
+			BccAddresses: [],
+			ToAddresses: [email],
+		},
+		Source: 'Aggie Web Developers <no-reply@aggiedevelopers.com>',
+		Template: 'AWD-Error-Email',
+		TemplateData:
+			'{ "Subject": "Validate Your AWD Account' +
+			'", "content": "' +
+			content +
+			'"}',
+		ReplyToAddresses: ['no-reply@aggiedevelopers.com'],
+	};
+
+	const sendPromise = new aws.SES({ apiVersion: '2010-12-01' })
+		.sendTemplatedEmail(params)
+		.promise();
+
+	return new Promise((resolve, reject) => {
+		sendPromise
+			.then(async function (data) {
+				resolve('Success');
+			})
+			.catch(function (err) {
+				console.error(err);
+				resolve('Error');
+			});
+	});
+};
 mailerObj.sendContactUsEmailGen = async function (formData) {
 	let content = '<p><b>Name:</b> ' + formData.txtNameGen + '</p>';
 	content += '<p><b>Email:</b> ' + formData.txtEmailGen + '</p>';

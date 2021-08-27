@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+<div class="container">
+	<div class="row mt-5">
+		<div class="col-12">
+			<h1>Edit Officer</h1>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row justify-content-center my-5 px-md-0 px-5">
+		<div class="col-xs-10 col-md-10 form-container p-4">
+			<h2 class="page-title">Edit <%= users[0].officer_position %></h2>
+			<form
+				id="frm"
+				action="/portal/officers/edit/<%= officer_id %>?_method=PUT"
+				method="POST"
+			>
+				<div class="form-group">
+					<label for="ddlUser">User Filling Officer Role</label>
+					<select class="form-control" id="ddlUser" name="ddlUser" c>
+						<option value="">- Select One -</option>
+						<% users.forEach(function(user) {  %>
+                            <option <%= user.current_officer_user_id == user.id ? "selected" : ""%> value="<%= user.id%>"><%= user.name%></option>
+						<% });%>
+					</select>
+				</div>
+
+				<button type="submit" class="btn btn-contact btn-contact-slim mt-4">
+					Submit
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="/scripts/portal/officers/edit.js"></script>
+<%- include('../partials/footer') %>
