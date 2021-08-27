@@ -802,6 +802,31 @@ label.error {
 	z-index: 3;
 }
 
+.photo-president {
+	background: url('../images/Vignesh-Bio-Pic.jpg') no-repeat;
+	background-size: contain;
+}
+
+.photo-vp {
+	background: url('../images/Cole-Bio-Pic.jpg') no-repeat;
+	background-size: contain;
+}
+
+.photo-pc {
+	background: url('../images/Michaela-Bio-Pic.jpg') no-repeat;
+	background-size: contain;
+}
+
+.photo-prc {
+	background: url('../images/Alan-Bio-Pic.jpg') no-repeat;
+	background-size: contain;
+}
+
+.photo-secretary {
+	background: url('../images/Trey-Bio-Pic.jpg') no-repeat;
+	background-size: contain;
+}
+
 .photo-default {
 	background: url('../images/AWD-logo.png') no-repeat;
 	background-size: contain;

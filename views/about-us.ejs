@@ -84,64 +84,179 @@
 		<div class="container my-5">
 
 			<div class="row justify-content-around">
-				<% if (officers) {
-					officers.forEach(function(officer) {
-						if (officer.first_name) { %>
-							<div class="col-10 col-md-6 col-lg-4">
-								<div class="officer-card">
-									<div class="officer-card-inner">
-										<div class="front">
-											<div class="officer-card-background-photo"></div>
-											<%  if (officer.image_url) { %>
-												<div class="officer-card-photo" style="background: url(<%=officer.image_url%>) no-repeat; background-size: contain;"></div>
-											<% } else { %>
-												<div class="officer-card-photo photo-default"></div>
-											<% } %>	
-											<div class="officer-card-body">
-												<h3 class="officer-name"><%=officer.first_name + " " + officer.last_name%></h3>
-												<!-- <p>he/him/his</p> -->
-												<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i><%=officer.name%></h4>
-												<!-- <p><i class="fas fa-star mr-2"></i>Co-Founder</p> -->
-												<!-- <p><i class="fas fa-map-marker-alt front-icons mr-2"></i>Austin, TX</p> -->
-												<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
-											</div>
-										</div>
-										<div class="back">
-											<div class="social-media-wrapper">
-												<% if (officer.website) { %>
-													<a href="//<%=officer.website%>" class="social-icon" aria-label="Visit <%=officer.first_name%>'s Website" title="Visit My Website" target="_blank"><i class="far fa-user"></i></a>
-												<% } %>
-												<!-- <a href="https://www.linkedin.com/in/cole-connelly/" class="social-icon" aria-label="Visit Cole's LinkedIn" title="Connect with Me" target="_blank"><i class="fab fa-linkedin"></i></a> -->
-											</div>
-										</div>
-									</div>
+				<div class="col-10 col-md-6 col-lg-4">
+					<div class="officer-card">
+						<div class="officer-card-inner">
+							<div class="front">
+								<div class="officer-card-background-photo"></div>
+								<div class="officer-card-photo photo-president"></div>
+								<div class="officer-card-body">
+									<h3 class="officer-name">Vignesh Joglekar</h3>
+									<p>he/him/his</p>
+									<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i>President</h4>
+									<p><i class="fas fa-map-marker-alt front-icons mr-2"></i>Coppell, TX</p>
+									<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
 								</div>
 							</div>
-						<% } else { %>
-							<div class="col-10 col-md-6 col-lg-4">
-								<div class="officer-card">
-									<div class="officer-card-inner">
-										<div class="front">
-											<div class="officer-card-background-photo"></div>
-											<div class="officer-card-photo photo-default"></div>
-											<div class="officer-card-body">
-												<h3 class="officer-name">Vacant</h3>
-												<p></p>
-												<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i><%=officer.name%></h4>
-												<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
-											</div>
-										</div>
-										<div class="back">
-											<div class="social-media-wrapper">
-												<h3 style="color: #FFF;">Reach out for more info!</h3>
-											</div>
-										</div>
-									</div>
+							<div class="back">
+								<div class="social-media-wrapper">
+									<a href="https://github.com/Vigasaurus/" class="social-icon" aria-label="Visit Vignesh's Github" title="Visit My Github" target="_blank"><i class="fab fa-github-alt"></i></a>
+									<a href="https://vigneshjoglekar.com/" class="social-icon" aria-label="Visit Vignesh's Website" title="Connect with Me" target="_blank"><i class="far fa-user"></i></a>
 								</div>
 							</div>
-						<% }
-					});
-				} %> 		
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-10 col-md-6 col-lg-4">
+					<div class="officer-card">
+						<div class="officer-card-inner">
+							<div class="front">
+								<div class="officer-card-background-photo"></div>
+								<div class="officer-card-photo photo-vp"></div>
+								<div class="officer-card-body">
+									<h3 class="officer-name">Cole D. Connelly</h3>
+									<p>he/him/his</p>
+									<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i>Vice President</h4>
+									<p><i class="fas fa-star mr-2"></i>Co-Founder</p>
+									<p><i class="fas fa-map-marker-alt front-icons mr-2"></i>Austin, TX</p>
+									<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
+								</div>
+							</div>
+							<div class="back">
+								<div class="social-media-wrapper">
+									<a href="https://github.com/cdconn00/" class="social-icon" aria-label="Visit Cole's Github" title="Visit My Github" target="_blank"><i class="fab fa-github-alt"></i></a>
+									<a href="https://www.linkedin.com/in/cole-connelly/" class="social-icon" aria-label="Visit Cole's LinkedIn" title="Connect with Me" target="_blank"><i class="fab fa-linkedin"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-10 col-md-6 col-lg-4">
+					<div class="officer-card">
+						<div class="officer-card-inner">
+							<div class="front">
+								<div class="officer-card-background-photo"></div>
+								<div class="officer-card-photo photo-default"></div>
+								<div class="officer-card-body">
+									<h3 class="officer-name">Chris McGregor</h3>
+									<p>he/him/his</p>
+									<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i>Co-Founder</h4>
+									<p><i class="fas fa-map-marker-alt front-icons mr-2"></i>Corpus Christi, TX</p>
+									<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
+								</div>
+							</div>
+							<div class="back">
+								<div class="social-media-wrapper">
+									<a href="https://github.com/f4alt/" class="social-icon" aria-label="Visit Chris' Github" title="Visit My Github" target="_blank"><i class="fab fa-github-alt"></i></a>
+									<a href="https://www.linkedin.com/in/christopher-mcgregor-490732179/" aria-label="Visit Chris' LinkedIn" class="social-icon" title="Connect with Me" target="_blank"><i class="fab fa-linkedin"></i></a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-10 col-md-6 col-lg-4">
+					<div class="officer-card">
+						<div class="officer-card-inner">
+							<div class="front">
+								<div class="officer-card-background-photo"></div>
+								<div class="officer-card-photo photo-pc"></div>
+								<div class="officer-card-body">
+									<h3 class="officer-name">Michaela Matocha</h3>
+									<p>she/they</p>
+									<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i>Project Coordinator</h4>
+									<p><i class="fas fa-map-marker-alt front-icons mr-2"></i>Round Rock, TX</p>
+									<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
+								</div>
+							</div>
+							<div class="back">
+								<div class="social-media-wrapper">
+									<a href="https://github.com/mich-matocha" class="social-icon" aria-label="Visit Michaela's Github" title="Visit My Github" target="_blank"><i class="fab fa-github-alt"></i></a>
+									<a href="https://www.linkedin.com/in/mich-matocha/" aria-label="Visit Michaela's LinkedIn" class="social-icon" title="Connect with Me" target="_blank"><i class="fab fa-linkedin"></i></a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-10 col-md-6 col-lg-4">
+					<div class="officer-card">
+						<div class="officer-card-inner">
+							<div class="front">
+								<div class="officer-card-background-photo"></div>
+								<div class="officer-card-photo photo-secretary"></div>
+								<div class="officer-card-body">
+									<h3 class="officer-name">Trey Dinges</h3>
+									<p>he/him/his</p>
+									<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i>Treasurer</h4>
+									<p><i class="fas fa-map-marker-alt front-icons mr-2"></i>Austin, TX</p>
+									<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
+								</div>
+							</div>
+							<div class="back">
+								<div class="social-media-wrapper">
+									<a href="https://github.com/treydinges" class="social-icon" aria-label="Visit Trey's Github" title="Visit My Github" target="_blank"><i class="fab fa-github-alt"></i></a>
+									<a href="https://www.linkedin.com/in/charles-dinges-02abb0169/" aria-label="Visit Trey's LinkedIn" class="social-icon" title="Connect with Me" target="_blank"><i class="fab fa-linkedin"></i></a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-10 col-md-6 col-lg-4">
+					<div class="officer-card">
+						<div class="officer-card-inner">
+							<div class="front">
+								<div class="officer-card-background-photo"></div>
+								<div class="officer-card-photo photo-prc"></div>
+								<div class="officer-card-body">
+									<h3 class="officer-name">Alan Nguyen</h3>
+									<p>he/him/his</p>
+									<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i>PR Coordinator</h4>
+									<p><i class="fas fa-map-marker-alt front-icons mr-2"></i>Houston, TX</p>
+									<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
+								</div>
+							</div>
+							<div class="back">
+								<div class="social-media-wrapper">
+									<a href="https://github.com/anguyen120" class="social-icon" aria-label="Visit Alan's Github" title="Visit My Github" target="_blank"><i class="fab fa-github-alt"></i></a>
+									<a href="https://www.linkedin.com/in/anguyen120" class="social-icon" aria-label="Visit Alan's LinkedIn" title="Connect with Me" target="_blank"><i class="fab fa-linkedin"></i></a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-10 col-md-6 col-lg-4">
+					<div class="officer-card">
+						<div class="officer-card-inner">
+							<div class="front">
+								<div class="officer-card-background-photo"></div>
+								<div class="officer-card-photo photo-default"></div>
+								<div class="officer-card-body">
+									<h3 class="officer-name">Vacant</h3>
+									<p></p>
+									<h4 class="officer-title"><i class="fas fa-hat-wizard mr-2"></i>Operations Officer</h4>
+									<p class="hover-only d-none d-lg-block">Hover to Learn More</p>
+								</div>
+							</div>
+							<div class="back">
+								<div class="social-media-wrapper">
+									<h3 style="color: #FFF;">Reach out for more info!</h3>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<script src="/scripts/about-us.js"></script>
