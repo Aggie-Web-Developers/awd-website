@@ -27,31 +27,55 @@ router.get('/', function (req, res) {
 
 // handle email list signup from index page
 router.post('/', function (req, res) {
-	var email = req.body.txtEmail;
-	var sqlReq = new sql.Request();
-
-	if (req.body.txtEmail == null || req.body.txtEmail == '') {
-		// if a null or empty email is submitted, then send back a 400 error. (prevents spam bots from causing errors on this endpoint endlessly)
+	if (
+		req.body.hiddenEmailRecaptcha === undefined ||
+		req.body.hiddenEmailRecaptcha === null ||
+		req.body.hiddenEmailRecaptcha === ''
+	) {
 		res.status(400).send();
 	} else {
-		sqlReq.input('email', sql.NVarChar, email);
+		const secretKey = process.env.captchaSecret;
+		const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.hiddenEmailRecaptcha}&remoteip=${req.connection.remoteAddress}`;
 
-		var sqlQuery =
-			'IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) ' +
-			'BEGIN ' +
-			'INSERT INTO tbl_email_list (email) values (@email) ' +
-			'END';
+		const response = fetch(verifyUrl)
+			.then((res) => res.json())
+			.then((json) => {
+				if (json.success !== undefined && !json.success) {
+					throw new Error('Captcha verification failed');
+				}
+			})
+			.then(() => {
+				var email = req.body.txtEmail;
+				var sqlReq = new sql.Request();
 
-		sqlReq
-			.query(sqlQuery)
-			.then((result) => {
-				res
-					.status(200)
-					.send('Success! Our best owl has delivered your request.');
+				if (req.body.txtEmail == null || req.body.txtEmail == '') {
+					// if a null or empty email is submitted, then send back a 400 error. (prevents spam bots from causing errors on this endpoint endlessly)
+					res.status(400).send();
+				} else {
+					sqlReq.input('email', sql.NVarChar, email);
+
+					var sqlQuery =
+						'IF NOT EXISTS (SELECT * FROM tbl_email_list WHERE email = @email) ' +
+						'BEGIN ' +
+						'INSERT INTO tbl_email_list (email) values (@email) ' +
+						'END';
+
+					sqlReq
+						.query(sqlQuery)
+						.then((result) => {
+							res
+								.status(200)
+								.send('Success! Our best owl has delivered your request.');
+						})
+						.catch((err) => {
+							console.error(err);
+							res.status(500).send();
+						});
+				}
 			})
 			.catch((err) => {
 				console.error(err);
-				res.status(500).send();
+				res.status(400).send();
 			});
 	}
 });

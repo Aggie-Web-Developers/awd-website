@@ -28,13 +28,16 @@ $(function () {
 			e.preventDefault();
 		})
 		.validate({
+			ignore: ':hidden:not(#hiddenEmailRecaptcha)',
 			rules: {
 				txtEmail: { required: true, email: true, maxlength: 100 },
+				hiddenEmailRecaptcha: { required: true },
 			},
 			messages: {
 				txtEmail: {
 					required: 'Please enter an email address.',
 				},
+				hiddenEmailRecaptcha: { required: 'Please complete the captcha.' },
 			},
 			errorPlacement: function (error, element) {
 				error.prependTo(element.closest('.col-lg-10'));
@@ -82,4 +85,16 @@ function checkAlerts(alert) {
 			$(this).hide();
 		});
 	}
+}
+
+function setEmailCaptcha(response) {
+	$('#hiddenEmailRecaptcha').val(response);
+}
+
+function CaptchaCallback() {
+	var widgetId1;
+	widgetId1 = grecaptcha.render('emailCaptcha', {
+		sitekey: '6LdEY94ZAAAAABoFUprOOSUaWB6Zo32-WnxFaVek',
+		callback: setEmailCaptcha,
+	});
 }

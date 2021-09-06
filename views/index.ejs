@@ -18,6 +18,11 @@
 								<button class="btn" id="btnSubmitHome" type="submit">Join Our Community</button>
 							</div>
 						</div>
+
+						<div class="form-group mt-3">
+							<div id="emailCaptcha" class="g-recaptcha" data-sitekey="6LdEY94ZAAAAABoFUprOOSUaWB6Zo32-WnxFaVek"></div>
+							<input type="hidden" class="required" name="hiddenEmailRecaptcha" id="hiddenEmailRecaptcha">
+						</div>
 					</div>
 				</div>
 			</form>
@@ -137,5 +142,6 @@
 			<% } %>
 		</div>
 
+		<script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
 		<script src="/scripts/index.js"></script>
 <%- include('partials/footer') %>
