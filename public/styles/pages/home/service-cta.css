@@ -1,0 +1,46 @@
+/*****************************************************************/
+/**************************** SERVICE CTA ****************************/
+/*****************************************************************/
+
+.section-service-cta {
+  background-image: url('../../../images/SVGs/CTA-background.svg');
+  background-size: 150%;
+  background-position: 50% 50%;
+  height: 60rem;
+  padding: 3rem 5.6rem 6.4rem 5.6rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-service-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 96rem;
+}
+
+.service-cta__university-logo {
+  height: 8rem;
+  margin-bottom: 6.4rem;
+}
+
+.service-cta__question,
+.service-cta__description {
+  color: var(--color-gray-lightest);
+
+  text-align: center;
+}
+
+.service-cta__question {
+  font-size: 4rem;
+  font-weight: 400;
+  margin-bottom: 4.8rem;
+}
+
+.service-cta__description {
+  margin-bottom: 5rem;
+  line-height: 1.4;
+}
