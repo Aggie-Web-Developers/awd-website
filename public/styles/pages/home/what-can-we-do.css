@@ -20,6 +20,8 @@
 }
 
 .features {
+  margin-top: 12rem;
+
   display: flex;
   flex-direction: column;
   gap: 12rem;

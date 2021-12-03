@@ -1,0 +1,15 @@
+/*****************************************************************/
+/**************************** NEWS AND EVENTS ****************************/
+/*****************************************************************/
+
+.section-news-and-events {
+  background-color: var(--color-primary-lightest);
+  padding: 6.4rem 5.6rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+.container-news-and-events {
+  
+}

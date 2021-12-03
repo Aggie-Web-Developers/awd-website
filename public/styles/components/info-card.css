@@ -1,0 +1,102 @@
+/*****************************************************************/
+/**************************** INFO CARD ****************************/
+/*****************************************************************/
+
+.info-card {
+  width: 45rem;
+  height: 58rem;
+  margin-top: 6rem;
+  border-radius: 5rem;
+  background-color: var(--color-gray-lightest);
+  box-shadow: -0.4rem 0.4rem 1rem rgb(0, 0, 0, .75);
+  overflow: hidden;
+
+  display: grid;
+  grid-template-rows: 37fr 46fr 17fr;
+}
+
+.info-card__img-container {
+  overflow: hidden;
+}
+
+.info-card__img {
+  width: 100%;
+}
+
+.info-card__main-text {
+  position: relative;
+}
+
+.info-card__sliding-box {
+  height: 100%;
+  background-color: var(--color-gray-lightest);
+  padding: 3rem 2.8rem;
+
+  position: relative;
+  z-index: 1;
+  transition: all 0.2s;
+
+  display: grid;
+  grid-template-rows: 27fr 40fr 33fr;
+  align-items: start;
+  justify-items: start;
+}
+
+.info-card:hover .info-card__sliding-box {
+  transform: translateY(-15rem);
+}
+
+.info-card__tag {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  display: inline-block;
+}
+
+.info-card__tag--workshop {
+  background-color: var(--color-secondary-dark);
+}
+
+.info-card__title {
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.info-card__subtitle {
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.info-card__description-box {
+  background-color: var(--color-gray);
+  padding: 2.8rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 15rem;
+}
+
+.info-card__description {
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.info-card__location-and-time {
+  background-color: var(--color-gray-light);
+
+  padding: 1.6rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.info-card__location,
+.info-card__time {
+  font-size: 1.8rem;
+  font-weight: 400;
+}

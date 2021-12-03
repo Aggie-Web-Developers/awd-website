@@ -3,5 +3,6 @@
 /*****************************************************************/
 
 @import "./home/header.css";
+@import "./home/news-and-events.css";
 @import "./home/service-cta.css";
 @import "./home/what-can-we-do.css";
