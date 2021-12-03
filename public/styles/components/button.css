@@ -26,6 +26,8 @@
   box-shadow: -0.3rem 0.3rem 0.5rem rgb(0, 0, 0, .75);
   background-color: var(--color-secondary);
 
+  cursor: pointer;
+
   transform: scale(0.99) translate(-0.2rem, 0.2rem);
 }
 

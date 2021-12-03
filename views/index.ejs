@@ -35,68 +35,98 @@
 				</div>
 				<% } %>
 
-					<section id="section-what-can-we-do" class="section-what-can-we-do">
-						<div class="container-what-can-we-do">
-							<h2 class="heading-secondary">What can we do for you?</h2>
+					<header class="header">
+						<div class="header__text-box">
+							<h1 class="header__title heading-primary">Aggie Web Developers</h1>
+							<span class="header__subtitle">Subtitle goes here</span>
 
-							<div class="features">
-								<!-- Workshops -->
-								<div class="feature">
-									<div class="feature__img-container">
-										<img class="feature__img" src="images/SVGs/workshops_illustration.svg" />
-									</div>
-									<div class="feature__text">
-										<h3 class="heading-tertiary feature__title">Workshops</h3>
-										<p class="feature__description">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et purus a odio finibus bibendum in
-											sit amet leo. Mauris feugiat erat tellus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Etiam et purus a odio finibus bibendum in sit amet leo. Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit. Etiam et purus a odio finibus bibendum in sit amet leo.
-										</p>
-										<a href="#" class="btn">Learn more</a>
-									</div>
-								</div>
+							<div class="header__discord-cta">
+								<p class="header__cta-text">
+									<span>XX</span> students involved in projects since 2020. <span>Be our XXth</span>
+								</p>
 
-								<!-- Projects -->
-								<div class="feature">
-									<div class="feature__img-container">
-										<img class="feature__img" src="images/SVGs/projects_illustration.svg" />
-									</div>
-									<div class="feature__text">
-										<h3 class="heading-tertiary feature__title">Projects</h3>
-										<p class="feature__description">
-											Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Viverra vitae congue eu
-											consequat ac felis donec et odio. Non pulvinar neque laoreet suspendisse interdum consectetur
-											libero
-											id faucibus. Diam vulputate ut pharetra sit amet aliquam id diam maecenas.
-										</p>
-										<a href="#" class="btn">Learn more</a>
-									</div>
-								</div>
+								<form class="header__form" id="frm" action="/" method="POST">
+									<label class="hidden" for="txtEmail">Your Email</label>
+									<input type="email" id="txtEmail" name="txtEmail" class="header__input"
+										placeholder="aggiedevelopers@gmail.com" required>
 
-								<!-- Meetings -->
-								<div class="feature">
-									<div class="feature__img-container">
-										<img class="feature__img" src="images/SVGs/meetings_illustration.svg" />
-									</div>
-									<div class="feature__text">
-										<h3 class="heading-tertiary feature__title">Meetings</h3>
-										<p class="feature__description">
-											Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Viverra vitae congue eu
-											Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Sit amet
-											nulla
-											facilisi morbi tempus iaculis urna id volutpat. Sed odio morbi quis commodo odio aenean sed
-											adipiscing. Scelerisque felis imperdiet proin fermentum. Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-											id faucibus. Diam vulputate ut pharetra sit amet aliquam id diam maecenas.
-										</p>
-										<a href="#" class="btn">Learn more</a>
-									</div>
-								</div>
+									<button class="btn header__btn" id="btnSubmitHome" type="submit">Join Our Community</button>
+								</form>
 							</div>
 						</div>
+					</header>
 
-					</section>
+					<main>
+						<section id="section-what-can-we-do" class="section-what-can-we-do">
+							<div class="container-what-can-we-do">
+								<h2 class="heading-secondary">What can we do for you?</h2>
+
+								<div class="features">
+
+									<!-- Workshops -->
+									<div class="feature">
+										<div class="feature__img-container">
+											<img class="feature__img" src="images/SVGs/workshops_illustration.svg" />
+										</div>
+										<div class="feature__text">
+											<h3 class="heading-tertiary feature__title">Workshops</h3>
+											<p class="feature__description">
+												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et purus a odio finibus bibendum
+												in
+												sit amet leo. Mauris feugiat erat tellus. Lorem ipsum dolor sit amet, consectetur adipiscing
+												elit.
+												Etiam et purus a odio finibus bibendum in sit amet leo. Lorem ipsum dolor sit amet, consectetur
+												adipiscing elit. Etiam et purus a odio finibus bibendum in sit amet leo.
+											</p>
+											<a href="#" class="btn">Learn more</a>
+										</div>
+									</div>
+
+									<!-- Projects -->
+									<div class="feature">
+										<div class="feature__img-container">
+											<img class="feature__img" src="images/SVGs/projects_illustration.svg" />
+										</div>
+										<div class="feature__text">
+											<h3 class="heading-tertiary feature__title">Projects</h3>
+											<p class="feature__description">
+												Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Viverra vitae congue
+												eu
+												consequat ac felis donec et odio. Non pulvinar neque laoreet suspendisse interdum consectetur
+												libero
+												id faucibus. Diam vulputate ut pharetra sit amet aliquam id diam maecenas.
+											</p>
+											<a href="#" class="btn">Learn more</a>
+										</div>
+									</div>
+
+									<!-- Meetings -->
+									<div class="feature">
+										<div class="feature__img-container">
+											<img class="feature__img" src="images/SVGs/meetings_illustration.svg" />
+										</div>
+										<div class="feature__text">
+											<h3 class="heading-tertiary feature__title">Meetings</h3>
+											<p class="feature__description">
+												Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Viverra vitae congue
+												eu
+												Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Sit amet
+												nulla
+												facilisi morbi tempus iaculis urna id volutpat. Sed odio morbi quis commodo odio aenean sed
+												adipiscing. Scelerisque felis imperdiet proin fermentum. Lorem ipsum dolor sit amet, consectetur
+												adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+												id faucibus. Diam vulputate ut pharetra sit amet aliquam id diam maecenas.
+											</p>
+											<a href="#" class="btn">Learn more</a>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+						</section>
+					</main>
+
 
 					<!-- <div class="container my-5">
 

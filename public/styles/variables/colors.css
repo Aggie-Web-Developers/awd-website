@@ -1,7 +1,12 @@
+/*****************************************************************/
+/**************************** COLORS ****************************/
+/*****************************************************************/
+
 :root {
   --color-primary-dark: #2930ca;
+  --color-primary-dark-rgb: 41, 48, 202;
   --color-primary: #686de0;
-  --color-primary: #aeb1ee;
+  --color-primary-light: #aeb1ee;
   --color-primary-lightest: #d7d9f7;
 
   --color-secondary-dark: #ffbe00;
@@ -9,6 +14,7 @@
   --color-secondary-light: #fff2cc;
 
   --color-gray-darkest: #2d2a2e;
+  --color-gray-darkest-rgb: 45, 42, 46;
   --color-gray-dark: #474557;
   --color-gray: #c7c7d3;
   --color-gray-light: #e2e2ed;
