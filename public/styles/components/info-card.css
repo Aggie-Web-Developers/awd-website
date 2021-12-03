@@ -15,6 +15,7 @@
   grid-template-rows: 37fr 46fr 17fr;
 }
 
+/***** IMAGE *****/
 .info-card__img-container {
   overflow: hidden;
 }
@@ -23,10 +24,12 @@
   width: 100%;
 }
 
-.info-card__main-text {
+/***** MAIN SECTION *****/
+.info-card__main-section {
   position: relative;
 }
 
+/* Sliding box */
 .info-card__sliding-box {
   height: 100%;
   background-color: var(--color-gray-lightest);
@@ -47,9 +50,20 @@
 }
 
 .info-card__tag {
-  padding: 0.5rem 1rem;
+  font-weight: 300;
+  padding: 0.6rem 1.6rem;
   border-radius: 2rem;
   display: inline-block;
+}
+
+.info-card__tag--news {
+  background-color: var(--color-red);
+  color: var(--color-gray-lightest);
+}
+
+.info-card__tag--social {
+  background-color: var(--color-primary-dark);
+  color: var(--color-gray-lightest);
 }
 
 .info-card__tag--workshop {
@@ -68,6 +82,7 @@
   line-height: 1.2;
 }
 
+/* Description */
 .info-card__description-box {
   background-color: var(--color-gray);
   padding: 2.8rem;
@@ -83,6 +98,8 @@
   font-weight: 300;
   line-height: 1.2;
 }
+
+/***** LOCATION AND TIME *****/
 
 .info-card__location-and-time {
   background-color: var(--color-gray-light);

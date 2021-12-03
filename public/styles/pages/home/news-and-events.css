@@ -11,5 +11,14 @@
 }
 
 .container-news-and-events {
-  
+  width: 160rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-cards {
+  display: flex;
+  gap: 6.4rem;
 }
