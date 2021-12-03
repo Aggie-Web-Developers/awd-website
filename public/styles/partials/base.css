@@ -35,3 +35,8 @@ a {
 .hidden {
   display: none;
 }
+
+::selection {
+  color: var(--color-gray-darkest);
+  background-color: var(--color-secondary);
+}
