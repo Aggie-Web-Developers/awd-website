@@ -1,0 +1,61 @@
+
+/*****************************************************************/
+/**************************** WHAT CAN WE DO ****************************/
+/*****************************************************************/
+
+.section-what-can-we-do {
+  background-color: var(--color-gray-lightest);
+  padding: 6.4rem 5.6rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+.container-what-can-we-do {
+  max-width: 150rem;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 12rem;
+}
+
+.feature {
+  display: flex;
+  gap: 8rem;
+}
+
+.features :nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.feature__img-container {
+  flex: 50;
+
+  display: flex;
+  justify-content: center;
+}
+
+.feature__img {
+  display: inline-block;
+  height: 44rem;
+  margin-top: -3rem;
+}
+
+.feature__text {
+  /* flex: 45; */
+  flex: 50;
+}
+
+.feature__title {
+  margin-bottom: 2rem;
+}
+
+.feature__description {
+  margin-bottom: 3rem;
+}
