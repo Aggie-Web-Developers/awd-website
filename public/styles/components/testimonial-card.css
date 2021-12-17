@@ -1,0 +1,69 @@
+/*****************************************************************/
+/**************************** TESTIMONIAL CARD ****************************/
+/*****************************************************************/
+
+.testimonial-card {
+  width: 45rem;
+  height: 50rem;
+  border-radius: 5.6rem;
+  background-color: var(--color-primary-light);
+  overflow: hidden;
+
+  display: grid;
+  grid-template-rows: 77.5fr 22.5fr;
+}
+
+.testimonial-card__body {
+  padding: 3.2rem 3.1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.testimonial-card__quotation-mark-container {
+  display: flex;
+  justify-content: center;
+}
+
+.testimonial-card__quotation-mark {
+  width: 20%;
+  height: auto;
+}
+
+.testimonial-card__quote {
+  text-align: center;
+  line-height: 1.2;
+  hyphens: auto;
+}
+
+.testimonial-card__footer {
+  background-color: var(--color-primary);
+  padding: 0.2rem 4.4rem;
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.testimonial-card__member-details {
+  height: 8rem;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.testimonial-card__member-name {
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: var(--color-gray-lightest);
+}
+
+.testimonial-card__member-position {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--color-gray-lightest);
+}

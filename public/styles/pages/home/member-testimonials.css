@@ -1,16 +1,16 @@
 /*****************************************************************/
-/**************************** NEWS AND EVENTS ****************************/
+/**************************** MEMBER TESTIMONIALS ****************************/
 /*****************************************************************/
 
-.section-news-and-events {
-  background-color: var(--color-primary-lightest);
+.section-member-testimonials {
+  background-color: var(--color-gray-lightest);
   padding: 6.4rem 5.6rem;
 
   display: flex;
   justify-content: center;
 }
 
-.container-news-and-events {
+.container-member-testimonials {
   width: 160rem;
 
   display: flex;
@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.info-cards {
+.testimonial-cards {
   margin-top: 6rem;
   
   display: flex;

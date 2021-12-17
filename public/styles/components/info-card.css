@@ -5,8 +5,7 @@
 .info-card {
   width: 45rem;
   height: 58rem;
-  margin-top: 6rem;
-  border-radius: 5rem;
+  border-radius: 5.6rem;
   background-color: var(--color-gray-lightest);
   box-shadow: -0.4rem 0.4rem 1rem rgb(0, 0, 0, .75);
   overflow: hidden;
@@ -25,7 +24,7 @@
 }
 
 /***** MAIN SECTION *****/
-.info-card__main-section {
+.info-card__body {
   position: relative;
 }
 
