@@ -116,3 +116,19 @@
   font-size: 1.8rem;
   font-weight: 400;
 }
+
+@media only screen and (max-width: 560px) {
+  .info-card {
+    max-width: 40rem;
+  }
+  .info-card__description-box {
+    height: auto;
+    padding: 1.4rem 2.8rem;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .info-card {
+    width: 35rem;
+  }
+}

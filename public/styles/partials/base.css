@@ -12,7 +12,6 @@
 }
 
 html {
-  font-size: 62.5%;
   font-size: 50%;
   transition: all 0.1s;
 }
@@ -24,7 +23,7 @@ body {
   line-height: 1;
   font-size: 1.8rem;
   color: var(--color-gray-darkest);
-  border-left: var(--color-secondary-dark) solid 6px;
+  border-left: var(--color-secondary-dark) solid 0.6rem;
   background-color: var(--color-secondary-dark);
 }
 
@@ -39,4 +38,10 @@ a {
 ::selection {
   color: var(--color-gray-darkest);
   background-color: var(--color-secondary);
+}
+
+@media only screen and (max-width: 425px) {
+  body {
+    border: none;
+  }
 }

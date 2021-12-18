@@ -3,33 +3,30 @@
 /*****************************************************************/
 
 .header {
-	height: 100vh;
-  border-top-left-radius: 16rem;
-	background:
-    linear-gradient(
-      rgba(var(--color-gray-darkest-rgb), 0.5),
-      rgba(var(--color-gray-darkest-rgb), 0.5)
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(var(--color-gray-darkest-rgb), 1),
-      85%,
-      rgba(var(--color-primary-dark-rgb), 1)
-    ),
-    url('../../../images/hero.jpg');
-
-    background-blend-mode: overlay, multiply, normal;
-
-    background-size: cover;
+	min-height: 100vh;
+	padding: 5.6rem;
+	border-top-left-radius: 16rem;
+	background: linear-gradient(
+			rgba(var(--color-gray-darkest-rgb), 0.5),
+			rgba(var(--color-gray-darkest-rgb), 0.5)
+		),
+		linear-gradient(
+			to bottom,
+			rgba(var(--color-gray-darkest-rgb), 1),
+			85%,
+			rgba(var(--color-primary-dark-rgb), 1)
+		),
+		url('../../../images/hero.jpg');
+	background-blend-mode: overlay, multiply, normal;
+	background-size: cover;
 
 	display: flex;
 	flex-direction: column;
-
 	align-items: center;
 }
 
 .header__text-box {
-	margin-top: 15%;
+	margin-top: 20vh;
 }
 
 .header__title,
@@ -47,7 +44,10 @@
 }
 
 .header__discord-cta {
-  margin-top: 20%;
+	margin-top: 25vh;
+	font-size: 2.4rem;
+	font-weight: 300;
+	line-height: 1.4;
 }
 
 .header__cta-text {
@@ -66,6 +66,7 @@
 
 .header__input {
 	flex: 1;
+	min-height: 6.4rem;
 	height: 6.4rem;
 	border-top-left-radius: 2.8rem;
 	border-bottom-left-radius: 2.8rem;
@@ -76,6 +77,8 @@
 
 	background-color: var(--color-gray-lightest);
 	color: var(--color-gray-darkest);
+
+	display: inline-block;
 }
 
 .header__input:focus {
@@ -92,7 +95,66 @@
 	border-bottom-left-radius: 0;
 	box-shadow: none !important;
 	transform: none !important;
+	min-height: 6.4rem;
+	height: 6.4rem;
 
 	flex-basis: max-content;
 	padding: 0 2.4rem;
+}
+
+@media only screen and (max-width: 1300px) {
+	.header {
+		border-top-left-radius: 12rem;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+}
+
+@media only screen and (max-width: 768px) {
+	.header__subtitle {
+		font-size: 3.6rem;
+	}
+	.header__form {
+		flex-direction: column;
+		gap: 2rem;
+	}
+	.header__input {
+		flex: 1;
+		border-radius: 2.8rem;
+	}
+	.header__btn {
+		border-radius: 2.8rem;
+		width: auto;
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	.header__text-box {
+		text-align: center;
+	}
+	.header__subtitle {
+		font-size: 3rem;
+	}
+	.header__text-box {
+		margin-top: 10vh;
+	}
+	.header__discord-cta {
+		margin-top: 15vh;
+	}
+}
+
+@media only screen and (max-width: 425px) {
+	.header {
+		border-top-left-radius: 0;
+	}
+	.header__discord-cta {
+		margin-top: 15vh;
+	}
+	.header__input {
+		font-size: 2.4rem;
+	}
+	.header__btn {
+		font-size: 2.4rem;
+	}
 }

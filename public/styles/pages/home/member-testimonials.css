@@ -11,7 +11,7 @@
 }
 
 .container-member-testimonials {
-  width: 160rem;
+  max-width: 160rem;
   position: relative;
 
   display: flex;
@@ -21,14 +21,28 @@
 
 .testimonial-cards {
   margin-top: 6rem;
+  grid-area: cards;
   
   display: flex;
+  justify-content: center;
   gap: 6.4rem;
 }
 
+.carousel {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-areas:
+  "left-btn cards right-btn";
+  gap: 1rem;
+  justify-items: center;
+  align-items: center;
+}
+
 .carousel-control {
-  position: absolute;
-  top: 50%;
+  position: relative;
+
   width: 5rem;
   height: auto;
   opacity: 0.4;
@@ -48,9 +62,44 @@
 .carousel-control:active path { fill: var(--color-secondary); }
 
 .carousel-control--left {
-  left: -2%;
+  grid-area: left-btn;
+  justify-self: end;
+  right: 2rem;
 }
 
 .carousel-control--right {
-  right: -2%;
+  grid-area: right-btn;
+  justify-self: start;
+  left: 2rem;
+}
+
+@media only screen and (max-width: 1400px) {
+  .container-member-testimonials .testimonial-card:nth-child(3) {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .container-member-testimonials .testimonial-card:nth-child(2) {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .carousel-control {
+    width: 3rem;
+  }
+}
+
+@media only screen and (max-width: 525px) {
+  .carousel {
+    grid-template-areas:
+    "cards cards cards"
+    "left-btn --- right-btn";
+    row-gap: 2rem;
+  }
+  .carousel-control {
+    left: 0;
+    right: 0;
+  }
 }

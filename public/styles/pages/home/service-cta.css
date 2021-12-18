@@ -6,7 +6,7 @@
   background-image: url('../../../images/SVGs/CTA-background.svg');
   background-size: 150%;
   background-position: 50% 50%;
-  height: 60rem;
+  min-height: 60rem;
   padding: 3rem 5.6rem 6.4rem 5.6rem;
 
   display: flex;
@@ -20,6 +20,8 @@
   align-items: center;
 
   max-width: 96rem;
+  font-size: 2.4rem;
+  font-weight: 300;
 }
 
 .service-cta__university-logo {

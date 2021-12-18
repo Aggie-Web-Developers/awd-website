@@ -37,3 +37,13 @@
 
   transform: scale(0.98) translate(-0.3rem, 0.3rem);
 }
+
+@media only screen and (max-width: 425px) {
+  .btn,
+  .btn:link,
+  .btn:visited  {
+    width: 18rem;
+    height: 5.6rem;
+    font-size: 2.4rem;
+  }
+}

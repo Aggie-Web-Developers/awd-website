@@ -3,7 +3,9 @@
 /*****************************************************************/
 
 .testimonial-card {
-  width: 45rem;
+  flex: 1;
+  width: 100%;
+  max-width: 80rem;
   height: 50rem;
   border-radius: 5.6rem;
   overflow: hidden;
@@ -15,6 +17,8 @@
 .testimonial-card__body {
   padding: 3.2rem 3.1rem;
   background-color: var(--color-primary-light);
+  font-size: 2.4rem;
+  font-weight: 300;
 
   display: flex;
   flex-direction: column;
@@ -27,7 +31,7 @@
 }
 
 .testimonial-card__quotation-mark {
-  width: 20%;
+  width: 7.6rem;
   height: auto;
 }
 
@@ -52,8 +56,7 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 1.6rem;
+  justify-content: space-evenly;
 }
 
 .testimonial-card__member-name {
@@ -66,4 +69,16 @@
   font-size: 1.8rem;
   font-weight: 300;
   color: var(--color-gray-lightest);
+}
+
+@media only screen and (max-width: 425px) {
+  .testimonial-card {
+    height: 56rem;
+  }
+  .testimonial-card__quote {
+    font-size: 2.2rem;
+  }
+  .testimonial-card__member-name {
+    font-size: 2rem;
+  }
 }
