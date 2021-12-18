@@ -6,7 +6,6 @@
   width: 45rem;
   height: 50rem;
   border-radius: 5.6rem;
-  background-color: var(--color-primary-light);
   overflow: hidden;
 
   display: grid;
@@ -15,6 +14,7 @@
 
 .testimonial-card__body {
   padding: 3.2rem 3.1rem;
+  background-color: var(--color-primary-light);
 
   display: flex;
   flex-direction: column;

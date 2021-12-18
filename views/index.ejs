@@ -170,7 +170,7 @@
 										<div class="info-card__body">
 											<div class="info-card__sliding-box">
 												<span class="info-card__tag info-card__tag--social">Social</span>
-												<h3 class="info-card__title">How to Keep Going When You Don’t Know What’s Next</h3>
+												<h3 class="info-card__title">How to Keep Going When You Don&lsquo;t Know What&lsquo;s Next</h3>
 												<p class="info-card__subtitle">
 													The future can be scary, but there are ways to deal with that fear.
 												</p>
@@ -219,6 +219,107 @@
 									<!-- End card 3 -->
 
 								</div>
+
+								<% if (events && events.length> 0) {%>
+									<div class="info-cards">
+										<% events.forEach(function(event) { %>
+											<div class="info-card">
+												<div class="info-card__img-container">
+													<img class="info-card__img" src="<%= event.image_link%>" alt="<%= event.name%> Thumbnail" />
+												</div>
+
+												<div class="info-card__body">
+													<div class="info-card__sliding-box">
+														<span class="info-card__tag info-card__tag--social">
+															<%= event.type%>
+														</span>
+														<h3 class="info-card__title">
+															<%= event.name%>
+														</h3>
+														<p class="info-card__subtitle">
+															<%= event.summary%>
+														</p>
+													</div>
+													<div class="info-card__description-box">
+														<p class="info-card__description">
+															<%- event.descr%>
+														</p>
+													</div>
+												</div>
+
+												<div class="info-card__location-and-time">
+													<p class="info-card__time">June 12, 05:00 PM</p>
+													<p class="info-card__location">Langford C 110</p>
+												</div>
+											</div>
+
+
+											<!-- <div class="col-xs-12 col-md-6 col-lg-4 mt-4">
+												<div class="text-center justify-content-center">
+													<div class="card-container">
+														<div class="column">
+															<div class="post-module">
+																<div class="thumbnail">
+																	<% if (event.type !="News" ) {%>
+																		<div class="date">
+																			<div class="day">
+																				<%=event.event_time.toLocaleString('default', { day: 'numeric' })%>
+																			</div>
+																			<div class="month" id="divMonth">
+																				<%=event.event_time.toLocaleString('default', { month: 'short' })%>
+																			</div>
+																		</div>
+																		<% } %>
+																			<img src="<%= event.image_link%>" alt="<%= event.name%> Thumbnail">
+																</div>
+																<div class="post-content">
+																	<div class="category">
+																		<%= event.type%>
+																	</div>
+																	<p class="title">
+																		<%= event.name%>
+																			</h3>
+																			<p class="sub_title">
+																				<%= event.summary%>
+																					</h4>
+																					<p class="description">
+																						<%- event.descr%>
+																					</p>
+																					<div class="post-meta">
+																						<span class="timestamp"><i class="far fa-calendar-alt mr-2"></i>
+																							<%= event.event_time.toLocaleString([], { month: 'long' , day: 'numeric' ,
+																								hour: '2-digit' , minute:'2-digit' })%>
+																						</span>
+																					</div>
+																					<div class="post-meta mt-2 pm">
+																						<% if (event.type=="News" ) {%>
+																							<span class="timestamp" title="Author"><i
+																									class="fas fa-user-edit mr-2"></i>
+																								<%= event.author %>
+																							</span>
+																							<% } else { %>
+																								<span class="timestamp" title="Location"><i
+																										class="fas fa-map-marker-alt mr-2"></i>
+																									<%= event.location %>
+																								</span>
+																								<% } %>
+																					</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div> -->
+											<% }); %>
+									</div>
+									<% } else {%>
+										<div class="row justify-content-center mt-4 mb-5">
+											<div class="col-12 text-center">
+												<h3 class="no-event-text">No news is good news, please check back soon.</h3>
+											</div>
+										</div>
+										<% } %>
+
 							</div>
 						</section>
 
@@ -239,6 +340,17 @@
 						<section id="section-member-testimonials" class="section-member-testimonials">
 							<div class="container-member-testimonials">
 								<h2 class="heading-secondary">Member Testimonials</h2>
+
+								<svg class="carousel-control carousel-control--left" xmlns="http://www.w3.org/2000/svg" width="37.266"
+									height="67.299" viewBox="0 0 37.266 67.299">
+									<path
+										d="M37.266,5.01v8.329A5,5,0,0,1,35.877,16.8L22.052,30.191a5,5,0,0,0,0,6.916L35.877,50.5a5,5,0,0,1,1.389,3.458v8.329a5,5,0,0,1-8.624,3.446L3.01,40.681a10,10,0,0,1,.035-14.336l25.6-24.78A5,5,0,0,1,37.266,5.01Z" />
+								</svg>
+								<svg class="carousel-control carousel-control--right" xmlns="http://www.w3.org/2000/svg" width="37.266"
+									height="67.299" viewBox="0 0 37.266 67.299">
+									<path
+										d="M0,5.01v8.329A5,5,0,0,0,1.389,16.8L15.213,30.191a5,5,0,0,1,0,6.916L1.389,50.5A5,5,0,0,0,0,53.959v8.329a5,5,0,0,0,8.624,3.446L34.255,40.681a10,10,0,0,0-.034-14.336L8.624,1.565A5,5,0,0,0,0,5.01Z" />
+								</svg>
 
 								<div class="testimonial-cards">
 
@@ -308,7 +420,7 @@
 												<img class="photo-small__img" src="images/Alan-Bio-Pic-min.jpg" alt="Peter Parker">
 											</div>
 											<div class="testimonial-card__member-details">
-												<p class="testimonial-card__member-name">Peter Parker</p>
+												<p class="testimonial-card__member-name">Peter Parker &lsquo;22</p>
 												<p class="testimonial-card__member-position">Project Manager</p>
 											</div>
 										</div>

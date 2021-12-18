@@ -12,6 +12,7 @@
 
 .container-member-testimonials {
   width: 160rem;
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -23,4 +24,33 @@
   
   display: flex;
   gap: 6.4rem;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  width: 5rem;
+  height: auto;
+  opacity: 0.4;
+  filter: drop-shadow(-0.4rem 0.4rem 0.5rem rgb(0, 0, 0, .85));
+}
+.carousel-control path { fill: var(--color-secondary-dark); }
+
+.carousel-control:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.carousel-control:active {
+  filter: drop-shadow(-0.2rem 0.2rem 0.3rem rgb(0, 0, 0, .75));
+  transform: scale(0.98) translate(-0.3rem, 0.3rem);
+}
+.carousel-control:active path { fill: var(--color-secondary); }
+
+.carousel-control--left {
+  left: -2%;
+}
+
+.carousel-control--right {
+  right: -2%;
 }
