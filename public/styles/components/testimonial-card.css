@@ -10,17 +10,87 @@
   border-radius: 5.6rem;
   overflow: hidden;
 
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+
   display: flex;
   flex-direction: column;
 }
 
-/* .testimonial-card--offscreen {
-  position: absolute;
+.testimonial-card.moveRight {
+  animation-name: moveRight;
+}
+.testimonial-card.leaveRight {
+  animation-name: leaveRight;
+}
+.testimonial-card.enterLeft {
+  animation-name: enterLeft;
+  animation-duration: 0.1s;
+}
+.testimonial-card.moveLeft {
+  animation-name: moveLeft;
+}
+.testimonial-card.leaveLeft {
+  animation-name: leaveLeft;
+}
+.testimonial-card.enterRight {
+  animation-name: enterRight;
+  animation-duration: 0.1s;
 }
 
-.testimonial-card--offscreen.offscreen-left {
+@keyframes moveRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(100% + 6.4rem));
+  }
+}
 
-} */
+@keyframes leaveRight {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    transform: translateX(calc(100% + 6.4rem)) scale(0.5);
+  }
+}
+
+@keyframes enterLeft {
+  0% {
+    transform: translateX(calc(-100% + -6.4rem));
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% + -6.4rem));
+  }
+}
+
+@keyframes leaveLeft {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    transform: translateX(calc(-100% + -6.4rem)) scale(0.5);
+  }
+}
+
+@keyframes enterRight{
+  0% {
+    transform: translateX(calc(100% + 6.4rem));
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
 
 .testimonial-card__body {
   padding: 3.2rem 3.1rem;

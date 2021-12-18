@@ -29,7 +29,7 @@ $(function () {
 		})
 		.validate({
 			rules: {
-				txtEmail: { required: true, email: true, maxlength: 100 },
+				txtEmail: { required: true, email: true, maxlength: 300 },
 			},
 			messages: {
 				txtEmail: {
@@ -76,7 +76,7 @@ function checkAlerts(alert) {
 				"<div class='alert alert-danger' role='alert'>" + alert + '</div>';
 		}
 
-		$('#navbar').hide().append(alertDiv).fadeIn(1000);
+		$('#navbar').hide().append(alertDiv).fadeIn(3000);
 
 		$('.alert').click(function () {
 			$(this).hide();
@@ -84,6 +84,11 @@ function checkAlerts(alert) {
 	}
 }
 
+const wait = milliseconds => 
+    new Promise(resolve => 
+        setTimeout(resolve, milliseconds)
+    );
+;
 
 /* ************************************** */
 /* *************TESTIMONIALS************* */
@@ -131,7 +136,7 @@ const testimonials = [
 let startIdx = 0; // index into the above array of testimonial data
 
 function setTestimonialCard({quote, imgUrl, fullName, year, position}, cardNum) {
-	const testimonialCard = document.querySelector(`.testimonial-card:nth-child(${cardNum})`)
+	const testimonialCard = document.querySelector(`.testimonial-card:nth-child(${cardNum})`);
 	testimonialCard.innerHTML = `
 	<div class="testimonial-card__body">
 		<div class="testimonial-card__quotation-mark-container">
@@ -167,12 +172,129 @@ setTestimonialCardAll(testimonials, 0);
 // carousel control buttons
 const carouselControlLeft = document.querySelector('.carousel-control--left');
 const carouselControlRight = document.querySelector('.carousel-control--right');
+let leftClicked = false;
+let rightClicked = false;
 
 carouselControlLeft.addEventListener('click', function() {
+	if (leftClicked) { return; }
+	leftClicked = true;
 	startIdx = startIdx > 0 ? startIdx - 1 : testimonials.length - 1;
-	setTestimonialCardAll(testimonials, startIdx);
+	const testimonialCard1 = document.querySelector(`.testimonial-card:nth-child(1)`);
+	const testimonialCard2 = document.querySelector(`.testimonial-card:nth-child(2)`);
+	const testimonialCard3 = document.querySelector(`.testimonial-card:nth-child(3)`);
+	const viewportWidth = window.innerWidth;
+	if (viewportWidth > 1024) {
+		testimonialCard1.classList.add('moveRight');
+		testimonialCard2.classList.add('moveRight');
+		testimonialCard3.classList.add('leaveRight');
+
+		wait(300)
+			.then(() => {
+				testimonialCard1.classList.add('enterLeft');
+				setTestimonialCardAll(testimonials, startIdx);
+				return wait(100);
+			})
+			.then(() => {
+				testimonialCard1.classList.remove('moveRight');
+				testimonialCard2.classList.remove('moveRight');
+				testimonialCard3.classList.remove('leaveRight');
+				testimonialCard1.classList.remove('enterLeft');
+				leftClicked = false;
+			});
+	}
+	else if (viewportWidth > 768) {
+		testimonialCard1.classList.add('moveRight');
+		testimonialCard2.classList.add('leaveRight');
+
+		wait(300)
+			.then(() => {
+				setTestimonialCardAll(testimonials, startIdx);
+				testimonialCard1.classList.add('enterLeft');
+				return wait(300);
+			})
+			.then(() => {
+				testimonialCard1.classList.remove('moveRight');
+				testimonialCard2.classList.remove('leaveRight');
+				testimonialCard1.classList.remove('enterLeft');
+				leftClicked = false;
+			});
+	}
+	else  {
+		testimonialCard1.classList.add('leaveRight');
+
+		wait(300)
+			.then(() => {
+				setTestimonialCardAll(testimonials, startIdx);
+				testimonialCard1.classList.add('enterLeft');
+				return wait(300);
+			})
+			.then(() => {
+				testimonialCard1.classList.remove('leaveRight');
+				testimonialCard1.classList.remove('enterLeft');
+				leftClicked = false;
+			});
+	}
 });
+
 carouselControlRight.addEventListener('click', function() {
+	if (rightClicked) { return; }
+	rightClicked = true;
 	startIdx = (startIdx + 1) % testimonials.length;
-	setTestimonialCardAll(testimonials, startIdx);
+
+	const testimonialCard1 = document.querySelector(`.testimonial-card:nth-child(1)`);
+	const testimonialCard2 = document.querySelector(`.testimonial-card:nth-child(2)`);
+	const testimonialCard3 = document.querySelector(`.testimonial-card:nth-child(3)`);
+	const viewportWidth = window.innerWidth;
+
+	if (viewportWidth > 1024) {
+		testimonialCard3.classList.add('moveLeft');
+		testimonialCard2.classList.add('moveLeft');
+		testimonialCard1.classList.add('leaveLeft');
+
+		wait(300)
+			.then(() => {
+				testimonialCard3.classList.add('enterRight');
+				setTestimonialCardAll(testimonials, startIdx);
+				return wait(300);
+			})
+			.then(() => {
+				testimonialCard3.classList.remove('moveLeft');
+				testimonialCard2.classList.remove('moveLeft');
+				testimonialCard1.classList.remove('leaveLeft');
+				testimonialCard3.classList.remove('enterRight');
+				rightClicked = false;
+			});
+	}
+	else if (viewportWidth > 768) {
+		testimonialCard2.classList.add('moveLeft');
+		testimonialCard1.classList.add('leaveLeft');
+
+		wait(300)
+			.then(() => {
+				setTestimonialCardAll(testimonials, startIdx);
+				testimonialCard2.classList.add('enterRight');
+				return wait(300);
+			})
+			.then(() => {
+				testimonialCard2.classList.remove('moveLeft');
+				testimonialCard1.classList.remove('leaveLeft');
+				testimonialCard2.classList.remove('enterRight');
+				rightClicked = false;
+			});
+	}
+	else  {
+		testimonialCard1.classList.add('leaveLeft');
+
+		wait(300)
+			.then(() => {
+				setTestimonialCardAll(testimonials, startIdx);
+				testimonialCard1.classList.add('enterRight');
+				return wait(300);
+			})
+			.then(() => {
+				testimonialCard1.classList.remove('leaveLeft');
+				testimonialCard1.classList.remove('enterRight');
+				rightClicked = false;
+			});
+	}
 });
