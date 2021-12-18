@@ -21,10 +21,16 @@ body {
   max-width: 100%;
   font-weight: 400;
   line-height: 1;
-  font-size: 1.8rem;
   color: var(--color-gray-darkest);
   border-left: var(--color-secondary-dark) solid 0.6rem;
   background-color: var(--color-secondary-dark);
+}
+
+section {
+  padding: 6.4rem 5.6rem;
+
+  display: flex;
+  justify-content: center;
 }
 
 a {
@@ -32,7 +38,7 @@ a {
 }
 
 .hidden {
-  display: none;
+  display: none!important;
 }
 
 ::selection {
@@ -40,8 +46,17 @@ a {
   background-color: var(--color-secondary);
 }
 
+@media only screen and (max-width: 768px) {
+  section {
+    padding: 5.6rem;
+  }
+}
+
 @media only screen and (max-width: 425px) {
   body {
     border: none;
+  }
+  section {
+    padding: 4.8rem 5.6rem;
   }
 }

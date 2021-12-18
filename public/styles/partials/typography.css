@@ -5,6 +5,7 @@
 .heading-primary {
   font-size: 10.2rem;
   font-weight: 200;
+  text-align: center;
 }
 
 .heading-secondary {
@@ -17,6 +18,10 @@
 .heading-tertiary {
   font-size: 4rem;
   font-weight: 400;
+}
+
+.paragraph {
+  font-size: 2.4rem;
 }
 
 input {
@@ -46,9 +51,17 @@ input {
 }
 
 @media only screen and (max-width: 640px) {
-  .heading-primary {
-    text-align: center;
-    font-size: 7.6rem;
+  .paragraph {
+    font-size: 2.2rem;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .heading-secondary {
+    font-size: 4.4rem;
+  }
+  .heading-tertiary {
+    font-size: 3.6rem;
   }
 }
 
@@ -58,6 +71,6 @@ input {
   }
 
   .heading-tertiary {
-    font-size: 3.6rem;
+    font-size: 3rem;
   }
 }

@@ -4,10 +4,6 @@
 
 .section-news-and-events {
   background-color: var(--color-primary-lightest);
-  padding: 6.4rem 5.6rem;
-
-  display: flex;
-  justify-content: center;
 }
 
 .container-news-and-events {
@@ -25,4 +21,10 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 6.4rem;
+}
+
+@media only screen and (max-width: 425px) {
+  .info-cards {
+    margin-top: 4.8rem;
+  }
 }

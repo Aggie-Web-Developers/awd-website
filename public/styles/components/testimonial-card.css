@@ -10,15 +10,15 @@
   border-radius: 5.6rem;
   overflow: hidden;
 
-  display: grid;
-  grid-template-rows: 77.5fr 22.5fr;
+  display: flex;
+  flex-direction: column;
 }
 
 .testimonial-card__body {
   padding: 3.2rem 3.1rem;
   background-color: var(--color-primary-light);
-  font-size: 2.4rem;
   font-weight: 300;
+  height: 77.5%;
 
   display: flex;
   flex-direction: column;
@@ -44,6 +44,7 @@
 .testimonial-card__footer {
   background-color: var(--color-primary);
   padding: 0.2rem 4.4rem;
+  height: 22.5%;
 
   display: flex;
   gap: 1rem;
@@ -74,9 +75,6 @@
 @media only screen and (max-width: 425px) {
   .testimonial-card {
     height: 56rem;
-  }
-  .testimonial-card__quote {
-    font-size: 2.2rem;
   }
   .testimonial-card__member-name {
     font-size: 2rem;

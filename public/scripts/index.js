@@ -91,19 +91,19 @@ function checkAlerts(alert) {
 // Example set of testimonial data
 const testimonials = [
 	{
-		quote: `I don't feel like grabbing filler text here.`,
-		imgUrl: `images/Vignesh-Bio-Pic-min.jpg`,
-		fullName: `Hawkeye`,
-		year: 22,
-		position: `Operations Officer`
-	},
-	{
 		quote: `So many fun uses! I'm planning on using this playsilk for newborn photos for my baby girl, who\
 	is due any day now! Definitely telling everyone I know about this shop.`,
 		imgUrl: `images/Trey-Bio-Pic-min.jpg`,
 		fullName: `Captain America`,
 		year: 22,
 		position: `Member`
+	},
+	{
+		quote: `I don't feel like grabbing filler text here.`,
+		imgUrl: `images/Vignesh-Bio-Pic-min.jpg`,
+		fullName: `Hawkeye`,
+		year: 22,
+		position: `Operations Officer`
 	},
 	{
 		quote: `
@@ -138,7 +138,7 @@ function setTestimonialCard({quote, imgUrl, fullName, year, position}, cardNum) 
 			<img class="testimonial-card__quotation-mark" src="images/SVGs/opening-quotation-mark.svg"
 				alt="opening quotation mark" />
 		</div>
-		<p class="testimonial-card__quote">
+		<p class="testimonial-card__quote paragraph">
 			${quote}
 		</p>
 	</div>

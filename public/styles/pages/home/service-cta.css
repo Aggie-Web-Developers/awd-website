@@ -7,10 +7,7 @@
   background-size: 150%;
   background-position: 50% 50%;
   min-height: 60rem;
-  padding: 3rem 5.6rem 6.4rem 5.6rem;
-
-  display: flex;
-  justify-content: center;
+  
   align-items: center;
 }
 
@@ -20,7 +17,6 @@
   align-items: center;
 
   max-width: 96rem;
-  font-size: 2.4rem;
   font-weight: 300;
 }
 
@@ -39,10 +35,17 @@
 .service-cta__question {
   font-size: 4rem;
   font-weight: 400;
+  line-height: 1.2;
   margin-bottom: 4.8rem;
 }
 
 .service-cta__description {
   margin-bottom: 5rem;
   line-height: 1.4;
+}
+
+@media only screen and (max-width: 560px) {
+  .service-cta__question {
+    font-size: 3.6rem;
+  }
 }

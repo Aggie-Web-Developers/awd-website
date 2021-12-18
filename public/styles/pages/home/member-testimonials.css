@@ -4,10 +4,6 @@
 
 .section-member-testimonials {
   background-color: var(--color-gray-lightest);
-  padding: 6.4rem 5.6rem;
-
-  display: flex;
-  justify-content: center;
 }
 
 .container-member-testimonials {
@@ -101,5 +97,11 @@
   .carousel-control {
     left: 0;
     right: 0;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .testimonial-cards {
+    margin-top: 4.8rem;
   }
 }
