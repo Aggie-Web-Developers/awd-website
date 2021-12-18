@@ -14,6 +14,14 @@
   flex-direction: column;
 }
 
+/* .testimonial-card--offscreen {
+  position: absolute;
+}
+
+.testimonial-card--offscreen.offscreen-left {
+
+} */
+
 .testimonial-card__body {
   padding: 3.2rem 3.1rem;
   background-color: var(--color-primary-light);

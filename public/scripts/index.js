@@ -169,10 +169,10 @@ const carouselControlLeft = document.querySelector('.carousel-control--left');
 const carouselControlRight = document.querySelector('.carousel-control--right');
 
 carouselControlLeft.addEventListener('click', function() {
-	startIdx = (startIdx + 1) % testimonials.length;
+	startIdx = startIdx > 0 ? startIdx - 1 : testimonials.length - 1;
 	setTestimonialCardAll(testimonials, startIdx);
 });
 carouselControlRight.addEventListener('click', function() {
-	startIdx = startIdx > 0 ? startIdx - 1 : testimonials.length - 1;
+	startIdx = (startIdx + 1) % testimonials.length;
 	setTestimonialCardAll(testimonials, startIdx);
 });
