@@ -10,7 +10,7 @@
   border-radius: 5.6rem;
   overflow: hidden;
 
-  animation-duration: 0.3s;
+  animation-duration: 0.2s;
   animation-timing-function: ease-in-out;
 
   display: flex;
@@ -52,13 +52,13 @@
     transform: translateX(0) scale(1);
   }
   100% {
-    transform: translateX(calc(100% + 6.4rem)) scale(0.5);
+    transform: translateX(calc(100% + 6.4rem)) scale(0);
   }
 }
 
 @keyframes enterLeft {
   0% {
-    transform: translateX(calc(-100% + -6.4rem));
+    transform: translateX(calc(-100% + -6.4rem)) scale(0);
   }
   100% {
     transform: translateX(0) scale(1);
@@ -79,13 +79,13 @@
     transform: translateX(0) scale(1);
   }
   100% {
-    transform: translateX(calc(-100% + -6.4rem)) scale(0.5);
+    transform: translateX(calc(-100% + -6.4rem)) scale(0);
   }
 }
 
 @keyframes enterRight{
   0% {
-    transform: translateX(calc(100% + 6.4rem));
+    transform: translateX(calc(100% + 6.4rem)) scale(0);
   }
   100% {
     transform: translateX(0) scale(1);

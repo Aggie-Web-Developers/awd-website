@@ -4,10 +4,11 @@
 
 .section-member-testimonials {
   background-color: var(--color-gray-lightest);
+  overflow: hidden;
 }
 
 .container-member-testimonials {
-  width: 100%;
+  width: 90%;
   max-width: 160rem;
   position: relative;
 
@@ -19,7 +20,7 @@
 .testimonial-cards {
   margin-top: 6rem;
   grid-area: cards;
-  width: 100%;
+  /* width: 100%; */
   
   display: flex;
   justify-content: center;
@@ -41,6 +42,7 @@
 
 .carousel-control {
   position: relative;
+  z-index: 1;
 
   width: 5rem;
   height: auto;
