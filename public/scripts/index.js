@@ -124,6 +124,10 @@ const wait = milliseconds =>
 		}
 
 		_fillItemsContainer() {
+			// empty the container so that we can refill it with just maxDisplayedItems of the items
+			this._itemsContainerElem.innerHTML = '';
+
+			// append first maxDisplayedItems elements of array to container of items
 			for (let i = 0; i < this._numItems && i < this._maxItemsDisplayed; ++i) {
 				this._itemsContainerElem.append(this._itemElemsArray[i]);
 			}
@@ -364,14 +368,6 @@ const wait = milliseconds =>
 
 	// Only create carousel if there are at least 2 items
 	if (newsAndEventsCards.length >= 2) {
-		// empty the container so that we can refill it with just 3 of the items
-		newsAndEventsCardsContainer.innerHTML = '';
-
-		// refill the container using the first 3 cards
-		for (let i = 0; i < newsAndEventsCards.length && i < 3; ++i) {
-			newsAndEventsCardsContainer.append(newsAndEventsCards[i]);
-		}
-
 		// Create carousel for news and events cards
 		const newsAndEventsCarouselOptions = {
 			carouselID: 'news-and-events-carousel',
@@ -498,9 +494,9 @@ const wait = milliseconds =>
 		testimonialCards.push(newCard);
 	});
 
-	// append first 3 elements of array to container of testimonial cards
+	// append testimonial cards to container of cards
 	const testimonialsContainer = document.querySelector('#member-testimonials-carousel .testimonial-cards');
-	for (let i = 0; i < testimonialCards.length && i < 3; ++i) { // 3 is the hardcoded max number of displayed items in carousel
+	for (let i = 0; i < testimonialCards.length; ++i) {
 		testimonialsContainer.append(testimonialCards[i]);
 	}
 
