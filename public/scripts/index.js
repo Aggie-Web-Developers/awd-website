@@ -167,9 +167,6 @@ const wait = milliseconds =>
 
 		// move left in carousel
 		async _shiftLeft(isFast) {
-			if (this._transitioning) { return; }
-			this._transitioning = true;
-	
 			const rightmostDist = this._getRightmostDist();
 	
 			// leftmost items move right
@@ -205,15 +202,12 @@ const wait = milliseconds =>
 	
 			// shift the array of items to the right (wrapping) to match new orientation
 			this._itemElemsArray.unshift(this._itemElemsArray.pop());
-	
-			this._transitioning = false;
 		}
 
 		// move right in carousel
 		async _shiftRight(isFast) {
-			// NOTE: upon first glance, it may seem that this could could easily be refactored from moveLeft. That is not the case
-			if (this._transitioning) { return; }
-			this._transitioning = true;
+			// NOTE: Upon first glance, it may seem that this could could easily be refactored from moveLeft().
+			// Perhaps that's true.
 
 			const rightmostDist = this._getRightmostDist();
 
@@ -241,24 +235,32 @@ const wait = milliseconds =>
 			this._itemElemsArray[(rightmostDist + 1) % this._numItems].classList.remove('enterRight', 'transition-fast');
 
 			this._itemElemsArray.push(this._itemElemsArray.shift());
-
-			this._transitioning = false;
 		}
 
 		_attachCarouselBtnListeners() {
 			// handle clicking left carousel control
 			const leftCallback = async function() {
+				if (this._transitioning) { return; }
+				this._transitioning = true;
+
 				await this._shiftLeft();
 				this._currFrontIdx = this._setIndicator(this._currFrontIdx, this._currFrontIdx - 1 >= 0
 					? this._currFrontIdx - 1
 					: this._numItems - 1);
+						
+				this._transitioning = false;
 			};
 			this._controlLeft.addEventListener('click', leftCallback.bind(this));
 
 			// handle clicking right carousel control
 			const rightCallback = async function() {
+				if (this._transitioning) { return; }
+				this._transitioning = true;
+
 				await this._shiftRight();
 				this._currFrontIdx = this._setIndicator(this._currFrontIdx, (this._currFrontIdx + 1) % this._numItems);
+				
+				this._transitioning = false;
 			};
 			this._controlRight.addEventListener('click', rightCallback.bind(this));
 
@@ -267,6 +269,8 @@ const wait = milliseconds =>
 				const clicked = e.target.closest('.carousel__indicator');
 
 				if (!clicked || clicked.classList.contains('active')) { return; }
+				if (this._transitioning) { return; }
+				this._transitioning = true;
 
 				const prevFrontIdx = this._currFrontIdx;
 				const targetIdx = parseInt(clicked.dataset.index);
@@ -307,6 +311,8 @@ const wait = milliseconds =>
 						}
 					}
 				}
+
+				this._transitioning = false;
 			};
 			this._indicatorsContainerElem.addEventListener('click', indicatorCallback.bind(this));
 		}
