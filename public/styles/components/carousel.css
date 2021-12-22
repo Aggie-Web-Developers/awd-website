@@ -57,10 +57,13 @@
 
 .carousel__indicators {
   grid-area: indicators;
+  padding: 0 1rem;
 
   display: flex;
   justify-content: center;
-  gap: 3.6rem;
+  column-gap: 3.6rem;
+  row-gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .carousel__indicator {
@@ -111,6 +114,6 @@
     right: 0;
   }
   .carousel__indicators {
-    gap: 3rem;
+    column-gap: 3rem;
   }
 }
