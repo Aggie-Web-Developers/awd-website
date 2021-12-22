@@ -19,98 +19,11 @@
 
 .testimonial-cards {
   margin-top: 6rem;
-  grid-area: cards;
-  /* width: 100%; */
+  grid-area: items;
   
   display: flex;
   justify-content: center;
   gap: 6.4rem;
-}
-
-.carousel {
-  position: relative;
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: min-content 1fr min-content;
-  grid-template-areas:
-  "left-btn cards right-btn"
-  ". indicators .";
-  column-gap: 1rem;
-  row-gap: 4.4rem;
-  justify-items: center;
-  align-items: center;
-}
-
-.carousel__control {
-  position: relative;
-  z-index: 1;
-
-  width: 5rem;
-  height: auto;
-  opacity: 0.4;
-  filter: drop-shadow(-0.4rem 0.4rem 0.5rem rgb(0, 0, 0, .85));
-}
-.carousel__control path { fill: var(--color-secondary-dark); }
-
-.carousel__control:hover {
-  cursor: pointer;
-  opacity: 1;
-}
-
-.carousel__control:active {
-  filter: drop-shadow(-0.2rem 0.2rem 0.3rem rgb(0, 0, 0, .75));
-  transform: scale(0.98) translate(-0.3rem, 0.3rem);
-}
-.carousel__control:active path { fill: var(--color-secondary); }
-
-.carousel__control--left {
-  grid-area: left-btn;
-  justify-self: end;
-  right: 2rem;
-}
-
-.carousel__control--right {
-  grid-area: right-btn;
-  justify-self: start;
-  left: 2rem;
-}
-
-.carousel__indicators {
-  grid-area: indicators;
-
-  display: flex;
-  justify-content: center;
-  gap: 3.6rem;
-}
-
-.carousel__indicator {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background-color: var(--color-secondary-dark);
-
-  opacity: 0.4;
-  filter: drop-shadow(-0.2rem 0.2rem 0.3rem rgb(0, 0, 0, .75));
-}
-
-.carousel__indicator:hover:not(.active) {
-  cursor: pointer;
-  background-color: var(--color-secondary);
-  opacity: 1;
-}
-
-.carousel__indicator:active:not(.active) {
-  transform: scale(0.99) translate(-0.2rem, 0.2rem);
-  filter: drop-shadow(-0.1rem 0.1rem 0.2rem rgb(0, 0, 0, .75));
-}
-
-
-.carousel__indicator.active {
-  opacity: 1;
-  background-color: var(--color-secondary-dark);
-  transform: scale(0.99) translate(-0.2rem, 0.2rem);
-  filter: drop-shadow(-0.1rem 0.1rem 0.2rem rgb(0, 0, 0, .75));
 }
 
 @media only screen and (max-width: 1400px) {
@@ -125,28 +38,6 @@
   }
   .container-member-testimonials .testimonial-card {
     width: 100%;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .carousel__control {
-    width: 3rem;
-  }
-}
-
-@media only screen and (max-width: 525px) {
-  .carousel {
-    grid-template-areas:
-    "cards cards cards"
-    "left-btn indicators right-btn";
-    row-gap: 2rem;
-  }
-  .carousel__control {
-    left: 0;
-    right: 0;
-  }
-  .carousel__indicators {
-    gap: 3rem;
   }
 }
 

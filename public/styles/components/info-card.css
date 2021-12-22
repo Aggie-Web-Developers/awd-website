@@ -10,6 +10,9 @@
   box-shadow: -0.4rem 0.4rem 1rem rgb(0, 0, 0, .75);
   overflow: hidden;
 
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+
   display: grid;
   grid-template-rows: 37fr 46fr 17fr;
 }
@@ -116,6 +119,16 @@
 .info-card__time {
   font-size: 1.8rem;
   font-weight: 400;
+}
+
+@media only screen and (max-width: 1040px) and (min-width: 977px) {
+  .info-card {
+    width: 40rem;
+  }
+  .info-card__description-box {
+    height: auto;
+    padding: 1.4rem 2.8rem;
+  }
 }
 
 @media only screen and (max-width: 560px) {

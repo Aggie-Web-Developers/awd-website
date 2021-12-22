@@ -4,6 +4,7 @@
 
 .section-news-and-events {
   background-color: var(--color-primary-lightest);
+  overflow: hidden;
 }
 
 .container-news-and-events {
@@ -16,11 +17,23 @@
 
 .info-cards {
   margin-top: 6rem;
+  grid-area: items;
   
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 6.4rem;
+}
+
+@media only screen and (max-width: 1390px) {
+  .container-news-and-events .info-card:nth-child(3) {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 976px) {
+  .container-news-and-events .info-card:nth-child(2) {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 425px) {

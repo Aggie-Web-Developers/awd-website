@@ -1,4 +1,5 @@
 @import "./components/button.css";
+@import "./components/carousel.css";
 @import "./components/info-card.css";
 @import "./components/photo-small.css";
 @import "./components/scrollbar.css";
@@ -6,6 +7,7 @@
 
 @import "./pages/home.css";
 
+@import "./partials/animation.css";
 @import "./partials/base.css";
 @import "./partials/typography.css";
 
