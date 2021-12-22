@@ -139,11 +139,11 @@ const wait = milliseconds =>
 	const testimonialCards = [
 	];
 
-	// populate testimonialCards
-	testimonials.forEach(({quote, imgUrl, fullName, year, position}) => {
-		const el = document.createElement('div');
-		el.classList.add('testimonial-card');
-		el.innerHTML = `
+	// create testimonial cards
+	testimonials.forEach(({quote, imgUrl, fullName, year, position}, idx) => {
+		const newCard = document.createElement('div');
+		newCard.classList.add('testimonial-card');
+		newCard.innerHTML = `
 		<div class="testimonial-card__body">
 			<div class="testimonial-card__quotation-mark-container">
 				<img class="testimonial-card__quotation-mark" src="images/SVGs/opening-quotation-mark.svg"
@@ -163,7 +163,8 @@ const wait = milliseconds =>
 			</div>
 		</div>
 		`;
-		testimonialCards.push(el);
+
+		testimonialCards.push(newCard);
 	});
 
 	// append first 3 elements of array to container of testimonial cards
@@ -172,85 +173,198 @@ const wait = milliseconds =>
 		testimonialsContainer.append(testimonialCards[i]);
 	}
 
-	// carousel control buttons
-	const carouselControlLeft = document.querySelector('.carousel-control--left');
-	const carouselControlRight = document.querySelector('.carousel-control--right');
-	let leftClicked = false;
-	let rightClicked = false;
 
-	carouselControlLeft.addEventListener('click', async function() {
-		if (leftClicked) { return; }
-		leftClicked = true;
 
-		// using viewportWidth and idx to account for media queries (because number of displayed cards will vary)
-		const viewportWidth = window.innerWidth;
-		let idx;
-		if (viewportWidth > 1400) { idx = 2; }
-		else if (viewportWidth > 1024) { idx = 1; }
-		else { idx = 0; }
-		idx = Math.min(idx, testimonialCards.length - 1);
+	// CAROUSEL FIELDS
+	const carouselControlLeft = document.querySelector('.carousel__control--left');
+	const carouselControlRight = document.querySelector('.carousel__control--right');
+	const numItems = testimonialCards.length;
+	let currFrontIdx = 0; // index of the leftmost item in the carousel
+	const breakpoint1 = 1400; // wider breakpoint
+	const breakpoint2 = 1024; // thinner breakpoint
+	let transitioning = false;
+	const transitionTime1 = 200; // duration of first transition in milliseconds
+	const transitionTime2 = 100;
+	const transitionTimeFast = 25; // used for indicator presses
 
-		// leftmost cards move right
-		for (let i = 0; i < idx; ++i) { testimonialCards[i].classList.add('moveRight'); }
-		// rightmost card leaves to the right
-		testimonialCards[idx].classList.add('leaveRight');
-		
+	// array of carousel indicators
+	const carouselIndicators = [
+	];
+
+	// create indicators
+	for (let i = 0; i < numItems; ++i) {
+		const newIndicator = document.createElement('div');
+		newIndicator.classList.add('carousel__indicator');
+		newIndicator.dataset.index = `${i}`;
+
+		carouselIndicators.push(newIndicator);
+	}
+
+	// append all carousel indicators to container of indicators
+	const indicatorsContainer = document.querySelector('.carousel__indicators');
+	for (let i = 0; i < carouselIndicators.length; ++i) {
+		indicatorsContainer.append(carouselIndicators[i]);
+	}
+
+	// set first indicator to be active
+	carouselIndicators[0].classList.add('active');
+
+	function setIndicator(currIdx, targetIdx) {
+		carouselIndicators[currIdx].classList.remove('active');
+		carouselIndicators[targetIdx].classList.add('active');
+
+		return targetIdx;
+	}
+
+	// get distance of rightmost item in carousel (number will vary because of media queries based on viewport width)
+	function getRightmostDist() {
+		let rightmostDist; // distance between leftmost item and rightmost item
+		if (window.innerWidth > breakpoint1) { rightmostDist = 2; }
+		else if (window.innerWidth > breakpoint2) { rightmostDist = 1; }
+		else { rightmostDist = 0; }
+
+		// accounts for carousel with less than 3 items
+		rightmostDist = Math.min(rightmostDist, numItems - 1);
+
+		return rightmostDist;
+	}
+
+	// move left in carousel
+	async function shiftLeft(isFast) {
+		if (transitioning) { return; }
+		transitioning = true;
+
+		const rightmostDist = getRightmostDist();
+
+		// leftmost items move right
+		for (let i = 0; i < rightmostDist; ++i) {
+			isFast && testimonialCards[i].classList.add('transition-fast');
+			testimonialCards[i].classList.add('moveRight');
+		}
+		// rightmost item leaves to the right
+		isFast && testimonialCards[rightmostDist].classList.add('transition-fast');
+		testimonialCards[rightmostDist].classList.add('leaveRight');
+
 		// wait for moving/leaving animations to end
-		await wait(200);
+		await wait(isFast ? transitionTimeFast : transitionTime1);
 
-		// remove the last child from the container of cards
+		// remove the last child from the container of items
 		testimonialsContainer.removeChild(testimonialsContainer.querySelector('.testimonial-card:last-child'));
-		// insert the last element from the array of cards to the beginning of the container. This should be intuitive.
-		testimonialsContainer.insertAdjacentElement('afterbegin', testimonialCards[testimonialCards.length - 1]);
-		// remove animation classes from cards to prevent odd graphical glitch
-		for (let i = 0; i < idx; ++i) { testimonialCards[i].className = 'testimonial-card'; }
-		// animate new card entering from the left
-		testimonialCards[testimonialCards.length - 1].classList.add('enterLeft');
+		// insert the last element from the array of items to the beginning of the container. This should be intuitive.
+		testimonialsContainer.insertAdjacentElement('afterbegin', testimonialCards[numItems - 1]);
+
+		// remove animation classes from items to prevent odd graphical glitch
+		for (let i = 0; i < rightmostDist; ++i) { testimonialCards[i].className = 'testimonial-card'; }
+		// animate new item entering from the left
+		isFast && testimonialCards[numItems - 1].classList.add('transition-fast');
+		testimonialCards[numItems - 1].classList.add('enterLeft');
 
 		// wait for entering animation to finish
-		await wait(100);
+		await wait(isFast ? transitionTimeFast : transitionTime2);
 
 		// remove all animations
-		for (let i = 0; i < idx; ++i) { testimonialCards[i].classList.remove('moveRight'); }
-		testimonialCards[idx].classList.remove('leaveRight');
-		testimonialCards[testimonialCards.length - 1].classList.remove('enterLeft');
+		for (let i = 0; i < rightmostDist; ++i) { testimonialCards[i].classList.remove('moveRight', 'transition-fast'); }
+		testimonialCards[rightmostDist].classList.remove('leaveRight', 'transition-fast');
+		testimonialCards[numItems - 1].classList.remove('enterLeft', 'transition-fast');
 
-		// shift the array of cards to the right (wrapping) to match new orientation
+		// shift the array of items to the right (wrapping) to match new orientation
 		testimonialCards.unshift(testimonialCards.pop());
 
-		leftClicked = false;
-	});
+		transitioning = false;
+	}
 
-	carouselControlRight.addEventListener('click', async function() {
-		if (rightClicked) { return; }
-		rightClicked = true;
+	// move right in carousel
+	async function moveRight(isFast) {
+		// NOTE: upon first glance, it may seem that this could could easily be refactored from moveLeft. That is not the case
+		if (transitioning) { return; }
+		transitioning = true;
 
-		const viewportWidth = window.innerWidth;
-		let idx;
-		if (viewportWidth > 1400) { idx = 2; }
-		else if (viewportWidth > 1024) { idx = 1; }
-		else { idx = 0; }
-		idx = Math.min(idx, testimonialCards.length - 1);
+		const rightmostDist = getRightmostDist();
 
-		for (let i = idx; i > 0; --i) { testimonialCards[i].classList.add('moveLeft'); }
+		for (let i = rightmostDist; i > 0; --i) {
+			isFast && testimonialCards[i].classList.add('transition-fast');
+			testimonialCards[i].classList.add('moveLeft');
+		}
+		isFast && testimonialCards[0].classList.add('transition-fast');
 		testimonialCards[0].classList.add('leaveLeft');
 
-		await wait(200);
+		await wait(isFast ? transitionTimeFast : transitionTime1);
 
 		testimonialsContainer.removeChild(testimonialsContainer.querySelector('.testimonial-card:first-child'));
-		testimonialsContainer.insertAdjacentElement('beforeend', testimonialCards[testimonialCards.length - 1]);
-		for (let i = idx; i > 0; --i) { testimonialCards[i].className = 'testimonial-card'; }
-		testimonialCards[(idx + 1) % testimonialCards.length].classList.add('enterRight');
+		testimonialsContainer.insertAdjacentElement('beforeend', testimonialCards[numItems - 1]);
 
-		await wait(100);
+		for (let i = rightmostDist; i > 0; --i) { testimonialCards[i].className = 'testimonial-card'; }
+		isFast && testimonialCards[(rightmostDist + 1) % numItems].classList.add('transition-fast');
+		testimonialCards[(rightmostDist + 1) % numItems].classList.add('enterRight');
 
-		for (let i = idx; i > 0; --i) { testimonialCards[i].classList.remove('moveLeft'); }
-		testimonialCards[0].classList.remove('leaveLeft');
-		testimonialCards[(idx + 1) % testimonialCards.length].classList.remove('enterRight');
+		await wait(isFast ? transitionTimeFast : transitionTime2);
+
+		for (let i = rightmostDist; i > 0; --i) { testimonialCards[i].classList.remove('moveLeft', 'transition-fast'); }
+		testimonialCards[0].classList.remove('leaveLeft', 'transition-fast');
+		testimonialCards[(rightmostDist + 1) % numItems].classList.remove('enterRight', 'transition-fast');
 
 		testimonialCards.push(testimonialCards.shift());
 
-		rightClicked = false;
+		transitioning = false;
+	}
+
+	// handle clicking left carousel control
+	carouselControlLeft.addEventListener('click', function() {
+		shiftLeft();
+		currFrontIdx = setIndicator(currFrontIdx, currFrontIdx - 1 >= 0 ? currFrontIdx - 1 : numItems - 1);
+	});
+
+	// handle clicking right carousel control
+	carouselControlRight.addEventListener('click', async function() {
+		moveRight();
+		currFrontIdx = setIndicator(currFrontIdx, (currFrontIdx + 1) % numItems);
+	});
+
+	// handle clicking an indicator
+	indicatorsContainer.addEventListener('click', async function(e) {
+		const clicked = e.target.closest('.carousel__indicator');
+
+		if (!clicked || clicked.classList.contains('active')) { return; }
+
+		const prevFrontIdx = currFrontIdx;
+		const targetIdx = parseInt(clicked.dataset.index);
+		currFrontIdx = setIndicator(currFrontIdx, targetIdx);
+
+		// get distances for travelling left or right to reach target item
+		const leftDist = targetIdx > prevFrontIdx
+			? numItems - (targetIdx - prevFrontIdx)
+			: Math.abs(targetIdx - prevFrontIdx);
+		const rightDist = targetIdx > prevFrontIdx
+			? targetIdx - prevFrontIdx
+			: numItems - Math.abs(targetIdx - prevFrontIdx);
+
+		// if left distance is shorter, use left shifts
+		if (leftDist < rightDist) {
+			for (let i = prevFrontIdx; i != targetIdx; i = (i - 1 >= 0 ? i - 1 : numItems - 1)) {
+				await shiftLeft(true);
+			}
+		}
+		// if right distance is shorter, use right shifts
+		else if (leftDist > rightDist) {
+			for (let i = prevFrontIdx; i != targetIdx; i = (i + 1) % numItems) {
+				await moveRight(true);
+			}
+		}
+		// if distances are equivalent, move in direction of target relative to current
+		else {
+			// if target is to the left, use left shifts
+			if (targetIdx < prevFrontIdx) {
+				for (let i = prevFrontIdx; i > targetIdx; --i) {
+					await shiftLeft(true);
+				}
+			}
+			// if target is to the right, use right shifts
+			else {
+				for (let i = prevFrontIdx; i < targetIdx; ++i) {
+					await moveRight(true);
+				}
+			}
+		}
 	});
 })();
 

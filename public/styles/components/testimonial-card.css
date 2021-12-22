@@ -37,59 +37,38 @@
   animation-name: enterRight;
   animation-duration: 0.1s;
 }
+.testimonial-card.transition-fast {
+  animation-duration: 0.025s!important;
+}
 
 @keyframes moveRight {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(100% + 6.4rem));
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100% + 6.4rem)); }
 }
 
 @keyframes leaveRight {
-  0% {
-    transform: translateX(0) scale(1);
-  }
-  100% {
-    transform: translateX(calc(100% + 6.4rem)) scale(0);
-  }
+  0% { transform: translateX(0) scale(1); }
+  100% { transform: translateX(calc(100% + 6.4rem)) scale(0); }
 }
 
 @keyframes enterLeft {
-  0% {
-    transform: translateX(calc(-100% + -6.4rem)) scale(0);
-  }
-  100% {
-    transform: translateX(0) scale(1);
-  }
+  0% { transform: translateX(calc(-100% + -6.4rem)) scale(0); }
+  100% { transform: translateX(0) scale(1); }
 }
 
 @keyframes moveLeft {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-100% + -6.4rem));
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% + -6.4rem)); }
 }
 
 @keyframes leaveLeft {
-  0% {
-    transform: translateX(0) scale(1);
-  }
-  100% {
-    transform: translateX(calc(-100% + -6.4rem)) scale(0);
-  }
+  0% { transform: translateX(0) scale(1); }
+  100% { transform: translateX(calc(-100% + -6.4rem)) scale(0); }
 }
 
 @keyframes enterRight{
-  0% {
-    transform: translateX(calc(100% + 6.4rem)) scale(0);
-  }
-  100% {
-    transform: translateX(0) scale(1);
-  }
+  0% { transform: translateX(calc(100% + 6.4rem)) scale(0); }
+  100% { transform: translateX(0) scale(1); }
 }
 
 .testimonial-card__body {
