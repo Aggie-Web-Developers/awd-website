@@ -18,6 +18,10 @@
   align-items: center;
 }
 
+.carousel-items {
+  flex-wrap: nowrap!important;
+}
+
 /* CONTROLS */
 
 .carousel__control {
@@ -60,6 +64,7 @@
 .carousel__indicators {
   grid-area: indicators;
   padding: 0 1rem;
+  max-width: 45rem;
   transition: all 0.1s;
 
   display: flex;
@@ -102,6 +107,12 @@
 @media only screen and (max-width: 768px) {
   .carousel__control {
     width: 3rem;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .carousel__indicators {
+    max-width: 40rem;
   }
 }
 

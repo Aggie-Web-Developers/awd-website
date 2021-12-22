@@ -5,7 +5,8 @@
 .testimonial-card {
   flex: 1;
   width: 100%;
-  max-width: 80rem;
+  min-width: 40rem;
+  max-width: 45rem;
   height: 50rem;
   border-radius: 5.6rem;
   overflow: hidden;
@@ -77,9 +78,16 @@
   color: var(--color-gray-lightest);
 }
 
+@media only screen and (max-width: 560px) {
+  .testimonial-card {
+    max-width: 40rem;
+  }
+}
+
 @media only screen and (max-width: 425px) {
   .testimonial-card {
     height: 56rem;
+    min-width: 35rem;
   }
   .testimonial-card__member-name {
     font-size: 2rem;

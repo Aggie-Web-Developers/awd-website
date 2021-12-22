@@ -91,7 +91,11 @@ const wait = milliseconds =>
 ;
 
 // IIFE
+// Creating carousels for the news and events and member testimonials
 (function() {
+	/* ************************************** */
+	/* *************CAROUSEL CLASS************* */
+	/* ************************************** */
 	class Carousel {
 		_maxItemsDisplayed = 3; // hard coded for now
 		_currFrontIdx = 0;
@@ -109,16 +113,13 @@ const wait = milliseconds =>
 			this._itemsContainerElem = this._carouselElem.querySelector(`.${itemsContainerClass}`);
 			this._breakpoint1 = breakpoint1;
 			this._breakpoint2 = breakpoint2;
-			
-
-			this._indicatorsContainerElem = this._carouselElem.querySelector('.carousel__indicators');
-			this._controlLeft = this._carouselElem.querySelector('.carousel__control--left');
-			this._controlRight = this._carouselElem.querySelector('.carousel__control--right');
 		}
 
 		initialize() {
+			this._carouselElem.classList.add('carousel');
+			this._itemsContainerElem.classList.add('carousel-items');
 			this._fillItemsContainer();
-			this._createIndicators();
+			this._createButtons();
 			this._attachCarouselBtnListeners();
 		}
 
@@ -128,7 +129,41 @@ const wait = milliseconds =>
 			}
 		}
 
-		_createIndicators() {
+		_createButtons() {
+			// CONTROLS
+			// Left control
+			this._controlLeft = document.createElement('svg');
+			this._carouselElem.append(this._controlLeft);
+			this._controlLeft.outerHTML =
+			`
+				<svg class="carousel__control carousel__control--left" xmlns="http://www.w3.org/2000/svg"
+					width="37.266" height="67.299" viewBox="0 0 37.266 67.299">
+					<path
+						d="M37.266,5.01v8.329A5,5,0,0,1,35.877,16.8L22.052,30.191a5,5,0,0,0,0,6.916L35.877,50.5a5,5,0,0,1,1.389,3.458v8.329a5,5,0,0,1-8.624,3.446L3.01,40.681a10,10,0,0,1,.035-14.336l25.6-24.78A5,5,0,0,1,37.266,5.01Z" />
+				</svg>
+			`;
+			this._controlLeft = this._carouselElem.querySelector('.carousel__control--left'); // need to assign it again for some reason
+
+			// Right control
+			this._controlRight = document.createElement('svg');
+			this._carouselElem.append(this._controlRight);
+			this._controlRight.outerHTML =
+			`
+				<svg class="carousel__control carousel__control--right" xmlns="http://www.w3.org/2000/svg"
+					width="37.266" height="67.299" viewBox="0 0 37.266 67.299">
+				<path
+					d="M0,5.01v8.329A5,5,0,0,0,1.389,16.8L15.213,30.191a5,5,0,0,1,0,6.916L1.389,50.5A5,5,0,0,0,0,53.959v8.329a5,5,0,0,0,8.624,3.446L34.255,40.681a10,10,0,0,0-.034-14.336L8.624,1.565A5,5,0,0,0,0,5.01Z" />
+				</svg>
+			`;
+			this._controlRight = this._carouselElem.querySelector('.carousel__control--right');
+
+			// INDICATORS
+			// Create container for indicators
+			this._indicatorsContainerElem = document.createElement('div');
+			this._indicatorsContainerElem.classList.add('carousel__indicators');
+			this._carouselElem.append(this._indicatorsContainerElem);
+
+			// Create indicators and append to array and container
 			for (let i = 0; i < this._numItems; ++i) {
 				// create indicator element
 				const newIndicator = document.createElement('div');
@@ -221,8 +256,10 @@ const wait = milliseconds =>
 			await wait(isFast ? this._transitionTimeFast : this._transitionTime1);
 
 			this._itemsContainerElem.removeChild(this._itemsContainerElem.querySelector(`.${this._itemElemClass}:first-child`));
+			// if there are more than maxItemsDisplayed, then just append the next item in the array (which of course...
+			// has index maxItemsDisplayed). Otherwise, it wraps around to the element we just removed, so index 0
 			this._itemsContainerElem.insertAdjacentElement('beforeend',
-				this._itemElemsArray[Math.min(this._maxItemsDisplayed, this._numItems - 1)]);
+				this._itemElemsArray[this._numItems > this._maxItemsDisplayed ? this._maxItemsDisplayed : 0]);
 
 			for (let i = rightmostDist; i > 0; --i) { this._itemElemsArray[i].className = this._itemElemClass; }
 			isFast && this._itemElemsArray[(rightmostDist + 1) % this._numItems].classList.add('transition-fast');
@@ -317,6 +354,39 @@ const wait = milliseconds =>
 			this._indicatorsContainerElem.addEventListener('click', indicatorCallback.bind(this));
 		}
 	};
+
+
+	/* ************************************** */
+	/* *************NEWS AND EVENTS************* */
+	/* ************************************** */
+	const newsAndEventsCardsContainer = document.querySelector('#news-and-events-carousel .info-cards');
+	const newsAndEventsCards = [...newsAndEventsCardsContainer.querySelectorAll('.info-card')];
+
+	// Only create carousel if there are at least 2 items
+	if (newsAndEventsCards.length >= 2) {
+		// empty the container so that we can refill it with just 3 of the items
+		newsAndEventsCardsContainer.innerHTML = '';
+
+		// refill the container using the first 3 cards
+		for (let i = 0; i < newsAndEventsCards.length && i < 3; ++i) {
+			newsAndEventsCardsContainer.append(newsAndEventsCards[i]);
+		}
+
+		// Create carousel for news and events cards
+		const newsAndEventsCarouselOptions = {
+			carouselID: 'news-and-events-carousel',
+			itemsContainerClass: 'info-cards',
+			itemElemClass: 'info-card',
+			itemElemsArray: newsAndEventsCards,
+			numItems: newsAndEventsCards.length,
+			breakpoint1: 1390,
+			breakpoint2: 976,
+		};
+		const newsAndEventsCarousel = new Carousel(newsAndEventsCarouselOptions);
+		newsAndEventsCarousel.initialize();
+	}
+	
+
 	
 	/* ************************************** */
 	/* *************TESTIMONIALS************* */
@@ -325,64 +395,17 @@ const wait = milliseconds =>
 	const testimonials = [
 		{
 			quote: `So many fun uses! I'm planning on using this playsilk for newborn photos for my baby girl, who\
-		is due any day now! Definitely telling everyone I know about this shop.`,
+			is due any day now! Definitely telling everyone I know about this shop.`,
 			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
 			fullName: `Captain America`,
 			year: 22,
 			position: `Member`
 		},
 		{
-			quote: `So many fun uses! I'm planning on using this playsilk for newborn photos for my baby girl, who\
-		is due any day now! Definitely telling everyone I know about this shop.`,
-			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
-			fullName: `Captain America`,
-			year: 22,
-			position: `A`
-		},
-		{
-			quote: `So many fun uses! I'm planning on using this playsilk for newborn photos for my baby girl, who\
-		is due any day now! Definitely telling everyone I know about this shop.`,
-			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
-			fullName: `Captain America`,
-			year: 22,
-			position: `B`
-		},
-		{
-			quote: `So many fun uses! I'm planning on using this playsilk for newborn photos for my baby girl, who\
-		is due any day now! Definitely telling everyone I know about this shop.`,
-			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
-			fullName: `Captain America`,
-			year: 22,
-			position: `C`
-		},
-		{
-			quote: `So many fun uses! I'm planning on using this playsilk for newborn photos for my baby girl, who\
-		is due any day now! Definitely telling everyone I know about this shop.`,
-			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
-			fullName: `Captain America`,
-			year: 22,
-			position: `D`
-		},
-		{
-			quote: `So many fun uses! I'm planning on using this playsilk for newborn photos for my baby girl, who\
-		is due any day now! Definitely telling everyone I know about this shop.`,
-			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
-			fullName: `Captain America`,
-			year: 22,
-			position: `E`
-		},
-		{
-			quote: `I don't feel like grabbing filler text here.`,
-			imgUrl: `images/Vignesh-Bio-Pic-min.jpg`,
-			fullName: `Hawkeye`,
-			year: 22,
-			position: `Operations Officer`
-		},
-		{
 			quote: `
-		Tincidunt lobortis feugiat vivamus at augue eget arcu. Consectetur libero id faucibus nisl
-		tincidunt eget. Dignissim sodales ut eu sem integer vitae justo.
-	`,
+			Tincidunt lobortis feugiat vivamus at augue eget arcu. Consectetur libero id faucibus nisl
+			tincidunt eget. Dignissim sodales ut eu sem integer vitae justo.
+			`,
 			imgUrl: `images/Cole-Bio-Pic-min.jpg`,
 			fullName: `Tony Stark`,
 			year: 22,
@@ -393,11 +416,53 @@ const wait = milliseconds =>
 			Ipsum dolor sit amet consectetur adipiscing. Est pellentesque elit ullamcorper dignissim cras
 			tincidunt lobortis feugiat vivamus. Sit amet nulla facilisi morbi tempus iaculis urna id
 			volutpat.
-		`,
+			`,
 			imgUrl: `images/Alan-Bio-Pic-min.jpg`,
 			fullName: `Peter Parker`,
 			year: 22,
 			position: `Project Manager`
+		},
+		{
+			quote: `I don't feel like grabbing filler text here.`,
+			imgUrl: `images/Vignesh-Bio-Pic-min.jpg`,
+			fullName: `Hawkeye`,
+			year: 22,
+			position: `Operations Officer`
+		},
+		{
+			quote: `A`,
+			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
+			fullName: `Captain America`,
+			year: 22,
+			position: `A`
+		},
+		{
+			quote: `B`,
+			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
+			fullName: `Captain America`,
+			year: 22,
+			position: `B`
+		},
+		{
+			quote: `C`,
+			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
+			fullName: `Captain America`,
+			year: 22,
+			position: `C`
+		},
+		{
+			quote: `D`,
+			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
+			fullName: `Captain America`,
+			year: 22,
+			position: `D`
+		},
+		{
+			quote: `E`,
+			imgUrl: `images/Trey-Bio-Pic-min.jpg`,
+			fullName: `Captain America`,
+			year: 22,
+			position: `E`
 		},
 	];
 
@@ -435,49 +500,24 @@ const wait = milliseconds =>
 
 	// append first 3 elements of array to container of testimonial cards
 	const testimonialsContainer = document.querySelector('#member-testimonials-carousel .testimonial-cards');
-	for (let i = 0; i < testimonialCards.length && i < 3; ++i) {
+	for (let i = 0; i < testimonialCards.length && i < 3; ++i) { // 3 is the hardcoded max number of displayed items in carousel
 		testimonialsContainer.append(testimonialCards[i]);
 	}
 
-	// Create carousel for member testimonial cards cards
-	const memberTestimonialsCarouselOptions = {
-		carouselID: 'member-testimonials-carousel',
-		itemsContainerClass: 'testimonial-cards',
-		itemElemClass: 'testimonial-card',
-		itemElemsArray: testimonialCards,
-		numItems: testimonialCards.length,
-		breakpoint1: 1400,
-		breakpoint2: 1024,
-	};
-	const memberTestimonialsCarousel = new Carousel(memberTestimonialsCarouselOptions);
-	memberTestimonialsCarousel.initialize();
-
-
-	
-	/* ************************************** */
-	/* *************NEWS AND EVENTS************* */
-	/* ************************************** */
-	const newsAndEventsCardsContainer = document.querySelector('#news-and-events-carousel .info-cards');
-	const newsAndEventsCards = [...newsAndEventsCardsContainer.querySelectorAll('.info-card')];
-	// empty the container so that we can refill it with just 3 of the items
-	newsAndEventsCardsContainer.innerHTML = '';
-
-	// refill the container using the first 3 cards
-	for (let i = 0; i < newsAndEventsCards.length && i < 3; ++i) {
-		newsAndEventsCardsContainer.append(newsAndEventsCards[i]);
+	// Only create carousel if there are at least 2 items
+	if (testimonialCards.length >= 2) {
+		// Create carousel for member testimonial cards cards
+		const memberTestimonialsCarouselOptions = {
+			carouselID: 'member-testimonials-carousel',
+			itemsContainerClass: 'testimonial-cards',
+			itemElemClass: 'testimonial-card',
+			itemElemsArray: testimonialCards,
+			numItems: testimonialCards.length,
+			breakpoint1: 1400,
+			breakpoint2: 1024,
+		};
+		const memberTestimonialsCarousel = new Carousel(memberTestimonialsCarouselOptions);
+		memberTestimonialsCarousel.initialize();
 	}
-
-	// Create carousel for news and events cards
-	const newsAndEventsCarouselOptions = {
-		carouselID: 'news-and-events-carousel',
-		itemsContainerClass: 'info-cards',
-		itemElemClass: 'info-card',
-		itemElemsArray: newsAndEventsCards,
-		numItems: newsAndEventsCards.length,
-		breakpoint1: 1390,
-		breakpoint2: 976,
-	};
-	const newsAndEventsCarousel = new Carousel(newsAndEventsCarouselOptions);
-	newsAndEventsCarousel.initialize();
 })();
 
