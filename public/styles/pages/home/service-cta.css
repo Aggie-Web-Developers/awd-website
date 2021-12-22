@@ -28,6 +28,7 @@
 .service-cta__question,
 .service-cta__description {
   color: var(--color-gray-lightest);
+	transition: all 0.1s;
 
   text-align: center;
 }

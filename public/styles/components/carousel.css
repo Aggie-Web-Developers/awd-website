@@ -5,6 +5,7 @@
 .carousel {
   position: relative;
   width: 100%;
+  transition: all 0.1s;
 
   display: grid;
   grid-template-columns: min-content 1fr min-content;
@@ -22,6 +23,7 @@
 .carousel__control {
   position: relative;
   z-index: 1;
+  transition: all 0.1s;
 
   width: 5rem;
   height: auto;
@@ -58,6 +60,7 @@
 .carousel__indicators {
   grid-area: indicators;
   padding: 0 1rem;
+  transition: all 0.1s;
 
   display: flex;
   justify-content: center;

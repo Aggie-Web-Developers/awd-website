@@ -17,6 +17,7 @@
 
 .features {
   margin-top: 12rem;
+	transition: all 0.1s;
 
   display: flex;
   flex-direction: column;
@@ -26,6 +27,7 @@
 .feature {
   display: flex;
   gap: 8rem;
+	transition: all 0.1s;
 }
 
 .features :nth-child(even) {
@@ -34,6 +36,7 @@
 
 .feature__img-container {
   flex: 50;
+	transition: all 0.1s;
 
   display: flex;
   justify-content: center;
@@ -43,6 +46,7 @@
   display: inline-block;
   height: 44rem;
   margin-top: -3rem;
+	transition: all 0.1s;
 }
 
 .feature__text {

@@ -20,6 +20,7 @@
 .testimonial-cards {
   margin-top: 6rem;
   grid-area: items;
+	transition: all 0.1s;
   
   display: flex;
   justify-content: center;

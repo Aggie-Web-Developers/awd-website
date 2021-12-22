@@ -27,6 +27,8 @@
 
 .header__text-box {
 	margin-top: 20vh;
+	
+	transition: all 0.1s;
 }
 
 .header__title,
@@ -46,6 +48,7 @@
 .header__discord-cta {
 	margin-top: 25vh;
 	line-height: 1.4;
+	transition: all 0.1s;
 }
 
 .header__cta-text {
@@ -59,6 +62,7 @@
 
 .header__form {
 	margin-top: 2rem;
+	transition: all 0.1s;
 
 	display: flex;
 }

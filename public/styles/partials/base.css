@@ -13,7 +13,6 @@
 
 html {
   font-size: 50%;
-  transition: all 0.1s;
 }
 
 body {
@@ -28,6 +27,7 @@ body {
 
 section {
   padding: 6.4rem 5.6rem;
+  transition: all 0.1s;
 
   display: flex;
   justify-content: center;

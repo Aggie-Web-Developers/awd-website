@@ -2,6 +2,14 @@
 /**************************** TYPOGRAPHY ****************************/
 /*****************************************************************/
 
+.heading-primary,
+.heading-secondary,
+.heading-tertiary,
+.paragraph,
+input {
+	transition: all 0.1s;
+}
+
 .heading-primary {
   font-size: 10.2rem;
   font-weight: 200;
