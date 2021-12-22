@@ -38,9 +38,6 @@
   #member-testimonials-carousel.carousel .testimonial-card:nth-child(2) {
     display: none;
   }
-  .container-member-testimonials .testimonial-card {
-    /* width: 100%; */
-  }
 }
 
 @media only screen and (max-width: 425px) {

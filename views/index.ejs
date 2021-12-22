@@ -135,7 +135,7 @@
 								<div id="news-and-events-carousel">
 									<div class="info-cards">
 
-										<!-- EXAMPLE CARDS -->
+										<!-- 3 EXAMPLE CARDS (these should be removed later) -->
 										<!-- Card 1 -->
 										<div class="info-card">
 											<div class="info-card__img-container">
@@ -156,7 +156,7 @@
 												</div>
 											</div>
 	
-											<div class="info-card__location-and-time">
+											<div class="info-card__meta-data">
 												<p class="info-card__time">June 9, 03:00 PM</p>
 												<p class="info-card__location">Langford C 110</p>
 											</div>
@@ -185,7 +185,7 @@
 												</div>
 											</div>
 	
-											<div class="info-card__location-and-time">
+											<div class="info-card__meta-data">
 												<p class="info-card__time">June 12, 05:00 PM</p>
 												<p class="info-card__location">Langford C 110</p>
 											</div>
@@ -213,7 +213,7 @@
 												</div>
 											</div>
 	
-											<div class="info-card__location-and-time">
+											<div class="info-card__meta-data">
 												<p class="info-card__time">June 16, 03:00 PM</p>
 												<p class="info-card__location">Langford C 110</p>
 											</div>
@@ -247,13 +247,22 @@
 														</div>
 													</div>
 
-													<div class="info-card__location-and-time">
-														<p class="info-card__time">June 12, 05:00 PM</p>
-														<p class="info-card__location">Langford C 110</p>
+													<div class="info-card__meta-data">
+														<p class="info-card__time">
+															<%= event.event_time.toLocaleString([], { month: 'long' , day: 'numeric' ,
+																								hour: '2-digit' , minute:'2-digit' })%>
+														</p>
+														
+														<% if (event.type =="News" ) {%>
+															<p class="info-card__author"><%= event.author %></p>
+														<% } else { %>
+															<p class="info-card__location"><%= event.location %></p>
+														<% } %>
 													</div>
 												</div>
 
 
+												<!-- The original code for populating list of cards (kept for reference; should be removed later) -->
 												<!-- <div class="col-xs-12 col-md-6 col-lg-4 mt-4">
 													<div class="text-center justify-content-center">
 														<div class="card-container">
@@ -311,9 +320,9 @@
 													</div>
 												</div> -->
 											<% }); %>
-											<% } else {%>
-													<p class="no-event-text">No news is good news, please check back soon.</p>
-											<% } %>
+										<% } else {%>
+												<p class="no-event-text">No news is good news, please check back soon.</p>
+										<% } %>
 									</div>
 								</div>
 

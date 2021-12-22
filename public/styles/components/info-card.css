@@ -106,7 +106,7 @@
 
 /***** LOCATION AND TIME *****/
 
-.info-card__location-and-time {
+.info-card__meta-data {
   background-color: var(--color-gray-light);
 
   padding: 1.6rem;
@@ -118,7 +118,8 @@
 }
 
 .info-card__location,
-.info-card__time {
+.info-card__time,
+.info-card__author {
   font-size: 1.8rem;
   font-weight: 400;
 }

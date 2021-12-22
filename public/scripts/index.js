@@ -117,7 +117,7 @@ const wait = milliseconds =>
 
 		initialize() {
 			this._carouselElem.classList.add('carousel');
-			this._itemsContainerElem.classList.add('carousel-items');
+			this._itemsContainerElem.classList.add('carousel__items');
 			this._fillItemsContainer();
 			this._createButtons();
 			this._attachCarouselBtnListeners();
